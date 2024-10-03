@@ -1,0 +1,23 @@
+<div class="login-panel">
+    <h1 class="title">Sign in</h1>
+    <form (submit)="onSubmit()">
+        <div class="input">
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email" class="text-input" [(ngModel)]="formData.email" required>
+        </div>
+        <div class="input">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="text-input" [(ngModel)]="formData.password" required>
+        </div>
+        <input type="submit" value="Sign in" class="button" >
+    </form>
+    <div class="no-account">
+        <h4>Don't have an account?</h4>
+        <button (click)="openRegisterPage()" class="button-small">Create Account</button>
+    </div>
+</div>
+@if (errorMessage) {
+    <div class="alert">
+        {{ errorMessage }}
+    </div>
+}

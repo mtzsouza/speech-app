@@ -1,0 +1,24 @@
+<div class="register-panel">
+        <form (submit)="onSubmit()">
+            <h1 class="title">Create Account</h1>
+            @if (errorMessage) {
+                <div>
+                    {{ errorMessage }}
+                </div>
+            }
+            <div class="input-box">
+                <label for="email">Email</label>
+                <input type="text" name="email" id="email" minlength="4" maxlength="30" [(ngModel)]="formData.email" required>
+            </div>
+            <div class="input-box">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" minlength="4" maxlength="12" [(ngModel)]="formData.username" required>
+            </div>
+            <div class="input-box">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" minlength="6" maxlength="12" [(ngModel)]="formData.password" required>
+            </div>
+            <button class="button">Create Account</button>
+            <h5 (click)="closeRegisterPage()">Already have an account?</h5>
+        </form>
+</div>
