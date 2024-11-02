@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DatabaseService } from '../../../services/database.service';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 
 @Component({
@@ -11,6 +11,6 @@ import { AuthService } from '../../../services/auth.service';
   styleUrl: './dashboard.component.sass'
 })
 export class DashboardComponent {  
+  router = inject(Router);
   auth = inject(AuthService);
-
 }

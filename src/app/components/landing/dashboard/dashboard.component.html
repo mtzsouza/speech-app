@@ -1,2 +1,47 @@
-<h1>Dashboard</h1>
-<button (click)="this.auth.logout();">Logout</button>
+<div class="container">
+    <div class="navbar">
+        <a class="icon" href="/">
+            <img src="/assets/home-icon.png" alt="Home Page">
+        </a>
+        <a class="icon" (click)="this.auth.logout()">
+            <img src="/assets/profile-icon.png" alt="Account Page">
+        </a>
+    </div>
+    <div class="main">
+        <div class="panel">
+            <h1 class="title">
+                Dashboard
+            </h1>
+            <div class="button-space">
+                <div class="row">
+                    <a class="square-button" href="/soundboard">
+                        <img src="/assets/soundboard-icon.png" alt="Soundboard Page" class="icon">
+                        <h1>Soundboard</h1>
+                    </a>
+                    <a class="square-button" href="/games">
+                        <img src="/assets/games-icon.png" alt="Games Page" class="icon">
+                        <h1>Games</h1>
+                    </a>
+                    <a class="square-button" href="/share">
+                        <img src="/assets/share-icon.png" alt="Share Page" class="icon">
+                        <h1>Progress</h1>
+                    </a>
+                </div>
+                <div class="row">
+                    <a class="square-button" href="/videos">
+                        <img src="/assets/videos-icon.png" alt="Videos Page" class="icon">
+                        <h1>Videos</h1>
+                    </a>
+                    <a class="square-button" href="/stories">
+                        <img src="/assets/stories-icon.png" alt="Stories Page" class="icon">
+                        <h1>Stories</h1>
+                    </a>
+                    <a class="square-button" href="/resources">
+                        <img src="/assets/parent-icon.png" alt="Guardian Resources Page" class="icon">
+                        <h1>Guardian Resources</h1>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
