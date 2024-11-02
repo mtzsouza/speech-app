@@ -28,6 +28,9 @@ export class UpdateNameComponent implements OnInit {
           console.log('Username updated successfully');
           this.currentUsername = this.newUsername;
           this.newUsername = ''; // Clear the input field
+
+          // Navigate back to the previous page after updating the username
+          this.location.back();
         },
         error => console.error('Error updating username:', error)
       );

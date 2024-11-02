@@ -19,26 +19,43 @@
     <button class="sidebar-btn" (click)="navigateTo('/update-name')">Update Username</button>
     <button class="sidebar-btn" (click)="navigateTo('/change-password')">Change Password</button>
   
-    <!-- Display Theme Dropdown -->
-    <button class="sidebar-btn" (click)="toggleDropdown('theme')">
-      Display Theme: Device Default
-      <span class="arrow" [class.open]="dropdowns.theme">&#9662;</span>
+<!-- Display Theme Dropdown -->
+<button class="sidebar-btn" (click)="toggleDropdown('theme')">
+  Display Theme: {{ getThemeLabel() }}
+  <span class="arrow" [class.open]="dropdowns.theme">&#9662;</span>
+</button>
+<div *ngIf="dropdowns.theme" class="dropdown-content">
+  <button class="dropdown-item" (click)="setTheme('light')">
+    - Light Mode <span *ngIf="theme === 'light'">✓</span>
+  </button>
+  <button class="dropdown-item" (click)="setTheme('dark')">
+    - Dark Mode <span *ngIf="theme === 'dark'">✓</span>
+  </button>
+  <button class="dropdown-item" (click)="setTheme('default')">
+    - Device Default <span *ngIf="theme === 'default'">✓</span>
+  </button>
+</div>
+
+<!-- Language Dropdown -->
+<button class="sidebar-btn" (click)="toggleDropdown('language')">
+  Language: {{ getLanguageLabel() }}
+  <span class="arrow" [class.open]="dropdowns.language">&#9662;</span>
+</button>
+<div *ngIf="dropdowns.language" class="dropdown-content">
+  <button class="dropdown-item" (click)="setLanguage('english')">
+    - English <span *ngIf="language === 'english'">✓</span>
+  </button>
+  <button class="dropdown-item" (click)="setLanguage('spanish')">
+    - Spanish <span *ngIf="language === 'spanish'">✓</span>
+  </button>
+  <button class="dropdown-item" (click)="setLanguage('default')">
+    - Device Default <span *ngIf="language === 'default'">✓</span>
+  </button>
+</div>
+
+
+    <button class="signout-btn" (click)="accountStatus()">
+      {{ isSignedIn ? 'Sign Out' : 'Sign In' }}
     </button>
-    <div *ngIf="dropdowns.theme" class="dropdown-content">
-      <button class="dropdown-item" (click)="setTheme('light')">Light Mode</button>
-      <button class="dropdown-item" (click)="setTheme('dark')">Dark Mode</button>
-      <button class="dropdown-item" (click)="setTheme('default')">Device Default</button>
-    </div>
-  
-    <!-- Language Dropdown -->
-    <button class="sidebar-btn" (click)="toggleDropdown('language')">
-      Language: Device Default
-      <span class="arrow" [class.open]="dropdowns.language">&#9662;</span>
-    </button>
-    <div *ngIf="dropdowns.language" class="dropdown-content">
-      <button class="dropdown-item" (click)="setLanguage('english')">English</button>
-      <button class="dropdown-item" (click)="setLanguage('spanish')">Spanish</button>
-      <button class="dropdown-item" (click)="setLanguage('default')">Device Default</button>
-    </div>
   </div>
 </div>

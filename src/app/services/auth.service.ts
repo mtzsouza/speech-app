@@ -2,7 +2,9 @@ import { Injectable, inject, signal } from "@angular/core";
 import { Observable, from } from "rxjs";;
 import { UserInterface } from "../utils/user.interface";
 import { DatabaseService } from "./database.service";
+import { EmailAuthProvider } from "firebase/auth";
 import { 
+    reauthenticateWithCredential,
     Auth,
     User,
     createUserWithEmailAndPassword, 
@@ -34,6 +36,8 @@ export class AuthService {
             // Register to Firestore
             const userData = {
                 admin: false,
+                theme: 'default',      // Default theme
+                language: 'default'
             };
             this.database.addDocWithCustomId("users", userData, email);
 
@@ -55,8 +59,8 @@ export class AuthService {
     }
 
     getUser$(): Observable<User | null> {
-        return user(this.firebaseAuth);  // returns an observable of the authenticated user
-      }
+        return user(this.firebaseAuth);
+    }
 
     getUsername(): string | null | undefined {
         return this.firebaseAuth.currentUser?.displayName;
@@ -86,6 +90,23 @@ export class AuthService {
           .catch(error => console.error('Error sending password reset email:', error));
     
         return from(promise);
+      }
+
+      reauthenticate(currentPassword: string): Observable<void> {
+        const user = this.firebaseAuth.currentUser;
+        if (user && user.email) {
+          const credential = EmailAuthProvider.credential(user.email, currentPassword);
+          const promise = reauthenticateWithCredential(user, credential).then(() => {
+            console.log('Re-authentication successful');
+          }).catch(error => {
+            console.error('Error re-authenticating:', error);
+            throw error; // Re-throw error to be handled in the component
+          });
+    
+          return from(promise);
+        } else {
+          return from(Promise.reject('No user is currently signed in'));
+        }
       }
 
     updateUsername(newUsername: string): Observable<void> {
