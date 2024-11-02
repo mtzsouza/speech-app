@@ -54,6 +54,10 @@ export class AuthService {
         return from(promise);
     }
 
+    getUser$(): Observable<User | null> {
+        return user(this.firebaseAuth);  // returns an observable of the authenticated user
+      }
+
     getUsername(): string | null | undefined {
         return this.firebaseAuth.currentUser?.displayName;
     }

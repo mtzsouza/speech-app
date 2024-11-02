@@ -1,0 +1,44 @@
+<!-- Profile button to open the sidebar, only visible when sidebar is closed -->
+<button class="profile-btn" (click)="toggleSidebar()" [class.hidden]="isSidebarOpen">
+  <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
+</button> 
+
+<!-- Sidebar -->
+<div class="sidebar" [class.open]="isSidebarOpen">
+  <div class="sidebar-header">
+    <!-- Close button and User profile -->
+    <button class="close-btn" (click)="toggleSidebar()">&#10006;</button>
+    <div class="user-info">
+      <p>Hello, {{ username || 'User' }}</p>  <!-- Display the user's username -->
+      <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
+    </div>
+  </div>
+
+  <div class="sidebar-content">
+    <!-- Static buttons -->
+    <button class="sidebar-btn" (click)="navigateTo('/update-name')">Update Username</button>
+    <button class="sidebar-btn" (click)="navigateTo('/change-password')">Change Password</button>
+  
+    <!-- Display Theme Dropdown -->
+    <button class="sidebar-btn" (click)="toggleDropdown('theme')">
+      Display Theme: Device Default
+      <span class="arrow" [class.open]="dropdowns.theme">&#9662;</span>
+    </button>
+    <div *ngIf="dropdowns.theme" class="dropdown-content">
+      <button class="dropdown-item" (click)="setTheme('light')">Light Mode</button>
+      <button class="dropdown-item" (click)="setTheme('dark')">Dark Mode</button>
+      <button class="dropdown-item" (click)="setTheme('default')">Device Default</button>
+    </div>
+  
+    <!-- Language Dropdown -->
+    <button class="sidebar-btn" (click)="toggleDropdown('language')">
+      Language: Device Default
+      <span class="arrow" [class.open]="dropdowns.language">&#9662;</span>
+    </button>
+    <div *ngIf="dropdowns.language" class="dropdown-content">
+      <button class="dropdown-item" (click)="setLanguage('english')">English</button>
+      <button class="dropdown-item" (click)="setLanguage('spanish')">Spanish</button>
+      <button class="dropdown-item" (click)="setLanguage('default')">Device Default</button>
+    </div>
+  </div>
+</div>
