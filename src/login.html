@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Full viewport height */
+        html, body {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1a1a1a; 
+        }
+
+        /* Container for the form */
+        .container {
+            width: 100%;
+            max-width: 450px; 
+            padding: 30px 30px 80px; 
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: left; 
+            margin-bottom: 80px; 
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px; 
+            color: #333; 
+            text-align: center; 
+            font-weight: bold; 
+        }
+
+        .input-label {
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            width: calc(100% - 30px); 
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 20px; 
+            box-sizing: border-box; 
+            font-style: italic; 
+        }
+
+        input::placeholder {
+            font-style: italic; /* Italic for placeholder text */
+            color: #aaa; /* Light gray color for placeholder */
+        }
+
+        button {
+            width: 100%;
+            padding: 10px; /* Padding for button */
+            border: 2px solid black; /* Black border for buttons */
+            border-radius: 20px; 
+            cursor: pointer;
+            font-size: 14px; /* Button font size */
+            margin: 5px 0; /* Margin for spacing */
+            transition: background-color 0.3s; 
+        }
+
+        .btn-signin {
+            background-color: #003366; /* Dark blue background */
+            color: white; /* White text */
+        }
+
+        .btn-signin:hover {
+            background-color: #002244; /* Darker blue on hover */
+        }
+
+        .link-button {
+            background-color: #003366; 
+            color: white; /* White text */
+            border: 2px solid black; 
+            border-radius: 20px;
+            cursor: pointer; 
+            font-size: 12px; /* Smaller font size */
+            padding: 5px 10px; 
+            margin: 5px 0; 
+            display: block; 
+            width: auto; 
+            white-space: normal; 
+        }
+
+        .link-button:hover {
+            background-color: #002244; /* Darker blue on hover */
+        }
+
+        .links {
+            margin-top: 20px;
+        }
+
+        /* Extra margin for password label */
+        .input-password {
+            margin-top: 20px; /* Increase space above the password field */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form>
+            <label class="input-label">Email</label>
+            <input type="email" placeholder="Default Input" required>
+            <label class="input-label input-password">Password</label> 
+            <input type="password" placeholder="Default Input" required>
+            <button type="submit" class="btn-signin">Sign In</button>
+        </form>
+        <div class="links">
+            <button class="link-button" onclick="window.location.href='#';">Forgot your password?</button>
+            <button class="link-button" onclick="window.location.href='registration.html';">Already have an account?</button>
+        </div>
+    </div>
+</body>
+</html>
