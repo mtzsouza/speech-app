@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="panel">
+        <form (submit)="onSubmit()">
+            <h1 class="title">Create Account</h1>
+            @if (errorMessage) {
+                <div class="alert">
+                    {{ errorMessage }}
+                </div>
+            }
+            <div class="input">
+                <label for="email">Email</label>
+                <input type="text" class="text-input" name="email" id="email" minlength="4" maxlength="30" [(ngModel)]="formData.email" required>
+            </div>
+            <div class="input">
+                <label for="username">Username</label>
+                <input type="text" class="text-input" name="username" id="username" minlength="4" maxlength="12" [(ngModel)]="formData.username" required>
+            </div>
+            <div class="input">
+                <label for="password">Password</label>
+                <input type="password" class="text-input" name="password" id="password" minlength="6" maxlength="12" [(ngModel)]="formData.password" required>
+            </div>
+            <button class="button">Create Account</button>
+            <h5 (click)="this.router.navigateByUrl('/login')">Already have an account?</h5>
+        </form>
+    </div>
+</div>
