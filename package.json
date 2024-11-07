@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:speech-app": "node dist/speech-app/server/server.mjs",
-    "deploy": "ng cache clean; vercel --prod"
+    "deploy": "ng build; ng cache clean; vercel --prod"
   },
   "private": true,
   "dependencies": {
