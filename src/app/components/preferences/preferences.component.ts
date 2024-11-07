@@ -26,8 +26,8 @@ export class PreferencesComponent implements OnInit, OnDestroy {
 
   username: string | null = null;
   isSignedIn: boolean = false;
-  theme: Theme = 'default';       // Use the Theme type here
-  language: Language = 'default'; // Use the Language type here
+  theme: Theme = 'default';
+  language: Language = 'default';
   private userId: string | null = null;
   private userSubscription: Subscription | undefined;
 
@@ -54,8 +54,10 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     this.userSubscription = this.authService.getUser$().subscribe(async (user: User | null) => {
       if (user) {
         this.userId = user.uid;
+        this.username = user.displayName || 'User'; // Set the username directly here
+        this.isSignedIn = true;
 
-        // Check if the user document exists
+        // Fetch user preferences from Firestore
         const preferences = await this.databaseService.fetchDocumentById('users', this.userId);
 
         if (!preferences) {
@@ -70,6 +72,10 @@ export class PreferencesComponent implements OnInit, OnDestroy {
           this.theme = preferences.theme || 'default';
           this.language = preferences.language || 'default';
         }
+      } else {
+        // Handle user not signed in
+        this.isSignedIn = false;
+        this.username = null;
       }
     });
   }
