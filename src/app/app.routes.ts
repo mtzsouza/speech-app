@@ -2,8 +2,10 @@ import { Routes } from '@angular/router';
 import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/compat/auth-guard';
 
 // Components
-import { LandingComponent } from './components/landing/landing.component';
-import { DashboardComponent } from './components/landing/dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { RecoverComponent } from './components/recover/recover.component';
 import { PreferencesComponent } from './components/preferences/preferences.component';
 import { UpdateNameComponent } from './components/update-info/update-name/update-name.component';
 import { ChangePasswordComponent } from './components/update-info/change-password/change-password.component';
@@ -14,19 +16,22 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
 export const routes: Routes = [
     { 
         path: '', 
-        component: DashboardComponent, 
-        ...canActivate(redirectUnauthorizedToLogin)
+        component: DashboardComponent
     },
-
     { 
         path: 'login', 
-        component: LandingComponent, 
+        component: LoginComponent, 
         ...canActivate(redirectLoggedInToDashboard)
     },
-
-    { 
-        path: 'preferences', 
-        component: PreferencesComponent, 
+    {
+        path: 'register',
+        component: RegisterComponent,
+        ...canActivate(redirectLoggedInToDashboard)
+    },
+    {
+        path: 'recover',
+        component: RecoverComponent,
+        ...canActivate(redirectLoggedInToDashboard)
     },
     { 
         path: 'update-name', 

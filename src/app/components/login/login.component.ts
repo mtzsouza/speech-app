@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Router} from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +13,8 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class LoginComponent {
   // Injections
-  http = inject(HttpClient);
   router = inject(Router);
-  authService = inject(AuthService);
-
-  // Switch to register panel
-  @Output('changeLandingPage')
-  changeLandingPage: EventEmitter<{ page: string }> = new EventEmitter();
-  openRegisterPage() {
-    this.changeLandingPage.emit({page: 'register'});
-  }
+  auth = inject(AuthService);
 
   // Initialize data
   errorMessage: string | null = null;
@@ -34,7 +25,7 @@ export class LoginComponent {
 
   // Log in
   onSubmit() {
-    this.authService.login(this.formData.email, this.formData.password)
+    this.auth.login(this.formData.email, this.formData.password)
     .subscribe({
       next: () => {
       this.router.navigateByUrl('/');
@@ -42,7 +33,6 @@ export class LoginComponent {
       error: (err) => {
         this.errorMessage = err.code;
       }
-    }
-    )
+    })
   }
 }
