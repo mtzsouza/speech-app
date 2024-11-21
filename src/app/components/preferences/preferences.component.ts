@@ -53,7 +53,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSubscription = this.authService.getUser$().subscribe(async (user: User | null) => {
       if (user) {
-        this.userId = user.uid;
+        this.userId = this.authService.getEmail()!;
         this.username = user.displayName || 'User'; // Set the username directly here
         this.isSignedIn = true;
 
