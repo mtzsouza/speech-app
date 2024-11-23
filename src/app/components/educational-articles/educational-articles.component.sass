@@ -1,0 +1,65 @@
+@import '../../../styles.sass'
+
+.container
+    justify-content: center
+    align-items: center
+
+    .panel
+        width: 50%
+        padding: 20px
+        transform: translateY(-25%)
+        background-color: white
+        border-radius: 10px
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1)
+
+        .header
+            display: flex
+            justify-content: space-between
+            align-items: center
+            margin-bottom: 20px
+
+            .title
+                text-align: center
+                font-size: 28px  /* Bigger title */
+                font-weight: bold  /* Bold title */
+                margin: 0
+                width: 100%
+
+            .profile-icon
+                width: 40px
+                height: 40px
+                border-radius: 50%
+                cursor: pointer
+
+        .input
+            margin-bottom: 20px
+
+            .text-input
+                width: 100%
+                padding: 10px
+                border: 1px solid #ccc
+                border-radius: 20px  /* Rounded edges */
+                font-family: inter
+                box-sizing: border-box
+
+        .articles-list
+            .article
+                display: flex
+                flex-direction: column
+                margin-bottom: 15px
+                padding: 15px
+                background-color: #003366  /* Darker blue background */
+                color: white
+                border-radius: 5px
+
+                .article-title
+                    font-weight: bold
+                    margin-bottom: 5px
+
+                .article-content
+                    font-size: 14px
+
+@media only screen and (max-width: 768px)
+    .container
+        .panel
+            width: 80%
