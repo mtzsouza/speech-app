@@ -1,0 +1,89 @@
+// Ensure body and html take full height for proper centering
+body, html
+  height: 100%
+  margin: 0
+  display: flex
+  justify-content: center
+  align-items: center
+  background-color: #2d2d2d // Dark gray background
+
+.video-center
+  max-width: 1500px
+  width: 90% // Responsive width
+  background-color: #f9f9f9
+  padding: 20px
+  border-radius: 10px
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1)
+  transform: translateY(50px) // Slightly move the box below the center
+  display: flex
+  flex-direction: column
+  margin-left: 15%
+
+  .header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 20px
+
+    h1
+      font-size: 24px
+      font-weight: bold
+      color: #333
+
+    .home-icon, .profile-icon
+      background: none
+      border: none
+      font-size: 24px
+      cursor: pointer
+
+  .search-bar
+    margin-bottom: 20px
+    text-align: center
+
+    input
+      width: 80%
+      padding: 10px
+      font-size: 16px
+      border: 1px solid #ccc
+      border-radius: 5px
+      outline: none
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1)
+
+  .video-list
+    display: flex
+    flex-direction: column
+    gap: 15px
+    max-height: 640px
+    overflow-y: auto
+    padding-right: 10px
+
+    .video-item
+      display: flex
+      align-items: center
+      padding: 15px
+      background-color: #fff
+      border-radius: 8px
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1)
+
+      .thumbnail
+        width: 100px
+        height: 100px
+        margin-right: 20px
+
+        img
+          width: 100%
+          height: 100%
+          object-fit: cover
+          border-radius: 5px
+
+      .video-info
+        flex: 1
+
+        .video-title
+          font-size: 18px
+          font-weight: bold
+          margin-bottom: 5px
+
+        .video-description
+          font-size: 14px
+          color: #666

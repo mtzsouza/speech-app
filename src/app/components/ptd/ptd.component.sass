@@ -1,0 +1,87 @@
+.progress-tracking
+  text-align: center
+  padding: 20px
+
+  .progress-card
+    background-color: white
+    border-radius: 10px
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1)
+    padding: 40px
+    max-width: 1000px
+    margin: 0 auto
+
+    h1
+      font-weight: bold
+      margin-bottom: 30px
+      font-size: 32px
+
+    .recent-sounds
+      display: flex
+      justify-content: center
+      gap: 50px
+
+      .sound-title
+        background-color: #003366
+        color: white
+        padding: 12px 20px
+        font-size: 18px
+        border-radius: 5px
+        margin-bottom: 20px
+
+      .progress-circle
+        position: relative
+        display: inline-block
+
+        svg
+          overflow: visible
+          transform: rotate(-90deg)
+
+          circle
+            fill: none
+            stroke-width: 12
+
+            &.bg-circle
+              stroke: #d3d3d3
+
+            &.progress-circle-fill
+              transition: stroke-dashoffset 0.5s ease-out
+              stroke-linecap: round
+
+        .percentage
+          position: absolute
+          top: 42%
+          left: 50%
+          transform: translate(-50%, -50%)
+          font-size: 24px
+          font-weight: bold
+
+        .completion
+          font-size: 14px
+          margin-top: 5px
+          color: #666
+
+    .activity-card
+      background-color: #003366
+      border-radius: 12px
+      padding: 20px
+      margin-top: 20px
+      text-align: center
+      display: flex
+      flex-direction: column
+      align-items: center
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out
+
+      &:hover
+        transform: translateY(-5px)
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15)
+
+      .activity-icon
+        font-size: 36px
+        margin-bottom: 10px
+        color: #003366 // Updated to your blue color
+
+      .activity-title
+        font-size: 18px
+        font-weight: bold
+        color: white // Also using blue for consistency

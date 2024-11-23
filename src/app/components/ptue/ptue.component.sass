@@ -1,0 +1,76 @@
+.achievement-container
+  width: 90%
+  max-width: 1200px
+  background-color: #f2f2f2  // Light background for contrast
+  color: #000
+  border-radius: 8px
+  padding: 20px
+  border: 2px solid #24457B
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2)
+  margin: auto
+  margin-top: 20px
+  overflow: hidden
+
+  .header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    margin-bottom: 20px
+
+    .home-btn, .profile-btn
+      background: none
+      border: none
+      font-size: 2.5em
+      cursor: pointer
+
+    .title
+      font-size: 2.5em
+      color: #000
+      margin: 0
+
+  .badge-grid
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
+    gap: 20px
+    max-height: 600px
+    overflow-y: scroll  // Scroll when content overflows
+    padding-right: 10px  // Space for the scrollbar
+
+    .badge-card
+      background-color: white
+      border: 1px solid #ccc
+      border-radius: 8px
+      padding: 10px
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
+
+      .badge-icon
+        width: 100px
+        height: 100px
+        background-color: gray  // Placeholder color for the icon
+        opacity: 0.5
+        clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)
+        margin-right: 15px
+
+      .badge-info
+        flex: 1
+        h3
+          margin: 0
+          font-size: 1.5em
+
+        p
+          margin: 5px 0
+
+        .date-earned
+          font-style: italic
+          font-size: 0.9em
+
+  @media (max-width: 768px)
+    .badge-grid
+      grid-template-columns: repeat(2, 1fr)
+
+  @media (max-width: 480px)
+    .badge-grid
+      grid-template-columns: 1fr
