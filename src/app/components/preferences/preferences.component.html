@@ -1,0 +1,61 @@
+<!-- Profile button to open the sidebar, only visible when sidebar is closed -->
+<button class="profile-btn" (click)="toggleSidebar()" [class.hidden]="isSidebarOpen">
+  <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
+</button> 
+
+<!-- Sidebar -->
+<div class="sidebar" [class.open]="isSidebarOpen">
+  <div class="sidebar-header">
+    <!-- Close button and User profile -->
+    <button class="close-btn" (click)="toggleSidebar()">&#10006;</button>
+    <div class="user-info">
+      <p>Hello, {{ username || 'Anon' }}</p>  <!-- Display the user's username -->
+      <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
+    </div>
+  </div>
+
+  <div class="sidebar-content">
+    <!-- Static buttons -->
+    <button class="sidebar-btn" (click)="navigateTo('/update-name')">Update Username</button>
+    <button class="sidebar-btn" (click)="navigateTo('/change-password')">Change Password</button>
+  
+<!-- Display Theme Dropdown -->
+<button class="sidebar-btn" (click)="toggleDropdown('theme')">
+  Display Theme: {{ getThemeLabel() }}
+  <span class="arrow" [class.open]="dropdowns.theme">&#9662;</span>
+</button>
+<div *ngIf="dropdowns.theme" class="dropdown-content">
+  <button class="dropdown-item" (click)="setTheme('light')">
+    - Light Mode <span *ngIf="theme === 'light'">✓</span>
+  </button>
+  <button class="dropdown-item" (click)="setTheme('dark')">
+    - Dark Mode <span *ngIf="theme === 'dark'">✓</span>
+  </button>
+  <button class="dropdown-item" (click)="setTheme('default')">
+    - Device Default <span *ngIf="theme === 'default'">✓</span>
+  </button>
+</div>
+
+<!-- Language Dropdown -->
+<button class="sidebar-btn" (click)="toggleDropdown('language')">
+  Language: {{ getLanguageLabel() }}
+  <span class="arrow" [class.open]="dropdowns.language">&#9662;</span>
+</button>
+<div *ngIf="dropdowns.language" class="dropdown-content">
+  <button class="dropdown-item" (click)="setLanguage('english')">
+    - English <span *ngIf="language === 'english'">✓</span>
+  </button>
+  <button class="dropdown-item" (click)="setLanguage('spanish')">
+    - Spanish <span *ngIf="language === 'spanish'">✓</span>
+  </button>
+  <button class="dropdown-item" (click)="setLanguage('default')">
+    - Device Default <span *ngIf="language === 'default'">✓</span>
+  </button>
+</div>
+
+
+    <button class="signout-btn" (click)="accountStatus()">
+      {{ isSignedIn ? 'Sign Out' : 'Sign In' }}
+    </button>
+  </div>
+</div>

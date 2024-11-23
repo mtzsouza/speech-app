@@ -1,0 +1,29 @@
+<div class="update-name-container">
+    <h2>Update Name</h2>
+    <form (submit)="onSubmit()">
+      <!-- Display Current Username -->
+      <div class="form-group">
+        <label>Current Username</label>
+        <p class="current-username">{{ currentUsername || 'No username available' }}</p>
+      </div>
+  
+      <!-- New Username -->
+      <div class="form-group">
+        <label for="newUsername">New Username</label>
+        <input
+          type="text"
+          id="newUsername"
+          placeholder="Enter new username"
+          [(ngModel)]="newUsername"
+          name="newUsername"
+        />
+      </div>
+  
+      <!-- Action Buttons -->
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
+        <button type="submit" class="update-btn">Update Information</button>
+      </div>
+    </form>
+  </div>
+  

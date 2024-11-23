@@ -1,0 +1,31 @@
+<div class="video-center">
+    <div class="header">
+      <button class="home-icon">🏠</button>
+      <h1>Welcome to the Video Center!</h1>
+      <button class="profile-icon">👤</button>
+    </div>
+  
+    <div class="search-bar">
+        <input
+          type="text"
+          placeholder="Search bar"
+          #searchInput
+          (input)="onSearch(searchInput.value)" />
+      </div>      
+  
+    <div class="video-list">
+      <div class="video-item" *ngFor="let video of videos">
+        <div class="thumbnail">
+          <img [src]="video.thumbnail" alt="{{ video.title }}" />
+        </div>
+        <div class="video-info">
+          <h2 class="video-title">
+            <a *ngIf="video.link; else plainTitle" [href]="video.link" target="_blank">{{ video.title }}</a>
+            <ng-template #plainTitle>{{ video.title }}</ng-template>
+          </h2>
+          <p class="video-description">{{ video.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
