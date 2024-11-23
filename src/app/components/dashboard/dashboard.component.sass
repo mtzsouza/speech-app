@@ -1,0 +1,84 @@
+@import '../../../styles.sass'
+
+.container
+    .main
+        width: 100%
+        height: 92%
+        display: flex
+        justify-content: center
+        align-items: start
+
+        .panel
+            height: 90%
+            background-color: white
+
+            .title
+                text-align: center
+                font-size: 50px
+                margin: 20px 0px
+
+            .button-space
+                width: 85%
+                height: 75%
+                display: flex
+                flex-direction: column
+                justify-content: center
+                gap: 20px
+
+                .row
+                    width: 100%
+                    height: 45%
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    gap: 5%
+
+                    .square-button
+                        aspect-ratio: 1
+                        height: 100%
+                        background-color: $blue
+                        border-radius: 15px
+                        display: flex
+                        flex-direction: column
+                        justify-content: center
+                        align-items: center
+                        overflow: hidden
+                        text-decoration: none
+
+                        img
+                            width: 50%
+
+                        h1
+                            padding-top: 20px
+                            margin: 0
+                            font-family: inter
+                            font-size: 20px
+                            color: black
+
+@media only screen and (max-width: 768px)
+    .container
+        .main
+            .panel
+                height: 98%
+
+                .button-space
+                    gap: 50px
+                    margin-top: 20px
+
+                    .row
+                        flex-direction: column
+
+                        .square-button
+                            width: 100%
+                            min-height: 75px
+
+                            img
+                                width: 40px
+
+                            h1
+                                padding: 0px
+                                margin-top: 2%
+                                font-size: 15px
+
+                .title
+                    font-size: 35px

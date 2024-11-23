@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="panel">
+        <h1 class="title">Login</h1>
+        @if (errorMessage) {
+            <div class="alert">
+                {{ errorMessage }}
+            </div>
+        }   
+        <form (submit)="onSubmit()">
+            <div class="input">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" class="text-input" [(ngModel)]="formData.email" required>
+            </div>
+            <div class="input">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="text-input" [(ngModel)]="formData.password" required>
+            </div>
+            <input type="submit" value="Sign in" class="button" >
+        </form>
+        <div class="alternative">
+            <button (click)="this.router.navigateByUrl('/register')" class="button">Don't have an account?</button>
+            <button (click)="this.router.navigateByUrl('/recover')" class="button">Forgot your password?</button>
+        </div>
+    </div> 
+</div>

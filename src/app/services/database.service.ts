@@ -98,4 +98,12 @@ export class DatabaseService {
       console.error('Error deleting document: ', error);
     }
   }
+
+  async fetchUserPreferences(userId: string): Promise<{ theme: string; language: string } | null> {
+    return await this.fetchDocumentById('users', userId);
+  }
+  
+  async updateUserPreference(userId: string, field: 'theme' | 'language', value: string): Promise<void> {
+    await this.updateField('users', userId, field, value);
+  }
 }

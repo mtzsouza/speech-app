@@ -1,0 +1,25 @@
+@import '../../../styles.sass'
+
+.container
+    justify-content: center
+    align-items: center
+
+    .panel
+        width: 25%
+        height: 50%
+        transform: translateY(-20%)
+        background-color: white
+        overflow: hidden
+
+        form
+            h5
+                cursor: pointer
+
+                &:hover
+                    text-decoration: underline
+
+@media only screen and (max-width: 768px)
+    .container
+        .panel
+            width: 80%
+            height: 55%
