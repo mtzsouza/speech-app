@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';  // Adjust the path as necessary
 import { FormsModule } from '@angular/forms';  // Ensure FormsModule is imported
 import { Location } from '@angular/common';    // Import Location for navigating back
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-name',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './update-name.component.html',
   styleUrls: ['./update-name.component.sass']
 })
@@ -21,7 +22,16 @@ export class UpdateNameComponent implements OnInit {
     this.currentUsername = this.authService.getUsername();
   }
 
+  emptyFieldError: boolean = false;
+
   onSubmit() {
+    this.emptyFieldError = false;
+
+    if (!this.newUsername.trim()) {
+      this.emptyFieldError = true;
+      return;
+    }
+
     if (this.newUsername.trim()) {
       this.authService.updateUsername(this.newUsername.trim()).subscribe(
         () => {

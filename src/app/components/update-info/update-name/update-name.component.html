@@ -18,6 +18,10 @@
           name="newUsername"
         />
       </div>
+
+      <div *ngIf="emptyFieldError" class="error-message">
+        <p>New username cannot be empty.</p>
+      </div>
   
       <!-- Action Buttons -->
       <div class="form-actions">
