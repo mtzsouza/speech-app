@@ -6,10 +6,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { RecoverComponent } from './components/recover/recover.component';
-<<<<<<< HEAD
 import { SoundboardComponent } from './components/features/soundboard/soundboard.component';
-=======
->>>>>>> main
 import { UpdateNameComponent } from './components/update-info/update-name/update-name.component';
 import { ChangePasswordComponent } from './components/update-info/change-password/change-password.component';
 import { GamesComponent } from './components/games/games.component';
@@ -47,16 +44,13 @@ export const routes: Routes = [
         component: ChangePasswordComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
-<<<<<<< HEAD
     { 
         path: 'soundboard', 
         component: SoundboardComponent
     },
-=======
     {
         path: 'games', 
         component: GamesComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
     }
->>>>>>> main
 ];
