@@ -1,126 +1,130 @@
-<app-navbar></app-navbar>
-<div class="soundboard-container">
-    <h1>Soundboard</h1>
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="main">
+        <div class="panel">
+            <h1>Soundboard</h1>
 
-    <div class="sound-categories">
-        <!-- A Sounds -->
-        <div class="category">
-            <h2>A Sounds</h2>
-            <button class="sound-button" (click)="openPopup('/eɪ/')">/eɪ/</button>
-            <button class="sound-button" (click)="openPopup('/æ/')">/æ/</button>
-        </div>
-        
-        <!-- E Sounds -->
-        <div class="category">
-            <h2>E Sounds</h2>
-            <button class="sound-button" (click)="openPopup('/i/')">/i/</button>
-            <button class="sound-button" (click)="openPopup('/ɛ/')">/ɛ/</button>
-        </div>
-        
-        <!-- I Sounds -->
-        <div class="category">
-            <h2>I Sounds</h2>
-            <button class="sound-button" (click)="openPopup('/aɪ/')">/aɪ/</button>
-            <button class="sound-button" (click)="openPopup('/ɪ/')">/ɪ/</button>
-        </div>
-        
-        <!-- O Sounds -->
-        <div class="category">
-            <h2>O Sounds</h2>
-            <button class="sound-button" (click)="openPopup('/oʊ/')">/oʊ/</button>
-            <button class="sound-button" (click)="openPopup('/ɑ/')">/ɑ/</button>
-        </div>
-    
-        <!-- U Sounds -->
-        <div class="category">
-            <h2>U Sounds</h2>
-            <button class="sound-button" (click)="openPopup('/ju/')">/ju/</button>
-            <button class="sound-button" (click)="openPopup('/ʌ/')">/ʌ/</button>
-            <button class="sound-button" (click)="openPopup('/ʊ/')">/ʊ/</button>
-        </div>
-    
-        <!-- Other Sounds -->
-        <div class="category">
-            <h2>Other Sounds</h2>
-            <div class="other-sounds">
-                <button class="sound-button" (click)="openPopup('oo')">oo</button>
-                <button class="sound-button" (click)="openPopup('aw')">aw</button>
-                <button class="sound-button" (click)="openPopup('ow')">ow</button>
-                <button class="sound-button" (click)="openPopup('oi')">oi</button>
-                <button class="sound-button" (click)="openPopup('er')">er</button>
-                <button class="sound-button" (click)="openPopup('ar')">ar</button>
-                <button class="sound-button" (click)="openPopup('or')">or</button>
-                <button class="sound-button" (click)="openPopup('air')">air</button>
-                <button class="sound-button" (click)="openPopup('b')">b</button>
-                <button class="sound-button" (click)="openPopup('ch')">ch</button>
-                <button class="sound-button" (click)="openPopup('d')">d</button>
-                <button class="sound-button" (click)="openPopup('f')">f</button>
-                <button class="sound-button" (click)="openPopup('g')">g</button>
-                <button class="sound-button" (click)="openPopup('h')">h</button>
-                <button class="sound-button" (click)="openPopup('j')">j</button>
-                <button class="sound-button" (click)="openPopup('k')">k</button>
-                <button class="sound-button" (click)="openPopup('l')">l</button>
-                <button class="sound-button" (click)="openPopup('m')">m</button>
-                <button class="sound-button" (click)="openPopup('n')">n</button>
-                <button class="sound-button" (click)="openPopup('ng')">ng</button>
-                <button class="sound-button" (click)="openPopup('p')">p</button>
-                <button class="sound-button" (click)="openPopup('r')">r</button>
-                <button class="sound-button" (click)="openPopup('s')">s</button>
-                <button class="sound-button" (click)="openPopup('sh')">sh</button>
-                <button class="sound-button" (click)="openPopup('t')">t</button>
-                <button class="sound-button" (click)="openPopup('th')">th</button>
-                <button class="sound-button" (click)="openPopup('v')">v</button>
-                <button class="sound-button" (click)="openPopup('w')">w</button>
-                <button class="sound-button" (click)="openPopup('y')">y</button>
-                <button class="sound-button" (click)="openPopup('z')">z</button>
-                <button class="sound-button" (click)="openPopup('zh')">zh</button>
+            <div class="sound-categories">
+                <!-- A Sounds -->
+                <div class="category">
+                    <h2>A Sounds</h2>
+                    <button class="sound-button" (click)="openPopup('/eɪ/')">/eɪ/</button>
+                    <button class="sound-button" (click)="openPopup('/æ/')">/æ/</button>
+                </div>
+                
+                <!-- E Sounds -->
+                <div class="category">
+                    <h2>E Sounds</h2>
+                    <button class="sound-button" (click)="openPopup('/i/')">/i/</button>
+                    <button class="sound-button" (click)="openPopup('/ɛ/')">/ɛ/</button>
+                </div>
+                
+                <!-- I Sounds -->
+                <div class="category">
+                    <h2>I Sounds</h2>
+                    <button class="sound-button" (click)="openPopup('/aɪ/')">/aɪ/</button>
+                    <button class="sound-button" (click)="openPopup('/ɪ/')">/ɪ/</button>
+                </div>
+                
+                <!-- O Sounds -->
+                <div class="category">
+                    <h2>O Sounds</h2>
+                    <button class="sound-button" (click)="openPopup('/oʊ/')">/oʊ/</button>
+                    <button class="sound-button" (click)="openPopup('/ɑ/')">/ɑ/</button>
+                </div>
+            
+                <!-- U Sounds -->
+                <div class="category">
+                    <h2>U Sounds</h2>
+                    <button class="sound-button" (click)="openPopup('/ju/')">/ju/</button>
+                    <button class="sound-button" (click)="openPopup('/ʌ/')">/ʌ/</button>
+                    <button class="sound-button" (click)="openPopup('/ʊ/')">/ʊ/</button>
+                </div>
+            
+                <!-- Other Sounds -->
+                <div class="category">
+                    <h2>Other Sounds</h2>
+                    <div class="other-sounds">
+                        <button class="sound-button" (click)="openPopup('oo')">oo</button>
+                        <button class="sound-button" (click)="openPopup('aw')">aw</button>
+                        <button class="sound-button" (click)="openPopup('ow')">ow</button>
+                        <button class="sound-button" (click)="openPopup('oi')">oi</button>
+                        <button class="sound-button" (click)="openPopup('er')">er</button>
+                        <button class="sound-button" (click)="openPopup('ar')">ar</button>
+                        <button class="sound-button" (click)="openPopup('or')">or</button>
+                        <button class="sound-button" (click)="openPopup('air')">air</button>
+                        <button class="sound-button" (click)="openPopup('b')">b</button>
+                        <button class="sound-button" (click)="openPopup('ch')">ch</button>
+                        <button class="sound-button" (click)="openPopup('d')">d</button>
+                        <button class="sound-button" (click)="openPopup('f')">f</button>
+                        <button class="sound-button" (click)="openPopup('g')">g</button>
+                        <button class="sound-button" (click)="openPopup('h')">h</button>
+                        <button class="sound-button" (click)="openPopup('j')">j</button>
+                        <button class="sound-button" (click)="openPopup('k')">k</button>
+                        <button class="sound-button" (click)="openPopup('l')">l</button>
+                        <button class="sound-button" (click)="openPopup('m')">m</button>
+                        <button class="sound-button" (click)="openPopup('n')">n</button>
+                        <button class="sound-button" (click)="openPopup('ng')">ng</button>
+                        <button class="sound-button" (click)="openPopup('p')">p</button>
+                        <button class="sound-button" (click)="openPopup('r')">r</button>
+                        <button class="sound-button" (click)="openPopup('s')">s</button>
+                        <button class="sound-button" (click)="openPopup('sh')">sh</button>
+                        <button class="sound-button" (click)="openPopup('t')">t</button>
+                        <button class="sound-button" (click)="openPopup('th')">th</button>
+                        <button class="sound-button" (click)="openPopup('v')">v</button>
+                        <button class="sound-button" (click)="openPopup('w')">w</button>
+                        <button class="sound-button" (click)="openPopup('y')">y</button>
+                        <button class="sound-button" (click)="openPopup('z')">z</button>
+                        <button class="sound-button" (click)="openPopup('zh')">zh</button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- Popup menu -->
-<div class="menu" *ngIf="isPopupOpen">
-    <div class="menu-content">
-        <!-- Header container has the sound, pronunciation button, and navigation buttons -->
-        <div class="header-container">
-            <button *ngIf="showExamples || showPairs" class="back-btn" (click)="togglePairs(false)" (click)="toggleExamples(false)">←</button>
-            <div class="sound-center">
-                <h2>{{ currentSound }}</h2>
-                <button class="pronunciation-btn" (click)="playSound(currentSound)">
-                    <img src="assets/playSound.svg" alt="Pronounce Sound" class="icon" />
-                </button>
+            
+            <!-- Popup menu -->
+        <div class="menu" *ngIf="isPopupOpen" (click)="handleOutsideClick($event)">
+            <div class="menu-content">
+                <!-- Header container has the sound, pronunciation button, and navigation buttons -->
+                <div class="header-container">
+                    <button *ngIf="showExamples || showPairs" class="back-btn" (click)="togglePairs(false)" (click)="toggleExamples(false)">←</button>
+                    <div class="sound-center">
+                        <h2>{{ currentSound }}</h2>
+                        <button class="pronunciation-btn" (click)="playSound(currentSound)">
+                            <img src="assets/playSound.svg" alt="Pronounce Sound" class="icon" />
+                        </button>
+                    </div>
+                    <button class="close-btn" (click)="closePopup()">×</button>
+                </div>
+                
+                <!-- Content -->
+                <div *ngIf="!showExamples && !showPairs" class="menu-options">
+                    <button class="menu-item" (click)="toggleExamples(true)">Examples</button>
+                    <button class="menu-item" (click)="togglePairs(true)">Minimal Pairs</button>
+                </div>
+
+                <div *ngIf="showExamples" class="content">
+                    <h3>Examples of words with {{ currentSound }}</h3>
+                    <ul>
+                        <li *ngFor="let example of examples[currentSound]" class="example-item">
+                            {{ example }}
+                            <button class="pronunciation-btn" (click)="playExample(example)">
+                                <img src="assets/playSound.svg" alt="Pronounce Example" class="icon" />
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div *ngIf="showPairs" class="content">
+                    <h3>Minimal pair for {{ currentSound }}</h3>
+                    <ul>
+                        <li *ngFor="let pair of pairs[currentSound]" class="pair-item">
+                            {{ pair }}
+                            <button class="pronunciation-btn" (click)="playPair(pair)">
+                                <img src="assets/playSound.svg" alt="Pronounce Pair" class="icon" />
+                            </button>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <button class="close-btn" (click)="closePopup()">×</button>
-        </div>
-        
-        <!-- Content -->
-        <div *ngIf="!showExamples && !showPairs" class="menu-options">
-            <button class="menu-item" (click)="toggleExamples(true)">Examples</button>
-            <button class="menu-item" (click)="togglePairs(true)">Minimal Pairs</button>
-        </div>
-
-        <div *ngIf="showExamples" class="content">
-            <h3>Examples of words with {{ currentSound }}</h3>
-            <ul>
-                <li *ngFor="let example of examples[currentSound]" class="example-item">
-                    {{ example }}
-                    <button class="pronunciation-btn" (click)="playExample(example)">
-                        <img src="assets/playSound.svg" alt="Pronounce Example" class="icon" />
-                    </button>
-                </li>
-            </ul>
-        </div>
-
-        <div *ngIf="showPairs" class="content">
-            <h3>Minimal pair for {{ currentSound }}</h3>
-            <ul>
-                <li *ngFor="let pair of pairs[currentSound]" class="pair-item">
-                    {{ pair }}
-                    <button class="pronunciation-btn" (click)="playPair(pair)">
-                        <img src="assets/playSound.svg" alt="Pronounce Pair" class="icon" />
-                    </button>
-                </li>
-            </ul>
         </div>
     </div>
 </div>
