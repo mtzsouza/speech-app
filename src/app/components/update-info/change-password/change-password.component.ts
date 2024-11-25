@@ -31,7 +31,7 @@ export class ChangePasswordComponent {
     this.updatePasswordError = false;
 
     // Check if any field is empty
-    if (!this.currentPassword || !this.newPassword || !this.confirmNewPassword) {
+    if (!this.currentPassword.trim() || !this.newPassword.trim() || !this.confirmNewPassword.trim()) {
       this.emptyFieldsError = true;
       return;
     }
