@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { redirectUnauthorizedTo, redirectLoggedInTo, canActivate } from '@angular/fire/compat/auth-guard';
 
 // Components
-import { DashboardAlphaComponent } from './components/dashboard-alpha/dashboard-alpha.component';
 import { PTHComponent } from './components/pth/pth.component';
 import { PTEComponent } from './components/pte/pte.component';
 import { PTUEComponent } from './components/ptue/ptue.component';
@@ -66,11 +65,6 @@ export const routes: Routes = [
         path: 'games', 
         component: GamesComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
-    },
-
-    {
-        path: 'dashboardAlpha',
-        component: DashboardAlphaComponent
     },
 
     {
