@@ -60,10 +60,6 @@ export const routes: Routes = [
         path: 'soundboard', 
         component: SoundboardComponent
     },
-<<<<<<< HEAD
-    
-=======
->>>>>>> main
     {
         path: 'games', 
         component: GamesComponent, 
