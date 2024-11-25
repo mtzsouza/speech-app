@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-educational-articles',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent],
   templateUrl: './educational-articles.component.html',
   styleUrl: './educational-articles.component.sass',
 })
