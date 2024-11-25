@@ -1,0 +1,30 @@
+<div class="container">
+  <app-navbar></app-navbar>
+  <div class="main">
+    <div class="panel">
+      <h1 class="title">Educational Articles!</h1>
+
+      <div class="input">
+        <input
+          type="text"
+          id="search"
+          name="search"
+          class="text-input"
+          [(ngModel)]="searchQuery"
+          (input)="filterArticles()"
+          placeholder="Search by title..."
+          required
+        />
+      </div>
+
+      <div class="articles-list">
+        <div class="article" *ngFor="let article of filteredArticles">
+          <div class="article-title">{{ article.title }}</div>
+          <div class="article-content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
