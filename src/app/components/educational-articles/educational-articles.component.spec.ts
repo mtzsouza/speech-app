@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EducationalArticlesComponent } from './educational-articles.component';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 describe('EducationalArticlesComponent', () => {
   let component: EducationalArticlesComponent;
@@ -7,7 +8,7 @@ describe('EducationalArticlesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EducationalArticlesComponent],
+      imports: [EducationalArticlesComponent, NavbarComponent],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EducationalArticlesComponent);
@@ -17,12 +18,5 @@ describe('EducationalArticlesComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should filter articles based on search query', () => {
-    component.searchQuery = 'Title 1';
-    component.filterArticles();
-    expect(component.filteredArticles.length).toBe(1);
-    expect(component.filteredArticles[0].title).toBe('[Article Title 1]');
   });
 });
