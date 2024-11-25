@@ -73,27 +73,27 @@ export const routes: Routes = [
     },
 
     {
-        path: 'progressTrackingHome',
+        path: 'progress',
         component: PTHComponent
     },
 
     {
-        path: 'progressTrackingEarned',
+        path: 'progress/earned',
         component: PTEComponent
     },
 
     {
-        path: 'progressTrackingUnearned',
+        path: 'progress/unearned',
         component: PTUEComponent
     },
 
     {
-        path: 'progressTrackingData',
+        path: 'progress/data',
         component: PTDComponent
     },
 
     {
-        path: 'videosHome',
+        path: 'videos',
         component: VHComponent
     }
 ];
