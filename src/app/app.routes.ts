@@ -69,22 +69,26 @@ export const routes: Routes = [
 
     {
         path: 'progress',
-        component: PTHComponent
+        component: PTHComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
     },
 
     {
         path: 'progress/earned',
-        component: PTEComponent
+        component: PTEComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
     },
 
     {
         path: 'progress/unearned',
-        component: PTUEComponent
+        component: PTUEComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
     },
 
     {
         path: 'progress/data',
-        component: PTDComponent
+        component: PTDComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
     },
 
     {
