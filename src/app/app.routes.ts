@@ -57,14 +57,11 @@ export const routes: Routes = [
         component: ChangePasswordComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
-<<<<<<< HEAD
     { 
         path: 'soundboard', 
         component: SoundboardComponent
     },
-=======
     
->>>>>>> main
     {
         path: 'games', 
         component: GamesComponent, 
