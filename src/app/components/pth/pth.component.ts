@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-pth',
   standalone: true,
-  imports: [],
+  imports: [NavbarComponent],
   templateUrl: './pth.component.html',
   styleUrls: ['./pth.component.sass']
 })

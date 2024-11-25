@@ -1,4 +1,15 @@
-// Ensure body and html take full height for proper centering
+.container
+  width: 100%
+  display: flex
+  flex-direction: column // Stack navbar and content
+
+.main
+  width: 100%
+  height: 92%
+  display: flex
+  justify-content: center
+  align-items: flex-start // Start aligning from the top
+
 body, html
   height: 100%
   margin: 0
@@ -17,11 +28,12 @@ body, html
   transform: translateY(50px) // Slightly move the box below the center
   display: flex
   flex-direction: column
-  margin-left: 15%
+  margin: 0 auto // Center horizontally
+  outline: 2px solid black
 
   .header
     display: flex
-    justify-content: space-between
+    justify-content: center
     align-items: center
     margin-bottom: 20px
 
