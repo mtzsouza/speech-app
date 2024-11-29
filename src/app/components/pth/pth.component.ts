@@ -14,10 +14,10 @@ export class PTHComponent {
   constructor(private router: Router) {}
 
   viewEarnedBadges() {
-    this.router.navigate(['/progressTrackingEarned']);
+    this.router.navigate(['/progress/earned']);
   }
 
   viewUnearnedBadges() {
-    this.router.navigate(['/progressTrackingUnearned']);
+    this.router.navigate(['/progress/unearned']);
   }
 }

@@ -7,7 +7,6 @@ import { PTEComponent } from './components/pte/pte.component';
 import { PTUEComponent } from './components/ptue/ptue.component';
 import { PTDComponent } from './components/ptd/ptd.component';
 import { VHComponent } from './components/vh/vh.component';
-
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -56,10 +55,12 @@ export const routes: Routes = [
         component: ChangePasswordComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
+
     { 
         path: 'soundboard', 
         component: SoundboardComponent
     },
+
     {
         path: 'games', 
         component: GamesComponent, 
@@ -67,27 +68,31 @@ export const routes: Routes = [
     },
 
     {
-        path: 'progressTrackingHome',
-        component: PTHComponent
+        path: 'progress',
+        component: PTHComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
     },
 
     {
-        path: 'progressTrackingEarned',
-        component: PTEComponent
+        path: 'progress/earned',
+        component: PTEComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
     },
 
     {
-        path: 'progressTrackingUnearned',
-        component: PTUEComponent
+        path: 'progress/unearned',
+        component: PTUEComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
     },
 
     {
-        path: 'progressTrackingData',
-        component: PTDComponent
+        path: 'progress/data',
+        component: PTDComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
     },
 
     {
-        path: 'videosHome',
+        path: 'videos',
         component: VHComponent
     }
 ];
