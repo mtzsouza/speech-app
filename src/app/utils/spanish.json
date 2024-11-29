@@ -1,5 +1,43 @@
 {
     "dashboard": {
         "title": "Panel"
+    },
+    "preferences": {
+        "greeting": "Hola, ",
+        "updateUsername": "Actualizar Nombre de Usuario",
+        "changePassword": "Cambiar Contraseña",
+        "displayTheme": "Mostrar Tema: ",
+        "language": "Idioma: ",
+        "signout": "Cerrar Sesión",
+        "signin": "Iniciar Sesión",
+        "light": "- Modo Luz",
+        "dark": "- Modo Oscuro",
+        "default": "- Dispositivo por Defecto",
+        "english": "- English",
+        "spanish": "- Español"
+    },
+    "updateUsername": {
+        "updateUsername": "Actualizar Nombre de Usuario",
+        "currentUsername": "Nombre de Usuario Actual",
+        "newUsername": "Nuevo Nombre de Usuario",
+        "defaultField": "Introducir nuevo nombre de usuario",
+        "update": "Información Actualizada",
+        "cancel": "Cancelar",
+        "errorEmpty": "El nuevo nombre de usuario no puede estar vacío."
+    },
+    "changePassword": {
+        "changePassword": "Cambiar Contraseña",
+        "currentPassword": "Contraseña Actual",
+        "newPassword": "Nueva Contraseña",
+        "confirmPassword": "Confirmar nueva contraseña",
+        "currentDefault": "Introduzca la contraseña actual",
+        "newDefault": "Introducir nueva contraseña",
+        "confirmDefault": "Confirmar nueva contraseña",
+        "update": "Información actualizada",
+        "cancel": "Cancelar",
+        "errorEmpty": "Todos los campos son obligatorios. Rellene todos los campos.",
+        "errorMismatch": "La nueva contraseña y la contraseña de confirmación no coinciden.",
+        "errorIncorrect": "La contraseña actual es incorrecta. Por favor, inténtelo de nuevo.",
+        "errorFailed": "No se ha podido actualizar la contraseña. Vuelva a intentarlo más tarde."
     }
 }

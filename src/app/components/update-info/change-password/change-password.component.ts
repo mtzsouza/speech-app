@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { CommonModule } from '@angular/common';
+import { LanguageService } from '../../../services/language.service';
+import * as english from '../../../utils/english.json'
 
 @Component({
   selector: 'app-change-password',
@@ -22,6 +24,15 @@ export class ChangePasswordComponent {
   updatePasswordError: boolean = false;
 
   constructor(private authService: AuthService, private location: Location) {}
+
+  languageService = inject(LanguageService)
+  userLanguage = english; // Default is english, to show up before language loads
+
+  ngOnInit(): void {
+    this.languageService.getLanguage().then(lang => {
+      this.userLanguage = lang;
+    });
+  }
 
   onSubmit() {
     // Reset error flags
