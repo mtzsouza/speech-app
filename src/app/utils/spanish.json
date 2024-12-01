@@ -39,5 +39,19 @@
         "errorMismatch": "La nueva contraseña y la contraseña de confirmación no coinciden.",
         "errorIncorrect": "La contraseña actual es incorrecta. Por favor, inténtelo de nuevo.",
         "errorFailed": "No se ha podido actualizar la contraseña. Vuelva a intentarlo más tarde."
+    },
+    "soundboard": {
+        "title": "Caja de Resonancia",
+        "exampleHeader": "Ejemplos de palabras con ",
+        "pairHeader": "Pares mínimos para ",
+        "categories": {
+            "Vocales": ["/a/", "/e/", "/i/", "/o/", "/u/"],
+            "Otros Sonidos": ["/b/", "/ca/", "/ci/", "/co/", "/cc/", "/cu/", "/ch/", "/d/", "/f/", "/g/", "/gue/", "/gui/", "/güe/", "/güi/", "/j/", "/k/", "/l/", "/ll/", "/m/", "/n/", "/ñ/", "/p/", "/que/", "/qui/", "/r/", "/rr/", "/s/", "/t/", "/y/", "/z/"]
+        },
+        "examples": {
+            "/a/": ["papa", "agua"]
+        },
+        "pairs": {
+        }
     }
 }
