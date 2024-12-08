@@ -1,0 +1,51 @@
+@import '../../../styles.sass'
+
+.container
+    .main
+        width: 100%
+        height: fit-content
+        display: flex
+        justify-content: center
+        align-items: start
+        overflow-y: scroll
+        padding-bottom: 20px
+
+        .panel
+            height: fit-content
+            background-color: white
+            padding-bottom: 20px
+
+            .title
+                text-align: center
+                font-size: 50px
+                font-weight: 800
+                margin: 20px 0px 40px 0px
+                transform: translateY(50%)
+
+            .story-selector
+                width: 80%
+                height: fit-content
+                background-color: $blue
+                margin: 15px 0px
+                padding: 0px 20px
+                border-radius: 14px
+                overflow: hidden
+                color: white
+                font-family: inter
+                font-weight: bold
+                transition-duration: 0.5s
+                text-decoration: none
+
+                &:hover
+                    transform: scale(105%)
+                    transition-duration: 0.5s
+
+@media only screen and (max-width: 768px)
+    .container
+        .main
+            .panel
+                height: 98%
+
+                .title
+                    font-size: 35px
+                    padding: 0px 20px
