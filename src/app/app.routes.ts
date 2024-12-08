@@ -15,6 +15,7 @@ import { SoundboardComponent } from './components/features/soundboard/soundboard
 import { UpdateNameComponent } from './components/update-info/update-name/update-name.component';
 import { ChangePasswordComponent } from './components/update-info/change-password/change-password.component';
 import { GamesComponent } from './components/games/games.component';
+import { StoriesComponent } from './components/stories/stories.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -94,5 +95,10 @@ export const routes: Routes = [
     {
         path: 'videos',
         component: VHComponent
+    },
+
+    {
+        path: 'stories',
+        component: StoriesComponent
     }
 ];
