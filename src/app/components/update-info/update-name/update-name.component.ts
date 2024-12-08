@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';  // Adjust the path as necessary
 import { FormsModule } from '@angular/forms';  // Ensure FormsModule is imported
 import { Location } from '@angular/common';    // Import Location for navigating back
 import { CommonModule } from '@angular/common';
+import { LanguageService } from '../../../services/language.service';
+import * as english from '../../../utils/english.json'
 
 @Component({
   selector: 'app-update-name',
@@ -17,9 +19,16 @@ export class UpdateNameComponent implements OnInit {
 
   constructor(private authService: AuthService, private location: Location) {}  // Inject Location
 
+  languageService = inject(LanguageService)
+  userLanguage = english; // Default is english, to show up before language loads
+
   ngOnInit(): void {
     // Fetch the current username when the component is initialized
     this.currentUsername = this.authService.getUsername();
+
+    this.languageService.getLanguage().then(lang => {
+      this.userLanguage = lang;
+    });
   }
 
   emptyFieldError: boolean = false;

@@ -1,32 +1,32 @@
 <div class="update-name-container">
-    <h2>Update Name</h2>
+    <h2>{{ userLanguage.updateUsername.updateUsername }}</h2>
     <form (submit)="onSubmit()">
       <!-- Display Current Username -->
       <div class="form-group">
-        <label>Current Username</label>
+        <label>{{ userLanguage.updateUsername.currentUsername }}</label>
         <p class="current-username">{{ currentUsername || 'No username available' }}</p>
       </div>
   
       <!-- New Username -->
       <div class="form-group">
-        <label for="newUsername">New Username</label>
+        <label for="newUsername">{{ userLanguage.updateUsername.newUsername }}</label>
         <input
           type="text"
           id="newUsername"
-          placeholder="Enter new username"
+          placeholder="{{ userLanguage.updateUsername.defaultField }}"
           [(ngModel)]="newUsername"
           name="newUsername"
         />
       </div>
 
       <div *ngIf="emptyFieldError" class="error-message">
-        <p>New username cannot be empty.</p>
+        <p>{{ userLanguage.updateUsername.errorEmpty }}</p>
       </div>
   
       <!-- Action Buttons -->
       <div class="form-actions">
-        <button type="button" class="cancel-btn" (click)="onCancel()">Cancel</button>
-        <button type="submit" class="update-btn">Update Information</button>
+        <button type="button" class="cancel-btn" (click)="onCancel()">{{ userLanguage.updateUsername.cancel }}</button>
+        <button type="submit" class="update-btn">{{ userLanguage.updateUsername.update }}</button>
       </div>
     </form>
   </div>
