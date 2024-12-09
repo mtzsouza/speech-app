@@ -24,8 +24,8 @@ export class SoundboardComponent {
   ngOnInit() {
     this.languageService.getLanguage().then(lang => {
       this.language = lang;
-      this.updateCategories();
     });
+    this.updateCategories();
   }
 
   currentLanguage:string = '';
