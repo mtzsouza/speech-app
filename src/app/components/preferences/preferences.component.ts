@@ -1,10 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { DatabaseService } from '../../services/database.service';
 import { User } from '@angular/fire/auth';
 import { Subscription } from 'rxjs';
+import { LanguageService } from '../../services/language.service';
+import * as english from '../../utils/english.json'
+
 
 // Define types for theme and language
 type Theme = 'light' | 'dark' | 'default';
@@ -44,6 +47,9 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     default: 'Device Default'
   };
 
+  languageService = inject(LanguageService)
+  userLanguage = english; // Default is english, to show up before language loads
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -78,6 +84,10 @@ export class PreferencesComponent implements OnInit, OnDestroy {
         this.username = null;
       }
     });
+
+    this.languageService.getLanguage().then(lang => {
+      this.userLanguage = lang;
+    });
   }
 
   ngOnDestroy(): void {
@@ -92,6 +102,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
         await this.databaseService.updateUserPreference(this.userId, 'theme', theme);
         this.theme = theme;
         console.log('Theme updated to:', theme);
+        window.location.reload();
       } catch (error) {
         console.error('Error updating theme:', error);
       }
@@ -104,6 +115,7 @@ export class PreferencesComponent implements OnInit, OnDestroy {
         await this.databaseService.updateUserPreference(this.userId, 'language', language);
         this.language = language;
         console.log('Language updated to:', language);
+        window.location.reload();
       } catch (error) {
         console.error('Error updating language:', error);
       }
