@@ -84,6 +84,28 @@ export class AuthService {
         return false;
     }
 
+    async requestAdmin(requestCode: string): Promise<boolean> {
+      const email = this.getEmail();
+      if (typeof email === 'string') {
+          try {
+              const doc = await this.database.fetchDocumentById('config', "codes");
+              const adminCode = doc.admin;
+
+              if (requestCode == adminCode) {
+                this.database.updateField("users", email, "admin", true);
+                return true
+              } else {
+                return false
+              }
+
+          } catch (error) {
+              console.error('Error fetching document:', error);
+              return false;
+          }
+      }
+      return false;
+  }
+
     resetPassword(email: string): Observable<void> {
         const promise = sendPasswordResetEmail(this.firebaseAuth, email)
           .then(() => console.log('Password reset email sent'))

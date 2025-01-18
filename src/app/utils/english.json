@@ -6,6 +6,7 @@
         "greeting": "Hello, ",
         "updateUsername": "Update Username",
         "changePassword": "Change Password",
+        "requestAdmin": "Request Admin",
         "displayTheme": "Display Theme: ",
         "language": "Language: ",
         "signout": "Sign Out",
@@ -39,6 +40,9 @@
         "errorMismatch": "New password and confirm password do not match.",
         "errorIncorrect": "Current password is incorrect. Please try again.",
         "errorFailed": "Failed to update password. Please try again later."
+    },
+    "requestAdmin": {
+        "enterCode": "What is your admin code?"
     },
     "soundboard": {
         "title": "Soundboard",

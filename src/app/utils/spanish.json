@@ -6,6 +6,7 @@
         "greeting": "Hola, ",
         "updateUsername": "Actualizar Nombre de Usuario",
         "changePassword": "Cambiar Contraseña",
+        "requestAdmin": "Solicitar Admin",
         "displayTheme": "Mostrar Tema: ",
         "language": "Idioma: ",
         "signout": "Cerrar Sesión",
@@ -39,6 +40,9 @@
         "errorMismatch": "La nueva contraseña y la contraseña de confirmación no coinciden.",
         "errorIncorrect": "La contraseña actual es incorrecta. Por favor, inténtelo de nuevo.",
         "errorFailed": "No se ha podido actualizar la contraseña. Vuelva a intentarlo más tarde."
+    },
+    "requestAdmin": {
+        "enterCode": "Cual es su codigo de admin?"
     },
     "soundboard": {
         "title": "Caja de Resonancia",
