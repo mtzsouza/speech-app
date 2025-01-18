@@ -70,6 +70,7 @@ export class AuthService {
         return this.firebaseAuth.currentUser?.email;
     }
 
+    // If calling this function from onInit, wait 1 second before calling
     async isAdmin(): Promise<boolean> {
         const email = this.getEmail();
         if (typeof email === 'string') {

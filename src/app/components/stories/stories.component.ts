@@ -11,9 +11,17 @@ import { AuthService } from '../../services/auth.service';
 })
 export class StoriesComponent {
   auth = inject(AuthService);
+  isAdmin = false
 
-  async ngOnInit() {
-    console.log(await this.auth.isAdmin());
+  ngOnInit(): void {
+    // Wait 1 second
+    setTimeout(() => {
+      this.checkAdminStatus();
+    }, 1000);
+  }
+
+  async checkAdminStatus() {
+    this.isAdmin = await this.auth.isAdmin()
   }
 
 }
