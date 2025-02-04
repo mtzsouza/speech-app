@@ -20,6 +20,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { EducationalArticlesComponent } from './components/educational-articles/educational-articles.component';
 import { RequestAdminComponent } from './components/update-info/request-admin/request-admin.component';
 import { AddStoryComponent } from './components/stories/add-story/add-story.component';
+import { ReadStoryComponent } from './components/stories/read-story/read-story.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -117,6 +118,11 @@ export const routes: Routes = [
         path: 'stories/add',
         component: AddStoryComponent,
         ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'stories/:title',
+        component: ReadStoryComponent
     },
 
     {

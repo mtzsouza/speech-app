@@ -124,5 +124,8 @@
             "/t/": ["Tía Día", "Toro Coro", "Taza Pasa"],
             "/y/": ["Yo Lo", "Yema Rema", "Rayo Rato"]
         }
+    },
+    "storyCenter": {
+        "title": "Bienvenido al Centro de Historias"
     }
 }
