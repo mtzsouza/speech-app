@@ -19,22 +19,27 @@ export class Game1Component implements OnInit {
   cards: { id: number; type: 'letter' | 'sound'; value: string; flipped: boolean; matched: boolean }[] = [];
   flippedCards: { id: number; type: 'letter' | 'sound'; value: string; flipped: boolean; matched: boolean }[] = [];
   isGameActive: boolean = false;
-  currentLanguage: string = 'english';
 
   level: number = 1;
   maxLevel: number = 20;
   maxCards: number = 50; 
   levelComplete: boolean = false;
 
-  ngOnInit(): void {
-    this.languageService.getLanguage().then((lang) => {
+  ngOnInit() {
+    this.languageService.getLanguage().then(lang => {
       this.language = lang;
-      this.currentLanguage = lang === english ? 'english' : 'spanish';
       this.initializeGame();
     });
+    this.initializeGame();
   }
+  currentLanguage:string = '';
 
   initializeGame(): void {
+    if(this.language.dashboard.title === 'Dashboard')
+      this.currentLanguage = 'english';
+    else
+      this.currentLanguage = 'spanish';
+
     this.isGameActive = true;
     this.levelComplete = false;
     this.cards = this.createCardDeck();
@@ -126,6 +131,9 @@ export class Game1Component implements OnInit {
   }
 
   playSound(sound: string): void {
+    console.log(sound);
+    console.log(`/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Pronunciations/${sound.replace(/\//g, '')}.mp3`);
+    console.log(this.currentLanguage);
     const audio = new Audio(
       `/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Pronunciations/${sound.replace(/\//g, '')}.mp3`
     );
