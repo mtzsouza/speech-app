@@ -42,6 +42,8 @@
     },
     "soundboard": {
         "title": "Soundboard",
+        "example": "Examples",
+        "minimalPair": "Minimal Pairs",
         "exampleHeader": "Examples of words with ",
         "pairHeader": "Minimal pairs for ",
         "categories": {

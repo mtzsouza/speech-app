@@ -1,0 +1,33 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="main">
+        <div class="panel">
+            <div class="game-container">
+                <h1>Card Matching Game</h1>
+                <h2>Level: {{ level }}</h2>
+            
+                <button class="restart-btn" (click)="restartGame()">Restart Game</button>
+            
+                <div class="card-grid">
+                <div
+                    class="card"
+                    *ngFor="let card of cards"
+                    [class.flipped]="card.flipped || card.matched"
+                    (click)="flipCard(card)"
+                >
+                    <div class="card-front" *ngIf="card.flipped || card.matched">
+                    <span *ngIf="card.type === 'letter'">{{ card.value }}</span>
+                    <img *ngIf="card.type === 'sound'" src="assets/playSound.svg" alt="Sound Icon" />
+                    </div>
+                    <div class="card-back" *ngIf="!card.flipped && !card.matched"></div>
+                </div>
+                </div>
+            
+                <div *ngIf="levelComplete" class="level-complete">
+                <h2>Level {{ level }} Complete!</h2>
+                <p>Loading next level...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

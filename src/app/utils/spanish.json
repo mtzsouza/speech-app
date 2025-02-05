@@ -42,6 +42,8 @@
     },
     "soundboard": {
         "title": "Caja de Resonancia",
+        "example": "Ejemplos",
+        "minimalPair": "Pares Mínimos",
         "exampleHeader": "Ejemplos de palabras con ",
         "pairHeader": "Pares mínimos para ",
         "categories": {

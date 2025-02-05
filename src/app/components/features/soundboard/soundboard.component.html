@@ -31,8 +31,8 @@
                 
                 <!-- Content -->
                 <div *ngIf="!showExamples && !showPairs" class="menu-options">
-                    <button class="menu-item" (click)="toggleExamples(true)">Examples</button>
-                    <button class="menu-item" (click)="togglePairs(true)">Minimal Pairs</button>
+                    <button class="menu-item" (click)="toggleExamples(true)">{{ language.soundboard.example }}</button>
+                    <button class="menu-item" (click)="togglePairs(true)">{{ language.soundboard.minimalPair }}</button>
                 </div>
 
                 <div *ngIf="showExamples" class="content">

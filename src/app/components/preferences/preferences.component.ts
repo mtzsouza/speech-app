@@ -110,17 +110,24 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   }
 
   async setLanguage(language: Language) {
-    if (this.userId) {
-      try {
+    try {
+      if (this.userId) {
+        // Update the language in the database if the user is signed in
         await this.databaseService.updateUserPreference(this.userId, 'language', language);
-        this.language = language;
-        console.log('Language updated to:', language);
-        window.location.reload();
-      } catch (error) {
-        console.error('Error updating language:', error);
+        console.log('Language updated in database:', language);
       }
+  
+      // Always update the language in local storage
+      localStorage.setItem('preferredLanguage', language);
+      this.language = language;
+  
+      console.log('Language updated to:', language);
+      window.location.reload(); // Refresh the page to apply the changes
+    } catch (error) {
+      console.error('Error updating language:', error);
     }
   }
+  
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;

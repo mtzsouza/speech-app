@@ -17,6 +17,7 @@ import { ChangePasswordComponent } from './components/update-info/change-passwor
 import { GamesComponent } from './components/games/games.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { Game1Component } from './components/games/game1/game1.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -66,6 +67,12 @@ export const routes: Routes = [
     {
         path: 'games', 
         component: GamesComponent, 
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'matching', 
+        component: Game1Component, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
 
