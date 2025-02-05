@@ -5,27 +5,39 @@
             <div class="game-container">
                 <h1>Card Matching Game</h1>
                 <h2>Level: {{ level }}</h2>
+                <h3>Lives <img id="life" src="assets/games/game1/life.png" alt="Life Icon"/> : {{ lives }}</h3>
             
                 <button class="restart-btn" (click)="restartGame()">Restart Game</button>
             
-                <div class="card-grid">
-                <div
-                    class="card"
-                    *ngFor="let card of cards"
-                    [class.flipped]="card.flipped || card.matched"
-                    (click)="flipCard(card)"
-                >
-                    <div class="card-front" *ngIf="card.flipped || card.matched">
-                    <span *ngIf="card.type === 'letter'">{{ card.value }}</span>
-                    <img *ngIf="card.type === 'sound'" src="assets/playSound.svg" alt="Sound Icon" />
+                <div class="card-grid" *ngIf="!gameOver">
+                    <div
+                        class="card"
+                        *ngFor="let card of cards"
+                        [class.flipped]="card.flipped || card.matched"
+                        (click)="flipCard(card)"
+                    >
+                        <div class="card-front" *ngIf="card.flipped || card.matched">
+                            <span *ngIf="card.type === 'letter'">{{ card.value }}</span>
+                            <img *ngIf="card.type === 'sound'" src="assets/playSound.svg" alt="Sound Icon" />
+                        </div>
+                        <div class="card-back" *ngIf="!card.flipped && !card.matched" [ngStyle]="{'background-size': '100px 150px', 'background-image': 'url(' + card.backImage + ')'}"></div>
                     </div>
-                    <div class="card-back" *ngIf="!card.flipped && !card.matched"></div>
                 </div>
+
+                <!-- Game Over Popup -->
+                <div class="menu" *ngIf="gameOver">
+                    <div class="menu-content">
+                        <h2>Game Over!</h2>
+                        <p>You ran out of lives.</p>
+                        <button class="restart-btn" (click)="restartGame()">Restart</button>
+                    </div>
                 </div>
-            
-                <div *ngIf="levelComplete" class="level-complete">
-                <h2>Level {{ level }} Complete!</h2>
-                <p>Loading next level...</p>
+
+                <div class="menu" *ngIf="levelComplete">
+                    <div class="menu-content">
+                        <h2>Level {{ level }} Complete!</h2>
+                        <p>Loading next level...</p>
+                    </div>
                 </div>
             </div>
         </div>
