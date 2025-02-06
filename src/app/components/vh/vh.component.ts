@@ -152,4 +152,31 @@ export class VHComponent {
       video.description.toLowerCase().includes(lowerTerm)
     );
   }
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.trackVisit();
+  }
+
+  trackVisit(): void {
+    // Mark the "Videos" page as visited
+    sessionStorage.setItem('visitedVideos', 'true');
+  }
+
+  trackVideoClick(videoLink: string): void {
+    let clickedVideos: string[] = JSON.parse(sessionStorage.getItem('clickedVideos') || '[]');
+    let totalVideos = this.allVideos.length;
+    let progressPerVideo = 100 / totalVideos;
+    let currentProgress = Number(sessionStorage.getItem('videoProgress')) || 0;
+
+    if (!clickedVideos.includes(videoLink)) {
+        clickedVideos.push(videoLink);
+        currentProgress = Math.min(currentProgress + progressPerVideo, 100);
+        currentProgress = Math.round(currentProgress); // Round to nearest whole number
+
+        sessionStorage.setItem('clickedVideos', JSON.stringify(clickedVideos));
+        sessionStorage.setItem('videoProgress', currentProgress.toString());
+    }
+  }
 }

@@ -20,4 +20,8 @@ export class PTHComponent {
   viewUnearnedBadges() {
     this.router.navigate(['/progress/unearned']);
   }
+
+  navigateToProgress(){
+    this.router.navigate(['/progress/data']);
+  }
 }

@@ -21,7 +21,12 @@
               </div>
               <div class="video-info">
                 <h2 class="video-title">
-                  <a *ngIf="video.link; else plainTitle" [href]="video.link" target="_blank">{{ video.title }}</a>
+                  <a *ngIf="video.link; else plainTitle"
+                    [href]="video.link"
+                    target="_blank"
+                    (click)="trackVideoClick(video.link)">
+                    {{ video.title }}
+                  </a>
                   <ng-template #plainTitle>{{ video.title }}</ng-template>
                 </h2>
                 <p class="video-description">{{ video.description }}</p>
