@@ -6,62 +6,28 @@
         <h1 class="title">Welcome to Progress Sharing!</h1>
       </div>
 
-      <div class="earned-badges">
+      <!-- Earned Badges Section (Only Show If Any Earned) -->
+      <div class="earned-badges" *ngIf="earnedBadges.length > 0">
         <h2>Earned Badges!</h2>
         <div class="badge-grid">
-          <div class="badge-card" title="Description of Badge 1">
-            <div class="badge-icon"></div>
+          <div class="badge-card" *ngFor="let badge of earnedBadges" [title]="badge.description">
+            <div class="badge-icon">{{ badge.icon }}</div>
             <div class="badge-info">
-              <h3>[Badge 1]</h3>
-            </div>
-          </div>
-          <div class="badge-card" title="Description of Badge 2">
-            <div class="badge-icon"></div>
-            <div class="badge-info">
-              <h3>[Badge 2]</h3>
-            </div>
-          </div>
-          <div class="badge-card" title="Description of Badge 3">
-            <div class="badge-icon"></div>
-            <div class="badge-info">
-              <h3>[Badge 3]</h3>
-            </div>
-          </div>
-          <div class="badge-card" title="Description of Badge 4">
-            <div class="badge-icon"></div>
-            <div class="badge-info">
-              <h3>[Badge 4]</h3>
+              <h3>{{ badge.name }}</h3>
             </div>
           </div>
         </div>
         <button class="see-more-btn" (click)="viewEarnedBadges()">See More</button>
       </div>
 
+      <!-- Unearned Badges Section -->
       <div class="unearned-badges">
         <h2>Not Yet Earned!</h2>
         <div class="badge-grid">
-          <div class="badge-card unearned" title="Description of Unearned Badge 1">
-            <div class="badge-icon"></div>
+          <div class="badge-card unearned" *ngFor="let badge of unearnedBadges" [title]="badge.description">
+            <div class="badge-icon">{{ badge.icon }}</div>
             <div class="badge-info">
-              <h3>First Steps</h3>
-            </div>
-          </div>
-          <div class="badge-card unearned" title="Description of Unearned Badge 2">
-            <div class="badge-icon"></div>
-            <div class="badge-info">
-              <h3>Binge Watcher</h3>
-            </div>
-          </div>
-          <div class="badge-card unearned" title="Description of Unearned Badge 3">
-            <div class="badge-icon"></div>
-            <div class="badge-info">
-              <h3>Committed Learner</h3>
-            </div>
-          </div>
-          <div class="badge-card unearned" title="Description of Unearned Badge 4">
-            <div class="badge-icon"></div>
-            <div class="badge-info">
-              <h3>Video Master</h3>
+              <h3>{{ badge.name }}</h3>
             </div>
           </div>
         </div>
