@@ -16,23 +16,50 @@ export class Game1Component implements OnInit {
   languageService = inject(LanguageService);
   language = english;
 
-  cards: { id: number; type: 'letter' | 'sound'; value: string; flipped: boolean; matched: boolean; backImage: string }[] = [];
-  flippedCards: { id: number; type: 'letter' | 'sound'; value: string; flipped: boolean; matched: boolean }[] = [];
+  cards: { id: number; type: 'letter' | 'sound'; value: string; ipaValue: string; flipped: boolean; matched: boolean; backImage: string }[] = [];
+  flippedCards: { id: number; type: 'letter' | 'sound'; value: string; ipaValue: string; flipped: boolean; matched: boolean }[] = [];
   isGameActive: boolean = false;
 
   level: number = 1;
+  highestLevel: number = 1;
   maxLevel: number = 20;
   maxCards: number = 50; 
   levelComplete: boolean = false;
   gameOver: boolean = false;
   lives: number = 0; 
+  showInstructions: boolean | null = null;
 
   ngOnInit() {
     this.languageService.getLanguage().then(lang => {
       this.language = lang;
-      this.initializeGame();
+      this.loadData();
     });
   }
+
+  loadData(): void {
+    const storedLevel = localStorage.getItem('highestLevel');
+    this.highestLevel = storedLevel ? parseInt(storedLevel, 10) : 1;
+
+    const dontShowInstructions = localStorage.getItem('dontShowInstructions');
+    this.showInstructions = dontShowInstructions !== 'true';
+
+    this.initializeGame();
+  }
+
+  saveHighestLevel(): void {
+    if (this.level > this.highestLevel) {
+      this.highestLevel = this.level;
+      localStorage.setItem('highestLevel', String(this.highestLevel));
+    }
+  }
+
+  hideInstructions(dontShowAgain: boolean): void {
+    this.showInstructions = false;
+    if (dontShowAgain) {
+      localStorage.setItem('dontShowInstructions', 'true');
+    }
+  }
+
   currentLanguage: string = '';
 
   initializeGame(): void {
@@ -48,39 +75,60 @@ export class Game1Component implements OnInit {
     this.cards = this.createCardDeck();
     this.shuffleCards();
 
-    // Calculate lives: 1 life per 2 cards
+    if (this.level > this.highestLevel) {
+      this.highestLevel = this.level;
+      localStorage.setItem('highestLevel', String(this.highestLevel));
+    }
+
     this.lives = Math.floor(this.cards.length / 2)+Math.floor(this.cards.length / 4);
   }
 
-  createCardDeck(): { id: number; type: 'letter' | 'sound'; value: string; flipped: boolean; matched: boolean; backImage: string }[] {
+  createCardDeck(): { 
+    id: number;
+    type: 'letter' | 'sound';
+    value: string;
+    ipaValue: string;
+    flipped: boolean;
+    matched: boolean;
+    backImage: string;
+  }[] {
     const sounds = this.language.soundboard.examples;
-    const letters = Object.keys(sounds);
+    const ipaSymbols = Object.keys(sounds);
+  
+    const phoneticMap: Record<string, string> = {
+      '/eɪ/': 'a (long)', '/æ/': 'a (short)',
+      '/i/': 'e (long)', '/ɛ/': 'e (short)',
+      '/aɪ/': 'i (long)', '/ɪ/': 'i (short)',
+      '/oʊ/': 'o (long)', '/ɑ/': 'o (short)',
+      '/ju/': 'u (long)', '/ʌ/': 'u (short)', '/ʊ/': 'u (short)'
+    };
   
     const numberOfCards = Math.min(4 + (this.level - 1) * 2, this.maxCards);
-    const selectedLetters = letters.slice(0, numberOfCards / 2);
+    const selectedIpaSymbols = ipaSymbols.slice(0, numberOfCards / 2);
   
     let id = 0;
-    const deck = selectedLetters.flatMap((letter) => [
-      { id: id++, type: 'letter' as const, value: letter, flipped: false, matched: false, backImage: `assets/games/game1/card${Math.floor(Math.random() * 16) + 1}.png` },
-      { id: id++, type: 'sound' as const, value: letter, flipped: false, matched: false, backImage: `assets/games/game1/card${Math.floor(Math.random() * 16) + 1}.png` },
-    ]);
+    return selectedIpaSymbols.flatMap((ipa) => {
+      const displayValue = phoneticMap[ipa] || ipa;
+      
+      const letterBack = `assets/games/game1/card${Math.floor(Math.random() * 16) + 1}.png`;
+      const soundBack = `assets/games/game1/card${Math.floor(Math.random() * 16) + 1}.png`;
   
-    return deck;
+      return [
+        { id: id++, type: 'letter', value: displayValue, ipaValue: ipa, flipped: false, matched: false, backImage: letterBack },
+        { id: id++, type: 'sound', value: ipa, ipaValue: ipa, flipped: false, matched: false, backImage: soundBack }
+      ];
+    });
   }
-  
-  
 
   shuffleCards(): void {
     this.cards = this.cards.sort(() => Math.random() - 0.5);
   }
 
-  flipCard(card: { id: number; type: 'letter' | 'sound'; value: string; flipped: boolean; matched: boolean }): void {
-    if (card.matched) {
-      this.playSound(card.value);
-      return;
-    }
+  flipCard(card: { id: number; type: 'letter' | 'sound'; value: string; ipaValue: string; flipped: boolean; matched: boolean }): void {
+    console.log(`Flipped: ${card.value} (IPA: ${card.ipaValue})`);
   
-    if (this.gameOver || card.flipped || this.flippedCards.length >= 2) {
+    if (card.matched || this.gameOver || card.flipped || this.flippedCards.length >= 2) {
+      this.playSound(card.ipaValue);
       return;
     }
   
@@ -92,44 +140,41 @@ export class Game1Component implements OnInit {
     }
   
     if (card.type === 'sound') {
-      this.playSound(card.value);
+      this.playSound(card.ipaValue);
     }
   }
-  
-  
-  
 
   checkMatch(): void {
     const [card1, card2] = this.flippedCards;
   
-    if (card1.value === card2.value && card1.type !== card2.type) {
+    if (card1.ipaValue === card2.ipaValue && card1.type !== card2.type) {
       card1.matched = true;
       card2.matched = true;
   
       if (this.cards.every((card) => card.matched)) {
         this.completeLevel();
       }
-  
-      this.flippedCards = []; // Clear immediately if it's a match
     } else {
       this.lives--;
   
       setTimeout(() => {
         card1.flipped = false;
         card2.flipped = false;
-        this.flippedCards = []; // Only clear after flipping back
       }, 500);
+    }
   
-      if (this.lives <= 0) {
-        this.endGame();
-      }
+    this.flippedCards = [];
+  
+    if (this.lives <= 0) {
+      this.endGame();
     }
   }
+  
 
   completeLevel(): void {
     this.isGameActive = false;
     this.levelComplete = true;
-
+    
     if (this.level < this.maxLevel) {
       setTimeout(() => {
         this.level++;
