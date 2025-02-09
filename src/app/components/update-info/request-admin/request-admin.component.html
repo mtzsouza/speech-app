@@ -1,0 +1,26 @@
+<div class="update-name-container">
+    <h2>{{ userLanguage.updateUsername.updateUsername }}</h2>
+    <form (submit)="onSubmit()">
+      <!-- Request Code -->
+      <div class="form-group">
+        <label for="code">{{ userLanguage.requestAdmin.enterCode }}</label>
+        <input
+          type="text"
+          id="code"
+          [(ngModel)]="code"
+          name="code"
+        />
+      </div>
+
+      <div *ngIf="emptyFieldError" class="error-message">
+        <p>Request Failed</p>
+      </div>
+  
+      <!-- Action Buttons -->
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="onCancel()">{{ userLanguage.updateUsername.cancel }}</button>
+        <button type="submit" class="update-btn">OK</button>
+      </div>
+    </form>
+  </div>
+  

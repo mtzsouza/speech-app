@@ -18,6 +18,10 @@ import { GamesComponent } from './components/games/games.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { Game1Component } from './components/games/game1/game1.component';
+import { EducationalArticlesComponent } from './components/educational-articles/educational-articles.component';
+import { RequestAdminComponent } from './components/update-info/request-admin/request-admin.component';
+import { AddStoryComponent } from './components/stories/add-story/add-story.component';
+import { ReadStoryComponent } from './components/stories/read-story/read-story.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -56,6 +60,12 @@ export const routes: Routes = [
     {
         path: 'change-password', 
         component: ChangePasswordComponent, 
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'request-admin', 
+        component: RequestAdminComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
 
@@ -107,7 +117,24 @@ export const routes: Routes = [
 
     {
         path: 'stories',
-        component: StoriesComponent
+        component: StoriesComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'stories/add',
+        component: AddStoryComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'stories/:title',
+        component: ReadStoryComponent
+    },
+
+    {
+        path: 'articles',
+        component: EducationalArticlesComponent
     },
 
     {

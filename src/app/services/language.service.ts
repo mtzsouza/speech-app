@@ -1,4 +1,4 @@
-import { Injectable, inject, signal } from "@angular/core";
+import { Injectable, inject} from "@angular/core";
 import { AuthService } from "./auth.service"
 import { DatabaseService } from "./database.service"
 import * as spanish from '../utils/spanish.json'

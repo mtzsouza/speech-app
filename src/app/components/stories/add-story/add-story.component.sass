@@ -1,0 +1,46 @@
+@import '../../../../styles.sass'
+
+.container
+    justify-content: start
+    align-items: center
+
+    .title
+        margin-bottom: 50px
+
+    .panel
+        margin-top: 2%
+        min-width: 50%
+        width: fit-content
+        min-height: 50%
+        height: fit-content
+
+    form
+        h5
+            cursor: pointer
+            margin: 0
+
+            &:hover
+                text-decoration: underline
+
+        .summary-input
+            width: 500px
+            border: solid, 2px, $dark-gray
+            border-radius: 10px
+            padding: 4px 12px
+            background-color: LightGray
+            font-family: inter
+
+        .story-input
+            width: 500px
+            min-height: 300px
+            border: solid, 2px, $dark-gray
+            border-radius: 10px
+            padding: 4px 12px
+            background-color: LightGray
+            font-family: inter
+            resize: none
+
+@media only screen and (max-width: 768px)
+    .container
+        .panel
+            width: 80%
