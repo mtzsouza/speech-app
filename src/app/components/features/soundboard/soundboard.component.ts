@@ -72,6 +72,8 @@ export class SoundboardComponent {
       sound = sound.replace(/\//g, ''); // Remove '/' characters
       this.currentAudio = new Audio(`/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Pronunciations/${sound}.mp3`);
       this.currentAudio.play();
+
+      this.trackSoundProgress(sound);
   }
   
   playExample(sound: string): void {
@@ -82,6 +84,8 @@ export class SoundboardComponent {
       sound = sound.toLocaleLowerCase(); // Convert to lowercase
       this.currentAudio = new Audio(`/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Examples/${sound}.mp3`);
       this.currentAudio.play();
+
+      this.trackSoundProgress(sound);
   }
 
   playPair(sound: string): void {
@@ -92,6 +96,8 @@ export class SoundboardComponent {
     console.log(sound);
     this.currentAudio = new Audio(`/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Pairs/${sound}.mp3`);
     this.currentAudio.play();
+
+    this.trackSoundProgress(sound);
   }
 
   toggleExamples(show: boolean): void {
@@ -109,4 +115,23 @@ export class SoundboardComponent {
   getPairsForCurrentSound(): string[] {
     return this.language.soundboard.pairs[this.currentSound as keyof typeof this.language.soundboard.pairs] || [];
   }
+
+  getTotalSounds(): number {
+    return Object.values(this.categories).reduce((acc, sounds) => acc + sounds.length, 0);
+  }
+
+  trackSoundProgress(sound: string): void {
+    let playedSounds: string[] = JSON.parse(sessionStorage.getItem('playedSounds') || '[]');
+
+    if (!playedSounds.includes(sound)) {
+        playedSounds.push(sound);
+        sessionStorage.setItem('playedSounds', JSON.stringify(playedSounds));
+
+        // Calculate progress
+        const totalSounds = this.getTotalSounds();
+        const progress = Math.min((playedSounds.length / totalSounds) * 100, 100);
+        sessionStorage.setItem('soundboardProgress', progress.toFixed(0));
+    }
+  }
+  
 }

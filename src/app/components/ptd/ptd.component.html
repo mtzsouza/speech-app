@@ -1,28 +1,45 @@
 <div class="container progress-tracking">
-    <app-navbar></app-navbar>
-  <div class="progress-card">
-    <h1>Welcome to Progress Tracking!</h1>
-    
-    <div class="row text-center recent-sounds">
-      <div class="col-4" *ngFor="let sound of recentSounds">
-        <div class="sound-title">{{ sound.name }}</div>
-        <div class="progress-circle">
-          <svg width="150" height="150">
-            <circle cx="75" cy="75" r="60" class="bg-circle"></circle>
-            <circle cx="75" cy="75" r="60" 
-                    [attr.stroke-dasharray]="getStrokeDashArray(sound.percentage)"
-                    [attr.stroke-dashoffset]="getStrokeDashOffset(sound.percentage)"
-                    [ngStyle]="{'stroke': sound.color}" 
-                    class="progress-circle-fill"></circle>
-          </svg>
-          <div class="percentage">{{ sound.percentage }}%</div>
-          <div class="completion">Completion</div>
-        </div>
-        <div class="activity-card">
-          <div class="activity-icon">{{ sound.icon }}</div>
-          <div class="activity-title">{{ sound.title }}</div>
-        </div>
+  <app-navbar></app-navbar>
+<div class="progress-card">
+  <h1>Welcome to Progress Tracking!</h1>
+  
+  <div class="row text-center recent-sounds">
+    <div class="col-4" *ngFor="let sound of recentSounds">
+      <div class="sound-title">{{ sound.name }}</div>
+      <div class="progress-circle">
+        <svg width="150" height="150">
+          <!-- Background circle -->
+          <circle 
+            cx="75" 
+            cy="75" 
+            r="60" 
+            class="bg-circle" 
+            stroke="#d3d3d3" 
+            stroke-width="12" 
+            fill="none">
+          </circle>
+        
+          <!-- Progress circle -->
+          <circle 
+            cx="75" 
+            cy="75" 
+            r="60" 
+            class="progress-circle-fill"
+            [attr.stroke]="sound.color" 
+            stroke-width="12" 
+            fill="none"
+            [attr.stroke-dasharray]="getStrokeDashArray(sound.percentage)" 
+            [attr.stroke-dashoffset]="getStrokeDashOffset(sound.percentage)">
+          </circle>
+        </svg>        
+        <div class="percentage">{{ sound.percentage }}%</div>
+        <div class="completion">Completion</div>
+      </div>
+      <div class="activity-card" (click)="navigateTo(sound.title)">
+        <div class="activity-icon">{{ sound.icon }}</div>
+        <div class="activity-title">{{ sound.title }}</div>
       </div>
     </div>
   </div>
+</div>
 </div>
