@@ -16,25 +16,25 @@ export class Game1Component implements OnInit {
   languageService = inject(LanguageService);
   language = english;
 
-  cards: { id: number; type: 'letter' | 'sound'; value: string; ipaValue: string; flipped: boolean; matched: boolean; backImage: string }[] = [];
-  flippedCards: { id: number; type: 'letter' | 'sound'; value: string; ipaValue: string; flipped: boolean; matched: boolean }[] = [];
-  isGameActive: boolean = false;
-
-  level: number = 1;
-  highestLevel: number = 1;
-  maxLevel: number = 20;
-  maxCards: number = 50; 
-  levelComplete: boolean = false;
-  gameOver: boolean = false;
-  lives: number = 0; 
-  showInstructions: boolean | null = null;
-
   ngOnInit() {
     this.languageService.getLanguage().then(lang => {
       this.language = lang;
       this.loadData();
     });
   }
+
+  cards: { id: number; type: 'letter' | 'sound'; value: string; ipaValue: string; flipped: boolean; matched: boolean; backImage: string }[] = [];
+  flippedCards: { id: number; type: 'letter' | 'sound'; value: string; ipaValue: string; flipped: boolean; matched: boolean }[] = [];
+  isGameActive: boolean = false;
+
+  level: number = 1;
+  highestLevel: number = 1;
+  maxLevel: number = 1;
+  levelComplete: boolean = false;
+  gameOver: boolean = false;
+  wonGame: boolean = false;
+  lives: number = 0; 
+  showInstructions: boolean | null = null;
 
   loadData(): void {
     const storedLevel = localStorage.getItem('highestLevel');
@@ -68,9 +68,15 @@ export class Game1Component implements OnInit {
     else
       this.currentLanguage = 'spanish';
 
+    const sounds = this.language.soundboard.examples;
+    const totalPairs = Object.keys(sounds).length;
+  
+    this.maxLevel = totalPairs-1;
+
     this.isGameActive = true;
     this.levelComplete = false;
     this.gameOver = false;
+    this.wonGame = false;
 
     this.cards = this.createCardDeck();
     this.shuffleCards();
@@ -103,7 +109,7 @@ export class Game1Component implements OnInit {
       '/ju/': 'u (long)', '/ʌ/': 'u (short)', '/ʊ/': 'u (short)'
     };
   
-    const numberOfCards = Math.min(4 + (this.level - 1) * 2, this.maxCards);
+    const numberOfCards = 4 + (this.level - 1) * 2
     const selectedIpaSymbols = ipaSymbols.slice(0, numberOfCards / 2);
   
     let id = 0;
@@ -127,8 +133,12 @@ export class Game1Component implements OnInit {
   flipCard(card: { id: number; type: 'letter' | 'sound'; value: string; ipaValue: string; flipped: boolean; matched: boolean }): void {
     console.log(`Flipped: ${card.value} (IPA: ${card.ipaValue})`);
   
-    if (card.matched || this.gameOver || card.flipped || this.flippedCards.length >= 2) {
+    if (card.matched) {
       this.playSound(card.ipaValue);
+      return;
+    }
+
+    if (card.flipped || this.gameOver || this.flippedCards.length >= 2) {
       return;
     }
   
@@ -173,15 +183,15 @@ export class Game1Component implements OnInit {
 
   completeLevel(): void {
     this.isGameActive = false;
-    this.levelComplete = true;
     
     if (this.level < this.maxLevel) {
+      this.levelComplete = true;
       setTimeout(() => {
         this.level++;
         this.initializeGame();
       }, 2000);
     } else {
-      console.log('Congratulations! You completed all levels!');
+      this.wonGame = true;
     }
   }
 
