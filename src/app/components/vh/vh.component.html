@@ -1,34 +1,67 @@
 <div class="container">
   <app-navbar></app-navbar>
-    <div class = "main">
-      <div class="video-center">
-          <div class="header">
-            <h1>Welcome to the Video Center!</h1>
-          </div>
-        
-          <div class="search-bar">
-              <input
-                type="text"
-                placeholder="Search bar"
-                #searchInput
-                (input)="onSearch(searchInput.value)" />
-            </div>      
-        
-          <div class="video-list">
-            <div class="video-item" *ngFor="let video of videos">
-              <div class="thumbnail">
-                <img [src]="video.thumbnail" alt="{{ video.title }}" />
-              </div>
-              <div class="video-info">
-                <h2 class="video-title">
-                  <a *ngIf="video.link; else plainTitle" [href]="video.link" target="_blank">{{ video.title }}</a>
-                  <ng-template #plainTitle>{{ video.title }}</ng-template>
-                </h2>
-                <p class="video-description">{{ video.description }}</p>
-              </div>
+  <div class="main">
+    <div class="video-center">
+      <div class="header">
+        <h1>Welcome to the Video Center!</h1>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="Search bar" #searchInput (input)="onSearch(searchInput.value)" />
+      </div>
+
+      <!-- English Videos Section -->
+      <div class="video-section">
+        <h2 class="section-title">English Videos</h2>
+        <div class="video-list">
+          <div class="video-item" 
+               *ngFor="let video of englishVideos" 
+               [ngClass]="{'watched-video': isWatched(video.link)}">
+            <div class="thumbnail">
+              <img [src]="video.thumbnail" alt="{{ video.title }}" />
+            </div>
+            <div class="video-info">
+              <h2 class="video-title">
+                <a *ngIf="video.link; else plainTitle"
+                   [href]="video.link"
+                   target="_blank"
+                   (click)="trackVideoClick(video.link)">
+                  {{ video.title }}
+                </a>
+                <ng-template #plainTitle>{{ video.title }}</ng-template>
+              </h2>
+              <p class="video-description">{{ video.description }}</p>
             </div>
           </div>
         </div>
+      </div>
+
+      <!-- Spanish Videos Section -->
+      <div class="video-section">
+        <h2 class="section-title">Spanish Videos</h2>
+        <div class="video-list">
+          <div class="video-item" 
+               *ngFor="let video of spanishVideos" 
+               [ngClass]="{'watched-video': isWatched(video.link)}">
+            <div class="thumbnail">
+              <img [src]="video.thumbnail" alt="{{ video.title }}" />
+            </div>
+            <div class="video-info">
+              <h2 class="video-title">
+                <a *ngIf="video.link; else plainTitle"
+                   [href]="video.link"
+                   target="_blank"
+                   (click)="trackVideoClick(video.link)">
+                  {{ video.title }}
+                </a>
+                <ng-template #plainTitle>{{ video.title }}</ng-template>
+              </h2>
+              <p class="video-description">{{ video.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
 </div>
-    

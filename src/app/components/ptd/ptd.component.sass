@@ -1,32 +1,40 @@
 .progress-tracking
   text-align: center
 
-
   .progress-card
     background-color: white
     border-radius: 10px
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1)
-    padding: 40px
-    max-width: 1000px
-    margin: 0 auto
+    padding: 60px
+    max-width: 1200px
+    min-height: 67vh
+    margin: 20px auto
+    width: 60% // Increased from 50% for a slightly larger container
 
     h1
       font-weight: bold
       margin-bottom: 30px
-      font-size: 32px
+      font-size: 36px // Slightly bigger title for better balance
 
     .recent-sounds
       display: flex
       justify-content: center
-      gap: 50px
+      gap: 60px // Increased gap for better spacing
+      flex-wrap: wrap // Allow wrapping for smaller screens
+
+      .col-4
+        flex: 1
+        min-width: 250px // Ensures a minimum width for better sizing
+        max-width: 300px // Keeps a balanced layout
+        text-align: center
 
       .sound-title
         background-color: #003366
         color: white
-        padding: 12px 20px
-        font-size: 18px
-        border-radius: 5px
-        margin-bottom: 20px
+        padding: 15px 25px
+        font-size: 22px // Bigger text for better readability
+        border-radius: 8px
+        margin-bottom: 25px
 
       .progress-circle
         position: relative
@@ -35,10 +43,12 @@
         svg
           overflow: visible
           transform: rotate(-90deg)
+          width: 180px // Increase size of SVG for bigger circles
+          height: 180px
 
           circle
             fill: none
-            stroke-width: 12
+            stroke-width: 14 // Thicker stroke for better visibility
 
             &.bg-circle
               stroke: #d3d3d3
@@ -49,39 +59,41 @@
 
         .percentage
           position: absolute
-          top: 42%
-          left: 50%
+          top: 49%
+          left: 45%
           transform: translate(-50%, -50%)
-          font-size: 24px
+          font-size: 26px
           font-weight: bold
 
         .completion
-          font-size: 14px
-          margin-top: 5px
-          color: #666
+          font-size: 28px
+          font-weight: bold
+          color: black
 
     .activity-card
       background-color: #003366
       border-radius: 12px
-      padding: 20px
-      margin-top: 20px
+      padding: 25px
+      margin-top: 30px
+      width: 260px // Wider activity cards
       text-align: center
       display: flex
       flex-direction: column
       align-items: center
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
       transition: transform 0.3s ease-out, box-shadow 0.3s ease-out
+      cursor: pointer
 
       &:hover
         transform: translateY(-5px)
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15)
 
       .activity-icon
-        font-size: 36px
-        margin-bottom: 10px
-        color: #003366 // Updated to your blue color
+        font-size: 42px // Bigger icon
+        margin-bottom: 15px
+        color: white
 
       .activity-title
-        font-size: 18px
+        font-size: 22px // Bigger text
         font-weight: bold
-        color: white // Also using blue for consistency
+        color: white
