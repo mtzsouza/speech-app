@@ -72,7 +72,7 @@ export class SoundboardComponent {
       this.currentAudio = new Audio(`/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Pronunciations/${sound}.mp3`);
       this.currentAudio.play();
 
-      this.trackSoundProgress(sound); // ✅ Track the sound
+      this.trackSoundProgress(sound);
   }
   
   playExample(sound: string): void {
@@ -84,7 +84,7 @@ export class SoundboardComponent {
       this.currentAudio = new Audio(`/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Examples/${sound}.mp3`);
       this.currentAudio.play();
 
-      this.trackSoundProgress(sound); // ✅ Track the example
+      this.trackSoundProgress(sound);
   }
 
   playPair(sound: string): void {
@@ -96,7 +96,7 @@ export class SoundboardComponent {
     this.currentAudio = new Audio(`/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Pairs/${sound}.mp3`);
     this.currentAudio.play();
 
-    this.trackSoundProgress(sound); // ✅ Track the pair
+    this.trackSoundProgress(sound);
   }
 
   toggleExamples(show: boolean): void {
@@ -115,7 +115,6 @@ export class SoundboardComponent {
     return this.language.soundboard.pairs[this.currentSound as keyof typeof this.language.soundboard.pairs] || [];
   }
 
-  // ✅ Get total number of sounds (based on categories)
   getTotalSounds(): number {
     return Object.values(this.categories).reduce((acc, sounds) => acc + sounds.length, 0);
   }
