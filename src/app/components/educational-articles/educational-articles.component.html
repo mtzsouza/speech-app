@@ -1,9 +1,11 @@
 <div class="container">
-  <app-navbar></app-navbar>
+  <app-navbar></app-navbar> <!-- Navbar component -->
+
   <div class="main">
     <div class="panel">
       <h1 class="title">Educational Articles!</h1>
 
+      <!-- Search input field -->
       <div class="input">
         <input
           type="text"
@@ -12,18 +14,23 @@
           class="text-input"
           [(ngModel)]="searchQuery"
           (input)="filterArticles()"
-          placeholder="Search by title..."
+          placeholder="Type to filter articles by title..."
           required
         />
       </div>
 
+      <!-- Articles list section -->
       <div class="articles-list">
         <div class="article" *ngFor="let article of filteredArticles">
-          <div class="article-title">{{ article.title }}</div>
+          <div class="article-title">
+            <a [href]="article.url" target="_blank">{{ article.title }}</a>
+          </div>
           <div class="article-content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque volutpat.
+            {{ article.description }}
+            <a [href]="article.url" target="_blank" class="read-more">Learn More</a>
           </div>
         </div>
+        <div *ngIf="filteredArticles.length === 0">No articles found.</div>
       </div>
     </div>
   </div>
