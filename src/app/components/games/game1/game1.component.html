@@ -1,0 +1,72 @@
+
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="main">
+        <div class="panel">
+            <div class="game-container">
+                <div class="text-box">
+                    <h1>{{ language.memoryMatch.title }}</h1>
+                    <h2>{{ language.memoryMatch.level }}: {{ level }}</h2>
+                    <h2>{{ language.memoryMatch.highestLevel }}: {{ highestLevel }}</h2>
+                    <h2>{{ language.memoryMatch.lives }} ❤️: {{ lives }}</h2>
+                </div>
+                        
+                <button class="restart-btn" (click)="restartGame()">{{ language.memoryMatch.restart }}</button>
+            
+                <div class="card-grid" *ngIf="!gameOver">
+                    <div
+                        class="card"
+                        *ngFor="let card of cards"
+                        [class.flipped]="card.flipped || card.matched"
+                        (click)="flipCard(card)"
+                    >
+                        <div class="card-front" *ngIf="card.flipped || card.matched">
+                            <span *ngIf="card.type === 'letter'">{{ card.value }}</span>
+                            <img *ngIf="card.type === 'sound'" src="assets/playSound.svg" alt="Sound Icon" />
+                        </div>
+                        <div class="card-back" *ngIf="!card.flipped && !card.matched" [ngStyle]="{'background-size': '100px 150px', 'background-image': 'url(' + card.backImage + ')'}"></div>
+                    </div>
+                </div>
+
+                <div class="menu" *ngIf="gameOver">
+                    <div class="menu-content">
+                        <h2>{{ language.memoryMatch.gameOver }}</h2>
+                        <p>{{ language.memoryMatch.outOfLives }}</p>
+                        <button class="restart-btn" (click)="restartGame()">Restart</button>
+                    </div>
+                </div>
+
+                <div class="menu" *ngIf="wonGame">
+                    <div class="menu-content">
+                        <h2>{{ language.memoryMatch.youWin }}</h2>
+                        <p>{{ language.memoryMatch.matchedAll }}</p>
+                        <button class="restart-btn" (click)="restartGame()">{{ language.memoryMatch.restart }}</button>
+                    </div>
+                </div>
+
+                <div class="menu" *ngIf="levelComplete">
+                    <div class="menu-content">
+                        <h2>{{ language.memoryMatch.levelComplete }} {{ level }}</h2>
+                        <p>{{ language.memoryMatch.loadingNext }}</p>
+                    </div>
+                </div>
+
+                <div class="menu" *ngIf="showInstructions">
+                    <div class="menu-content">
+                        <h2>{{ language.memoryMatch.instructions.title }}</h2>
+                        <p>{{ language.memoryMatch.instructions.matchLetters }}</p>
+                        <p>{{ language.memoryMatch.instructions.flipCards }}</p>
+                        <p>{{  language.memoryMatch.instructions.incorrectMatch  }}</p>
+                        <p>{{ language.memoryMatch.instructions.limitedLives }}</p>
+
+                        <label>
+                            <input type="checkbox" #dontShow (change)="hideInstructions(dontShow.checked)">
+                            {{ language.memoryMatch.instructions.dontShowAgain }}
+                        </label>
+                        <button class="restart-btn" (click)="hideInstructions(dontShow.checked)">{{ language.memoryMatch.instructions.startGame }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

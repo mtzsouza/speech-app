@@ -46,6 +46,8 @@
     },
     "soundboard": {
         "title": "Caja de Resonancia",
+        "example": "Ejemplos",
+        "minimalPair": "Pares Mínimos",
         "exampleHeader": "Ejemplos de palabras con ",
         "pairHeader": "Pares mínimos para ",
         "categories": {
@@ -127,5 +129,27 @@
     },
     "storyCenter": {
         "title": "Bienvenido al Centro de Historias"
+    },
+    "memoryMatch": {
+        "title": "Memoria y Sonidos",
+        "level": "Nivel",
+        "highestLevel": "Mejor Nivel",
+        "lives": "Vidas",
+        "restart": "Reiniciar el Juego",
+        "gameOver": "¡Se acabó el juego!",
+        "outOfLives": "Te quedaste sin vidas.",
+        "youWin": "¡Tú ganas!",
+        "matchedAll": "¡Guau! ¡Igualaste cada sonido!",
+        "levelComplete": "¡Nivel Completo!",
+        "loadingNext": "Cargando el siguiente nivel...",
+        "instructions": {
+            "title": "Cómo Jugar",
+            "matchLetters": "Empareja las tarjetas de letras con sus correspondientes tarjetas de sonidos.",
+            "flipCards": "Haz clic en dos cartas para darles la vuelta. Si coinciden, permanecen volteadas.",
+            "incorrectMatch": "Si no coinciden, volverán a voltearse al cabo de poco tiempo.",
+            "limitedLives": "Ten cuidado, ¡tienes vidas limitadas!",
+            "dontShowAgain": "No mostrar de nuevo",
+            "startGame": "Comenzar el Juego"
+        }
     }
 }

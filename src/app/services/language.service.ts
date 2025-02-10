@@ -8,18 +8,35 @@ import * as english from '../utils/english.json'
     providedIn: 'root'
 })
 export class LanguageService {
-    auth = inject(AuthService)
-    database = inject(DatabaseService)
+  auth = inject(AuthService)
+  database = inject(DatabaseService)
 
-    getLanguage(): Promise<any> {
-        return this.auth.firebaseAuth.authStateReady().then(user => {
-            return this.database.fetchDocumentById('users', this.auth.getEmail()!).then(userData => {
-              if (userData.language == 'spanish') {
-                return spanish;
-              } else {
-                return english;
-              }
-            })
-        });
+  private LANGUAGE_KEY = 'preferredLanguage';
+
+  async getLanguage(): Promise<any> {
+    const storedLanguage = localStorage.getItem(this.LANGUAGE_KEY);
+
+    if (this.auth.firebaseAuth.currentUser) {
+      // User is signed in, fetch language from Firebase
+      const userData = await this.database.fetchDocumentById('users', this.auth.getEmail()!);
+
+      if (userData?.language) {
+        const firebaseLanguage = userData.language;
+        // Save Firebase language to local storage for future sessions
+        localStorage.setItem(this.LANGUAGE_KEY, firebaseLanguage);
+
+        // Return the Firebase language preference
+        console.log("Firebase language is: ", firebaseLanguage);
+        return firebaseLanguage === 'spanish' ? spanish : english;
+      }
     }
+
+    // If no Firebase language is available or user is not signed in, fallback to local storage
+    console.log("Local language is: ", storedLanguage);
+    if (storedLanguage === 'spanish') {
+      return spanish;
+    } else if (storedLanguage === 'english') {
+      return english;
+    }
+  }
 }

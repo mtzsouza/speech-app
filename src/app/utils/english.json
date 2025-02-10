@@ -46,6 +46,8 @@
     },
     "soundboard": {
         "title": "Soundboard",
+        "example": "Examples",
+        "minimalPair": "Minimal Pairs",
         "exampleHeader": "Examples of words with ",
         "pairHeader": "Minimal pairs for ",
         "categories": {
@@ -147,5 +149,27 @@
     },
     "storyCenter": {
         "title": "Welcome to the Story Center"
+    },
+    "memoryMatch": {
+        "title": "Memory Match",
+        "level": "Level",
+        "highestLevel": "Highest Level",
+        "lives": "Lives",
+        "restart": "Restart Game",
+        "gameOver": "Game Over!",
+        "outOfLives": "You ran out of lives.",
+        "youWin": "You Win!",
+        "matchedAll": "Wow! You matched every sound!",
+        "levelComplete": "Level Complete!",
+        "loadingNext": "Loading next level...",
+        "instructions": {
+            "title": "How to Play",
+            "matchLetters": "Match the letter cards with their corresponding sound cards.",
+            "flipCards": "Click on two cards to flip them. If they match, they stay flipped.",
+            "incorrectMatch": "If they don't match, they will flip back over after a short time.",
+            "limitedLives": "Be careful, you have limited lives!",
+            "dontShowAgain": "Don't show again",
+            "startGame": "Start Game"
+        }
     }
 }

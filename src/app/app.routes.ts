@@ -17,6 +17,7 @@ import { ChangePasswordComponent } from './components/update-info/change-passwor
 import { GamesComponent } from './components/games/games.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { Game1Component } from './components/games/game1/game1.component';
 import { EducationalArticlesComponent } from './components/educational-articles/educational-articles.component';
 import { RequestAdminComponent } from './components/update-info/request-admin/request-admin.component';
 import { AddStoryComponent } from './components/stories/add-story/add-story.component';
@@ -76,6 +77,12 @@ export const routes: Routes = [
     {
         path: 'games', 
         component: GamesComponent, 
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'matching', 
+        component: Game1Component, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
 
