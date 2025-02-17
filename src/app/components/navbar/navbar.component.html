@@ -1,6 +1,21 @@
 <div class="navbar">
+    <!-- Home Icon -->
     <a class="icon" href="/">
         <img src="/assets/home-icon.png" alt="Home Page">
     </a>
-    <app-preferences></app-preferences>
+
+    <!-- Quick Links -->
+     @if (this.currentPage != "/") {
+        <div class="links">
+            <a href="/soundboard">Soundboard</a>
+            <a href="/games">Games</a>
+            <a href="/stories">Stories</a>
+            <a href="/progress">Progress</a>
+         </div>
+     }
+
+    <!-- Preferences Icon -->
+     <div class="icon">
+        <app-preferences></app-preferences>
+     </div>
 </div>

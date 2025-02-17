@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { PreferencesComponent } from '../preferences/preferences.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,4 +12,7 @@ import { PreferencesComponent } from '../preferences/preferences.component';
 })
 export class NavbarComponent {
   auth = inject(AuthService);
+  router = inject(Router);
+
+  currentPage = this.router.url;
 }
