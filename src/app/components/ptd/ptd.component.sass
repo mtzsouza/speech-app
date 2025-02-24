@@ -5,11 +5,18 @@
     background-color: white
     border-radius: 10px
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1)
-    padding: 60px
+    padding: 40px
     max-width: 1200px
     min-height: 67vh
     margin: 20px auto
-    width: 60% // Increased from 50% for a slightly larger container
+    width: 80% // Adjusted width for better responsiveness
+
+    @media (max-width: 1024px)
+      width: 90% // Adjusts width for smaller screens
+
+    @media (max-width: 768px)
+      width: 95% // Further adjustment for mobile screens
+      padding: 30px
 
     h1
       font-weight: bold
@@ -19,14 +26,18 @@
     .recent-sounds
       display: flex
       justify-content: center
-      gap: 60px // Increased gap for better spacing
-      flex-wrap: wrap // Allow wrapping for smaller screens
+      gap: 40px
+      flex-wrap: wrap // Allows wrapping on smaller screens
 
       .col-4
         flex: 1
-        min-width: 250px // Ensures a minimum width for better sizing
+        min-width: 250px // Ensures a minimum width for better layout
         max-width: 300px // Keeps a balanced layout
         text-align: center
+
+        @media (max-width: 768px)
+          min-width: 100% // Ensures full-width stacking on smaller screens
+          max-width: 100%
 
       .sound-title
         background-color: #003366
@@ -35,6 +46,7 @@
         font-size: 22px // Bigger text for better readability
         border-radius: 8px
         margin-bottom: 25px
+        font-weight: bold
 
       .progress-circle
         position: relative
@@ -45,6 +57,10 @@
           transform: rotate(-90deg)
           width: 180px // Increase size of SVG for bigger circles
           height: 180px
+
+          @media (max-width: 768px)
+            width: 140px
+            height: 140px
 
           circle
             fill: none
@@ -59,16 +75,24 @@
 
         .percentage
           position: absolute
-          top: 49%
-          left: 45%
+          top: 50%
+          left: 50%
           transform: translate(-50%, -50%)
           font-size: 26px
           font-weight: bold
+          display: flex
+          align-items: center
+          justify-content: center
+          width: 100%
+          text-align: center
 
         .completion
           font-size: 28px
           font-weight: bold
           color: black
+
+          @media (max-width: 768px)
+            font-size: 24px // Reduce size for smaller screens
 
     .activity-card
       background-color: #003366
@@ -97,3 +121,6 @@
         font-size: 22px // Bigger text
         font-weight: bold
         color: white
+
+      @media (max-width: 768px)
+        width: 90% // Make full width on smaller screens

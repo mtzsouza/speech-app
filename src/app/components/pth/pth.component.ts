@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 
@@ -10,16 +10,33 @@ import { CommonModule } from '@angular/common';
   templateUrl: './pth.component.html',
   styleUrls: ['./pth.component.sass']
 })
-
-export class PTHComponent {
+export class PTHComponent implements OnInit {
   earnedBadges: any[] = [];
   unearnedBadges: any[] = [];
 
   allBadges = [
-    { name: 'First Steps', description: 'Start your journey!', icon: '🥇', requiredProgress: 5 },
-    { name: 'Binge Watcher', description: 'Watch 10 videos!', icon: '📺', requiredProgress: 10 },
-    { name: 'Committed Learner', description: 'Reach 50% progress!', icon: '🎓', requiredProgress: 50 },
-    { name: 'Video Master', description: 'Complete all videos!', icon: '🏆', requiredProgress: 100 }
+    // Video Watching Achievements
+    { name: 'First Steps', description: 'Watch your first video!', icon: '📺', requiredProgress: 5 },
+    { name: 'Binge Watcher', description: 'Watch 3 videos.', icon: '🎥', requiredProgress: 10 },
+    { name: 'Committed Learner', description: 'Watch 10 videos.', icon: '🎬', requiredProgress: 15 },
+    { name: 'Video Master', description: 'Watch 25 videos.', icon: '🏆', requiredProgress: 20 },
+    { name: 'Marathon Session', description: 'Watch videos for 1 hour.', icon: '⏳', requiredProgress: 25 },
+
+    // Soundboard Study Achievements
+    { name: 'Sound Explorer', description: 'Play a sound from the soundboard.', icon: '🔊', requiredProgress: 30 },
+    { name: 'Melody Maker', description: 'Play 5 different sounds.', icon: '🎶', requiredProgress: 35 },
+    { name: 'Dedicated Student', description: 'Study for 30 minutes.', icon: '📚', requiredProgress: 40 },
+    { name: 'Master of Sounds', description: 'Study for 1 hour.', icon: '💡', requiredProgress: 50 },
+
+    // Streak & Daily Achievements
+    { name: 'Daily Learner', description: 'Visit the website 3 days in a row.', icon: '📆', requiredProgress: 55 },
+    { name: 'Consistency is Key', description: 'Study for 7 consecutive days.', icon: '🔥', requiredProgress: 60 },
+    { name: 'Learning Streak', description: 'Watch a video or use the soundboard 10 days in a row.', icon: '🏅', requiredProgress: 65 },
+
+    // Miscellaneous Achievements
+    { name: 'Curious Explorer', description: 'Visit both Videos and Soundboard sections.', icon: '🧭', requiredProgress: 70 },
+    { name: 'Active Participant', description: 'Visit the website 10 times.', icon: '⭐', requiredProgress: 75 },
+    { name: 'Knowledge Seeker', description: 'Complete all previous achievements.', icon: '🎓', requiredProgress: 80 }
   ];
 
   constructor(private router: Router) {}
@@ -35,21 +52,18 @@ export class PTHComponent {
 
     this.earnedBadges = []; // Reset earned badges
 
-    if (totalProgress >= 5) {
-      this.earnedBadges.push(this.allBadges.find(b => b.name === 'First Steps'));
-    }
-    if (totalProgress >= 10) {
-      this.earnedBadges.push(this.allBadges.find(b => b.name === 'Binge Watcher'));
-    }
-    if (totalProgress >= 50) {
-      this.earnedBadges.push(this.allBadges.find(b => b.name === 'Committed Learner'));
-    }
-    if (totalProgress >= 100) {
-      this.earnedBadges.push(this.allBadges.find(b => b.name === 'Video Master'));
+    // Check and award badges based on progress
+    for (let badge of this.allBadges) {
+      if (totalProgress >= badge.requiredProgress) {
+        this.earnedBadges.push(badge);
+      }
     }
 
-    // Filter out earned badges from unearned list
-    this.unearnedBadges = this.allBadges.filter(b => !this.earnedBadges.includes(b));
+    // Get remaining unearned badges (that are not in earnedBadges)
+    let remainingUnearned = this.allBadges.filter(b => !this.earnedBadges.includes(b));
+
+    // Ensure 4 unearned badges are always displayed
+    this.unearnedBadges = remainingUnearned.slice(0, 4);
   }
 
   viewEarnedBadges() {
