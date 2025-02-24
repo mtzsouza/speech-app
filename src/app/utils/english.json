@@ -6,7 +6,13 @@
         "progress": "Progress"
     },
     "dashboard": {
-        "title": "Dashboard"
+        "title": "Dashboard",
+        "soundboard": "Soundboard",
+        "games": "Games",
+        "stories": "Stories",
+        "progress": "Progress",
+        "videos": "Videos",
+        "resources": "Guardian Resources"
     },
     "preferences": {
         "greeting": "Hello, ",

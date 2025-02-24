@@ -6,7 +6,13 @@
         "progress": "Progreso"
     },
     "dashboard": {
-        "title": "Panel"
+        "title": "Panel",
+        "soundboard": "Caja de Resonancia",
+        "games": "Juegos",
+        "stories": "Stories",
+        "progress": "Historias",
+        "videos": "Videos",
+        "resources": "Recursos"
     },
     "preferences": {
         "greeting": "Hola, ",
