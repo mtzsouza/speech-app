@@ -3,14 +3,28 @@
         <h1 class="title">Add Story</h1>
         <form (submit)="onSubmit()">
             <div class="input">
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" class="text-input" [(ngModel)]="formData.title" required>
-                <label for="sound">Sound</label>
-                <input type="text" id="sound" name="sound" class="text-input" [(ngModel)]="formData.sound" required>
-                <label for="summary">Summary</label>
-                <input type="text" id="summary" name="summary" class="summary-input" [(ngModel)]="formData.summary" required>
-                <label for="story">Story</label>
-                <textarea id="story" name="story" class="story-input" [(ngModel)]="formData.story" required></textarea>
+                <div class="input-area">
+                    <label for="title_english">Title: English</label>
+                    <input type="text" id="title_english" name="title_english" class="text-input" [(ngModel)]="formData.title_english" required>
+                    <label for="title_spanish">Title: Spanish</label>
+                    <input type="text" id="title_spanish" name="title_spanish" class="text-input" [(ngModel)]="formData.title_spanish" required>
+                </div>
+                <div class="input-area">
+                    <label for="sound">Sound</label>
+                    <input type="text" id="sound" name="sound" class="text-input" [(ngModel)]="formData.sound" required>
+                </div>
+                <div class="input-area">
+                    <label for="summary_english">Summary: English</label>
+                    <input type="text" id="summary_english" name="summary_english" class="summary-input" [(ngModel)]="formData.summary_english" required>
+                    <label for="summary_spanish">Summary: Spanish</label>
+                    <input type="text" id="summary_spanish" name="summary_spanish" class="summary-input" [(ngModel)]="formData.summary_spanish" required>
+                </div>
+                <div class="input-area">
+                    <label for="text_english">Text: English</label>
+                    <textarea id="text_english" name="text_english" class="story-input" [(ngModel)]="formData.text_english" required></textarea>
+                    <label for="text_spanish">Text: Spanish</label>
+                    <textarea id="text_spanish" name="text_spanish" class="story-input" [(ngModel)]="formData.text_spanish" required></textarea>
+                </div>
             </div>
             <input type="submit" value="Add Story" class="button" >
             <h5 (click)="this.router.navigateByUrl('/stories')">Cancel</h5>
