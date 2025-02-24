@@ -1,4 +1,10 @@
 {
+    "navbar": {
+        "soundboard": "Caja de Resonancia",
+        "games": "Juegos",
+        "stories": "Historias",
+        "progress": "Progreso"
+    },
     "dashboard": {
         "title": "Panel"
     },
