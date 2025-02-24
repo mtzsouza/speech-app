@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { LanguageService } from '../../services/language.service';
+import * as english from '../../utils/english.json'
 
 @Component({
   selector: 'app-games',
@@ -9,5 +11,12 @@ import { NavbarComponent } from '../navbar/navbar.component';
   styleUrl: './games.component.sass'
 })
 export class GamesComponent {
+  languageService = inject(LanguageService);
+  
+  userLanguage = english;
+
+  async ngOnInit(): Promise<void> {
+    this.userLanguage = await this.languageService.getLanguage();
+  }
 
 }

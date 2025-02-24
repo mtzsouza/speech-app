@@ -133,6 +133,9 @@
             "/y/": ["Yo Lo", "Yema Rema", "Rayo Rato"]
         }
     },
+    "games": {
+        "title": "Bienvenido al Centro de Juegos"
+    },
     "storyCenter": {
         "title": "Bienvenido al Centro de Historias"
     },

@@ -153,6 +153,9 @@
             "zh": ["Usual Useful", "Vision Mission"]
         }
     },
+    "games": {
+        "title": "Welcome to the Game Center"
+    },
     "storyCenter": {
         "title": "Welcome to the Story Center"
     },
