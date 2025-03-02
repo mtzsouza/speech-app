@@ -3,9 +3,11 @@
 .container
     justify-content: start
     align-items: center
+    height: fit-content
+    padding: 20px 0px
 
     .title
-        margin-bottom: 50px
+        margin-bottom: 20px
 
     .panel
         margin-top: 2%
@@ -22,25 +24,48 @@
             &:hover
                 text-decoration: underline
 
-        .summary-input
-            width: 500px
-            border: solid, 2px, $dark-gray
-            border-radius: 10px
-            padding: 4px 12px
-            background-color: LightGray
-            font-family: inter
+        .input
 
-        .story-input
-            width: 500px
-            min-height: 300px
-            border: solid, 2px, $dark-gray
-            border-radius: 10px
-            padding: 4px 12px
-            background-color: LightGray
-            font-family: inter
-            resize: none
+            .input-area
+                display: flex
+                flex-direction: column
+                padding: 10px
+                gap: 2px
+
+            .summary-input
+                width: 500px
+                border: solid, 2px, $dark-gray
+                border-radius: 10px
+                padding: 4px 12px
+                background-color: LightGray
+                font-family: inter
+
+            .story-input
+                width: 500px
+                min-height: 300px
+                border: solid, 2px, $dark-gray
+                border-radius: 10px
+                padding: 4px 12px
+                background-color: LightGray
+                font-family: inter
+                resize: none
 
 @media only screen and (max-width: 768px)
     .container
         .panel
-            width: 80%
+            position: relative
+            width: 90%
+
+            form
+                max-width: 100%
+
+                .input
+                    margin-left: 25px
+                    max-width: 100%
+
+                    .summary-input
+                        max-width: 80%
+
+                    .story-input
+                        max-width: 80%
+                    

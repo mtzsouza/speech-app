@@ -5,7 +5,12 @@
             <div (click)="this.speak()">⊙</div>
             <div (click)="this.stop()">⊘</div>
         </div>
-        <h1 class="title">{{ this.title }}</h1>
-        <p>{{ this.story }}</p>
+        @if (isEnglish()) {
+            <h1 class="title">{{ this.title_english }}</h1>
+            <p>{{ this.text_english }}</p>
+        } @else {
+            <h1 class="title">{{ this.title_spanish }}</h1>
+            <p>{{ this.text_spanish }}</p>
+        }
     </div>
 </div>

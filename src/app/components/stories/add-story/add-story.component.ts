@@ -19,11 +19,14 @@ export class AddStoryComponent {
 
     // Initialize data
     formData: StoryInterface = {
-      "title": "",
+      "author": "",
+      "title_english": "",
+      "title_spanish": "",
       "sound": "",
-      "summary": "",
-      "story": "",
-      "author": ""
+      "summary_english": "",
+      "summary_spanish": "",
+      "text_english": "",
+      "text_spanish": "",
     }
 
     ngOnInit() {

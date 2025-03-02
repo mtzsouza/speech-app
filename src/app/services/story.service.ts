@@ -26,10 +26,10 @@ export class StoryService {
       })
     }
 
-    fetchStoryByTitle(title: string) {
+    fetchStoryByEnglishTitle(title_english: string) {
       return this.database.fetchCollection('stories').then(data => {
         for (let story of data) {
-          if (story.title == title) {
+          if (story.title_english == title_english) {
             return story;
           }
         }

@@ -8,3 +8,38 @@
         img
             width: 55%
             padding: 10px 15px
+
+    .links
+        position: absolute
+        left: 50%
+        transform: translateX(-50%)
+        display: flex
+        flex: column
+        gap: 48px
+        padding: 12px
+
+        a
+            font-size: larger
+            color: white
+            text-shadow: black 1px 1px
+            font-family: Inter
+            font-weight: bold
+            text-decoration: none
+            transition-duration: 0.2s
+
+            &:hover
+                transform: scale(110%)
+                transition-duration: 0.2s
+
+@media only screen and (max-width: 768px)
+    .navbar
+        .icon
+            img
+                padding: 10px
+
+        .links
+            gap: 12px
+            padding-top: 5%
+
+            a
+                font-size: small

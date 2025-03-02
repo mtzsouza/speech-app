@@ -1,6 +1,18 @@
 {
+    "navbar": {
+        "soundboard": "Soundboard",
+        "games": "Games",
+        "stories": "Stories",
+        "progress": "Progress"
+    },
     "dashboard": {
-        "title": "Dashboard"
+        "title": "Dashboard",
+        "soundboard": "Soundboard",
+        "games": "Games",
+        "stories": "Stories",
+        "progress": "Progress",
+        "videos": "Videos",
+        "resources": "Guardian Resources"
     },
     "preferences": {
         "greeting": "Hello, ",
@@ -146,6 +158,9 @@
             "z": ["Vies Vice", "Laze Lathe", "Rays Rage"],
             "zh": ["Usual Useful", "Vision Mission"]
         }
+    },
+    "games": {
+        "title": "Welcome to the Game Center"
     },
     "storyCenter": {
         "title": "Welcome to the Story Center"

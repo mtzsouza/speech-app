@@ -9,10 +9,17 @@
                 {{ userLanguage.storyCenter.title }}
             </h1>
             @for (story of stories; track story) {
-                <a href="stories/{{ this.encodeTitle(story.title) }}" class="story-selector">
-                    <h2 class="story-title">{{ story.title }}</h2>
-                    <h3 class="story-sound">{{ story.sound }}</h3>
-                    <h3 class="story-summary">{{ story.summary }}</h3>
+                <a href="stories/{{ this.encodeTitle(story.title_english) }}" class="story-selector">
+                    @if (isEnglish()) {
+                        <h2 class="story-title">{{ story.title_english }}</h2>
+                        <h3 class="story-sound">{{ story.sound }}</h3>
+                        <h3 class="story-summary">{{ story.summary_english }}</h3>
+                    } @else {
+                        <h2 class="story-title">{{ story.title_spanish }}</h2>
+                        <h3 class="story-sound">{{ story.sound }}</h3>
+                        <h3 class="story-summary">{{ story.summary_spanish }}</h3>
+                    }
+
                 </a>
             }
         </div>

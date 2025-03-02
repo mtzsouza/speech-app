@@ -32,4 +32,8 @@ export class StoriesComponent {
   encodeTitle(title: string) {
     return title.replaceAll(" ", "_")
   }
+
+  isEnglish() {
+    return JSON.stringify(this.userLanguage) === JSON.stringify(english);
+  }
 }
