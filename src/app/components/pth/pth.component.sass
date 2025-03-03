@@ -1,7 +1,77 @@
+@keyframes glow
+  0%
+    box-shadow: 0 0 5px #ffeb3b, 0 0 10px #ffeb3b
+  50%
+    box-shadow: 0 0 15px #ffeb3b, 0 0 30px #ffcc00
+  100%
+    box-shadow: 0 0 5px #ffeb3b, 0 0 10px #ffeb3b
+
+.shiny-badge
+  position: relative
+  background: linear-gradient(135deg, #ffd700, #ffcc00, #ffea00)
+  background-size: 400% 400%
+  animation: shine 2s linear infinite, glow 1.5s infinite alternate
+  border-radius: 12px
+  padding: 10px
+  text-align: center
+  color: black
+  font-weight: bold
+  display: inline-block
+  box-shadow: 0 0 15px rgba(255, 204, 0, 0.6)
+
+  &:before
+    content: ''
+    position: absolute
+    top: 0
+    left: -75%
+    width: 50%
+    height: 100%
+    transform: skewX(-25deg)
+    animation: shine 2s linear infinite
+
+
+
+.animate-badge
+  animation: popIn 0.6s ease-out, glow 1.5s ease-in-out 2 alternate
+
+@keyframes confetti-fall
+  0%
+    transform: translateY(-100vh) rotateZ(0deg)
+    opacity: 1
+  100%
+    transform: translateY(100vh) rotateZ(360deg)
+    opacity: 1
+
+h2
+  font-size: 2.2em
+  font-weight: bold
+  color: #333
+  letter-spacing: 1px
+  margin-bottom: 10px
+  display: flex
+  padding-left: 10px
+  align-items: center
+  gap: 10px // Space between icon and text
+  text-align: left
+
+.confetti
+  position: fixed
+  top: 0
+  width: 12px  // Slightly larger for visibility
+  height: 12px
+  background-color: rgba(255, 204, 0, 1) // Full opacity (no transparency)
+  animation: confetti-fall linear infinite
+  border-radius: 50% // Makes it rounder
+  opacity: 1 // Ensures no transparency
+  z-index: 9999
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) // Adds slight depth effect
+
+
 .container
   width: 100%
   display: flex
   flex-direction: column // Stack navbar and content
+  overflow: scroll
 
 .main
   width: 100%
@@ -36,7 +106,7 @@
       cursor: pointer
 
     .title
-      font-size: 2.5em
+      font-size: 3.5em
       color: #000
       margin: 0
 
@@ -48,6 +118,7 @@
     padding-right: 10px // Space for the scrollbar
 
     .badge-card
+      position: relative // Needed for absolute tooltip positioning
       background-color: white
       border: 1px solid #ccc
       border-radius: 8px
@@ -56,6 +127,7 @@
       align-items: center
       justify-content: flex-start
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
+      overflow: hidden
 
       .badge-icon
         width: 100px
@@ -69,25 +141,29 @@
 
       .badge-info
         flex: 1
+        position: relative // Ensure the tooltip is positioned correctly
         h3
           margin: 0
           font-size: 1.2em
-
-      &:hover::after
-        content: attr(title)
+      
+      .badge-tooltip
         position: absolute
-        background: rgba(0, 0, 0, 0.7)
-        color: #fff
+        background-color: rgba(0, 0, 0, 0.8) // Dark tooltip background
+        color: white
         padding: 5px 10px
         border-radius: 5px
-        bottom: 100% // Position it above the badge
-        left: 50% // Center it horizontally
-        transform: translateX(-50%) // Offset it to center
-        font-size: 0.9em
-        white-space: nowrap // Prevents shifting due to wrapping
-        z-index: 10 // Ensure it appears above other elements
+        font-size: 0.8em
+        white-space: nowrap
+        top: -30px // Position slightly above the badge
+        left: 50%
+        transform: translateX(-50%)
+        opacity: 0
+        visibility: hidden
+        transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out
+        
+      &:hover .badge-tooltip
         opacity: 1
-        transition: opacity 0.2s ease-in-out
+        visibility: visible
 
     .unearned
       opacity: 0.5 // Style for unearned badges
@@ -115,16 +191,35 @@
     width: fit-content
     transition: 0.3s ease-in-out
 
-    &:hover
-      background-color: rgba(36, 69, 123, 0.7) // Make it slightly transparent
-      transform: scale(1.05) // Slightly enlarge for better effect
-    
+  .earned-badges
+    border-radius: 12px
+    text-align: center
+    margin-bottom: 20px
+    padding: 15px
+    background-color: #e0e0e0
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) 
+
+  .unearned-badges
+    border-radius: 12px
+    text-align: center
+    margin-bottom: 20px
+    padding: 15px
+    background-color: #e0e0e0
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) 
+
+
   .progress-data-link
     display: flex
     justify-content: center
     align-items: center
-    margin-top: auto // Push it to the bottom of the container
-    padding-bottom: 20px // Add spacing from the bottom
+    margin-top: auto
+    padding-bottom: 20px
+
+  .earned-btn-container, .unearned-btn-container
+    display: flex
+    justify-content: left
+    margin-top: 15px
+    font-family: Arial, sans-serif
 
   .progress-btn
     background-color: #24457B
@@ -138,8 +233,8 @@
     justify-content: center
     align-items: center
     width: fit-content
-    margin: 0 auto // Center horizontally
     transition: 0.3s ease-in-out
+    font-weight: bold
 
     &:hover
       background-color: rgba(36, 69, 123, 0.7) // Make it slightly transparent

@@ -23,13 +23,13 @@ export class PTDComponent implements OnInit {
   }
 
   getStrokeDashArray(percentage: number): string {
-    const radius = 60; // Same radius as defined in the SVG
+    const radius = 100; // Same radius as defined in the SVG
     const circumference = 2 * Math.PI * radius;
     return `${circumference} ${circumference}`;
   }
 
   getStrokeDashOffset(percentage: number): number {
-    const radius = 60;
+    const radius = 100;
     const circumference = 2 * Math.PI * radius;
     return circumference - (percentage / 100) * circumference;
   }
