@@ -6,37 +6,62 @@
         <h1 class="title">Welcome to Progress Sharing!</h1>
       </div>
 
-      <!-- Earned Badges Section (Only Show If Any Earned) -->
+      <!-- Earned Badges Section -->
       <div class="earned-badges" *ngIf="earnedBadges.length > 0">
         <h2>Earned Badges!</h2>
         <div class="badge-grid">
-          <div class="badge-card" *ngFor="let badge of earnedBadges" [title]="badge.description">
+          <div class="badge-card shiny-badge"
+              *ngFor="let badge of earnedBadges">
             <div class="badge-icon">{{ badge.icon }}</div>
             <div class="badge-info">
               <h3>{{ badge.name }}</h3>
+              <span class="badge-tooltip">Required Progress: {{ badge.requiredProgress }}</span>
             </div>
           </div>
         </div>
-        <button class="see-more-btn" (click)="viewEarnedBadges()">See More</button>
+
+        <!-- Show 'See Earned Badges' button ONLY IF at least one badge is earned -->
+        <div class="earned-btn-container">
+          <button class="progress-btn" (click)="viewEarnedBadges()">
+            See Earned Badges
+          </button>
+        </div>
+      </div>
+
+      <!-- Confetti Effect -->
+      <div *ngIf="showConfetti">
+        <div
+          *ngFor="let piece of confettiPieces"
+          class="confetti"
+          [ngStyle]="{ left: piece.left, backgroundColor: piece.color, animationDuration: piece.animationDuration }"
+        ></div>
       </div>
 
       <!-- Unearned Badges Section -->
       <div class="unearned-badges">
         <h2>Not Yet Earned!</h2>
         <div class="badge-grid">
-          <div class="badge-card unearned" *ngFor="let badge of unearnedBadges" [title]="badge.description">
+          <div class="badge-card unearned"
+              *ngFor="let badge of unearnedBadges">
             <div class="badge-icon">{{ badge.icon }}</div>
             <div class="badge-info">
               <h3>{{ badge.name }}</h3>
+              <span class="badge-tooltip">Required Progress: {{ badge.requiredProgress }}</span>
             </div>
           </div>
         </div>
-        <button class="see-more-btn" (click)="viewUnearnedBadges()">See More</button>
 
-        <!-- NEW BUTTON TO VIEW PROGRESS DATA -->
-        <div class="progress-data-link">
-          <button class="progress-btn" (click)="navigateToProgress()">View Progress Data</button>
+        <!-- 'See Unearned Badges' button (always appears) -->
+        <div class="unearned-btn-container">
+          <button class="progress-btn" (click)="viewUnearnedBadges()">
+            See Unearned Badges
+          </button>
         </div>
+      </div>
+
+      <!-- View Progress Data Button (Centered) -->
+      <div class="progress-data-link">
+        <button class="progress-btn" (click)="navigateToProgress()">View Progress Data</button>
       </div>
     </div>
   </div>
