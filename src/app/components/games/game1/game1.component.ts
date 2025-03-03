@@ -138,6 +138,10 @@ export class Game1Component implements OnInit {
       return;
     }
 
+    if (card.type === 'sound') {
+      this.playSound(card.ipaValue);
+    }
+
     if (card.flipped || this.gameOver || this.flippedCards.length >= 2) {
       return;
     }
@@ -147,10 +151,6 @@ export class Game1Component implements OnInit {
   
     if (this.flippedCards.length === 2) {
       setTimeout(() => this.checkMatch(), 1000);
-    }
-  
-    if (card.type === 'sound') {
-      this.playSound(card.ipaValue);
     }
   }
 
