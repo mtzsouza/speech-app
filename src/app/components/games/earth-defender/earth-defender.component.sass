@@ -1,0 +1,178 @@
+.container
+  display: flex
+  flex-direction: column
+  min-height: 100%
+  height: auto
+  overflow: auto
+
+.main
+  width: 100%
+  height: 92%
+  display: flex
+  justify-content: center
+  align-items: start
+  padding-bottom: 20px
+
+.panel
+  width: 95%
+  min-height: 90%
+  background-image: url('/assets/games/earth-defender/space.jpg')
+  background-size: contain
+  display: flex
+  flex-direction: column
+  align-items: center
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+  border-radius: 10px
+  height: auto
+  padding-bottom: 20px
+
+.game-container
+  position: relative
+  width: 100%
+  height: 100vh
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: flex-end
+  overflow: hidden
+  background: url('/assets/games/earth-defender/space.jpg') no-repeat center center
+  background-size: cover
+
+.hidden
+    visibility: hidden
+
+.earth
+  position: absolute
+  bottom: 80px 
+  left: 50%
+  transform: translateX(-50%)
+
+  img
+    width: 100px
+    height: auto
+
+.meteor
+  position: absolute
+  left: 50%
+  transform: translateX(-50%)
+  transition: top 0.5s linear
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  img
+    width: 140px
+    height: auto
+
+  .word
+    font-size: 1.5rem
+    font-weight: bold
+    color: white
+    background: rgba(0, 0, 0, 0.7)
+    padding: 5px 10px
+    border-radius: 5px
+    margin-top: 5px
+
+.explosion
+  position: absolute
+  transform: translate(-50%, -50%)
+  animation: shrinkFade 2s forwards
+
+  img
+    width: 100px
+    height: 100px
+
+.options-container
+  position: absolute
+  bottom: 10px
+  width: 50%
+  background: rgba(100, 100, 100, 0.8)
+  padding: 15px
+  border-radius: 10px
+  display: flex
+  justify-content: center
+  align-items: center
+
+.options
+  display: flex
+  gap: 15px
+
+  button
+    padding: 10px 20px
+    font-size: 1rem
+    cursor: pointer
+    background: linear-gradient(to bottom, #ffcc00, #ff9900)
+    border-radius: 10px
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3)
+    border: none
+    font-weight: bold
+
+.missile
+  position: absolute
+  bottom: 85px
+  left: 50%
+  transform: translateX(-50%)
+  transition: bottom 0.2s linear 
+
+  img
+    width: 20px
+    height: 50px 
+
+@keyframes missileLaunch
+  from
+    bottom: 80px 
+  to
+    bottom: 90vh
+
+@keyframes shrinkFade
+  0%
+    transform: translate(-50%, -50%) scale(1)
+    opacity: 1
+  100%
+    transform: translate(-50%, -50%) scale(0)
+    opacity: 0
+
+.menu
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  background: rgba(0, 0, 0, 0.8)
+  color: white
+  padding: 2rem
+  border-radius: 10px
+  text-align: center
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3)
+  z-index: 1000
+  width: 300px
+
+.menu-content
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  h2
+    margin-bottom: 10px
+
+  p
+    margin-bottom: 8px
+
+  label
+    display: flex
+    align-items: center
+    font-size: 1rem
+    margin-top: 10px
+    cursor: pointer
+
+  input[type="checkbox"]
+    margin-right: 5px
+
+.restart-btn
+  margin-top: 10px
+  padding: 0.5rem 1rem
+  font-size: 1.2rem
+  cursor: pointer
+  background: white
+  color: black
+  border: none
+  border-radius: 5px
