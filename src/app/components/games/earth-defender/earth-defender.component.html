@@ -3,18 +3,18 @@
     <div class="main">
         <div class="panel">
             <div class="game-container">
-                <!-- Meteor (Falls from the top) -->
+                <!--meteor-->
                 <div *ngIf="showMeteor" class="meteor" [ngStyle]="{'top': meteorPosition + '%'}">
                     <img src="/assets/games/earth-defender/meteor.png" alt="Meteor">
                     <span class="word">{{ word }}</span>
                 </div>
 
-                <!-- Earth (Above the options box) -->
+                <!--earth-->
                 <div *ngIf="showEarth" class="earth">
                     <img src="/assets/games/earth-defender/earth.png" alt="Earth">
                 </div>
 
-                <!-- Gray Box for Sound Option Buttons -->
+                <!--options-->
                 <div class="options-container">
                     <div class="options">
                         <button *ngFor="let option of options" (click)="selectAnswer(option)" [disabled]="isDisabled">
@@ -23,19 +23,19 @@
                     </div>
                 </div>
 
-                <!-- Explosion (Appears when collision occurs) -->
+                <!--explosion-->
                 <div *ngIf="explosion" class="explosion" [ngStyle]="{'top': explosion.y + '%', 'left': explosion.x + '%'}">
                     <img src="/assets/games/earth-defender/explosion.png" alt="Explosion">
                 </div>
 
-                <!-- Missile container -->
+                <!--missile-->
                 <div class="missile-container">
                     <div *ngFor="let missile of missiles" class="missile" [ngStyle]="{'bottom': missile.position + '%'}">
                         <img src="/assets/games/earth-defender/missile.png" alt="Missile">
                     </div>
                 </div>
 
-                <!-- Game Over Screen -->
+                <!--game over-->
                 <div class="menu" *ngIf="gameOver">
                     <div class="menu-content">
                         <h2>Game Over!</h2>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <!-- Instructions Popup -->
+                <!--instructions-->
                 <div class="menu" *ngIf="showInstructions">
                     <div class="menu-content">
                         <h2>How to Play</h2>

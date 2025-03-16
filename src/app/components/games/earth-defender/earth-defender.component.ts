@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -21,6 +21,7 @@ export class EarthDefenderComponent implements OnInit {
   correctSound: string = '';
   options: string[] = [];
   isDisabled: boolean = false;
+  meteorPosition: number = 0;
   timer: number = 0;
   gameInterval: any;
   timerInterval: any;
@@ -29,9 +30,6 @@ export class EarthDefenderComponent implements OnInit {
   explosion: { x: number, y: number } | null = null;
   showEarth: boolean = true;
   showMeteor: boolean = true;
-  meteorPosition: number = 0;
-
-  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.languageService.getLanguage().then(lang => {
@@ -59,61 +57,48 @@ export class EarthDefenderComponent implements OnInit {
   initializeGame(): void {
     this.gameOver = false;
     this.timer = 0;
+    this.meteorPosition = 0;
     this.missiles = [];
     this.explosion = null;
     this.showEarth = true;
     this.showMeteor = true;
-    this.meteorPosition = 0;
     this.selectNewWord();
     this.startGameLoop();
   }
 
-  startGameLoop(): void {
-    this.gameOver = false;
-    this.isDisabled = false;
-    clearInterval(this.gameInterval);
-    clearInterval(this.timerInterval);
+    startGameLoop(): void {
+      this.gameOver = false;
+      this.isDisabled = false;
+      clearInterval(this.gameInterval);
+      clearInterval(this.timerInterval); // Ensure no duplicate timers
 
-    const screenHeight = window.innerHeight;
-    const meteorSpeed = screenHeight * 0.005; // Moves 0.5% of screen height per tick
+      let speed = 0.15; // Adjusted meteor speed
+      const meteorHeight = 210; // Approximate height of the meteor in pixels
 
-    this.timer = 0;
-    this.timerInterval = setInterval(() => {
-      if (!this.gameOver) {
-        this.timer++;
-      }
-    }, 1000);
+      // Timer now updates independently every second
+      this.timer = 0;
+      this.timerInterval = setInterval(() => {
+          if (!this.gameOver) {
+              this.timer++;
+          }
+      }, 1000);
 
-    this.gameInterval = setInterval(() => {
-      if (this.gameOver) {
-        clearInterval(this.gameInterval);
-        return;
-      }
+      this.gameInterval = setInterval(() => {
+          this.meteorPosition += speed;
 
-      this.meteorPosition += meteorSpeed;
+          // Calculate actual bottom position of meteor for collision
+          const meteorBottom = this.meteorPosition + (meteorHeight / window.innerHeight) * 100;
+          const earthTop = 85; // Position where Earth starts
 
-      const meteorElement = document.querySelector('.meteor') as HTMLElement | null;
-      const earthElement = document.querySelector('.earth') as HTMLElement | null;
-
-      if (!meteorElement || !earthElement) {
-        console.warn("⚠️ Game over - elements no longer exist.");
-        return;
-      }
-
-      const meteorBottom = meteorElement.getBoundingClientRect().bottom;
-      const earthTop = earthElement.getBoundingClientRect().top;
-
-      console.log(`🌍 Earth Top: ${earthTop}, ☄️ Meteor Bottom: ${meteorBottom}`);
-
-      if (meteorBottom >= earthTop) {
-        console.log("💥 Earth Impact!");
-        this.triggerExplosion(earthElement.getBoundingClientRect().left + 50, earthTop, true);
-        this.showEarth = false;
-        this.showMeteor = false;
-        this.endGame();
-      }
-    }, 30);
+          if (meteorBottom >= earthTop) { // Collision check
+              this.triggerExplosion(50, earthTop, true);
+              this.showEarth = false;
+              this.showMeteor = false;
+              this.endGame();
+          }
+      }, 30); // Only controls meteor speed now
   }
+
 
   selectNewWord(): void {
     if (!this.language.soundboard || !this.language.soundboard.examples) return;
@@ -147,7 +132,8 @@ export class EarthDefenderComponent implements OnInit {
 
     if (sound === this.correctSound) {
       setTimeout(() => {
-        this.triggerExplosion(this.meteorPosition, this.meteorPosition);
+        this.meteorPosition = Math.max(this.meteorPosition - 20, 0);
+        this.triggerExplosion(50, this.meteorPosition);
         this.selectNewWord();
       }, 1000);
     } else {
@@ -159,72 +145,39 @@ export class EarthDefenderComponent implements OnInit {
   fireMissile(): void {
     if (this.gameOver) return;
 
-    const earthElement = document.querySelector('.earth') as HTMLElement | null;
-    if (!earthElement) {
-      console.error("⚠️ ERROR: Earth element not found!");
-      return;
-    }
-
-    const earthRect = earthElement.getBoundingClientRect();
-    const missile = { id: this.missileIdCounter++, position: earthRect.top - 50 };
+    const missile = { id: this.missileIdCounter++, position: 10 }; // Starts above Earth
     this.missiles.push(missile);
 
-    this.cdr.detectChanges();
+    const missileInterval = setInterval(() => {
+      missile.position += 5;
 
-    setTimeout(() => {
-      const missileElement = document.querySelector(`.missile[data-id="${missile.id}"] img`) as HTMLElement | null;
-
-      if (!missileElement) {
-        console.error("❌ Missile element NOT FOUND in the DOM!");
-        return;
+      if (missile.position >= this.meteorPosition) {
+        this.triggerExplosion(50, missile.position);
+        this.missiles = this.missiles.filter(m => m.id !== missile.id);
+        clearInterval(missileInterval);
       }
-
-      const missileInterval = setInterval(() => {
-        if (this.gameOver) {
-          clearInterval(missileInterval);
-          return;
-        }
-
-        missile.position -= 2;
-        missileElement.style.transform = `translateY(${missile.position}px)`;
-
-        const meteorElement = document.querySelector('.meteor img') as HTMLElement | null;
-        if (!meteorElement) return;
-
-        const missileRect = missileElement.getBoundingClientRect();
-        const meteorRect = meteorElement.getBoundingClientRect();
-
-        if (
-          missileRect.top < meteorRect.bottom &&
-          missileRect.bottom > meteorRect.top &&
-          missileRect.left < meteorRect.right &&
-          missileRect.right > meteorRect.left
-        ) {
-          console.log("💥 COLLISION DETECTED!");
-
-          this.triggerExplosion(meteorRect.left + meteorRect.width / 2, meteorRect.bottom, false);
-          this.missiles = this.missiles.filter(m => m.id !== missile.id);
-          clearInterval(missileInterval);
-        }
-
-        if (missile.position <= 0) {
-          console.log("❌ Missile out of bounds, removing...");
-          this.missiles = this.missiles.filter(m => m.id !== missile.id);
-          clearInterval(missileInterval);
-        }
-      }, 10);
     }, 100);
   }
 
   triggerExplosion(x: number, y: number, isEarthCollision: boolean = false): void {
     this.explosion = { x, y };
+    
+    // Apply larger explosion for Earth collisions
+    const explosionSize = isEarthCollision ? 150 : 80; // Earth collision is bigger
+
+    // Update explosion element size dynamically
+    const explosionElement = document.querySelector('.explosion img');
+    if (explosionElement) {
+        (explosionElement as HTMLImageElement).style.width = `${explosionSize}px`;
+        (explosionElement as HTMLImageElement).style.height = `${explosionSize}px`;
+    }
 
     setTimeout(() => this.explosion = null, 2000);
-  }
+}
 
   endGame(): void {
     clearInterval(this.gameInterval);
-    clearInterval(this.timerInterval);
+    clearInterval(this.timerInterval); // Stop the survival timer
     this.gameOver = true;
     this.isDisabled = true;
     this.missiles = [];
