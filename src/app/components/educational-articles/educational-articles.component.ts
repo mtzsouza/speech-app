@@ -73,8 +73,21 @@ export class EducationalArticlesComponent {
 
   // Filter articles based on search query
   filterArticles() {
+    const query = this.searchQuery.toLowerCase();
     this.filteredArticles = this.articles.filter((article) =>
-      article.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      article.title.toLowerCase().includes(query)
     );
+  }
+
+  // Highlight search term in article titles
+  highlightSearchTerm(title: string): string {
+    if (!this.searchQuery) return title;
+    const regex = new RegExp(`(${this.searchQuery})`, 'gi');
+    return title.replace(regex, '<span class="highlight">$1</span>');
+  }
+
+  // Track items in *ngFor for better performance
+  trackByArticleId(index: number, article: any): number {
+    return article.title; // Using title as a unique key for simplicity
   }
 }
