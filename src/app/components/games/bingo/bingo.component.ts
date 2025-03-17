@@ -128,20 +128,98 @@ markSquare(row: number, col: number): void {
       }, 600);
   }
 }
-  
-  
 
-  checkWin(): void {
-    const isRowWin = this.board.some(row => row.every(cell => cell.marked));
-    const isColWin = this.board[0].some((_, col) => this.board.every(row => row[col].marked));
-    const isDiagonalWin = this.board.every((row, idx) => row[idx].marked) ||
-                          this.board.every((row, idx) => row[4 - idx].marked);
+replaySound(): void {
+  if (!this.currentSound) return;
 
-    if (isRowWin || isColWin || isDiagonalWin) {
-      this.gameWon = true;
-      alert('🎉 BINGO! You won!');
-    }
+  console.log("🔁 Replaying sound:", this.currentSound);
+
+  const soundPath = `/assets/sounds/${this.currentLanguage === 'english' ? 'eng' : 'spa'}Pronunciations/${this.currentSound.replace(/\//g, '')}.mp3`;
+
+  const audio = new Audio(soundPath);
+  audio.load();
+  audio.play().catch(error => console.error("Error replaying sound:", error));
+}
+
+triggerConfetti(): void {
+  const canvas = document.getElementById("confettiCanvas") as HTMLCanvasElement;
+  if (!canvas) return;
+
+  const confettiCtx = canvas.getContext("2d")!;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  canvas.style.display = "block"; // Ensure it's visible
+
+  const confettiParticles = Array.from({ length: 200 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height - canvas.height,
+    r: Math.random() * 6 + 2,
+    d: Math.random() * 2 + 1,
+    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+    tilt: Math.random() * 10 - 5,
+    tiltAngleIncrement: Math.random() * 0.07 + 0.05,
+    tiltAngle: Math.random() * Math.PI,
+  }));
+
+  function drawConfetti() {
+    confettiCtx.clearRect(0, 0, canvas.width, canvas.height);
+    confettiParticles.forEach((p) => {
+      confettiCtx.beginPath();
+      confettiCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      confettiCtx.fillStyle = p.color;
+      confettiCtx.fill();
+    });
   }
+
+  function updateConfetti() {
+    confettiParticles.forEach((p) => {
+      p.y += p.d;
+      p.x += Math.sin(p.tiltAngle) * 2;
+      p.tiltAngle += p.tiltAngleIncrement;
+      if (p.y > canvas.height) {
+        p.y = -10;
+        p.x = Math.random() * canvas.width;
+      }
+    });
+  }
+
+  function animateConfetti() {
+    drawConfetti();
+    updateConfetti();
+    requestAnimationFrame(animateConfetti);
+  }
+
+  animateConfetti();
+
+  // Stop and clear confetti after 5 seconds
+  setTimeout(() => {
+    canvas.style.display = "none";
+    confettiCtx.clearRect(0, 0, canvas.width, canvas.height);
+  }, 5000);
+}
+
+
+
+checkWin(): void {
+  const isRowWin = this.board.some(row => row.every(cell => cell.marked));
+  const isColWin = this.board[0].some((_, col) => this.board.every(row => row[col].marked));
+  const isDiagonalWin = this.board.every((row, idx) => row[idx].marked) ||
+                        this.board.every((row, idx) => row[4 - idx].marked);
+
+  if (isRowWin || isColWin || isDiagonalWin) {
+    this.gameWon = true;
+
+    // Start confetti animation first
+    this.triggerConfetti();
+
+    // Show the victory message with a small delay to sync effect
+    setTimeout(() => {
+      document.getElementById("victoryMessage")!.style.display = "block";
+    }, 1000);
+  }
+}
+
+
 
   resetGame(): void {
     this.calledSounds = [];

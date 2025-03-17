@@ -62,6 +62,25 @@
 
         &:hover
             background-color: rgba(36, 69, 123, 0.8)
+    
+    .replay-btn
+        background: #24457B
+        color: white
+        border: none
+        padding: 10px 20px
+        font-size: 1.2em
+        border-radius: 5px
+        cursor: pointer
+        margin: 10px
+        transition: 0.3s ease-in-out
+
+        &:hover
+            background-color: rgba(36, 69, 123, 0.8)
+
+        &:disabled
+            background: gray
+            cursor: not-allowed
+
 
     .current-sound
         font-size: 1.4em
@@ -117,3 +136,45 @@
                 opacity: 0.5
                 animation: fadeOut 1s ease-in-out
                 text-decoration: line-through
+
+.victory-popup
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    background: #f9f9f9
+    color: black
+    padding: 30px 40px
+    border-radius: 12px
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3)
+    font-size: 2em // Make text larger
+    text-align: center
+    display: none
+    z-index: 1000
+    width: 50%
+    max-width: 600px
+
+    button
+      margin-top: 10px
+      padding: 10px 20px
+      font-size: 1em
+      background: #24457B
+      color: white
+      border: none
+      border-radius: 5px
+      cursor: pointer
+      transition: background 0.3s ease-in-out
+
+      &:hover
+          background: rgba(36, 69, 123, 0.8)
+
+#confettiCanvas
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    pointer-events: none // Prevents interaction issues
+    z-index: 9999
+    display: none // Initially hidden
+
