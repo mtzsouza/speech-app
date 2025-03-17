@@ -1,4 +1,5 @@
 .achievement-container
+  position: relative
   width: 90%
   max-width: 1200px
   background-color: #f2f2f2  // Light background for contrast
@@ -10,6 +11,17 @@
   margin: auto
   margin-top: 20px
   overflow: hidden
+
+  .back-button
+    position: absolute
+    top: 20px
+    left: 50px
+    text-decoration: none
+    font-size: 40px
+    color: black
+    background-color: lightgray
+    border-radius: 30px
+    padding: 2px 8px
 
   .header
     display: flex
@@ -72,10 +84,16 @@
           font-style: italic
           font-size: 0.9em
 
-  @media (max-width: 768px)
-    .badge-grid
-      grid-template-columns: repeat(2, 1fr)
+@media (max-width: 768px)
+  .achievement-container
+      .back-button
+        top: 5px
+        left: 10px
+        font-size: 25px
+          
+      .badge-grid
+        grid-template-columns: repeat(2, 1fr)
 
-  @media (max-width: 480px)
-    .badge-grid
-      grid-template-columns: 1fr
+@media (max-width: 480px)
+  .badge-grid
+    grid-template-columns: 1fr
