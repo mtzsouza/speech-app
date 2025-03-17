@@ -24,9 +24,10 @@
                 </div>
 
                 <!--explosion-->
-                <div *ngIf="explosion" class="explosion" [ngStyle]="{'top': explosion.y + '%', 'left': explosion.x + '%'}">
+                <div *ngIf="explosion" class="explosion" [ngStyle]="{'top': explosion.y + '%', 'left': explosion.x + '%', 'width': explosion.size + 'px', 'height': explosion.size + 'px'}">
                     <img src="/assets/games/earth-defender/explosion.png" alt="Explosion">
                 </div>
+           
 
                 <!--missile-->
                 <div class="missile-container">
