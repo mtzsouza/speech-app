@@ -40,7 +40,7 @@ export class Game1Component implements OnInit {
     const storedLevel = localStorage.getItem('highestLevel');
     this.highestLevel = storedLevel ? parseInt(storedLevel, 10) : 1;
 
-    const dontShowInstructions = localStorage.getItem('dontShowInstructions');
+    const dontShowInstructions = localStorage.getItem('dontShowInstructionsMM');
     this.showInstructions = dontShowInstructions !== 'true';
 
     this.initializeGame();
@@ -56,7 +56,7 @@ export class Game1Component implements OnInit {
   hideInstructions(dontShowAgain: boolean): void {
     this.showInstructions = false;
     if (dontShowAgain) {
-      localStorage.setItem('dontShowInstructions', 'true');
+      localStorage.setItem('dontShowInstructionsMM', 'true');
     }
   }
 
