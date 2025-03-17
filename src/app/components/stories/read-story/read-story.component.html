@@ -2,8 +2,11 @@
     <div class="panel">
         <a href="/stories" class="button">←</a>
         <div class="control button">
-            <div (click)="this.speak()">⊙</div>
-            <div (click)="this.stop()">⊘</div>
+            @if (!isReading) {
+                <img src="../../../../assets/start-icon.png" alt="Start Reading" (click)="this.speak()">
+            } @else {
+                <img src="../../../../assets/stop-icon.png" alt="Stop Reading" (click)="this.stop()">
+            }
         </div>
         @if (isEnglish()) {
             <h1 class="title">{{ this.title_english }}</h1>
