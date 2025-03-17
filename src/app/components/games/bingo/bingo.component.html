@@ -1,0 +1,35 @@
+<canvas id="confettiCanvas"></canvas>
+<div id="victoryMessage" class="victory-popup">
+  🎉 BINGO! You won! 🎊
+  <button onclick="document.getElementById('victoryMessage').style.display='none'">
+      OK
+  </button>
+</div>
+
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="bingo-container">
+        <h1>Bingo / Lotería 🎶</h1>
+    
+        <button class="play-btn" (click)="playSound()" [disabled]="gameWon">🎵 Play Sound</button>
+        <button class="replay-btn" (click)="replaySound()" [disabled]="!currentSound || gameWon">🔁 Replay Sound</button>
+        <p *ngIf="displayedSound" class="current-sound">Now Playing: <strong>{{ displayedSound }}</strong></p>
+    
+        <div class="bingo-board">
+        <div *ngFor="let row of board; let rowIdx = index" class="bingo-row">
+            <div *ngFor="let cell of row; let colIdx = index"
+                class="bingo-cell"
+                [class.marked]="cell.marked"
+                [class.missed]="cell.missed"
+                [class.correct]="cell.animation === 'correct'"
+                [class.incorrect]="cell.animation === 'incorrect'"
+                (click)="markSquare(rowIdx, colIdx)">
+                {{ cell.value }}
+            </div>
+        </div>
+    
+        <button class="reset-btn" (click)="resetGame()">🔄 Reset Game</button>
+    </div>  
+</div>
+  
+
