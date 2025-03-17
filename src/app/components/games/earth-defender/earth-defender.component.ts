@@ -1,3 +1,6 @@
+//TODO
+//Ensure all collision checks are percentage based
+//Ensure proper spawn positions based on percentages
 import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { RouterModule } from '@angular/router';
