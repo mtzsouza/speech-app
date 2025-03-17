@@ -40,7 +40,7 @@
           width: 100%
           padding: 10px
           border: 1px solid #ccc
-          border-radius: 20px  
+          border-radius: 20px
           font-family: inter
 
       .articles-list
@@ -49,9 +49,14 @@
           flex-direction: column
           margin-bottom: 15px
           padding: 15px
-          background-color: #003366  
+          background-color: #003366
           color: white
           border-radius: 5px
+          transition: transform 0.2s, box-shadow 0.2s
+
+          &:hover
+            transform: translateY(-5px)
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1)
 
           .article-title
             font-weight: bold
@@ -67,11 +72,20 @@
           .article-title a:hover, .article-content a:hover
             text-decoration: underline
 
+      .no-articles
+        text-align: center
+        font-size: 18px
+        color: #333
+
+      .highlight
+        background-color: yellow
+        color: black
+
 @media only screen and (max-width: 768px)
   .container
     .main
       .panel
-        width: 80%
+        width: 90%
 
         .back-button
           top: 5px
@@ -79,4 +93,8 @@
           font-size: 25px
 
         .title
-          font-size: 24px
+          font-size: 22px
+
+  .article
+    padding: 10px
+    margin-bottom: 10px
