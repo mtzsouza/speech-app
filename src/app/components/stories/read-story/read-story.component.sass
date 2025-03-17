@@ -1,6 +1,7 @@
 @import '../../../../styles.sass'
 
 .container
+    display: flex
     justify-content: start
     align-items: center
     min-height: 100%
@@ -43,6 +44,9 @@
             gap: 10px
             cursor: pointer
 
+            img
+                height: 50px
+
 @media only screen and (max-width: 768px)
     .container
         .panel
@@ -62,6 +66,9 @@
             .control
                 top: 5px
                 right: 10px
+
+                img
+                    height: 30px
 
         .title
             font-size: 25px

@@ -20,6 +20,7 @@ export class ReadStoryComponent {
   languageService = inject(LanguageService);
 
   userLanguage = english;
+  isReading = false;
 
   title_english = "";
   title_spanish = "";
@@ -45,6 +46,7 @@ export class ReadStoryComponent {
   }
 
   speak() {
+    this.isReading = true;
     if (this.isEnglish()) {
       this.speech.speak(this.text_english, "Google US English");
     } else {
@@ -53,6 +55,7 @@ export class ReadStoryComponent {
   }
 
   stop() {
+    this.isReading = false;
     this.speech.stop()
   }
 }
