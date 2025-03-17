@@ -1,0 +1,180 @@
+@keyframes shake
+  0%
+    transform: translateX(0)
+  25%
+    transform: translateX(-5px)
+  50%
+    transform: translateX(5px)
+  75%
+    transform: translateX(-5px)
+  100%
+    transform: translateX(0)
+
+@keyframes flashRed
+  0%
+    background: #ff3333
+  50%
+    background: #ff6666
+  100%
+    background: #ff3333
+
+@keyframes glowGreen
+  0%
+    box-shadow: 0 0 5px #33ff33, 0 0 10px #33ff33
+  50%
+    box-shadow: 0 0 15px #66ff66, 0 0 30px #33ff33
+  100%
+    box-shadow: 0 0 5px #33ff33, 0 0 10px #33ff33
+
+@keyframes pulse
+  0%
+    transform: scale(1)
+  50%
+    transform: scale(1.1)
+  100%
+    transform: scale(1)
+
+.bingo-container
+    text-align: center
+    padding: 20px
+    width: 90%
+    max-width: 1200px
+    background-color: #f2f2f2  // Light background for contrast
+    color: #000
+    border-radius: 8px
+    padding: 20px
+    border: 2px solid #24457B
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2)
+    margin: auto
+    margin-top: 20px
+    overflow: hidden
+
+    .play-btn, .reset-btn
+        background: #24457B
+        color: white
+        border: none
+        padding: 10px 20px
+        font-size: 1.2em
+        border-radius: 5px
+        cursor: pointer
+        margin: 10px
+        transition: 0.3s ease-in-out
+
+        &:hover
+            background-color: rgba(36, 69, 123, 0.8)
+    
+    .replay-btn
+        background: #24457B
+        color: white
+        border: none
+        padding: 10px 20px
+        font-size: 1.2em
+        border-radius: 5px
+        cursor: pointer
+        margin: 10px
+        transition: 0.3s ease-in-out
+
+        &:hover
+            background-color: rgba(36, 69, 123, 0.8)
+
+        &:disabled
+            background: gray
+            cursor: not-allowed
+
+
+    .current-sound
+        font-size: 1.4em
+        font-weight: bold
+        margin-top: 15px
+
+    .bingo-board
+        display: grid
+        grid-template-rows: repeat(5, 1fr)
+        gap: 5px
+        margin-top: 20px
+        justify-content: center
+
+        .bingo-row
+            display: flex
+            justify-content: center
+            gap: 5px
+
+        .bingo-cell
+            width: 80px
+            height: 80px
+            display: flex
+            align-items: center
+            justify-content: center
+            background: #fff
+            border: 2px solid #24457B
+            font-size: 1.2em
+            font-weight: bold
+            cursor: pointer
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out
+
+            &.marked
+                background: #ffcc00
+                color: black
+                border: 2px solid black
+                transform: scale(1.1) // Slight pop effect for clarity
+                transition: 0.3s ease-in-out
+            
+            &.incorrect
+                animation: shake 0.3s ease-in-out, flashRed 0.6s ease-in-out
+
+            &.correct
+                background: #33ff33
+                color: black
+                border: 2px solid #008000
+                animation: glowGreen 1s ease-in-out, pulse 0.5s ease-in-out
+            
+            &.missed
+                background: #cc0000 !important
+                color: white
+                border: 2px solid #cc0000
+                cursor: not-allowed
+                opacity: 0.5
+                animation: fadeOut 1s ease-in-out
+                text-decoration: line-through
+
+.victory-popup
+    position: fixed
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    background: #f9f9f9
+    color: black
+    padding: 30px 40px
+    border-radius: 12px
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3)
+    font-size: 2em // Make text larger
+    text-align: center
+    display: none
+    z-index: 1000
+    width: 50%
+    max-width: 600px
+
+    button
+      margin-top: 10px
+      padding: 10px 20px
+      font-size: 1em
+      background: #24457B
+      color: white
+      border: none
+      border-radius: 5px
+      cursor: pointer
+      transition: background 0.3s ease-in-out
+
+      &:hover
+          background: rgba(36, 69, 123, 0.8)
+
+#confettiCanvas
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    pointer-events: none // Prevents interaction issues
+    z-index: 9999
+    display: none // Initially hidden
+

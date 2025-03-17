@@ -33,6 +33,17 @@ body, html
   outline: 2px solid black
   overflow-y: auto
 
+  .back-button
+    position: absolute
+    top: 20px
+    left: 50px
+    text-decoration: none
+    font-size: 40px
+    color: black
+    background-color: lightgray
+    border-radius: 30px
+    padding: 2px 8px
+
   .header
     display: flex
     justify-content: center
@@ -115,3 +126,12 @@ body, html
 
     .watched-video
       background-color: #e0e0e0
+
+@media only screen and (max-width: 768px)
+  .container
+    .main
+      .video-center
+        .back-button
+          top: 5px
+          left: 10px
+          font-size: 25px

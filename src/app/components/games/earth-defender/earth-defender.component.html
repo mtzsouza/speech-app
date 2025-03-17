@@ -1,0 +1,64 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="main">
+        <div class="panel">
+            <div class="game-container">
+                <!--meteor-->
+                <div *ngIf="showMeteor" class="meteor" [ngStyle]="{'top': meteorPosition + '%'}">
+                    <img src="/assets/games/earth-defender/meteor.png" alt="Meteor">
+                    <span class="word">{{ word }}</span>
+                </div>
+
+                <!--earth-->
+                <div *ngIf="showEarth" class="earth">
+                    <img src="/assets/games/earth-defender/earth.png" alt="Earth">
+                </div>
+
+                <!--options-->
+                <div class="options-container">
+                    <div class="options">
+                        <button *ngFor="let option of options" (click)="selectAnswer(option)" [disabled]="isDisabled">
+                            {{ option }}
+                        </button>
+                    </div>
+                </div>
+
+                <!--explosion-->
+                <div *ngIf="explosion" class="explosion" [ngStyle]="{'top': explosion.y + '%', 'left': explosion.x + '%', 'width': explosion.size + 'px', 'height': explosion.size + 'px'}">
+                    <img src="/assets/games/earth-defender/explosion.png" alt="Explosion">
+                </div>
+           
+
+                <!--missile-->
+                <div class="missile-container">
+                    <div *ngFor="let missile of missiles" class="missile" [ngStyle]="{'bottom': missile.position + '%'}">
+                        <img src="/assets/games/earth-defender/missile.png" alt="Missile">
+                    </div>
+                </div>
+
+                <!--game over-->
+                <div class="menu" *ngIf="gameOver">
+                    <div class="menu-content">
+                        <h2>Game Over!</h2>
+                        <p>You survived {{ timer }} seconds.</p>
+                        <button class="restart-btn" (click)="restartGame()">Restart</button>
+                    </div>
+                </div>
+
+                <!--instructions-->
+                <div class="menu" *ngIf="showInstructions">
+                    <div class="menu-content">
+                        <h2>How to Play</h2>
+                        <p>Destroy meteors by choosing the correct phonetic sound before they reach Earth.</p>
+
+                        <label>
+                            <input type="checkbox" #dontShow (change)="hideInstructions(dontShow.checked)">
+                            Don't show again
+                        </label>
+                        <button class="restart-btn" (click)="hideInstructions(dontShow.checked)">Start Game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

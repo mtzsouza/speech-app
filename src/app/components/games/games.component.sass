@@ -9,8 +9,20 @@
         align-items: start
 
         .panel
+            position: relative
             height: 90%
             background-color: white
+
+            .back-button
+                position: absolute
+                top: 20px
+                left: 50px
+                text-decoration: none
+                font-size: 40px
+                color: black
+                background-color: lightgray
+                border-radius: 30px
+                padding: 2px 8px
 
             .title
                 text-align: center
@@ -22,6 +34,7 @@
             .button-space
                 width: 85%
                 height: 75%
+                padding: 40px
                 display: flex
                 flex-direction: column
                 justify-content: center
@@ -38,7 +51,7 @@
                     .game-button
                         position: relative
                         aspect-ratio: 1
-                        height: 110%
+                        width: 175px
                         border: solid black thin
                         border-radius: 15px
                         background-color: lightgray
@@ -61,6 +74,7 @@
                         .game-title
                             margin: 0
                             padding-top: 10px
+                            font-size: 20px
 
                     .game_1
                         background-image: $game_1_icon
@@ -89,17 +103,23 @@
             .panel
                 height: 98%
 
+                .back-button
+                    top: 5px
+                    left: 10px
+                    font-size: 25px
+
                 .button-space
                     margin-top: 25px
-                    gap: 5px
+                    padding: 10px
+                    gap: 20px
                     justify-content: flex-start
 
                     .row
                         flex-direction: column
                         height: 30%
+                        gap: 20px
 
                         .game-button
-                            width: 100%
                             min-height: 75px
 
                             img
@@ -111,5 +131,5 @@
                                 font-size: 15px
 
                 .title
-                    font-size: 20px
+                    font-size: 25px
                     padding: 10px
