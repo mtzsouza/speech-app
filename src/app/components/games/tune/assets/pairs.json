@@ -1,0 +1,77 @@
+[
+  {
+    "sounds": ["p", "b"],
+    "pairs": [
+      {
+        "sound": "p",
+        "english_words": ["pat", "pen", "pick", "past", "pile", "pin", "pack", "pump", "party", "proud", "park", "peach", "pencil", "pet", "pot", "pink", "purse", "paper", "play", "push"],
+        "spanish_words": ["perro", "pan", "pelo", "paz", "piso", "pato", "pico", "peso", "pueblo", "puerta", "pared", "piedra", "plaza", "plato", "punto", "papa", "pintura", "parque", "peine", "pintor"]
+      },
+      {
+        "sound": "b",
+        "english_words": ["bat", "ben", "big", "best", "bile", "bin", "back", "bump", "barn", "brave", "bark", "beach", "bench", "bet", "bot", "bank", "burst", "butter", "blame", "bush"],
+        "spanish_words": ["barco", "boca", "burro", "baño", "bebé", "bolsa", "botella", "bueno", "brisa", "banda", "brillo", "broma", "basura", "bajo", "bailar", "bravo", "bomba", "bicho", "barro", "bandera"]
+      }
+    ]
+  },
+  {
+    "sounds": ["t", "d"],
+    "pairs": [
+      {
+        "sound": "t",
+        "english_words": ["tap", "ten", "top", "tail", "till", "tack", "tape", "tune", "time", "trick", "tank", "turtle", "tick", "tone", "touch", "taste", "tool", "twin", "trip", "twist"],
+        "spanish_words": ["tigre", "taza", "tierra", "tonto", "tomate", "tijera", "túnel", "trampa", "teléfono", "templo", "triste", "tapa", "tocar", "tiempo", "tiburón", "techo", "tela", "tren", "torre", "tarea"]
+      },
+      {
+        "sound": "d",
+        "english_words": ["dap", "den", "dog", "dale", "dill", "deck", "dome", "dune", "dime", "drink", "dank", "doodle", "done", "dutch", "dust", "dull", "dwell", "drop", "dream"],
+        "spanish_words": ["dado", "dedo", "dulce", "duende", "dinero", "duro", "dentro", "dormir", "deporte", "decidir", "desierto", "día", "duda", "desayuno", "detalle", "delgado", "deseo", "dama", "dueño", "dicha"]
+      }
+    ]
+  },
+  {
+    "sounds": ["k", "ɡ"],
+    "pairs": [
+      {
+        "sound": "k",
+        "english_words": ["cap", "cat", "kick", "kite", "kill", "king", "cold", "kind", "keep", "cook", "coin", "cup", "coat", "clap", "clock", "crisp", "cough", "climb", "kiss", "knot"],
+        "spanish_words": ["casa", "cielo", "coche", "cortar", "corazón", "canto", "carne", "cuchillo", "cuerda", "cocina", "cubo", "claro", "crecer", "cabeza", "cerca", "cuento", "cálido", "campo", "correr", "costumbre"]
+      },
+      {
+        "sound": "ɡ",
+        "english_words": ["gap", "got", "gig", "guide", "gill", "gold", "give", "good", "goat", "goose", "game", "gum", "grape", "green", "glove", "grow", "glass", "grand", "group", "guess"],
+        "spanish_words": ["gato", "gente", "guitarra", "goma", "gris", "globo", "ganar", "grande", "gusto", "gol", "gallo", "gota", "girar", "guerra", "grupo", "general", "gigante", "grúa", "guapo", "gemelo"]
+      }
+    ]
+  },
+  {
+    "sounds": ["f", "v"],
+    "pairs": [
+      {
+        "sound": "f",
+        "english_words": ["fan", "fun", "fit", "fine", "fall", "fat", "fast", "fear", "fish", "fork", "five", "fry", "fix", "feel", "file", "fact", "firm", "fruit", "friend", "full"],
+        "spanish_words": ["faro", "fuego", "feliz", "flor", "frío", "fuerte", "familia", "fondo", "fácil", "fuente", "fila", "forma", "fútbol", "falso", "fiera", "feo", "figura", "fantasma", "feria", "fruta"]
+      },
+      {
+        "sound": "v",
+        "english_words": ["van", "vow", "vit", "vine", "veal", "vast", "vest", "vote", "voice", "vivid", "view", "victory", "violin", "virus", "village", "valley", "vehicle", "viper", "venture", "visit"],
+        "spanish_words": ["vaca", "vela", "verde", "vida", "vuelo", "ventana", "vino", "valiente", "verano", "vestido", "viaje", "volver", "viento", "veloz", "vender", "vivir", "vacío", "vecino", "valioso", "voz"]
+      }
+    ]
+  },
+  {
+    "sounds": ["s", "z"],
+    "pairs": [
+      {
+        "sound": "s",
+        "english_words": ["sip", "sit", "sad", "see", "sell", "sun", "sock", "soft", "salt", "seat", "soap", "soup", "sour", "safe", "save", "seal", "silk", "sleep", "smart", "speak"],
+        "spanish_words": ["sol", "sopa", "silla", "sabor", "sello", "sano", "saco", "sombra", "suerte", "secreto", "sal", "saltar", "serio", "sonido", "seda", "silencio", "sierra", "sabio", "sufrir", "sabroso"]
+      },
+      {
+        "sound": "z",
+        "english_words": ["zip", "zit", "zebra", "zone", "zero", "zeal", "zest", "zigzag", "zodiac", "zoom", "zombie", "zinc", "zap", "zonal", "zany", "zen", "zephyr", "zebra", "zonal", "zealous"],
+        "spanish_words": ["zapato", "zanahoria", "zorro", "zona", "zebra", "zigzag", "zoquete", "zumbido", "zancudo", "zarza", "zurdo", "zodiaco", "zanja", "zarpar", "zafiro", "zurcir", "zancada", "zanco", "zambullida", "zarzal"]
+      }
+    ]
+  }
+]
