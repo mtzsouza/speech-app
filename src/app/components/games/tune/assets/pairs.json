@@ -1,7 +1,7 @@
 [
   {
     "sounds": ["p", "b"],
-    "pairs": [
+    "choices": [
       {
         "sound": "p",
         "english_words": ["pat", "pen", "pick", "past", "pile", "pin", "pack", "pump", "party", "proud", "park", "peach", "pencil", "pet", "pot", "pink", "purse", "paper", "play", "push"],
@@ -16,7 +16,7 @@
   },
   {
     "sounds": ["t", "d"],
-    "pairs": [
+    "choices": [
       {
         "sound": "t",
         "english_words": ["tap", "ten", "top", "tail", "till", "tack", "tape", "tune", "time", "trick", "tank", "turtle", "tick", "tone", "touch", "taste", "tool", "twin", "trip", "twist"],
@@ -31,7 +31,7 @@
   },
   {
     "sounds": ["k", "ɡ"],
-    "pairs": [
+    "choices": [
       {
         "sound": "k",
         "english_words": ["cap", "cat", "kick", "kite", "kill", "king", "cold", "kind", "keep", "cook", "coin", "cup", "coat", "clap", "clock", "crisp", "cough", "climb", "kiss", "knot"],
@@ -46,7 +46,7 @@
   },
   {
     "sounds": ["f", "v"],
-    "pairs": [
+    "choices": [
       {
         "sound": "f",
         "english_words": ["fan", "fun", "fit", "fine", "fall", "fat", "fast", "fear", "fish", "fork", "five", "fry", "fix", "feel", "file", "fact", "firm", "fruit", "friend", "full"],
@@ -61,7 +61,7 @@
   },
   {
     "sounds": ["s", "z"],
-    "pairs": [
+    "choices": [
       {
         "sound": "s",
         "english_words": ["sip", "sit", "sad", "see", "sell", "sun", "sock", "soft", "salt", "seat", "soap", "soup", "sour", "safe", "save", "seal", "silk", "sleep", "smart", "speak"],

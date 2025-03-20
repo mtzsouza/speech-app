@@ -26,13 +26,11 @@ export class LanguageService {
         localStorage.setItem(this.LANGUAGE_KEY, firebaseLanguage);
 
         // Return the Firebase language preference
-        console.log("Firebase language is: ", firebaseLanguage);
         return firebaseLanguage === 'spanish' ? spanish : english;
       }
     }
 
     // If no Firebase language is available or user is not signed in, fallback to local storage
-    console.log("Local language is: ", storedLanguage);
     if (storedLanguage === 'spanish') {
       return spanish;
     } else if (storedLanguage === 'english') {
