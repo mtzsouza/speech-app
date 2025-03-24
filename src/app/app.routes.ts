@@ -19,6 +19,7 @@ import { StoriesComponent } from './components/stories/stories.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { Game1Component } from './components/games/game1/game1.component';
 import { BingoComponent } from './components/games/bingo/bingo.component';
+import { MatchMazeComponent } from './components/games/match-maze/match-maze.component';
 import { EarthDefenderComponent } from './components/games/earth-defender/earth-defender.component';
 import { EducationalArticlesComponent } from './components/educational-articles/educational-articles.component';
 import { RequestAdminComponent } from './components/update-info/request-admin/request-admin.component';
@@ -91,6 +92,12 @@ export const routes: Routes = [
     {
         path:'bingo',
         component: BingoComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path:'match-maze',
+        component: MatchMazeComponent,
         ...canActivate(redirectUnauthorizedToLogin)
     },
   

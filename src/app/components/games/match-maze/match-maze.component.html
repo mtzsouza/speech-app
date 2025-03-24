@@ -1,0 +1,41 @@
+<canvas id="confettiCanvas"></canvas>
+<div *ngIf="showVictoryMessage" class="victory-popup">
+  🎉 You escaped the maze! 🎊<br/>
+  <button (click)="hideVictoryMessage()">OK</button>
+</div>
+
+<div class="container">
+  <app-navbar></app-navbar>
+  <div class="maze-container">
+    <h2>Match Maze 🧩</h2>
+
+    <div class="maze-grid">
+      <div *ngFor="let row of maze" class="maze-row">
+        <div
+            *ngFor="let cell of row"
+            class="maze-cell"
+            [class.wall-up]="cell.walls.up"
+            [class.wall-down]="cell.walls.down"
+            [class.wall-left]="cell.walls.left"
+            [class.wall-right]="cell.walls.right"
+            [class.player]="isPlayer(cell)"
+            [class.blocked]="cell.blocked"
+            [class.correct]="cell.correct"
+            [class.path]="gameWon && isInPath(cell)"
+            >
+            {{ phoneticMap[cell.value] || cell.value }}
+            </div>
+      </div>
+    </div>
+
+    <div *ngIf="!gameWon && currentChallenge" class="choices">
+      <h3>Select the matching sound:</h3>
+      <button *ngFor="let ipa of choices" (click)="selectSound(ipa)">
+        🔊 {{ phoneticMap[ipa] || ipa }}
+      </button>
+      <button (click)="replaySound()">🔁 Replay</button>
+    </div>
+
+    <button (click)="resetGame()">🔄 Reset Maze</button>
+  </div>
+</div>
