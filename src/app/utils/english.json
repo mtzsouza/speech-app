@@ -186,5 +186,28 @@
             "dontShowAgain": "Don't show again",
             "startGame": "Start Game"
         }
+    },
+    "earthDefender": {
+        "score": "Score:",
+        "streak": "Streak:",
+        "longestStreak": "Longest Streak:",
+        "time": "Time:",
+        "bestTime": "Best Time:",
+        "bestScore": "Best Score:",
+        "bestStreak": "All-Time Best Streak:",
+        "backToGames": "Back to Games",
+        "gameOver": "Game Over!",
+        "survivedTime": "You survived {{ timer }} seconds.",
+        "restart": "Restart",
+        "instructions": {
+            "title": "How to Play",
+            "goal": "Don't let the meteor hit the Earth!",
+            "shoot": "Shoot missiles by choosing the sound made by the highlighted syllable by the meteor.",
+            "effect": "Missiles push the meteor back a little.",
+            "caution": "Be careful though! Incorrect answers will put the missile on a cooldown.",
+            "question": "How long will you last?",
+            "dontShowAgain": "Don't show again",
+            "startGame": "Start Game"
+        }
     }
 }

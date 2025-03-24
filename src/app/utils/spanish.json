@@ -166,5 +166,28 @@
             "dontShowAgain": "No mostrar de nuevo",
             "startGame": "Comenzar el Juego"
         }
+    },
+    "earthDefender": {
+        "score": "Puntuación:",
+        "streak": "Racha:",
+        "longestStreak": "Racha más Larga:",
+        "time": "Hora:",
+        "bestTime": "Mejor Hora:",
+        "bestScore": "Mejor Puntuación:",
+        "bestStreak": "Mejor Racha de todos los Tiempos:",
+        "backToGames": "Volver a Juegos",
+        "gameOver": "¡Se acabó el juego!",
+        "survivedTime": "Sobreviviste {{ timer }} segundos.",
+        "restart": "Reiniciar el Juego",
+        "instructions": {
+            "title": "Cómo Jugar",
+            "goal": "¡No dejes que el meteorito golpee la Tierra!",
+            "shoot": "Dispara misiles eligiendo el sonido que hace la sílaba resaltada por el meteorito.",
+            "effect": "Los misiles hacen retroceder un poco al meteoro.",
+            "caution": "Pero ten cuidado. Las respuestas incorrectas harán que el misil se enfríe.",
+            "question": "¿Cuánto durarás?",
+            "dontShowAgain": "No mostrar de nuevo",
+            "startGame": "Comenzar el Juego"
+        }
     }
 }
