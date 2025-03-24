@@ -1,0 +1,33 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="main">
+        <div class="panel">
+            <a href="/games" class="nav-button back-button">↩</a>
+            <a href="/tune-your-ears" class="nav-button restart-button">↻</a>
+            @if (menuActive) {
+                <div class="menu">
+                    <h1>Tune Your Ears</h1>
+                    <p>
+                        Choose a pair to practice and answer quickly to earn more points.
+                        <br>
+                        <br>
+                        Once the game starts, you may click on the word to hear it. 
+                    </p>
+                    <div class="selection-box">
+                        @for (pair of pairs; track pair) {
+                            <div class="pair-button" (click)="startGame(pair)">
+                                <p>{{ pair.sounds[0] }}, {{ pair.sounds[1] }}</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            @if (gameActive) {
+                <!-- TO DO -->
+            }
+            @if (summaryActive) {
+                <!-- TO DO -->
+            }
+        </div>
+    </div>
+</div>

@@ -60,7 +60,6 @@ export class DatabaseService {
         throw new Error(`Collection '${collectionName}' does not exist or is empty`);
       }
       const data = snapshot.docs.map(doc => doc.data());
-      console.log('Collection fetched successfully');
       return data;
     } catch (error) {
       throw error;
@@ -72,7 +71,6 @@ export class DatabaseService {
     try {
       const docSnapshot = await getDoc(docRef);
       if (docSnapshot.exists()) {
-        console.log('Document fetched successfully');
         return docSnapshot.data();
       } else {
         console.log('No such document!');

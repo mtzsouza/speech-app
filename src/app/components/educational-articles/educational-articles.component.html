@@ -3,6 +3,8 @@
 
   <div class="main">
     <div class="panel">
+      <a href="/" class="back-button">←</a>
+
       <h1 class="title">Educational Articles!</h1>
 
       <!-- Search input field -->
@@ -16,21 +18,25 @@
           (input)="filterArticles()"
           placeholder="Type to filter articles by title..."
           required
+          aria-label="Search for educational articles"
+          aria-describedby="search-helper"
         />
       </div>
 
       <!-- Articles list section -->
       <div class="articles-list">
-        <div class="article" *ngFor="let article of filteredArticles">
+        <div class="article" *ngFor="let article of filteredArticles; trackBy: trackByArticleId">
           <div class="article-title">
-            <a [href]="article.url" target="_blank">{{ article.title }}</a>
+            <a [href]="article.url" target="_blank" [innerHTML]="highlightSearchTerm(article.title)"></a>
           </div>
           <div class="article-content">
             {{ article.description }}
             <a [href]="article.url" target="_blank" class="read-more">Learn More</a>
           </div>
         </div>
-        <div *ngIf="filteredArticles.length === 0">No articles found.</div>
+        <div *ngIf="filteredArticles.length === 0" class="no-articles">
+          No articles found. Try clearing your search or exploring other topics.
+        </div>
       </div>
     </div>
   </div>

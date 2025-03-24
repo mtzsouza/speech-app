@@ -1,13 +1,13 @@
 {
     "navbar": {
-        "soundboard": "Caja de Resonancia",
+        "soundboard": "Fonética",
         "games": "Juegos",
         "stories": "Historias",
         "progress": "Progreso"
     },
     "dashboard": {
         "title": "Panel",
-        "soundboard": "Caja de Resonancia",
+        "soundboard": "Fonética",
         "games": "Juegos",
         "stories": "Historias",
         "progress": "Progreso",
