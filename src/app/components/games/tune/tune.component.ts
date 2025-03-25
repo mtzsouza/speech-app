@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core'; 
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { LanguageService } from '../../../services/language.service';
+import { SpeechService } from '../../../services/speech.service';
 import * as english from '../../../utils/english.json'
 import pairs from './assets/pairs.json';
 
@@ -19,7 +20,9 @@ interface Question {
 })
 export class TuneComponent {
   languageService = inject(LanguageService);
+  speechService = inject(SpeechService);
   
+  pairs = pairs;
   userLanguage = english;
 
   async ngOnInit(): Promise<void> {
@@ -30,10 +33,12 @@ export class TuneComponent {
     return JSON.stringify(this.userLanguage) === JSON.stringify(english);
   }
 
-  pairs = pairs;
+  // Screen data
   menuActive = true;
   gameActive = false;
   summaryActive = false;
+
+  // Game data
   questionsPerGame = 10;
   questions: Question[] = [];
   currentQuestion: Question = {
@@ -41,26 +46,6 @@ export class TuneComponent {
     correctSound: "",
     wrongSound: ""
   };
-
-  startGame(pair: any) {
-    this.menuActive = false;
-    this.gameActive = true;
-    this.questions = [];
-  
-    const usedWords = new Set<string>();
-  
-    while (this.questions.length < this.questionsPerGame) {
-      const question = this.generateQuestion(pair);
-      
-      if (question && !usedWords.has(question.word)) {
-        this.questions.push(question);
-        usedWords.add(question.word);
-      }
-    }
-  
-    this.loadNextQuestion();
-    console.log(this.currentQuestion);
-  }
 
   generateQuestion(pair: any): Question | null {
     if (!pair.choices || pair.choices.length < 2) {
@@ -85,14 +70,39 @@ export class TuneComponent {
     };
   }
 
-  loadNextQuestion() {
+  startGame(pair: any) {
+    this.menuActive = false;
+    this.gameActive = true;
+  
+    // Generate questions
+    this.questions = [];
+    const usedWords = new Set<string>();
+    while (this.questions.length < this.questionsPerGame) {
+      const question = this.generateQuestion(pair);
+      
+      if (question && !usedWords.has(question.word)) {
+        this.questions.push(question);
+        usedWords.add(question.word);
+      }
+    }
+  
+    this.loadNextQuestion();
+    console.log(this.currentQuestion);
+  }
+
+  async loadNextQuestion() {
+    // If no questions left, finish game and open summary
     if (this.questions.length === 0) {
       this.gameActive = false;
       this.summaryActive = true;
       return;
     }
 
+    // Load next question and delete previous question
     this.currentQuestion = this.questions[0];
     this.questions = this.questions.slice(1);
+
+    // Play sound
+    // this.speechService.start(this.currentQuestion.word);
   }
 }
