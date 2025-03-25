@@ -85,9 +85,13 @@ export class PreferencesComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.languageService.getLanguage().then(lang => {
-      this.userLanguage = lang;
-    });
+    this.authService.firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.languageService.getLanguage().then(lang => {
+          this.language = lang;
+        });
+      }
+    })
   }
 
   ngOnDestroy(): void {
