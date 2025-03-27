@@ -148,4 +148,14 @@ export class DatabaseService {
       throw error;
     }
   }
+
+  async fileExists(path: string): Promise<boolean> {
+    const fileRef = ref(this.storage, path);
+    try {
+      const response = await getDownloadURL(fileRef);
+      return true;
+    } catch(error) {
+      return false;
+    }
+  }
 }

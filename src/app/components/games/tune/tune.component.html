@@ -3,7 +3,7 @@
     <div class="main">
         <div class="panel">
             <a href="/games" class="nav-button back-button">↩</a>
-            <a href="/tune-your-ears" class="nav-button restart-button">↻</a>
+
             @if (menuActive) {
                 <div class="menu">
                     <h1>Tune Your Ears</h1>
@@ -19,13 +19,45 @@
                     </div>
                 </div>
             }
+
             @if (gameActive) {
-                <div class="game-area">
-                    
+                <div class="game-area screen">
+                    <div class="countdown">
+                        <svg viewBox="-50 -50 100 100" stroke-width="10">
+                            <circle r="40" />
+                            <circle r="40" pathLength="1" />
+                        </svg>
+                    </div>
+                    <div class="choice-area">
+                        @if (firstChoiceCorrect) {
+                            <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">{{currentQuestion.correctSound}}</div>
+                            <div class="choice-button" (click)="processResponse('wrong')">{{currentQuestion.wrongSound}}</div>
+                        } @else {
+                            <div class="choice-button" (click)="processResponse('wrong')">{{currentQuestion.wrongSound}}</div>
+                            <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">{{currentQuestion.correctSound}}</div>
+                        }
+                    </div>
                 </div>
             }
+
             @if (summaryActive) {
-                <!-- TO DO -->
+                 <div class="summary-area screen">
+                    <h2>Total points earned:</h2>
+                    <h1>{{ pointsEarned }}</h1>
+                    <div class="finish">
+                        <a href="/tune-your-ears" class="nav-button restart-button">↻</a>
+                    </div>
+                 </div>
+            }
+
+            @if (isAdmin) {
+                <div class="audio-gen" (click)="generateAudios()">
+                    @if (generationStatus) {
+                        {{ generationStatus }}
+                    } @else {
+                        🔊
+                    }
+                </div>
             }
         </div>
     </div>

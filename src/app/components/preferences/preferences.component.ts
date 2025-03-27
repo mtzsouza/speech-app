@@ -6,8 +6,7 @@ import { DatabaseService } from '../../services/database.service';
 import { User } from '@angular/fire/auth';
 import { Subscription } from 'rxjs';
 import { LanguageService } from '../../services/language.service';
-import * as english from '../../utils/english.json'
-
+import * as english from '../../utils/english.json';
 
 // Define types for theme and language
 type Theme = 'light' | 'dark' | 'default';
@@ -34,7 +33,6 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   private userId: string | null = null;
   private userSubscription: Subscription | undefined;
 
-  // Mappings for display labels with explicit types
   themeLabels: Record<Theme, string> = {
     light: 'Light Mode',
     dark: 'Dark Mode',
@@ -47,8 +45,8 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     default: 'Device Default'
   };
 
-  languageService = inject(LanguageService)
-  userLanguage = english; // Default is english, to show up before language loads
+  languageService = inject(LanguageService);
+  userLanguage = english;
 
   constructor(
     private router: Router,
@@ -60,26 +58,22 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     this.userSubscription = this.authService.getUser$().subscribe(async (user: User | null) => {
       if (user) {
         this.userId = this.authService.getEmail()!;
-        this.username = user.displayName || 'User'; // Set the username directly here
+        this.username = user.displayName || 'User';
         this.isSignedIn = true;
 
-        // Fetch user preferences from Firestore
         const preferences = await this.databaseService.fetchDocumentById('users', this.userId);
 
         if (!preferences) {
-          // If the document doesn't exist, create it with default settings
           await this.databaseService.addDocWithCustomId('users', {
             theme: 'default',
             language: 'default'
           }, this.userId);
           console.log('User preferences document created with default values');
         } else {
-          // If it exists, load the current preferences
           this.theme = preferences.theme || 'default';
           this.language = preferences.language || 'default';
         }
       } else {
-        // Handle user not signed in
         this.isSignedIn = false;
         this.username = null;
       }
@@ -88,10 +82,18 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     this.authService.firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         this.languageService.getLanguage().then(lang => {
-          this.language = lang;
+          const validLanguages: Language[] = ['english', 'spanish', 'default'];
+          const possibleLang = typeof lang === 'object' && 'default' in lang ? lang.default : lang;
+
+          if (validLanguages.includes(possibleLang as Language)) {
+            this.language = possibleLang as Language;
+          } else {
+            console.warn('Invalid language value:', lang);
+            this.language = 'default';
+          }
         });
       }
-    })
+    });
   }
 
   ngOnDestroy(): void {
@@ -116,22 +118,19 @@ export class PreferencesComponent implements OnInit, OnDestroy {
   async setLanguage(language: Language) {
     try {
       if (this.userId) {
-        // Update the language in the database if the user is signed in
         await this.databaseService.updateUserPreference(this.userId, 'language', language);
         console.log('Language updated in database:', language);
       }
-  
-      // Always update the language in local storage
+
       localStorage.setItem('preferredLanguage', language);
       this.language = language;
-  
+
       console.log('Language updated to:', language);
-      window.location.reload(); // Refresh the page to apply the changes
+      window.location.reload();
     } catch (error) {
       console.error('Error updating language:', error);
     }
   }
-  
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
@@ -157,13 +156,11 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     }
   }
 
-  // Method to get the user-friendly theme label
   getThemeLabel(): string {
-    return this.themeLabels[this.theme];
+    return this.themeLabels[this.theme] || 'Unknown';
   }
 
-  // Method to get the user-friendly language label
   getLanguageLabel(): string {
-    return this.languageLabels[this.language];
+    return this.languageLabels[this.language] || 'Unknown';
   }
 }

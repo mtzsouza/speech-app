@@ -20,7 +20,7 @@ export class SpeechService {
 
   async generateAudio(text: string, language: string, id: string): Promise<string> {
     const voiceId = VOICE_MAP[language] || VOICE_MAP['english'];
-    const paddedText = '... ' + text;
+    const paddedText = text;
     const path = `audios/${language}/${id}.mp3`;
 
     try {
