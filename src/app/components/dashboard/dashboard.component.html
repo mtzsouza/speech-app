@@ -1,39 +1,40 @@
 <div class="container">
-    <app-navbar></app-navbar>
+    <app-navbar class="dashboard-navbar"></app-navbar>
     <div class="main">
         <div class="panel">
-            <h1 class="title">
-                {{ language.dashboard.title }}
-            </h1>
-            <div class="button-space">
-                <div class="row">
-                    <a class="square-button" href="/soundboard">
-                        <img src="/assets/soundboard-icon.png" alt="Soundboard Page" class="icon">
-                        <h1>{{ language.dashboard.soundboard }}</h1>
-                    </a>
-                    <a class="square-button" href="/games">
-                        <img src="/assets/games-icon.png" alt="Games Page" class="icon">
-                        <h1>{{ language.dashboard.games }}</h1>
-                    </a>
-                    <a class="square-button" href="/progress">
-                        <img src="/assets/share-icon.png" alt="Share Page" class="icon">
-                        <h1>{{ language.dashboard.progress }}</h1>
-                    </a>
-                </div>
-                <div class="row">
-                    <a class="square-button" href="/videos">
-                        <img src="/assets/videos-icon.png" alt="Videos Page" class="icon">
-                        <h1>{{ language.dashboard.videos }}</h1>
-                    </a>
-                    <a class="square-button" href="/stories">
-                        <img src="/assets/stories-icon.png" alt="Stories Page" class="icon">
-                        <h1>{{ language.dashboard.stories }}</h1>
-                    </a>
-                    <a class="square-button" href="/articles">
-                        <img src="/assets/parent-icon.png" alt="Guardian Resources Page" class="icon">
-                        <h1>{{ language.dashboard.resources }}</h1>
-                    </a>
-                </div>
+            <h1 class="main-title">{{ language.dashboard.title }}</h1>
+            <p class="activities-title">Select an activity to begin</p>
+            
+            <div class="activities-grid">
+                <a class="activity-link soundboard" href="/soundboard">
+                    <img src="/assets/soundboard-icon.png" alt="Soundboard">
+                    <span>{{ language.dashboard.soundboard }}</span>
+                </a>
+                
+                <a class="activity-link games" href="/games">
+                    <img src="/assets/games-icon.png" alt="Games">
+                    <span>{{ language.dashboard.games }}</span>
+                </a>
+                
+                <a class="activity-link progress" href="/progress">
+                    <img src="/assets/share-icon.png" alt="Progress">
+                    <span>{{ language.dashboard.progress }}</span>
+                </a>
+                
+                <a class="activity-link videos" href="/videos">
+                    <img src="/assets/videos-icon.png" alt="Videos">
+                    <span>{{ language.dashboard.videos }}</span>
+                </a>
+                
+                <a class="activity-link stories" href="/stories">
+                    <img src="/assets/stories-icon.png" alt="Stories">
+                    <span>{{ language.dashboard.stories }}</span>
+                </a>
+                
+                <a class="activity-link resources" href="/articles">
+                    <img src="/assets/parent-icon.png" alt="Resources">
+                    <span>{{ language.dashboard.resources }}</span>
+                </a>
             </div>
         </div>
     </div>

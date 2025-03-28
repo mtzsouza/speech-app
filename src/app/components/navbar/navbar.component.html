@@ -1,21 +1,32 @@
 <div class="navbar">
     <!-- Home Icon -->
-    <a class="icon" href="/">
-        <img src="/assets/home-icon.png" alt="Home Page">
+    <a class="home-link" href="/">
+        <div class="icon-wrapper">
+            <img src="/assets/home-icon.png" alt="Home Page" class="home-icon">
+        </div>
+        <span class="app-name">SpeechApp</span>
     </a>
 
     <!-- Quick Links -->
-     @if (this.currentPage != "/") {
+    @if (this.currentPage != "/") {
         <div class="links">
-            <a href="/soundboard">{{ this.userLanguage.navbar.soundboard }}</a>
-            <a href="/games">{{ this.userLanguage.navbar.games }}</a>
-            <a href="/stories">{{ this.userLanguage.navbar.stories }}</a>
-            <a href="/progress">{{ this.userLanguage.navbar.progress }}</a>
-         </div>
-     }
+            <a href="/soundboard" [class.active]="currentPage === '/soundboard'">
+                {{ this.userLanguage.navbar.soundboard }}
+            </a>
+            <a href="/games" [class.active]="currentPage === '/games'">
+                {{ this.userLanguage.navbar.games }}
+            </a>
+            <a href="/stories" [class.active]="currentPage === '/stories'">
+                {{ this.userLanguage.navbar.stories }}
+            </a>
+            <a href="/progress" [class.active]="currentPage === '/progress'">
+                {{ this.userLanguage.navbar.progress }}
+            </a>
+        </div>
+    }
 
     <!-- Preferences Icon -->
-     <div class="icon">
+    <div class="preferences">
         <app-preferences></app-preferences>
-     </div>
+    </div>
 </div>

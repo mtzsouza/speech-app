@@ -2,64 +2,92 @@
     <app-navbar></app-navbar>
     <div class="main">
         <div class="panel">
-            <a href="/" class="back-button">←</a>
-
-            <h1>{{ language.soundboard.title }}</h1>
+            <div class="header">
+                <a href="/" class="back-link">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Back</span>
+                </a>
+                <h1>{{ language.soundboard.title }}</h1>
+            </div>
 
             <div class="sound-categories">
                 <div *ngFor="let category of objectKeys(categories)" class="category">
                     <h2>{{ category }}</h2>
-                    <button *ngFor="let sound of categories[category]" class="sound-button" (click)="openPopup(sound)">
-                      {{ sound }}
-                    </button>
-                  </div>
-                </div>
-            </div>
-            
-            <!-- Popup menu -->
-        <div class="menu" *ngIf="isPopupOpen" (click)="handleOutsideClick($event)">
-            <div class="menu-content">
-                <!-- Header container has the sound, pronunciation button, and navigation buttons -->
-                <div class="header-container">
-                    <button *ngIf="showExamples || showPairs" class="back-btn" (click)="togglePairs(false)" (click)="toggleExamples(false)">←</button>
-                    <div class="sound-center">
-                        <h2>{{ currentSound }}</h2>
-                        <button class="pronunciation-btn" (click)="playSound(currentSound)">
-                            <img src="assets/playSound.svg" alt="Pronounce Sound" class="icon" />
+                    <div class="sound-buttons">
+                        <button *ngFor="let sound of categories[category]" class="sound-button" (click)="openPopup(sound)">
+                            {{ sound }}
                         </button>
                     </div>
-                    <button class="close-btn" (click)="closePopup()">×</button>
                 </div>
-                
-                <!-- Content -->
-                <div *ngIf="!showExamples && !showPairs" class="menu-options">
-                    <button class="menu-item" (click)="toggleExamples(true)">{{ language.soundboard.example }}</button>
-                    <button class="menu-item" (click)="togglePairs(true)">{{ language.soundboard.minimalPair }}</button>
+            </div>
+        </div>
+    </div>
+            
+    <!-- Popup menu -->
+    <div class="menu" *ngIf="isPopupOpen" (click)="handleOutsideClick($event)">
+        <div class="menu-content">
+            <!-- Header container -->
+            <div class="menu-header">
+                <button *ngIf="showExamples || showPairs" class="nav-btn back-btn" (click)="togglePairs(false)" (click)="toggleExamples(false)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="sound-display">
+                    <h2>{{ currentSound }}</h2>
+                    <button class="play-btn" (click)="playSound(currentSound)">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 3L19 12L5 21V3Z" fill="currentColor"/>
+                        </svg>
+                    </button>
                 </div>
+                <button class="nav-btn close-btn" (click)="closePopup()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 6L18 18M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Options -->
+            <div *ngIf="!showExamples && !showPairs" class="menu-options">
+                <button class="menu-item" (click)="toggleExamples(true)">
+                    <span>{{ language.soundboard.example }}</span>
+                </button>
+                <button class="menu-item" (click)="togglePairs(true)">
+                    <span>{{ language.soundboard.minimalPair }}</span>
+                </button>
+            </div>
 
-                <div *ngIf="showExamples" class="content">
-                    <h3>{{ language.soundboard.exampleHeader }} {{ currentSound }}</h3>
-                    <ul>
-                        <li *ngFor="let example of getExamplesForCurrentSound()" class="example-item">
-                            {{ example }}
-                            <button class="pronunciation-btn" (click)="playExample(example)">
-                                <img src="assets/playSound.svg" alt="Pronounce Example" class="icon" />
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+            <!-- Examples content -->
+            <div *ngIf="showExamples" class="content">
+                <h3>{{ language.soundboard.exampleHeader }} {{ currentSound }}</h3>
+                <ul>
+                    <li *ngFor="let example of getExamplesForCurrentSound()" class="list-item">
+                        <span>{{ example }}</span>
+                        <button class="play-btn small" (click)="playExample(example)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 3L19 12L5 21V3Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </div>
 
-                <div *ngIf="showPairs" class="content">
-                    <h3>{{ language.soundboard.pairHeader }} {{ currentSound }}</h3>
-                    <ul>
-                        <li *ngFor="let pair of getPairsForCurrentSound()" class="pair-item">
-                            {{ pair }}
-                            <button class="pronunciation-btn" (click)="playPair(pair)">
-                                <img src="assets/playSound.svg" alt="Pronounce Pair" class="icon" />
-                            </button>
-                        </li>
-                    </ul>
-                </div>
+            <!-- Pairs content -->
+            <div *ngIf="showPairs" class="content">
+                <h3>{{ language.soundboard.pairHeader }} {{ currentSound }}</h3>
+                <ul>
+                    <li *ngFor="let pair of getPairsForCurrentSound()" class="list-item">
+                        <span>{{ pair }}</span>
+                        <button class="play-btn small" (click)="playPair(pair)">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 3L19 12L5 21V3Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

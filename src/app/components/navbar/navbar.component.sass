@@ -1,45 +1,148 @@
+@import '../../../styles.sass'
+
+// Global box-sizing to prevent sizing issues
+*
+    box-sizing: border-box
+
 .navbar
     width: 100%
-    height: 8%
+    height: 65px
     display: flex
     justify-content: space-between
+    align-items: center
+    background-color: white
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06)
+    padding: 0 25px
+    position: relative
+    z-index: 100
+    overflow-x: hidden
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04)
 
-    .icon
-        img
-            width: 55%
-            padding: 10px 15px
-
-    .links
-        position: absolute
-        left: 50%
-        transform: translateX(-50%)
+    // Home link with icon and app name
+    .home-link
         display: flex
-        flex: column
-        gap: 48px
-        padding: 12px
-
-        a
-            font-size: larger
-            color: white
-            text-shadow: black 1px 1px
-            font-family: Inter
-            font-weight: bold
-            text-decoration: none
-            transition-duration: 0.2s
-
+        align-items: center
+        text-decoration: none
+        padding: 8px 0
+        transition: all 0.3s ease
+        flex-shrink: 0
+        
+        &:hover
+            transform: translateY(-2px)
+        
+        .icon-wrapper
+            background: linear-gradient(135deg, #2463c9, #24457B)
+            width: 40px
+            height: 40px
+            border-radius: 10px
+            display: flex
+            justify-content: center
+            align-items: center
+            flex-shrink: 0
+            box-shadow: 0 4px 8px rgba(36, 69, 123, 0.25)
+            transition: all 0.3s ease
+            
             &:hover
-                transform: scale(110%)
-                transition-duration: 0.2s
+                box-shadow: 0 6px 12px rgba(36, 69, 123, 0.3)
+                transform: translateY(-2px)
+            
+            .home-icon
+                width: 60%
+                height: auto
+                filter: brightness(0) invert(1)
+        
+        .app-name
+            font-family: 'Inter', sans-serif
+            font-weight: 700
+            font-size: 20px
+            background: linear-gradient(135deg, #2463c9, #24457B) 
+            -webkit-background-clip: text
+            -webkit-text-fill-color: transparent
+            margin-left: 12px
+            white-space: nowrap
+            letter-spacing: -0.5px
+            
+            @media (max-width: 640px)
+                display: none
 
+    // Navigation links
+    .links
+        display: flex
+        gap: 38px
+        overflow-x: hidden
+        flex-wrap: nowrap
+        justify-content: center
+        max-width: calc(100% - 220px)
+        
+        a
+            font-size: 16px
+            color: #444
+            font-family: 'Inter', sans-serif
+            font-weight: 500
+            text-decoration: none
+            transition: all 0.3s ease
+            position: relative
+            padding: 6px 2px
+            white-space: nowrap
+            
+            &:after
+                content: ""
+                position: absolute
+                bottom: -2px
+                left: 0
+                width: 0
+                height: 3px
+                background: linear-gradient(90deg, #2463c9, #24457B)
+                transition: width 0.3s ease
+                border-radius: 3px
+            
+            &:hover
+                color: #2463c9
+                transform: translateY(-2px)
+                
+                &:after
+                    width: 100%
+            
+            &.active
+                color: #2463c9
+                font-weight: 600
+                
+                &:after
+                    width: 100%
+                    background: linear-gradient(90deg, #2463c9, #24457B)
+
+    // Preferences button area
+    .preferences
+        display: flex
+        align-items: center
+        flex-shrink: 0
+        margin-left: auto
+
+// Media queries for responsiveness
 @media only screen and (max-width: 768px)
     .navbar
-        .icon
-            img
-                padding: 10px
-
+        padding: 0 15px
+        
         .links
-            gap: 12px
-            padding-top: 5%
-
+            gap: 24px
+            max-width: calc(100% - 150px)
+            
             a
-                font-size: small
+                font-size: 15px
+
+@media only screen and (max-width: 580px)
+    .navbar
+        .links
+            background-color: white
+            padding: 0 10px
+            display: flex
+            justify-content: center
+            gap: 15px
+            max-width: calc(100% - 100px)
+            
+            a
+                font-size: 14px
+                padding: 6px 0
+                
+                &:after
+                    bottom: -3px
