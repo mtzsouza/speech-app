@@ -1,105 +1,144 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.prod';
+import { DatabaseService } from './database.service';
+
+const VOICE_MAP: Record<string, string> = {
+  'english': 'Qggl4b0xRMiqOwhPtVWT',
+  'spanish': 'TxGEqnHWrfWFTfGW9XjX',
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpeechService {
-  private synth = window.speechSynthesis;
-  public voices: SpeechSynthesisVoice[] = [];
-  private utteranceQueue: SpeechSynthesisUtterance[] = [];
-  private isSpeaking = false;
+  private audio: HTMLAudioElement | null = null;
+  private isPaused = false;
+  private apiKey = environment.elevenlabsConfig.apiKey;
+  private onEndedCallback: (() => void) | null = null;
 
-  constructor() {
-    this.loadVoices();
+  constructor(private databaseService: DatabaseService) {}
+
+  async generateAudio(text: string, language: string, id: string): Promise<string> {
+    const voiceId = VOICE_MAP[language] || VOICE_MAP['english'];
+    const paddedText = text;
+    const path = `audios/${language}/${id}.mp3`;
+
+    try {
+      const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
+        method: 'POST',
+        headers: {
+          'xi-api-key': this.apiKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          text: paddedText,
+          model_id: 'eleven_multilingual_v1',
+          voice_settings: {
+            stability: 0.5,
+            similarity_boost: 0.75,
+            speed: 0.77
+          }
+        })
+      });
+
+      const audioBlob = await response.blob();
+      const downloadUrl = await this.databaseService.storeFile(path, audioBlob);
+      return downloadUrl;
+    } catch (error) {
+      console.error('Error generating or storing audio:', error);
+      throw error;
+    }
   }
 
-  private loadVoices() {
-    this.voices = this.synth.getVoices();
+  async start(language: string, id: string): Promise<void> {
+    this.stop();
+    const path = `audios/${language}/${id}.mp3`;
 
-    if (this.voices.length === 0) {
-      this.synth.onvoiceschanged = () => {
-        this.voices = this.synth.getVoices();
-        console.log("Available Voices:", this.voices);
+    try {
+      const audioUrl = await this.databaseService.fetchFile(path);
+      this.audio = new Audio(audioUrl);
+      this.setupAudioHandlers(this.audio);
+      this.audio.load();
+    } catch (error) {
+      console.error('Error starting audio:', error);
+    }
+  }
+
+  async restart(language: string, id: string): Promise<void> {
+    // Ensure current audio is stopped before starting a new one
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+      this.audio.src = ''; // Force reset
+      this.audio.load();
+      this.audio = null;
+      this.isPaused = false;
+    }
+  
+    const path = `audios/${language}/${id}.mp3`;
+  
+    try {
+      const audioUrl = await this.databaseService.fetchFile(path);
+      const newAudio = new Audio(audioUrl);
+  
+      // Apply handlers before assigning to this.audio
+      newAudio.oncanplaythrough = () => {
+        newAudio.play();
       };
+  
+      newAudio.onended = () => {
+        this.audio = null;
+        this.isPaused = false;
+        if (this.onEndedCallback) {
+          this.onEndedCallback();
+        }
+      };
+  
+      this.audio = newAudio;
+      this.audio.load();
+    } catch (error) {
+      console.error('Error restarting audio:', error);
     }
-  }
+  }  
 
-  speak(text: string, voiceName?: string) {
-    if (this.isSpeaking) {
-      console.warn("Speech is already in progress...");
-      return;
-    }
+  private setupAudioHandlers(audio: HTMLAudioElement) {
+    audio.oncanplaythrough = () => {
+      audio.play();
+    };
 
-    if (text) {
-      const chunks = this.splitTextIntoChunks(text, 120); // Reduce max length
-      this.utteranceQueue = chunks.map(chunk => this.createUtterance(chunk, voiceName));
-      this.isSpeaking = true;
-      this.playQueue();
-    }
-  }
-
-  private createUtterance(chunk: string, voiceName?: string): SpeechSynthesisUtterance {
-    const utterance = new SpeechSynthesisUtterance(chunk);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.8;
-    utterance.pitch = 1;
-
-    if (voiceName) {
-      const selectedVoice = this.voices.find(v => v.name === voiceName);
-      if (selectedVoice) {
-        utterance.voice = selectedVoice;
+    audio.onended = () => {
+      this.audio = null;
+      this.isPaused = false;
+      if (this.onEndedCallback) {
+        this.onEndedCallback();
       }
-    }
-
-    return utterance;
+    };
   }
 
-  private playQueue() {
-    if (this.utteranceQueue.length === 0) {
-      this.isSpeaking = false;
-      return;
-    }
-
-    const utterance = this.utteranceQueue.shift();
-    if (utterance) {
-      utterance.onend = () => {
-        setTimeout(() => this.playQueue(), 200); // Delay to prevent cut-off
-      };
-      utterance.onerror = (event) => {
-        console.error("Speech error:", event);
-        this.isSpeaking = false;
-      };
-
-      this.synth.speak(utterance);
+  pause() {
+    if (this.audio && !this.audio.paused) {
+      this.audio.pause();
+      this.isPaused = true;
     }
   }
 
-  private splitTextIntoChunks(text: string, maxLength: number): string[] {
-    const sentences = text.match(/[^.!?]+[.!?]*/g) || [text]; // Split into sentences
-    const chunks: string[] = [];
-    let chunk = '';
-
-    for (const sentence of sentences) {
-      if ((chunk + sentence).length > maxLength) {
-        chunks.push(chunk.trim());
-        chunk = sentence;
-      } else {
-        chunk += ' ' + sentence;
-      }
+  resume() {
+    if (this.audio && this.isPaused) {
+      this.audio.play();
+      this.isPaused = false;
     }
-
-    if (chunk) {
-      chunks.push(chunk.trim());
-    }
-
-    return chunks;
   }
 
   stop() {
-    if (this.synth.speaking) {
-      this.synth.cancel();
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+      this.audio = null;
+      this.isPaused = false;
     }
-    this.utteranceQueue = [];
-    this.isSpeaking = false;
   }
-} 
+
+  onAudioEnd(callback: () => void) {
+    this.onEndedCallback = callback;
+  }
+}

@@ -1,6 +1,7 @@
 @import '../../../../styles.sass'
 
 .container
+    display: flex
     justify-content: start
     align-items: center
     height: fit-content
@@ -49,6 +50,22 @@
                 background-color: LightGray
                 font-family: inter
                 resize: none
+
+        .loading-area
+            display: flex
+            align-items: center
+            gap: 12px
+            margin-bottom: 1rem
+            color: #ff0000
+            font-weight: bold
+
+            .spinner
+                width: 20px
+                height: 20px
+                border: 3px solid rgba(0, 0, 0, 0.1)
+                border-left-color: #ff0000
+                border-radius: 50%
+                animation: spin 1s linear infinite
 
 @media only screen and (max-width: 768px)
     .container

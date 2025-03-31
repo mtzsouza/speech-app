@@ -7,4 +7,5 @@ export interface StoryInterface {
     summary_spanish: string;
     text_english: string;
     text_spanish: string;
+    audio_id: string;
 }

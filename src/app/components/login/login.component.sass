@@ -18,35 +18,8 @@ $shadow-color: rgba(0, 0, 0, 0.1)
 
 .container
     display: flex
-    flex-direction: column
-    min-height: 100vh
-    background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%)
-    
-    .back-button
-        position: absolute
-        top: 20px
-        left: 20px
-        display: flex
-        align-items: center
-        text-decoration: none
-        color: white
-        font-weight: 500
-        transition: all 0.2s ease
-        padding: 10px
-        z-index: 10
-        
-        svg
-            margin-right: 8px
-            
-            path
-                stroke: currentColor
-        
-        span
-            font-size: 15px
-        
-        &:hover
-            transform: translateX(-3px)
-            text-shadow: 0 2px 5px rgba(0,0,0,0.1)
+    justify-content: center
+    align-items: center
 
     .login-section
         display: flex

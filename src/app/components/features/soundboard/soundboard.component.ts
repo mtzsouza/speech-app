@@ -3,6 +3,7 @@ import { NavbarComponent } from '../../navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LanguageService } from '../../../services/language.service';
+import { AuthService } from '../../../services/auth.service';
 import * as english from '../../../utils/english.json'
 
 @Component({
@@ -18,15 +19,20 @@ export class SoundboardComponent {
   showExamples: boolean = false;
   showPairs: boolean = false;
 
-  languageService = inject(LanguageService)
+  authService = inject(AuthService);
+  languageService = inject(LanguageService);
   language = english; // Default is english, to show up before language loads
 
   ngOnInit() {
-    this.languageService.getLanguage().then(lang => {
-      this.language = lang;
+    this.authService.firebaseAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.languageService.getLanguage().then(lang => {
+          this.language = lang;
+          this.updateCategories();
+        });
+      }
       this.updateCategories();
-    });
-    this.updateCategories();
+    })
   }
 
   currentLanguage:string = '';

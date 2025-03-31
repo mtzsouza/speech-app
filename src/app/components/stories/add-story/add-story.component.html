@@ -26,6 +26,12 @@
                     <textarea id="text_spanish" name="text_spanish" class="story-input" [(ngModel)]="formData.text_spanish" required></textarea>
                 </div>
             </div>
+            @if (isGenerating) {
+                <div class="loading-area">
+                    <div class="spinner"></div>
+                    <p>Generating audios... please do not leave this page.</p>
+                </div>
+            }
             <input type="submit" value="Add Story" class="button" >
             <h5 (click)="this.router.navigateByUrl('/stories')">Cancel</h5>
         </form>

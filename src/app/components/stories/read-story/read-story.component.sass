@@ -10,6 +10,7 @@
 
     .title
         margin-bottom: 10px
+        text-align: center
 
     .panel
         position: relative
@@ -17,7 +18,7 @@
         min-height: 50%
         height: fit-content
         width: 50%
-        padding: 0px 5%
+        padding: 20px 5%
 
         p
             font-size: 20px
@@ -32,6 +33,8 @@
             background-color: lightgray
             border-radius: 30px
             padding: 2px 8px
+            user-select: none
+            cursor: pointer
 
         a   
             top: 20px
@@ -42,10 +45,16 @@
             right: 50px
             display: flex
             gap: 10px
-            cursor: pointer
 
             img
                 height: 50px
+
+        .audio-gen
+            bottom: 20px
+            right: 50px
+            font-size: 20px
+            background-color: black
+            color: white
 
 @media only screen and (max-width: 768px)
     .container
@@ -60,15 +69,19 @@
                 font-size: 25px
 
             a
-                top: 5px
+                top: 15px
                 left: 10px
 
             .control
-                top: 5px
+                top: 15px
                 right: 10px
 
                 img
                     height: 30px
+
+            .audio-gen
+                bottom: 5px
+                right: 10px
 
         .title
             font-size: 25px
