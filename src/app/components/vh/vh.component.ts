@@ -174,6 +174,11 @@ export class VHComponent {
       .filter(video => video.title.toLowerCase().includes(lowerTerm) || video.description.toLowerCase().includes(lowerTerm));
   }
   
+  // Add this method to your component class
+  clearSearch(input: HTMLInputElement): void {
+    input.value = '';
+    this.onSearch('');
+  }
 
   constructor() {}
 

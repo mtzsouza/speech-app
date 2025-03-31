@@ -1,41 +1,51 @@
 <div class="container">
     <app-navbar class="dashboard-navbar"></app-navbar>
     <div class="main">
-        <div class="panel">
-            <h1 class="main-title">{{ language.dashboard.title }}</h1>
-            <p class="activities-title">Select an activity to begin</p>
-            
-            <div class="activities-grid">
-                <a class="activity-link soundboard" href="/soundboard">
+        <h1 class="main-title">{{ language.dashboard.title }}</h1>
+        <p class="activities-title">Select an activity to begin</p>
+        
+        <div class="activities-grid">
+            <a class="activity-link soundboard" routerLink="/soundboard">
+                <div class="icon-container soundboard-bg">
                     <img src="/assets/soundboard-icon.png" alt="Soundboard">
-                    <span>{{ language.dashboard.soundboard }}</span>
-                </a>
-                
-                <a class="activity-link games" href="/games">
+                </div>
+                <span>{{ language.dashboard.soundboard }}</span>
+            </a>
+            
+            <a class="activity-link games" routerLink="/games">
+                <div class="icon-container games-bg">
                     <img src="/assets/games-icon.png" alt="Games">
-                    <span>{{ language.dashboard.games }}</span>
-                </a>
-                
-                <a class="activity-link progress" href="/progress">
+                </div>
+                <span>{{ language.dashboard.games }}</span>
+            </a>
+            
+            <a class="activity-link progress" routerLink="/progress">
+                <div class="icon-container progress-bg">
                     <img src="/assets/share-icon.png" alt="Progress">
-                    <span>{{ language.dashboard.progress }}</span>
-                </a>
-                
-                <a class="activity-link videos" href="/videos">
+                </div>
+                <span>{{ language.dashboard.progress }}</span>
+            </a>
+            
+            <a class="activity-link videos" routerLink="/videos">
+                <div class="icon-container videos-bg">
                     <img src="/assets/videos-icon.png" alt="Videos">
-                    <span>{{ language.dashboard.videos }}</span>
-                </a>
-                
-                <a class="activity-link stories" href="/stories">
+                </div>
+                <span>{{ language.dashboard.videos }}</span>
+            </a>
+            
+            <a class="activity-link stories" routerLink="/stories">
+                <div class="icon-container stories-bg">
                     <img src="/assets/stories-icon.png" alt="Stories">
-                    <span>{{ language.dashboard.stories }}</span>
-                </a>
-                
-                <a class="activity-link resources" href="/articles">
+                </div>
+                <span>{{ language.dashboard.stories }}</span>
+            </a>
+            
+            <a class="activity-link resources" routerLink="/articles">
+                <div class="icon-container resources-bg">
                     <img src="/assets/parent-icon.png" alt="Resources">
-                    <span>{{ language.dashboard.resources }}</span>
-                </a>
-            </div>
+                </div>
+                <span>{{ language.dashboard.resources }}</span>
+            </a>
         </div>
     </div>
 </div>

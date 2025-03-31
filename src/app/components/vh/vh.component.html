@@ -2,14 +2,28 @@
   <app-navbar></app-navbar>
   <div class="main">
     <div class="video-center">
-      <a href="/" class="back-button">←</a>
+      <a routerLink="/dashboard" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Back</span>
+      </a>
 
       <div class="header">
-        <h1>Welcome to the Video Center!</h1>
+        <h1>Video Library</h1>
       </div>
 
       <div class="search-bar">
-        <input type="text" placeholder="Search bar" #searchInput (input)="onSearch(searchInput.value)" />
+        <div class="search-wrapper">
+          <i class="fas fa-search search-icon"></i>
+          <input 
+            type="text" 
+            placeholder="Search videos by title or description" 
+            #searchInput 
+            (input)="onSearch(searchInput.value)" 
+          />
+          <i *ngIf="searchInput.value" class="fas fa-times clear-icon" (click)="clearSearch(searchInput)"></i>
+        </div>
       </div>
 
       <!-- English Videos Section -->
@@ -19,21 +33,36 @@
           <div class="video-item" 
                *ngFor="let video of englishVideos" 
                [ngClass]="{'watched-video': isWatched(video.link)}">
-            <div class="thumbnail">
-              <img [src]="video.thumbnail" alt="{{ video.title }}" />
+            <div class="video-content">
+              <div class="thumbnail">
+                <img [src]="video.thumbnail" alt="{{ video.title }}" />
+                <div class="play-button">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div *ngIf="isWatched(video.link)" class="watched-badge">
+                  <i class="fas fa-check"></i> Watched
+                </div>
+              </div>
+              <div class="video-info">
+                <h3 class="video-title">
+                  <a *ngIf="video.link; else plainTitle"
+                     [href]="video.link"
+                     target="_blank"
+                     (click)="trackVideoClick(video.link)">
+                    {{ video.title.replace('ENG_PK ', '').replace('SPA_PK ', '') }}
+                  </a>
+                  <ng-template #plainTitle>{{ video.title.replace('ENG_PK ', '').replace('SPA_PK ', '') }}</ng-template>
+                </h3>
+                <p class="video-description">{{ video.description }}</p>
+              </div>
             </div>
-            <div class="video-info">
-              <h2 class="video-title">
-                <a *ngIf="video.link; else plainTitle"
-                   [href]="video.link"
-                   target="_blank"
-                   (click)="trackVideoClick(video.link)">
-                  {{ video.title.replace('ENG_PK ', '').replace('SPA_PK ', '') }}
-                </a>
-                <ng-template #plainTitle>{{ video.title.replace('ENG_PK ', '').replace('SPA_PK ', '') }}</ng-template>
-              </h2>
-              <p class="video-description">{{ video.description }}</p>
-            </div>
+            <a *ngIf="video.link"
+               [href]="video.link"
+               target="_blank"
+               class="watch-button"
+               (click)="trackVideoClick(video.link)">
+              Watch Video <i class="fas fa-external-link-alt"></i>
+            </a>
           </div>
         </div>
       </div>
@@ -45,25 +74,39 @@
           <div class="video-item" 
                *ngFor="let video of spanishVideos" 
                [ngClass]="{'watched-video': isWatched(video.link)}">
-            <div class="thumbnail">
-              <img [src]="video.thumbnail" alt="{{ video.title }}" />
+            <div class="video-content">
+              <div class="thumbnail">
+                <img [src]="video.thumbnail" alt="{{ video.title }}" />
+                <div class="play-button">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div *ngIf="isWatched(video.link)" class="watched-badge">
+                  <i class="fas fa-check"></i> Watched
+                </div>
+              </div>
+              <div class="video-info">
+                <h3 class="video-title">
+                  <a *ngIf="video.link; else plainTitle"
+                     [href]="video.link"
+                     target="_blank"
+                     (click)="trackVideoClick(video.link)">
+                    {{ video.title.replace('ENG_PK ', '').replace('SPA_PK ', '') }}
+                  </a>
+                  <ng-template #plainTitle>{{ video.title.replace('ENG_PK ', '').replace('SPA_PK ', '') }}</ng-template>
+                </h3>
+                <p class="video-description">{{ video.description }}</p>
+              </div>
             </div>
-            <div class="video-info">
-              <h2 class="video-title">
-                <a *ngIf="video.link; else plainTitle"
-                   [href]="video.link"
-                   target="_blank"
-                   (click)="trackVideoClick(video.link)">
-                  {{ video.title.replace('ENG_PK ', '').replace('SPA_PK ', '') }}
-                </a>
-                <ng-template #plainTitle>{{ video.title.replace('ENG_PK ', '').replace('SPA_PK ', '') }}</ng-template>
-              </h2>
-              <p class="video-description">{{ video.description }}</p>
-            </div>
+            <a *ngIf="video.link"
+               [href]="video.link"
+               target="_blank"
+               class="watch-button"
+               (click)="trackVideoClick(video.link)">
+              Watch Video <i class="fas fa-external-link-alt"></i>
+            </a>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

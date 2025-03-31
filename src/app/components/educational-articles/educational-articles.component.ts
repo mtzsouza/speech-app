@@ -75,8 +75,15 @@ export class EducationalArticlesComponent {
   filterArticles() {
     const query = this.searchQuery.toLowerCase();
     this.filteredArticles = this.articles.filter((article) =>
-      article.title.toLowerCase().includes(query)
+      article.title.toLowerCase().includes(query) || 
+      article.description.toLowerCase().includes(query)
     );
+  }
+
+  // Clear search query and reset filtered articles
+  clearSearch() {
+    this.searchQuery = '';
+    this.filteredArticles = [...this.articles];
   }
 
   // Highlight search term in article titles

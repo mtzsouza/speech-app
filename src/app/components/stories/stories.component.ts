@@ -4,22 +4,23 @@ import { AuthService } from '../../services/auth.service';
 import { LanguageService } from '../../services/language.service';
 import { StoryService } from '../../services/story.service';
 import { StoryInterface } from '../../utils/story.interface';
-import * as english from '../../utils/english.json'
+import * as english from '../../utils/english.json';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router'; // Add this import
 
 @Component({
   selector: 'app-stories',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule, RouterModule], // Add this to imports array
   templateUrl: './stories.component.html',
-  styleUrl: './stories.component.sass'
+  styleUrls: ['./stories.component.sass']
 })
-export class StoriesComponent {
+export class StoriesComponent implements OnInit {
   languageService = inject(LanguageService);
   auth = inject(AuthService);
-  storyService = inject(StoryService)
+  storyService = inject(StoryService);
 
-  isAdmin = false
+  isAdmin = false;
   userLanguage = english;
   stories: any;
 
@@ -30,7 +31,7 @@ export class StoriesComponent {
   }
 
   encodeTitle(title: string) {
-    return title.replaceAll(" ", "_")
+    return title.replaceAll(" ", "_");
   }
 
   isEnglish() {

@@ -2,25 +2,53 @@
     <div class="panel">
         <form (submit)="onSubmit()">
             <h1 class="title">Create Account</h1>
+            
             @if (errorMessage) {
                 <div class="alert">
+                    <i class="fas fa-exclamation-circle"></i>
                     {{ errorMessage }}
                 </div>
             }
-            <div class="input">
+            
+            <div class="input-group">
                 <label for="email">Email</label>
-                <input type="text" class="text-input" name="email" id="email" minlength="4" maxlength="30" [(ngModel)]="formData.email" required>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="email" class="text-input" name="email" id="email" 
+                           minlength="4" maxlength="30" [(ngModel)]="formData.email" 
+                           placeholder="Enter your email" required>
+                </div>
             </div>
-            <div class="input">
+            
+            <div class="input-group">
                 <label for="username">Username</label>
-                <input type="text" class="text-input" name="username" id="username" minlength="4" maxlength="12" [(ngModel)]="formData.username" required>
+                <div class="input-wrapper">
+                    <i class="fas fa-user icon"></i>
+                    <input type="text" class="text-input" name="username" id="username" 
+                           minlength="4" maxlength="12" [(ngModel)]="formData.username" 
+                           placeholder="Choose a username" required>
+                </div>
             </div>
-            <div class="input">
+            
+            <div class="input-group">
                 <label for="password">Password</label>
-                <input type="password" class="text-input" name="password" id="password" minlength="6" maxlength="12" [(ngModel)]="formData.password" required>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" class="text-input" name="password" id="password" 
+                           minlength="6" maxlength="12" [(ngModel)]="formData.password" 
+                           placeholder="Create a password" required>
+                </div>
             </div>
-            <button class="button">Create Account</button>
-            <h5 (click)="this.router.navigateByUrl('/login')">Already have an account?</h5>
+            
+            <button type="submit" class="button">
+                <span>Create Account</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            
+            <div class="login-link">
+                <span>Already have an account?</span>
+                <h5 (click)="this.router.navigateByUrl('/login')">Log in</h5>
+            </div>
         </form>
     </div>
 </div>

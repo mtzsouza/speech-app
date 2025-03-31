@@ -1,16 +1,26 @@
 @import '../../../styles.sass'
 
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+
 // Fix navbar home icon issue
 :host ::ng-deep .dashboard-navbar
   .home-icon, .menu-icon
-    color: #333 !important
+    color: $text-dark !important
 
 // Main container styles
 .container
   display: flex
   flex-direction: column
-  height: 100vh
-  background-color: #fafafa
+  min-height: 100vh
+  background-color: white
   
   .main
     flex: 1
@@ -19,111 +29,134 @@
     margin: 0 auto
     padding: 40px 20px
     
-    .panel
-      // Title section
-      .main-title
-        font-size: 32px
-        font-weight: 700
-        color: #111
-        margin-bottom: 12px
-        text-align: center
+    // Title section (removed panel)
+    .main-title
+      font-size: 32px
+      font-weight: 700
+      color: $text-dark
+      margin-bottom: 12px
+      text-align: center
+    
+    .activities-title
+      font-size: 18px
+      color: $text-medium
+      margin-bottom: 40px
+      text-align: center
+    
+    // Enhanced grid layout
+    .activities-grid
+      display: grid
+      grid-template-columns: repeat(3, 1fr)
+      gap: 30px
       
-      .activities-title
-        font-size: 18px
-        color: #666
-        margin-bottom: 40px
-        text-align: center
-      
-      // Simple grid layout
-      .activities-grid
-        display: grid
-        grid-template-columns: repeat(3, 1fr)
-        gap: 30px
+      // Activity links with consistent blue
+      .activity-link
+        display: flex
+        flex-direction: column
+        align-items: center
+        padding: 30px 20px
+        text-decoration: none
+        border-radius: 12px
+        transition: all 0.3s ease
+        position: relative
+        overflow: hidden
+        border: 1px solid $border-color
+        background-color: white
         
-        // Clean, minimal activity links
-        .activity-link
+        &:hover
+          transform: translateY(-5px)
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08)
+          border-bottom: 3px solid $main-blue
+        
+        // Icon container with consistent blue
+        .icon-container
+          width: 80px
+          height: 80px
+          border-radius: 50%
           display: flex
-          flex-direction: column
           align-items: center
-          padding: 24px 16px
-          text-decoration: none
-          transition: transform 0.15s ease
-          border-radius: 12px
+          justify-content: center
+          margin-bottom: 20px
+          transition: transform 0.3s ease
+          background-color: $blue-light
           
-          &:hover
-            transform: translateY(-4px)
-            background-color: rgba(0, 0, 0, 0.02)
-          
-          // Simple icon styling
           img
-            width: 64px
-            height: 64px
-            margin-bottom: 16px
-            opacity: 0.9
-            transition: opacity 0.15s ease
+            width: 45px
+            height: 45px
+            transition: transform 0.3s ease
+            // Apply blue filter to icons
+            filter: invert(23%) sepia(90%) saturate(1352%) hue-rotate(206deg) brightness(97%) contrast(94%)
+        
+        &:hover .icon-container
+          transform: scale(1.1)
           
-          &:hover img
-            opacity: 1
-          
-          // Clean typography
-          span
-            font-size: 16px
-            font-weight: 500
-            color: #333
-            text-align: center
-          
-          // Color accents - minimally applied
-          &.soundboard
-            color: #4a6cf7
-          &.games
-            color: #7950F2
-          &.progress
-            color: #37B24D
-          &.videos
-            color: #E03131
-          &.stories
-            color: #F76707
-          &.resources
-            color: #1098AD
+        &:hover img
+          transform: scale(1.1)
+        
+        // Typography
+        span
+          font-size: 16px
+          font-weight: 600
+          color: $text-dark
+          text-align: center
+          margin-top: 5px
+          position: relative
+          z-index: 1
 
-// Responsive adjustments
-@media only screen and (max-width: 768px)
+      // Improved focus state for accessibility
+      .activity-link:focus
+        outline: none
+        box-shadow: 0 0 0 3px rgba($main-blue, 0.4)
+        transform: translateY(-3px)
+
+// Enhanced responsive design
+@media only screen and (max-width: 992px)
   .container .main
     padding: 30px 20px
     
-    .panel .activities-grid
+    .main-title
+      font-size: 30px
+    
+    .activities-title
+      font-size: 17px
+      margin-bottom: 35px
+    
+    .activities-grid
       grid-template-columns: repeat(2, 1fr)
       gap: 24px
 
-      .activity-link
-        padding: 20px
-
-@media only screen and (max-width: 480px)
+@media only screen and (max-width: 576px)
   .container .main
     padding: 20px 16px
     
-    .panel
-      .main-title
-        font-size: 28px
-        
-      .activities-title
-        font-size: 16px
-        margin-bottom: 30px
+    .main-title
+      font-size: 28px
       
-      .activities-grid
-        grid-template-columns: 1fr
-        gap: 16px
+    .activities-title
+      font-size: 16px
+      margin-bottom: 30px
+    
+    .activities-grid
+      grid-template-columns: 1fr
+      gap: 20px
+      
+      .activity-link
+        flex-direction: row
+        justify-content: flex-start
+        align-items: center
+        padding: 16px
+        text-align: left
         
-        .activity-link
-          flex-direction: row
-          justify-content: flex-start
-          align-items: center
-          padding: 16px
+        .icon-container
+          width: 60px
+          height: 60px
+          margin: 0 20px 0 0
           
           img
-            width: 48px
-            height: 48px
-            margin: 0 16px 0 0
-            
-          span
-            text-align: left
+            width: 30px
+            height: 30px
+        
+        span
+          text-align: left
+          font-size: 16px
+          font-weight: 500
