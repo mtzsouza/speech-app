@@ -25,6 +25,7 @@ import { RequestAdminComponent } from './components/update-info/request-admin/re
 import { AddStoryComponent } from './components/stories/add-story/add-story.component';
 import { ReadStoryComponent } from './components/stories/read-story/read-story.component';
 import { TuneComponent } from './components/games/tune/tune.component';
+import { TestComponent } from './components/test/test.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -33,6 +34,11 @@ export const routes: Routes = [
     { 
         path: '', 
         component: DashboardComponent
+    },
+    
+    { 
+        path: 'test', 
+        component: TestComponent
     },
 
     { 
