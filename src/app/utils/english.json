@@ -160,7 +160,9 @@
         }
     },
     "games": {
-        "title": "Welcome to the Game Center"
+        "title": "Welcome to the Game Center",
+        "listening": "Listening Games",
+        "speaking": "Speaking Games"
     },
     "storyCenter": {
         "title": "Welcome to the Story Center"
