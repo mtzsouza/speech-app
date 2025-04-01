@@ -1,6 +1,6 @@
 <div class="container">
     <div class="panel">
-        <h1 class="title">Login</h1>
+        <h1 class="title">Welcome Back</h1>
         @if (errorMessage) {
             <div class="alert">
                 {{ errorMessage }}
@@ -9,17 +9,19 @@
         <form (submit)="onSubmit()">
             <div class="input">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" class="text-input" [(ngModel)]="formData.email" required>
+                <input type="text" id="email" name="email" class="text-input" [(ngModel)]="formData.email" placeholder="Enter your email" required>
             </div>
             <div class="input">
                 <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="text-input" [(ngModel)]="formData.password" required>
+                <input type="password" id="password" name="password" class="text-input" [(ngModel)]="formData.password" placeholder="Enter your password" required>
             </div>
-            <input type="submit" value="Sign in" class="button" >
+            <button type="submit" class="button">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
         </form>
         <div class="alternative">
-            <button (click)="this.router.navigateByUrl('/register')" class="button">Don't have an account?</button>
-            <button (click)="this.router.navigateByUrl('/recover')" class="button">Forgot your password?</button>
+            <a (click)="this.router.navigateByUrl('/register')" class="alt-link">Don't have an account?</a>
+            <a (click)="this.router.navigateByUrl('/recover')" class="alt-link">Forgot your password?</a>
         </div>
     </div> 
 </div>

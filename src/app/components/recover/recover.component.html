@@ -1,13 +1,18 @@
 <div class="container">
     <div class="panel">
         <h1 class="title">Reset Password</h1>
+        <p class="description">Enter your email address and we'll send you instructions to reset your password.</p>
         <form (submit)="onSubmit()">
             <div class="input">
                 <label for="email">Email</label>
-                <input type="text" id="email" name="email" class="text-input" [(ngModel)]="formData.email" required>
+                <input type="text" id="email" name="email" class="text-input" [(ngModel)]="formData.email" placeholder="Enter your email" required>
             </div>
-            <input type="submit" value="Send Recovery Email" class="button" >
-            <h5 (click)="this.router.navigateByUrl('/login')">Cancel</h5>
+            <button type="submit" class="button">
+                <i class="fas fa-paper-plane"></i> Send Recovery Email
+            </button>
         </form>
+        <div class="alternative">
+            <a (click)="this.router.navigateByUrl('/login')" class="alt-link">Back to Login</a>
+        </div>
     </div>
 </div>

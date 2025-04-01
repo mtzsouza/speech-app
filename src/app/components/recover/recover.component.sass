@@ -4,24 +4,99 @@
     display: flex
     justify-content: center
     align-items: center
+    background: linear-gradient(180deg, $primary-color, $secondary-color)
+    min-height: 100vh
 
-    .title
-        margin-bottom: 50px
 
     .panel
-        width: 25%
-        height: 50%
-        transform: translateY(-25%)
+        width: 400px
+        max-width: 90%
+        padding: 40px 30px
+        border-radius: 12px
+        background-color: white
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15)
+        overflow: hidden
+        
+        .title
+            margin-bottom: 15px
+            color: $primary-color
+            text-align: center
+            font-weight: 600
+        
+        .description
+            text-align: center
+            color: #666
+            margin-bottom: 25px
+            font-size: 14px
+            line-height: 1.4
 
-    form
-        h5
-            cursor: pointer
-            margin: 0
+        form
+            margin: 15px 0
+            width: 100%
+            display: flex
+            flex-direction: column
+            align-items: center
 
-            &:hover
-                text-decoration: underline
+            .input
+                margin-bottom: 20px
+                width: 100%
+
+                label
+                    display: block
+                    margin-bottom: 6px
+                    font-weight: 500
+                    color: $primary-color
+
+                .text-input
+                    width: 100%
+                    padding: 12px 15px
+                    border: 1px solid #ddd
+                    border-radius: 8px
+                    font-size: 14px
+                    transition: border 0.3s
+                    background-color: #f9f9f9
+                    box-sizing: border-box
+
+                    &:focus
+                        border-color: $primary-color
+                        outline: none
+                        background-color: white
+
+            .button
+                width: 100%
+                padding: 12px
+                border: none
+                border-radius: 8px
+                background-color: $primary-color
+                color: white
+                font-weight: 500
+                font-size: 16px
+                cursor: pointer
+                transition: all 0.2s
+                box-sizing: border-box
+                
+                &:hover
+                    background-color: darken($primary-color, 10%)
+                    transform: translateY(-2px)
+
+        .alternative
+            margin-top: 25px
+            display: flex
+            justify-content: center
+            
+            .alt-link
+                color: $primary-color
+                text-decoration: none
+                font-size: 16px
+                cursor: pointer
+                transition: all 0.2s
+                
+                &:hover
+                    color: darken($primary-color, 15%)
+                    text-decoration: underline
 
 @media only screen and (max-width: 768px)
     .container
         .panel
-            width: 80%
+            width: 90%
+            padding: 30px 20px
