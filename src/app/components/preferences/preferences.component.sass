@@ -1,15 +1,28 @@
+@import '../../../styles.sass'
+
 /* Profile button styles */
 .profile-btn
   position: absolute
   top: 10px
   right: 10px
   border: none
-  background: none
+  background: rgba(0, 0, 0, 0.1)
   cursor: pointer
   display: flex
   align-items: center
   justify-content: center
   z-index: 1
+  border-radius: 50%
+  transition: all 0.2s ease-in-out
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)
+
+  &:hover
+    transform: scale(1.05)
+    background: rgba(0, 0, 0, 0.15)
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15)
+
+  &:active
+    transform: scale(0.95)
 
   &.hidden
     display: none  // Hide the button when sidebar is open
@@ -18,6 +31,7 @@
 .profile-icon
   width: 45px
   height: 45px
+  transition: transform 0.2s ease
 
 /* Sidebar styles */
 .sidebar
@@ -26,22 +40,26 @@
   right: -300px
   width: 300px
   height: 100%
-  background-color: #d3d3d3
-  transition: right 0.3s ease
-  z-index: 2
-  font-family: Arial, Helvetica, sans-serif
+  background-color: $sidebar-bg
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)
+  z-index: 999
+  font-family: Lexend, Arial, sans-serif
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1)
+  overflow-y: auto
+  overflow-x: hidden
 
   &.open
     right: 0  // Slide sidebar into view when open
-
+    box-shadow: -8px 0 25px rgba(0, 0, 0, 0.2)
 
   .sidebar-header
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 10px
-    background-color: #333
+    padding: 13px
+    background-color: $sidebar-header-bg
     color: white
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
 
     .user-info
       display: flex
@@ -50,20 +68,43 @@
       p
         margin: 0
         padding: 0 10px
+        font-weight: 500
+        font-size: 16px
 
       .profile-icon
-        width: 30px
-        height: 30px
+        width: 34px
+        height: 34px
+        border-radius: 50%
+        padding: 2px
+        background-color: white
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)
 
   .close-btn
     background: none
     border: none
     color: white
-    font-size: 24px
+    font-size: 20px
     cursor: pointer
+    border-radius: 50%
+    width: 30px
+    height: 30px
+    display: flex
+    align-items: center
+    justify-content: center
+    transition: all 0.2s ease
+    
+    &:hover
+      background-color: rgba(255, 255, 255, 0.1)
+      transform: scale(1.1)
+    
+    &:active
+      transform: scale(0.95)
 
   .sidebar-content
     padding: 20px
+    display: flex
+    flex-direction: column
+    gap: 10px
 
     .sidebar-btn
       display: block
@@ -74,7 +115,20 @@
       padding: 10px 0
       font-size: 16px
       cursor: pointer
-      color: black
+      color: $sidebar-text
+      border-radius: 8px
+      transition: all 0.2s ease
+      position: relative
+      font-weight: 500
+      border-left: 3px solid transparent
+
+      &:hover
+        background-color: $sidebar-btn-hover
+        border-left: 3px solid $primary-color
+        padding-left: 18px
+
+      &:active
+        background-color: $sidebar-btn-active
 
     .arrow
       float: right
@@ -84,32 +138,80 @@
         transform: rotate(180deg)
 
     .dropdown-content
-      margin-left: 20px
-      padding-top: 10px
+      margin-left: 10px
+      padding: 5px 0
+      border-radius: 8px
+      background-color: $sidebar-dropdown-bg
+      margin-bottom: 5px
+      animation: fadeIn 0.3s ease-in-out
 
       .dropdown-item
         display: block
         background: none
         border: none
         text-align: left
-        padding: 5px 0
+        padding: 10px 15px
         cursor: pointer
-        color: black
+        color: $sidebar-text
+        font-size: 14px
+        transition: all 0.2s ease
+        border-radius: 5px
+        position: relative
+        
+        &:hover
+          background-color: $sidebar-btn-hover
+          transform: translateX(5px)
+        
+        &:active
+          background-color: $sidebar-btn-active
+          transform: translateX(2px)
+          
+        span
+          display: inline-block
+          margin-left: 5px
+          font-weight: bold
+          transform: scale(1.2)
 
 .signout-btn
     align-self: center
-    margin-top: 20px
-    padding: 10px 20px
+    margin-top: auto
+    margin-bottom: 20px
+    padding: 12px 25px
     font-size: 16px
     font-weight: bold
     color: white
-    background-color: #d9534f
+    background-color: $primary-color
     border: none
-    border-radius: 5px
+    border-radius: 8px
     cursor: pointer
+    transition: all 0.2s ease
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1)
+    
+    &:hover
+      transform: translateY(-3px)
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15)
+      filter: brightness(110%)
+    
+    &:active
+      transform: translateY(0)
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+      filter: brightness(95%)
+
+// Animation keyframes
+@keyframes fadeIn
+  from
+    opacity: 0
+    transform: translateY(-10px)
+  to
+    opacity: 1
+    transform: translateY(0)
 
 @media only screen and (max-width: 768px)
   .profile-btn
     top: 5px
     right: 5px
-    transform: scale(85%)
+    transform: scale(0.85)
+    
+  .sidebar
+    width: 85%
+    right: -85%

@@ -1,13 +1,20 @@
+@import '../../../styles.sass'
 .navbar
     width: 100%
     height: 8%
     display: flex
     justify-content: space-between
+    align-items: center
+    background-color: $navbar-color
 
     .icon
         img
-            width: 55%
-            padding: 10px 15px
+            height: 40px
+            margin: 10px
+            filter: invert(1)
+
+            &:hover
+             filter: invert(1) drop-shadow(0 0 5px rgba(255, 255, 255, 0.7))
 
     .links
         position: absolute
