@@ -1,46 +1,68 @@
+@import '../../../styles.sass'
+
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+$error-color: #d32f2f
+$error-background: #ffebee
+
 /* Profile button styles */
 .profile-btn
   position: absolute
-  top: 10px
-  right: 10px
+  top: 15px
+  right: 15px
   border: none
   background: none
+  padding: 8px
+  border-radius: 50%
   cursor: pointer
   display: flex
   align-items: center
   justify-content: center
   z-index: 1
-
+  transition: all 0.2s ease
+  
+  &:hover
+    background-color: $blue-light
+    transform: scale(1.05)
+  
   &.hidden
     display: none  // Hide the button when sidebar is open
 
 /* Profile icon styles */
 .profile-icon
-  width: 45px
-  height: 45px
+  width: 40px
+  height: 40px
+  filter: invert(23%) sepia(90%) saturate(1352%) hue-rotate(206deg) brightness(97%) contrast(94%)  // Apply blue filter
 
 /* Sidebar styles */
 .sidebar
   position: fixed
   top: 0
-  right: -300px
-  width: 300px
+  right: -320px
+  width: 320px
   height: 100%
-  background-color: #d3d3d3
+  background-color: white
+  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.08)
   transition: right 0.3s ease
-  z-index: 2
-  font-family: Arial, Helvetica, sans-serif
+  z-index: 999
+  font-family: 'Roboto', Arial, sans-serif
 
   &.open
     right: 0  // Slide sidebar into view when open
-
 
   .sidebar-header
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 10px
-    background-color: #333
+    padding: 18px 20px
+    background-color: $main-blue
     color: white
 
     .user-info
@@ -50,66 +72,134 @@
       p
         margin: 0
         padding: 0 10px
+        font-weight: 500
+        font-size: 16px
 
       .profile-icon
         width: 30px
         height: 30px
+        filter: brightness(0) invert(1)  // Make icon white
 
   .close-btn
     background: none
     border: none
     color: white
-    font-size: 24px
+    font-size: 20px
     cursor: pointer
+    padding: 8px
+    border-radius: 50%
+    transition: all 0.2s ease
+    display: flex
+    align-items: center
+    justify-content: center
+    
+    &:hover
+      background-color: rgba(255, 255, 255, 0.15)
 
   .sidebar-content
     padding: 20px
+    display: flex
+    flex-direction: column
 
     .sidebar-btn
-      display: block
+      display: flex
+      align-items: center
+      justify-content: space-between
       width: 100%
       background: none
       border: none
       text-align: left
-      padding: 10px 0
-      font-size: 16px
+      padding: 14px 16px
+      margin-bottom: 5px
+      font-size: 15px
+      font-weight: 500
       cursor: pointer
-      color: black
+      color: $text-medium
+      border-radius: 8px
+      transition: all 0.2s ease
+      
+      &:hover
+        background-color: $blue-light
+        color: $main-blue
 
     .arrow
-      float: right
       transition: transform 0.3s ease
+      font-size: 12px
+      margin-left: 10px
 
       &.open
         transform: rotate(180deg)
 
     .dropdown-content
-      margin-left: 20px
-      padding-top: 10px
-
+      margin: 0 10px 15px 10px
+      padding: 5px 0
+      border-left: 2px solid $border-color
+      
       .dropdown-item
-        display: block
+        display: flex
+        align-items: center
+        justify-content: space-between
         background: none
         border: none
         text-align: left
-        padding: 5px 0
+        padding: 10px 15px
+        width: 100%
         cursor: pointer
-        color: black
+        color: $text-medium
+        font-size: 14px
+        border-radius: 6px
+        transition: all 0.2s ease
+        margin: 2px 0
+        
+        &:hover
+          background-color: $blue-light
+          color: $main-blue
+          
+        span
+          font-weight: 600
+          color: $main-blue
 
 .signout-btn
-    align-self: center
-    margin-top: 20px
-    padding: 10px 20px
-    font-size: 16px
-    font-weight: bold
+    margin-top: auto
+    padding: 14px
+    font-size: 15px
+    font-weight: 600
     color: white
-    background-color: #d9534f
+    background-color: $main-blue
     border: none
-    border-radius: 5px
+    border-radius: 8px
     cursor: pointer
+    transition: all 0.2s ease
+    margin-top: 30px
+    
+    &:hover
+      background-color: $darker-blue
+      transform: translateY(-2px)
+      box-shadow: 0 5px 15px rgba($main-blue, 0.2)
+      
+    &.signout
+      background-color: #f44336
+      
+      &:hover
+        background-color: #d32f2f
 
 @media only screen and (max-width: 768px)
   .profile-btn
-    top: 5px
-    right: 5px
-    transform: scale(85%)
+    top: 10px
+    right: 10px
+    
+  .sidebar
+    width: 280px
+    
+    .sidebar-header
+      padding: 15px
+      
+      .user-info p
+        font-size: 15px
+        
+    .sidebar-content
+      padding: 15px
+      
+      .sidebar-btn
+        padding: 12px 14px
+        font-size: 14px

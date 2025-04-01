@@ -7,56 +7,66 @@
 <div class="sidebar" [class.open]="isSidebarOpen">
   <div class="sidebar-header">
     <!-- Close button and User profile -->
-    <button class="close-btn" (click)="toggleSidebar()">&#10006;</button>
     <div class="user-info">
-      <p>{{ userLanguage.preferences.greeting }}{{ username || 'Anon' }}</p>  <!-- Display the user's username -->
       <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
+      <p>{{ userLanguage.preferences.greeting }}{{ username || 'Anon' }}</p>
     </div>
+    <button class="close-btn" (click)="toggleSidebar()">&#10006;</button>
   </div>
 
   <div class="sidebar-content">
     <!-- Static buttons -->
-    <button class="sidebar-btn" (click)="navigateTo('/update-name')">{{ userLanguage.preferences.updateUsername }}</button>
-    <button class="sidebar-btn" (click)="navigateTo('/change-password')">{{ userLanguage.preferences.changePassword }}</button>
-    <button class="sidebar-btn" (click)="navigateTo('/request-admin')">{{ userLanguage.preferences.requestAdmin }}</button>
+    <button class="sidebar-btn" (click)="navigateTo('/update-name')">
+      <span>{{ userLanguage.preferences.updateUsername }}</span>
+      <i class="fas fa-user-edit"></i>
+    </button>
+    
+    <button class="sidebar-btn" (click)="navigateTo('/change-password')">
+      <span>{{ userLanguage.preferences.changePassword }}</span>
+      <i class="fas fa-key"></i>
+    </button>
+    
+    <button class="sidebar-btn" (click)="navigateTo('/request-admin')">
+      <span>{{ userLanguage.preferences.requestAdmin }}</span>
+      <i class="fas fa-user-shield"></i>
+    </button>
   
-<!-- Display Theme Dropdown -->
-<button class="sidebar-btn" (click)="toggleDropdown('theme')">
-  {{ userLanguage.preferences.displayTheme }}{{ getThemeLabel() }}
-  <span class="arrow" [class.open]="dropdowns.theme">&#9662;</span>
-</button>
-<div *ngIf="dropdowns.theme" class="dropdown-content">
-  <button class="dropdown-item" (click)="setTheme('light')">
-    {{ userLanguage.preferences.light }} <span *ngIf="theme === 'light'">✓</span>
-  </button>
-  <button class="dropdown-item" (click)="setTheme('dark')">
-    {{ userLanguage.preferences.dark }}<span *ngIf="theme === 'dark'">✓</span>
-  </button>
-  <button class="dropdown-item" (click)="setTheme('default')">
-    {{ userLanguage.preferences.default }}<span *ngIf="theme === 'default'">✓</span>
-  </button>
-</div>
+    <!-- Display Theme Dropdown -->
+    <button class="sidebar-btn" (click)="toggleDropdown('theme')">
+      <span>{{ userLanguage.preferences.displayTheme }}{{ getThemeLabel() }}</span>
+      <span class="arrow" [class.open]="dropdowns.theme">&#9662;</span>
+    </button>
+    <div *ngIf="dropdowns.theme" class="dropdown-content">
+      <button class="dropdown-item" (click)="setTheme('light')">
+        {{ userLanguage.preferences.light }} <span *ngIf="theme === 'light'">✓</span>
+      </button>
+      <button class="dropdown-item" (click)="setTheme('dark')">
+        {{ userLanguage.preferences.dark }}<span *ngIf="theme === 'dark'">✓</span>
+      </button>
+      <button class="dropdown-item" (click)="setTheme('default')">
+        {{ userLanguage.preferences.default }}<span *ngIf="theme === 'default'">✓</span>
+      </button>
+    </div>
 
-<!-- Language Dropdown -->
-<button class="sidebar-btn" (click)="toggleDropdown('language')">
-  {{ userLanguage.preferences.language }}{{ getLanguageLabel() }}
-  <span class="arrow" [class.open]="dropdowns.language">&#9662;</span>
-</button>
-<div *ngIf="dropdowns.language" class="dropdown-content">
-  <button class="dropdown-item" (click)="setLanguage('english')">
-    {{ userLanguage.preferences.english }}<span *ngIf="language === 'english'">✓</span>
-  </button>
-  <button class="dropdown-item" (click)="setLanguage('spanish')">
-    {{ userLanguage.preferences.spanish }}<span *ngIf="language === 'spanish'">✓</span>
-  </button>
-  <button class="dropdown-item" (click)="setLanguage('default')">
-    {{ userLanguage.preferences.default }}<span *ngIf="language === 'default'">✓</span>
-  </button>
-</div>
+    <!-- Language Dropdown -->
+    <button class="sidebar-btn" (click)="toggleDropdown('language')">
+      <span>{{ userLanguage.preferences.language }}{{ getLanguageLabel() }}</span>
+      <span class="arrow" [class.open]="dropdowns.language">&#9662;</span>
+    </button>
+    <div *ngIf="dropdowns.language" class="dropdown-content">
+      <button class="dropdown-item" (click)="setLanguage('english')">
+        {{ userLanguage.preferences.english }}<span *ngIf="language === 'english'">✓</span>
+      </button>
+      <button class="dropdown-item" (click)="setLanguage('spanish')">
+        {{ userLanguage.preferences.spanish }}<span *ngIf="language === 'spanish'">✓</span>
+      </button>
+      <button class="dropdown-item" (click)="setLanguage('default')">
+        {{ userLanguage.preferences.default }}<span *ngIf="language === 'default'">✓</span>
+      </button>
+    </div>
 
-
-    <button class="signout-btn" (click)="accountStatus()">
-      {{ isSignedIn ? userLanguage.preferences.signout : userLanguage.preferences.signin }}
+    <button class="signout-btn" [class.signout]="isSignedIn" (click)="accountStatus()">
+      <span>{{ isSignedIn ? userLanguage.preferences.signout : userLanguage.preferences.signin }}</span>
     </button>
   </div>
 </div>
