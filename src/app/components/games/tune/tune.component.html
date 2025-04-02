@@ -22,12 +22,7 @@
 
             @if (gameActive) {
                 <div class="game-area screen">
-                    <div class="countdown">
-                        <svg viewBox="-50 -50 100 100" stroke-width="10">
-                            <circle r="40" />
-                            <circle r="40" pathLength="1" />
-                        </svg>
-                    </div>
+                    <h1 class="displayed-time">{{ displayedTime }}</h1>
                     <div class="choice-area">
                         @if (firstChoiceCorrect) {
                             <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">{{currentQuestion.correctSound}}</div>

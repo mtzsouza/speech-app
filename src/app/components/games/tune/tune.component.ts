@@ -54,7 +54,8 @@ export class TuneComponent {
     correctSound: "",
     wrongSound: ""
   };
-  questionTime = 7;
+  questionTime = 6;
+  displayedTime = 5;
   responded = false;
   randomizer = Math.random();
   firstChoiceCorrect = this.randomizer > 0.5;
@@ -104,6 +105,7 @@ export class TuneComponent {
       this.questionsPerGame = this.questionsPerGame - 1;
     }
 
+    this.pointsEarned = Math.round(this.pointsEarned);
     this.gameActive = false;
     this.summaryActive = true;
   }
@@ -124,18 +126,20 @@ export class TuneComponent {
 
     // Timer
     while (this.questionTime > 0) {
-      await this.wait(1);
-      this.questionTime -= 1;
+      await this.wait(0.1);
+      this.questionTime -= 0.1;
+      this.displayedTime = Math.ceil(Math.min(this.questionTime, this.displayedTime));
     }
 
     // Remove question and reset time
-    this.questionTime = 7;
+    this.questionTime = 7.0;
+    this.displayedTime = 5.0;
     this.questions = this.questions.slice(1);
   }
 
   processResponse(choice: string) {
     if (!this.responded && choice == 'correct') {
-      const timeMultiplier = Math.min(5, this.questionTime);
+      const timeMultiplier = Math.min(5.0, this.questionTime);
       this.pointsEarned += (timeMultiplier * 100);
     }
     this.responded = true;
