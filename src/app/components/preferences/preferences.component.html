@@ -1,72 +1,63 @@
-<!-- Profile button to open the sidebar, only visible when sidebar is closed -->
-<button class="profile-btn" (click)="toggleSidebar()" [class.hidden]="isSidebarOpen">
-  <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
-</button> 
+<div class="preferences-wrapper">
+    <button class="preferences-btn" (click)="toggleDropdown('profile')" [class.active]="dropdowns.profile">
+        <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
+    </button>
 
-<!-- Sidebar -->
-<div class="sidebar" [class.open]="isSidebarOpen">
-  <div class="sidebar-header">
-    <!-- Close button and User profile -->
-    <div class="user-info">
-      <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
-      <p>{{ userLanguage.preferences.greeting }}{{ username || 'Anon' }}</p>
+    <div class="dropdown-menu" *ngIf="dropdowns.profile">
+        <!-- User Info -->
+        <div class="user-info">
+            <img src="assets/profile.svg" alt="Profile Icon" class="profile-icon" />
+            <p>{{ userLanguage.preferences.greeting }}{{ username || 'Anon' }}</p>
+        </div>
+
+        <div class="menu-items">
+            <!-- Account Settings -->
+            <button class="menu-item" (click)="navigateTo('/update-name')">
+                <i class="fas fa-user-edit"></i>
+                <span>{{ userLanguage.preferences.updateUsername }}</span>
+            </button>
+            
+            <button class="menu-item" (click)="navigateTo('/change-password')">
+                <i class="fas fa-key"></i>
+                <span>{{ userLanguage.preferences.changePassword }}</span>
+            </button>
+            
+            <button class="menu-item" (click)="navigateTo('/request-admin')">
+                <i class="fas fa-user-shield"></i>
+                <span>{{ userLanguage.preferences.requestAdmin }}</span>
+            </button>
+
+            <!-- Language Settings -->
+            <div class="submenu">
+                <button class="menu-item" (click)="toggleDropdown('language')">
+                    <i class="fas fa-globe"></i>
+                    <span>{{ userLanguage.preferences.language }}</span>
+                    <span class="arrow" [class.open]="dropdowns.language">&#9662;</span>
+                </button>
+                
+                <div class="submenu-content" *ngIf="dropdowns.language">
+                    <button class="submenu-item" (click)="setLanguage('english')">
+                        {{ userLanguage.preferences.english }}
+                        <span *ngIf="language === 'english'">✓</span>
+                    </button>
+                    <button class="submenu-item" (click)="setLanguage('spanish')">
+                        {{ userLanguage.preferences.spanish }}
+                        <span *ngIf="language === 'spanish'">✓</span>
+                    </button>
+                    <button class="submenu-item" (click)="setLanguage('default')">
+                        {{ userLanguage.preferences.default }}
+                        <span *ngIf="language === 'default'">✓</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Sign Out Button -->
+            <button class="menu-item signout" (click)="accountStatus()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>{{ isSignedIn ? userLanguage.preferences.signout : userLanguage.preferences.signin }}</span>
+            </button>
+        </div>
     </div>
-    <button class="close-btn" (click)="toggleSidebar()">&#10006;</button>
-  </div>
-
-  <div class="sidebar-content">
-    <!-- Static buttons -->
-    <button class="sidebar-btn" (click)="navigateTo('/update-name')">
-      <span>{{ userLanguage.preferences.updateUsername }}</span>
-      <i class="fas fa-user-edit"></i>
-    </button>
-    
-    <button class="sidebar-btn" (click)="navigateTo('/change-password')">
-      <span>{{ userLanguage.preferences.changePassword }}</span>
-      <i class="fas fa-key"></i>
-    </button>
-    
-    <button class="sidebar-btn" (click)="navigateTo('/request-admin')">
-      <span>{{ userLanguage.preferences.requestAdmin }}</span>
-      <i class="fas fa-user-shield"></i>
-    </button>
-  
-    <!-- Display Theme Dropdown -->
-    <button class="sidebar-btn" (click)="toggleDropdown('theme')">
-      <span>{{ userLanguage.preferences.displayTheme }}{{ getThemeLabel() }}</span>
-      <span class="arrow" [class.open]="dropdowns.theme">&#9662;</span>
-    </button>
-    <div *ngIf="dropdowns.theme" class="dropdown-content">
-      <button class="dropdown-item" (click)="setTheme('light')">
-        {{ userLanguage.preferences.light }} <span *ngIf="theme === 'light'">✓</span>
-      </button>
-      <button class="dropdown-item" (click)="setTheme('dark')">
-        {{ userLanguage.preferences.dark }}<span *ngIf="theme === 'dark'">✓</span>
-      </button>
-      <button class="dropdown-item" (click)="setTheme('default')">
-        {{ userLanguage.preferences.default }}<span *ngIf="theme === 'default'">✓</span>
-      </button>
-    </div>
-
-    <!-- Language Dropdown -->
-    <button class="sidebar-btn" (click)="toggleDropdown('language')">
-      <span>{{ userLanguage.preferences.language }}{{ getLanguageLabel() }}</span>
-      <span class="arrow" [class.open]="dropdowns.language">&#9662;</span>
-    </button>
-    <div *ngIf="dropdowns.language" class="dropdown-content">
-      <button class="dropdown-item" (click)="setLanguage('english')">
-        {{ userLanguage.preferences.english }}<span *ngIf="language === 'english'">✓</span>
-      </button>
-      <button class="dropdown-item" (click)="setLanguage('spanish')">
-        {{ userLanguage.preferences.spanish }}<span *ngIf="language === 'spanish'">✓</span>
-      </button>
-      <button class="dropdown-item" (click)="setLanguage('default')">
-        {{ userLanguage.preferences.default }}<span *ngIf="language === 'default'">✓</span>
-      </button>
-    </div>
-
-    <button class="signout-btn" [class.signout]="isSignedIn" (click)="accountStatus()">
-      <span>{{ isSignedIn ? userLanguage.preferences.signout : userLanguage.preferences.signin }}</span>
-    </button>
-  </div>
 </div>

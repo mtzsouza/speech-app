@@ -40,6 +40,7 @@ $navy-blue: #003366
       font-weight: 500
       transition: all 0.2s ease
       margin-bottom: 30px
+      cursor: pointer  // Add cursor pointer
       
       svg
         margin-right: 8px
@@ -53,6 +54,11 @@ $navy-blue: #003366
       &:hover
         color: $main-blue
         transform: translateX(-3px)
+      
+      &:focus  // Add focus styles for accessibility
+        outline: none
+        color: $main-blue
+        box-shadow: 0 0 0 2px rgba($main-blue, 0.1)
     
     h1
       text-align: center
@@ -130,9 +136,11 @@ $navy-blue: #003366
         
         .activity-card
           background-color: $main-blue
-          border-radius: 10px
-          padding: 18px 20px
-          width: 100%
+          border-radius: 8px  // Reduced from 10px
+          padding: 14px 16px  // Reduced padding
+          width: 85%  // Reduced width
+          max-width: 240px  // Added max-width
+          margin: 0 auto  // Center the card
           text-align: center
           display: flex
           flex-direction: column
@@ -141,19 +149,25 @@ $navy-blue: #003366
           cursor: pointer
           
           &:hover
-            transform: translateY(-5px)
+            transform: translateY(-3px)  // Reduced lift
             background-color: $darker-blue
-            box-shadow: 0 8px 15px rgba($main-blue, 0.2)
+            box-shadow: 0 6px 12px rgba($main-blue, 0.2)  // Reduced shadow
+          
+          .activity-wrapper
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: 6px  // Reduced gap
           
           .activity-icon
-            font-size: 30px
-            margin-bottom: 10px
+            font-size: 24px  // Reduced from 30px
             color: white
           
           .activity-title
-            font-size: 18px
+            font-size: 15px  // Reduced from 18px
             font-weight: 600
             color: white
+            white-space: nowrap
 
 @media only screen and (max-width: 992px)
   .progress-tracking
@@ -224,11 +238,11 @@ $navy-blue: #003366
               font-size: 14px
           
           .activity-card
-            padding: 15px
+            padding: 12px 14px
+            width: 80%
             
             .activity-icon
-              font-size: 26px
-              margin-bottom: 8px
+              font-size: 22px
             
             .activity-title
-              font-size: 16px
+              font-size: 14px

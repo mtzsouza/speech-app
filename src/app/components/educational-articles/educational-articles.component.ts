@@ -2,11 +2,17 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-educational-articles',
   standalone: true,
-  imports: [CommonModule, FormsModule, NavbarComponent],
+  imports: [
+    CommonModule, 
+    FormsModule, 
+    NavbarComponent,
+    RouterModule
+  ],
   templateUrl: './educational-articles.component.html',
   styleUrls: ['./educational-articles.component.sass'],
 })
@@ -71,6 +77,8 @@ export class EducationalArticlesComponent {
   // Filtered articles
   filteredArticles = [...this.articles];
 
+  constructor(private router: Router) {}
+
   // Filter articles based on search query
   filterArticles() {
     const query = this.searchQuery.toLowerCase();
@@ -96,5 +104,10 @@ export class EducationalArticlesComponent {
   // Track items in *ngFor for better performance
   trackByArticleId(index: number, article: any): number {
     return article.title; // Using title as a unique key for simplicity
+  }
+
+  // Navigate back to the home page
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }

@@ -29,9 +29,12 @@ $background-light: #F8FAFD
     align-items: center
     text-decoration: none
     color: $text-medium
+    font-size: 15px
     font-weight: 500
     transition: all 0.2s ease
     margin-bottom: 30px
+    cursor: pointer  // Add cursor pointer to indicate clickable
+    width: fit-content  // Ensure link only takes up needed space
     
     svg
       margin-right: 8px
@@ -39,12 +42,14 @@ $background-light: #F8FAFD
       path
         stroke: currentColor
     
-    span
-      font-size: 15px
-    
     &:hover
       color: $main-blue
       transform: translateX(-3px)
+    
+    &:focus
+      outline: none
+      color: $main-blue
+      box-shadow: 0 0 0 2px rgba($main-blue, 0.1)
 
   .header
     text-align: center
