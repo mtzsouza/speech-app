@@ -11,7 +11,7 @@ interface Game {
   description: string;
   emoji: string;
   iconClass: string;
-  category: 'hearing' | 'visual' | 'memory' | 'interactive';
+  category: 'hearing' | 'speaking' | 'memory' | 'interactive';
   link: string;
 }
 
@@ -39,7 +39,7 @@ export class GamesComponent implements OnInit {
       description: 'Match pairs of sounds to improve memory and recognition',
       emoji: '🎯',
       iconClass: 'game_1',
-      category: 'memory',
+      category: 'hearing',
       link: '/matching'
     },
     {
@@ -47,7 +47,7 @@ export class GamesComponent implements OnInit {
       description: 'Save Earth by matching correct sounds',
       emoji: '🌍',
       iconClass: 'game_2',
-      category: 'interactive',
+      category: 'hearing',
       link: '/earth-defender'
     },
     {
@@ -63,8 +63,32 @@ export class GamesComponent implements OnInit {
       description: 'Classic bingo with phonetic sounds',
       emoji: '🎲',
       iconClass: 'game_4',
-      category: 'visual',
+      category: 'hearing',
       link: '/bingo'
+    },
+    {
+      title: 'Game 5',
+      description: 'Description of the game',
+      emoji: '🎲',
+      iconClass: 'game_5',
+      category: 'speaking',
+      link: '/games'
+    },
+    {
+      title: 'Game 6',
+      description: 'Description of the game',
+      emoji: '🎲',
+      iconClass: 'game_6',
+      category: 'speaking',
+      link: '/games'
+    },
+    {
+      title: 'Game 7',
+      description: 'Description of the game',
+      emoji: '🎲',
+      iconClass: 'game_7',
+      category: 'speaking',
+      link: '/games'
     }
   ];
 
@@ -84,8 +108,8 @@ export class GamesComponent implements OnInit {
       case 'hearing':
         this.filteredGames = this.games.filter(game => game.category === 'hearing');
         break;
-      case 'visual':
-        this.filteredGames = this.games.filter(game => game.category === 'visual');
+      case 'speaking':
+        this.filteredGames = this.games.filter(game => game.category === 'speaking');
         break;
       case 'memory':
         this.filteredGames = this.games.filter(game => game.category === 'memory');
