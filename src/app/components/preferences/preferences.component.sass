@@ -1,46 +1,78 @@
-/* Profile button styles */
+@import '../../../styles.sass'
+
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+$error-color: #d32f2f
+$error-background: #ffebee
+
+// Variables
+$dropdown-width: 280px
+$menu-item-height: 40px
+$border-radius: 12px
+$dark-background: #1a1a2e
+$light-background: #ffffff
+$text-color: #374151
+$text-color-light: #6b7280
+$hover-color: rgba(0, 0, 0, 0.04)
+
+// Profile button styles
 .profile-btn
   position: absolute
-  top: 10px
-  right: 10px
+  top: 15px
+  right: 15px
   border: none
   background: none
+  padding: 8px
+  border-radius: 50%
   cursor: pointer
   display: flex
   align-items: center
   justify-content: center
   z-index: 1
-
+  transition: all 0.2s ease
+  
+  &:hover
+    background-color: $blue-light
+    transform: scale(1.05)
+  
   &.hidden
     display: none  // Hide the button when sidebar is open
 
 /* Profile icon styles */
 .profile-icon
-  width: 45px
-  height: 45px
+  width: 40px
+  height: 40px
+  filter: invert(23%) sepia(90%) saturate(1352%) hue-rotate(206deg) brightness(97%) contrast(94%)  // Apply blue filter
 
 /* Sidebar styles */
 .sidebar
   position: fixed
   top: 0
-  right: -300px
-  width: 300px
+  right: -320px
+  width: 320px
   height: 100%
-  background-color: #d3d3d3
+  background-color: white
+  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.08)
   transition: right 0.3s ease
-  z-index: 2
-  font-family: Arial, Helvetica, sans-serif
+  z-index: 999
+  font-family: 'Roboto', Arial, sans-serif
 
   &.open
     right: 0  // Slide sidebar into view when open
-
 
   .sidebar-header
     display: flex
     justify-content: space-between
     align-items: center
-    padding: 10px
-    background-color: #333
+    padding: 18px 20px
+    background-color: $main-blue
     color: white
 
     .user-info
@@ -50,66 +82,316 @@
       p
         margin: 0
         padding: 0 10px
+        font-weight: 500
+        font-size: 16px
 
       .profile-icon
         width: 30px
         height: 30px
+        filter: brightness(0) invert(1)  // Make icon white
 
   .close-btn
     background: none
     border: none
     color: white
-    font-size: 24px
+    font-size: 20px
     cursor: pointer
+    padding: 8px
+    border-radius: 50%
+    transition: all 0.2s ease
+    display: flex
+    align-items: center
+    justify-content: center
+    
+    &:hover
+      background-color: rgba(255, 255, 255, 0.15)
 
   .sidebar-content
     padding: 20px
+    display: flex
+    flex-direction: column
 
     .sidebar-btn
-      display: block
+      display: flex
+      align-items: center
+      justify-content: space-between
       width: 100%
       background: none
       border: none
       text-align: left
-      padding: 10px 0
-      font-size: 16px
+      padding: 14px 16px
+      margin-bottom: 5px
+      font-size: 15px
+      font-weight: 500
       cursor: pointer
-      color: black
+      color: $text-medium
+      border-radius: 8px
+      transition: all 0.2s ease
+      
+      &:hover
+        background-color: $blue-light
+        color: $main-blue
 
     .arrow
-      float: right
       transition: transform 0.3s ease
+      font-size: 12px
+      margin-left: 10px
 
       &.open
         transform: rotate(180deg)
 
     .dropdown-content
-      margin-left: 20px
-      padding-top: 10px
-
+      margin: 0 10px 15px 10px
+      padding: 5px 0
+      border-left: 2px solid $border-color
+      
       .dropdown-item
-        display: block
+        display: flex
+        align-items: center
+        justify-content: space-between
         background: none
         border: none
         text-align: left
-        padding: 5px 0
+        padding: 10px 15px
+        width: 100%
         cursor: pointer
-        color: black
+        color: $text-medium
+        font-size: 14px
+        border-radius: 6px
+        transition: all 0.2s ease
+        margin: 2px 0
+        
+        &:hover
+          background-color: $blue-light
+          color: $main-blue
+          
+        span
+          font-weight: 600
+          color: $main-blue
 
 .signout-btn
-    align-self: center
-    margin-top: 20px
-    padding: 10px 20px
-    font-size: 16px
-    font-weight: bold
+    margin-top: auto
+    padding: 14px
+    font-size: 15px
+    font-weight: 600
     color: white
-    background-color: #d9534f
+    background-color: $main-blue
     border: none
-    border-radius: 5px
+    border-radius: 8px
     cursor: pointer
+    transition: all 0.2s ease
+    margin-top: 30px
+    
+    &:hover
+      background-color: $darker-blue
+      transform: translateY(-2px)
+      box-shadow: 0 5px 15px rgba($main-blue, 0.2)
+      
+    &.signout
+      background-color: #f44336
+      
+      &:hover
+        background-color: #d32f2f
+
+.preferences-wrapper
+    position: relative
+    display: flex
+    align-items: center
+
+    .preferences-btn
+        width: 44px  // Increased size
+        height: 44px
+        border: 2px solid rgba($main-blue, 0.1)
+        background: rgba($main-blue, 0.08)
+        cursor: pointer
+        display: flex
+        align-items: center
+        justify-content: center
+        transition: all 0.2s ease
+        padding: 0
+        
+        &:hover, &.active
+            background-color: rgba($main-blue, 0.12)
+            transform: translateY(-2px)
+        
+        .profile-icon
+            width: 28px  // Increased icon size
+            height: 28px
+            border-radius: 50%
+            filter: invert(31%) sepia(98%) saturate(1946%) hue-rotate(210deg) brightness(97%) contrast(87%)  // Applied blue color
+
+    .dropdown-menu
+        position: absolute
+        top: calc(100% + 8px)
+        right: 0
+        width: $dropdown-width
+        background: $light-background
+        border-radius: $border-radius
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15)
+        z-index: 1000
+        overflow: hidden
+        animation: dropdownFade 0.2s ease
+
+        .user-info
+            display: flex
+            align-items: center
+            padding: 16px
+            background: #2463eb
+            color: white
+            
+            .profile-icon
+                width: 32px
+                height: 32px
+                margin-right: 12px
+                filter: brightness(0) invert(1)
+            
+            p
+                margin: 0
+                font-weight: 500
+
+        .menu-items
+            padding: 8px 0
+            
+            .menu-item
+                width: 100%
+                height: $menu-item-height
+                display: flex
+                align-items: center
+                padding: 0 16px
+                border: none
+                background: none
+                cursor: pointer
+                transition: all 0.2s ease
+                color: $text-color
+                font-size: 14px
+                
+                i
+                    width: 20px
+                    margin-right: 12px
+                    color: $text-color-light
+                
+                &:hover
+                    background: $hover-color
+                    color: #2463eb
+                    
+                    i
+                        color: #2463eb
+
+                &.signout
+                    color: $error-color
+                    
+                    i
+                        color: $error-color
+                    
+                    &:hover
+                        background: $error-background
+
+            .submenu
+                position: relative
+                
+                .arrow
+                    margin-left: auto
+                    transition: transform 0.2s ease
+                    
+                    &.open
+                        transform: rotate(180deg)
+                
+                .submenu-content
+                    background: $light-background
+                    margin: 0 8px
+                    border-radius: 8px
+                    overflow: hidden
+                    
+                    .submenu-item
+                        width: 100%
+                        height: 36px
+                        display: flex
+                        align-items: center
+                        justify-content: space-between
+                        padding: 0 16px
+                        border: none
+                        background: none
+                        cursor: pointer
+                        transition: all 0.2s ease
+                        color: $text-color
+                        font-size: 14px
+                        
+                        &:hover
+                            background: $hover-color
+                            color: #2463eb
+
+            .divider
+                height: 1px
+                background: $border-color
+                margin: 8px 0
+
+@keyframes dropdownFade
+    from
+        opacity: 0
+        transform: translateY(-10px)
+    to
+        opacity: 1
+        transform: translateY(0)
+
+// Dark mode styles
+:host-context(.dark-theme)
+    .preferences-wrapper
+        .preferences-btn
+            background: rgba($main-blue, 0.15)
+            border-color: rgba($main-blue, 0.2)
+            
+            &:hover, &.active
+                background: rgba($main-blue, 0.2)
+            
+            .profile-icon
+                filter: brightness(0) invert(1)  // White icon in dark mode
+        
+        .dropdown-menu
+            background: $dark-background
+            border: 1px solid rgba(255, 255, 255, 0.1)
+            
+            .menu-items
+                .menu-item
+                    color: #e5e7eb
+                    
+                    &:hover
+                        background: rgba(255, 255, 255, 0.05)
+                    
+                    i
+                        color: rgba(255, 255, 255, 0.5)
+                
+                .submenu-content
+                    background: $dark-background
+                
+                .divider
+                    background: rgba(255, 255, 255, 0.1)
 
 @media only screen and (max-width: 768px)
   .profile-btn
-    top: 5px
-    right: 5px
-    transform: scale(85%)
+    top: 10px
+    right: 10px
+    
+  .sidebar
+    width: 280px
+    
+    .sidebar-header
+      padding: 15px
+      
+      .user-info p
+        font-size: 15px
+        
+    .sidebar-content
+      padding: 15px
+      
+      .sidebar-btn
+        padding: 12px 14px
+        font-size: 14px
+
+    .preferences-wrapper
+        .preferences-btn
+            width: 40px
+            height: 40px
+            
+            .profile-icon
+                width: 24px
+                height: 24px

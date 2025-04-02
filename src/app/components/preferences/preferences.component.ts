@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -22,7 +22,7 @@ type Language = 'english' | 'spanish' | 'default';
 export class PreferencesComponent implements OnInit, OnDestroy {
   isSidebarOpen = false;
   dropdowns = {
-    theme: false,
+    profile: false,
     language: false,
   };
 
@@ -136,8 +136,23 @@ export class PreferencesComponent implements OnInit, OnDestroy {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  toggleDropdown(dropdown: 'theme' | 'language') {
-    this.dropdowns[dropdown] = !this.dropdowns[dropdown];
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.preferences-wrapper')) {
+      this.dropdowns.profile = false;
+      this.dropdowns.language = false;
+    }
+  }
+
+  toggleDropdown(dropdown: 'profile' | 'language') {
+    if (dropdown === 'profile') {
+      this.dropdowns.profile = !this.dropdowns.profile;
+      this.dropdowns.language = false;
+    } else {
+      this.dropdowns.language = !this.dropdowns.language;
+    }
+    event?.stopPropagation();
   }
 
   navigateTo(route: string) {

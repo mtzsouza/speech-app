@@ -15,6 +15,8 @@ import { SoundboardComponent } from './components/features/soundboard/soundboard
 import { UpdateNameComponent } from './components/update-info/update-name/update-name.component';
 import { ChangePasswordComponent } from './components/update-info/change-password/change-password.component';
 import { GamesComponent } from './components/games/games.component';
+import { ListeningComponent } from './components/games/listening/listening.component';
+import { SpeakingComponent } from './components/games/speaking/speaking.component';
 import { StoriesComponent } from './components/stories/stories.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { Game1Component } from './components/games/game1/game1.component';
@@ -86,6 +88,18 @@ export const routes: Routes = [
     {
         path: 'games', 
         component: GamesComponent, 
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'games/listening', 
+        component: ListeningComponent, 
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'games/speaking', 
+        component: SpeakingComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
 

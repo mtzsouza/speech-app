@@ -1,63 +1,170 @@
-/* Container for the update name form */
+@import '../../../../styles.sass'
+
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+$error-color: #d32f2f
+$error-background: #ffebee
+
+/* Container for the request admin form */
 .update-name-container
-  background-color: #fff
+  background-color: white
   width: 400px
-  padding: 20px 40px
+  max-width: 90%
+  padding: 30px
   margin: 50px auto
-  border-radius: 10px
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
+  border-radius: 12px
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08)
   text-align: center
+  position: relative
+  
+  .back-button
+    position: absolute
+    top: 15px
+    left: 15px
+    display: flex
+    align-items: center
+    text-decoration: none
+    color: $text-medium
+    font-weight: 500
+    transition: all 0.2s ease
+    font-size: 14px
+    
+    svg
+      margin-right: 8px
+      width: 18px
+      height: 18px
+      
+      path
+        stroke: currentColor
+    
+    &:hover
+      color: $main-blue
+      transform: translateX(-3px)
 
 /* Title */
 .update-name-container h2
-  font-size: 24px
-  font-weight: bold
-  margin-bottom: 20px
+  font-size: 26px
+  font-weight: 700
+  color: $text-dark
+  margin-top: 10px
+  margin-bottom: 25px
 
 /* Form group */
 .form-group
-  margin-bottom: 15px
+  margin-bottom: 25px
   text-align: left
-  font-family: Arial, Helvetica, sans-serif
 
-.form-group label
-  display: block
-  font-weight: bold
-  margin-bottom: 5px
-  font-family: Arial, Helvetica, sans-serif
+  label
+    display: block
+    font-weight: 500
+    margin-bottom: 10px
+    color: $text-medium
+    font-size: 15px
 
-.form-group input[type="text"]
-  width: 100%
-  padding: 8px
-  font-size: 16px
-  border: 1px solid #ccc
-  border-radius: 5px
+  input[type="text"]
+    width: 100%
+    padding: 14px
+    font-size: 15px
+    border: 1px solid $border-color
+    border-radius: 8px
+    transition: border-color 0.3s, box-shadow 0.3s
+    
+    &:focus
+      border-color: $main-blue
+      outline: none
+      box-shadow: 0 0 0 3px rgba($main-blue, 0.1)
+    
+    &::placeholder
+      color: $text-light
 
+/* Error message */
 .error-message
-  color: red
-  font-size: 14px
-  margin-top: -10px
-  margin-bottom: 10px
+  padding: 12px
+  background-color: $error-background
+  border-left: 3px solid $error-color
+  color: $error-color
+  border-radius: 6px
+  text-align: left
+  margin-bottom: 20px
+  display: flex
+  align-items: center
+  
+  i
+    margin-right: 10px
+    
+  p
+    margin: 0
+    font-size: 14px
+    font-weight: 500
 
 /* Action buttons */
 .form-actions
   display: flex
   justify-content: space-between
-  margin-top: 20px
+  margin-top: 30px
+  gap: 15px
 
-.cancel-btn,
-.update-btn
-  padding: 10px 20px
-  font-size: 16px
-  font-weight: bold
-  border-radius: 5px
-  cursor: pointer
-  border: none
+  button
+    flex: 1
+    padding: 14px
+    font-size: 15px
+    font-weight: 600
+    border-radius: 8px
+    cursor: pointer
+    border: none
+    transition: all 0.2s ease
+    
+    &:hover
+      transform: translateY(-2px)
 
 .cancel-btn
-  background-color: #ccc
-  color: #333
+  background-color: $background-light
+  color: $text-medium
+  
+  &:hover
+    background-color: darken($background-light, 5%)
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05)
 
 .update-btn
-  background-color: #1a73e8
+  background-color: $main-blue
   color: white
+  
+  &:hover
+    background-color: $darker-blue
+    box-shadow: 0 5px 15px rgba($main-blue, 0.2)
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px)
+  .update-name-container
+    width: 90%
+    padding: 25px 20px
+    margin: 30px auto
+    
+    h2
+      font-size: 24px
+      margin-bottom: 20px
+    
+    .back-button
+      top: 10px
+      left: 10px
+  
+  .form-group
+    margin-bottom: 20px
+    
+    input[type="text"]
+      padding: 12px
+      font-size: 14px
+  
+  .form-actions
+    margin-top: 25px
+    
+    button
+      padding: 12px
+      font-size: 14px

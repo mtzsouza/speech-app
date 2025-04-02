@@ -1,15 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-vh',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [
+    CommonModule, 
+    NavbarComponent,
+    RouterModule
+  ],
   templateUrl: './vh.component.html',
   styleUrls: ['./vh.component.sass']
 })
-export class VHComponent {
+export class VHComponent implements OnInit {
   // Full video list
   allVideos = [
     { 
@@ -174,8 +179,13 @@ export class VHComponent {
       .filter(video => video.title.toLowerCase().includes(lowerTerm) || video.description.toLowerCase().includes(lowerTerm));
   }
   
+  // Add this method to your component class
+  clearSearch(input: HTMLInputElement): void {
+    input.value = '';
+    this.onSearch('');
+  }
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.trackVisit();
@@ -211,5 +221,9 @@ export class VHComponent {
   isWatched(videoLink: string): boolean {
     let watchedVideos: string[] = JSON.parse(sessionStorage.getItem('watchedVideos') || '[]');
     return watchedVideos.includes(videoLink);
+  }
+
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }

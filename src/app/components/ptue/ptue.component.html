@@ -1,138 +1,183 @@
 <div class="container">
   <app-navbar></app-navbar>
   <div class="achievement-container">
-    <a href="/progress" class="back-button">←</a>
+    <a (click)="goBack()" class="back-link">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>Back to Progress</span>
+    </a>
 
     <div class="header">
-      <h1 class="title">Unearned Achievements!</h1>
+      <h1 class="title">Unearned Achievements</h1>
     </div>
 
-    <div class="badge-grid">
-      <!-- Video Watching Achievements -->
-      <div class="badge-card">
-        <div class="badge-icon">📺</div>
-        <div class="badge-info">
-          <h3>First Steps</h3>
-          <p>Earned</p>
-          <p>Watch your first video!</p>
+    <!-- Video Achievements Section -->
+    <div class="badge-section">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 4H7C4.79086 4 3 5.79086 3 8V16C3 18.2091 4.79086 20 7 20H17C19.2091 20 21 18.2091 21 16V8C21 5.79086 19.2091 4 17 4Z" stroke="currentColor" stroke-width="2" fill="none"/>
+          <path d="M10 9L15 12L10 15V9Z" fill="currentColor"/>
+        </svg>
+        Video Learning Achievements
+      </h2>
+      <div class="badge-grid">
+        <div class="badge-card">
+          <div class="badge-icon">📺</div>
+          <div class="badge-info">
+            <h3>First Steps</h3>
+            <p>Watch your first video!</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">🎥</div>
+          <div class="badge-info">
+            <h3>Binge Watcher</h3>
+            <p>Watch 3 videos.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">🎬</div>
+          <div class="badge-info">
+            <h3>Committed Learner</h3>
+            <p>Watch 10 videos.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">🏆</div>
+          <div class="badge-info">
+            <h3>Video Master</h3>
+            <p>Watch 25 videos.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">⏳</div>
+          <div class="badge-info">
+            <h3>Marathon Session</h3>
+            <p>Watch videos for 1 hour.</p>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="badge-card">
-        <div class="badge-icon">🎥</div>
-        <div class="badge-info">
-          <h3>Binge Watcher</h3>
-          <p>Watch 3 videos.</p>
+    <!-- Soundboard Study Achievements -->
+    <div class="badge-section">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z" fill="currentColor"/>
+          <path d="M19 12C19 12 15.5 18 12 18C8.5 18 5 12 5 12C5 12 8.5 6 12 6C15.5 6 19 12 19 12Z" stroke="currentColor" stroke-width="2" fill="none"/>
+        </svg>
+        Soundboard Achievements
+      </h2>
+      <div class="badge-grid">
+        <div class="badge-card">
+          <div class="badge-icon">🔊</div>
+          <div class="badge-info">
+            <h3>Sound Explorer</h3>
+            <p>Play a sound from the soundboard.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">🎶</div>
+          <div class="badge-info">
+            <h3>Melody Maker</h3>
+            <p>Play 5 different sounds.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">📚</div>
+          <div class="badge-info">
+            <h3>Dedicated Student</h3>
+            <p>Study for 30 minutes.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">💡</div>
+          <div class="badge-info">
+            <h3>Master of Sounds</h3>
+            <p>Study for 1 hour.</p>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="badge-card">
-        <div class="badge-icon">🎬</div>
-        <div class="badge-info">
-          <h3>Committed Learner</h3>
-          <p>Watch 10 videos.</p>
+    <!-- Streak & Daily Achievements -->
+    <div class="badge-section">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M15 9L19 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M17 7L17 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Consistency Achievements
+      </h2>
+      <div class="badge-grid">
+        <div class="badge-card">
+          <div class="badge-icon">📆</div>
+          <div class="badge-info">
+            <h3>Daily Learner</h3>
+            <p>Visit the website 3 days in a row.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">🔥</div>
+          <div class="badge-info">
+            <h3>Consistency is Key</h3>
+            <p>Study for 7 consecutive days.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">🏅</div>
+          <div class="badge-info">
+            <h3>Learning Streak</h3>
+            <p>Watch a video or use the soundboard 10 days in a row.</p>
+          </div>
         </div>
       </div>
+    </div>
 
-      <div class="badge-card">
-        <div class="badge-icon">🏆</div>
-        <div class="badge-info">
-          <h3>Video Master</h3>
-          <p>Watch 25 videos.</p>
+    <!-- Miscellaneous Achievements -->
+    <div class="badge-section">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 16L6 10H18L12 16Z" fill="currentColor"/>
+        </svg>
+        Miscellaneous Achievements
+      </h2>
+      <div class="badge-grid">
+        <div class="badge-card">
+          <div class="badge-icon">🧭</div>
+          <div class="badge-info">
+            <h3>Curious Explorer</h3>
+            <p>Visit both Videos and Soundboard sections.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">⭐</div>
+          <div class="badge-info">
+            <h3>Active Participant</h3>
+            <p>Visit the website 10 times.</p>
+          </div>
+        </div>
+
+        <div class="badge-card">
+          <div class="badge-icon">🎓</div>
+          <div class="badge-info">
+            <h3>Knowledge Seeker</h3>
+            <p>Complete all previous achievements.</p>
+          </div>
         </div>
       </div>
-
-      <div class="badge-card">
-        <div class="badge-icon">⏳</div>
-        <div class="badge-info">
-          <h3>Marathon Session</h3>
-          <p>Watch videos for 1 hour.</p>
-        </div>
-      </div>
-
-      <!-- Soundboard Study Achievements -->
-      <div class="badge-card">
-        <div class="badge-icon">🔊</div>
-        <div class="badge-info">
-          <h3>Sound Explorer</h3>
-          <p>Play a sound from the soundboard.</p>
-        </div>
-      </div>
-
-      <div class="badge-card">
-        <div class="badge-icon">🎶</div>
-        <div class="badge-info">
-          <h3>Melody Maker</h3>
-          <p>Play 5 different sounds.</p>
-        </div>
-      </div>
-
-      <div class="badge-card">
-        <div class="badge-icon">📚</div>
-        <div class="badge-info">
-          <h3>Dedicated Student</h3>
-          <p>Study for 30 minutes.</p>
-        </div>
-      </div>
-
-      <div class="badge-card">
-        <div class="badge-icon">💡</div>
-        <div class="badge-info">
-          <h3>Master of Sounds</h3>
-          <p>Study for 1 hour.</p>
-        </div>
-      </div>
-
-      <!-- Streak & Daily Achievements -->
-      <div class="badge-card">
-        <div class="badge-icon">📆</div>
-        <div class="badge-info">
-          <h3>Daily Learner</h3>
-          <p>Visit the website 3 days in a row.</p>
-        </div>
-      </div>
-
-      <div class="badge-card">
-        <div class="badge-icon">🔥</div>
-        <div class="badge-info">
-          <h3>Consistency is Key</h3>
-          <p>Study for 7 consecutive days.</p>
-        </div>
-      </div>
-
-      <div class="badge-card">
-        <div class="badge-icon">🏅</div>
-        <div class="badge-info">
-          <h3>Learning Streak</h3>
-          <p>Watch a video or use the soundboard 10 days in a row.</p>
-        </div>
-      </div>
-
-      <!-- Miscellaneous Achievements -->
-      <div class="badge-card">
-        <div class="badge-icon">🧭</div>
-        <div class="badge-info">
-          <h3>Curious Explorer</h3>
-          <p>Visit both Videos and Soundboard sections.</p>
-        </div>
-      </div>
-
-      <div class="badge-card">
-        <div class="badge-icon">⭐</div>
-        <div class="badge-info">
-          <h3>Active Participant</h3>
-          <p>Visit the website 10 times.</p>
-        </div>
-      </div>
-
-      <div class="badge-card">
-        <div class="badge-icon">🎓</div>
-        <div class="badge-info">
-          <h3>Knowledge Seeker</h3>
-          <p>Complete all previous achievements.</p>
-        </div>
-      </div>
-
     </div>
   </div>
 </div>

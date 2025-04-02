@@ -1,37 +1,241 @@
 @import '../../../styles.sass'
 
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+$error-color: #d32f2f
+$error-background: #ffebee
+
 .container
+    min-height: 100vh
+    width: 100%
     display: flex
-    justify-content: center
-    align-items: center
+    flex-direction: column
+    position: relative
+    background-color: $background-light
+    
+    .back-button
+        display: flex
+        align-items: center
+        text-decoration: none
+        color: $text-medium
+        font-weight: 500
+        transition: all 0.2s ease
+        margin: 20px 0 0 20px
+        
+        svg
+            margin-right: 8px
+            
+            path
+                stroke: currentColor
+        
+        span
+            font-size: 15px
+        
+        &:hover
+            color: $main-blue
+            transform: translateX(-3px)
 
-    .panel
-        width: 25%
-        height: 50%
-        transform: translateY(-25%)
-        background-color: white
+    .login-section
+        display: flex
+        justify-content: center
+        align-items: center
+        flex: 1
+        padding: 20px
+        
+        .panel
+            width: 400px
+            max-width: 100%
+            position: relative
+            background-color: white
+            border-radius: 12px
+            padding: 40px 35px
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08)
+            
+            // Removed the blue dash as requested
 
-        form
-            margin-top: 20px
+            .logo-container
+                display: flex
+                justify-content: center
+                margin-bottom: 20px
+                
+                .logo
+                    width: 70px
+                    height: 70px
+                    object-fit: contain
 
-        .alternative
-            position: absolute
-            bottom: 0
-            padding: 20px 10px
-            display: flex
-            gap: 10px
+            .title
+                color: $text-dark
+                margin-top: 0
+                margin-bottom: 35px
+                font-weight: 700
+                text-align: center
+                font-size: 30px
+                letter-spacing: -0.5px
+                
+            .alert
+                background-color: $error-background
+                color: $error-color
+                padding: 14px
+                border-radius: 8px
+                margin-bottom: 25px
+                display: flex
+                align-items: center
+                border-left: 3px solid $error-color
+                
+                i
+                    margin-right: 12px
+                    font-size: 16px
+                    min-width: 16px
+            
+            form
+                .input-group
+                    margin-bottom: 22px
+                    
+                    label
+                        display: block
+                        margin-bottom: 10px
+                        font-weight: 500
+                        color: $text-medium
+                        font-size: 15px
+                        
+                    .input-wrapper
+                        position: relative
+                        
+                        .icon
+                            position: absolute
+                            left: 14px
+                            top: 50%
+                            transform: translateY(-50%)
+                            color: $main-blue
+                            font-size: 16px
+                            
+                        .text-input
+                            width: 100%
+                            padding: 14px 14px 14px 42px
+                            border: 1px solid $border-color
+                            border-radius: 8px
+                            font-size: 15px
+                            transition: border-color 0.3s, box-shadow 0.3s
+                            
+                            &:focus
+                                border-color: $main-blue
+                                outline: none
+                                box-shadow: 0 0 0 3px rgba($main-blue, 0.1)
+                            
+                            &::placeholder
+                                color: $text-light
+                
+                .button
+                    width: 100%
+                    background-color: $main-blue
+                    color: white
+                    border: none
+                    border-radius: 8px
+                    padding: 16px
+                    font-size: 16px
+                    font-weight: 600
+                    cursor: pointer
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    transition: all 0.2s ease
+                    margin-top: 20px
+                    margin-bottom: 25px
+                    
+                    span
+                        margin-right: 10px
+                        
+                    i
+                        font-size: 15px
+                        
+                    &:hover
+                        background-color: $darker-blue
+                        transform: translateY(-2px)
+                        box-shadow: 0 5px 15px rgba($main-blue, 0.2)
+                        
+                    &:active
+                        transform: translateY(0)
+                
+                .separator
+                    display: flex
+                    align-items: center
+                    text-align: center
+                    margin: 30px 0
+                    
+                    &::before, &::after
+                        content: ""
+                        flex: 1
+                        border-bottom: 1px solid $border-color
+                    
+                    span
+                        padding: 0 12px
+                        color: $text-light
+                        font-size: 14px
+                
+                .account-options
+                    display: flex
+                    flex-direction: column
+                    gap: 16px
+                    
+                    .option
+                        display: flex
+                        align-items: center
+                        color: $main-blue
+                        cursor: pointer
+                        transition: all 0.2s
+                        padding: 8px 2px
+                        border-radius: 6px
+                        
+                        i
+                            margin-right: 12px
+                            font-size: 15px
+                            width: 18px
+                            text-align: center
+                        
+                        span
+                            font-size: 15px
+                            font-weight: 500
+                        
+                        &:hover
+                            color: $darker-blue
+                            background-color: $blue-light
+                            padding: 8px 12px
+                            transform: translateX(5px)
 
-            .button
-                border: solid 2px $dark-gray
-                border-radius: 10px
-                padding: 4px
-                background-color: $blue
-                font-family: inter
-                font-size: 11px
-                color: white
-                cursor: pointer
+@media only screen and (max-width: 992px)
+    .container
+        .back-button
+            margin: 15px 0 0 15px
+        
+        .login-section
+            padding: 10px 15px
 
 @media only screen and (max-width: 768px)
     .container
-        .panel
-            width: 80%
+        background-color: $background-light
+        
+        .back-button
+            margin: 10px 0 0 10px
+            
+        .login-section
+            padding: 40px 15px 15px 15px
+            
+            .panel
+                width: 100%
+                padding: 30px 25px
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06)
+                
+                .title
+                    font-size: 28px
+                    margin-bottom: 30px
+                    
+                .logo-container .logo
+                    width: 60px
+                    height: 60px
