@@ -12,10 +12,9 @@ export class StoryService {
 
     addStory(story: StoryInterface) {
         this.database.addDocument("stories", story).then(() => {
-          alert("Story added.");
-          this.router.navigateByUrl("/stories")
+          console.log("Story added.")
         }).catch(error => {
-          alert("Adding story failed. Check console for error description.");
+          console.log("Error adding story.")
           console.error(error);
         })
     }

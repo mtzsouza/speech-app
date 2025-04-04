@@ -1,25 +1,76 @@
 <div class="container">
-    <div class="panel">
-        <h1 class="title">Login</h1>
-        @if (errorMessage) {
-            <div class="alert">
-                {{ errorMessage }}
-            </div>
-        }   
-        <form (submit)="onSubmit()">
-            <div class="input">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" class="text-input" [(ngModel)]="formData.email" required>
-            </div>
-            <div class="input">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="text-input" [(ngModel)]="formData.password" required>
-            </div>
-            <input type="submit" value="Sign in" class="button" >
-        </form>
-        <div class="alternative">
-            <button (click)="this.router.navigateByUrl('/register')" class="button">Don't have an account?</button>
-            <button (click)="this.router.navigateByUrl('/recover')" class="button">Forgot your password?</button>
-        </div>
-    </div> 
+    <!-- Back button -->
+    <a routerLink="/" class="back-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Back to Home</span>
+    </a>
+    
+    <div class="login-section">
+        <div class="panel">
+            <h1 class="title">Welcome Back</h1>
+            
+            @if (errorMessage) {
+                <div class="alert">
+                    <i class="fas fa-exclamation-circle"></i>
+                    {{ errorMessage }}
+                </div>
+            }
+            
+            <form (submit)="onSubmit()">
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope icon"></i>
+                        <input 
+                            type="text" 
+                            id="email" 
+                            name="email" 
+                            class="text-input" 
+                            [(ngModel)]="formData.email" 
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock icon"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            class="text-input" 
+                            [(ngModel)]="formData.password" 
+                            placeholder="Enter your password"
+                            required
+                        >
+                    </div>
+                </div>
+                
+                <button type="submit" class="button">
+                    <span>Sign In</span>
+                    <i class="fas fa-sign-in-alt"></i>
+                </button>
+                
+                <div class="separator">
+                    <span>or</span>
+                </div>
+                
+                <div class="account-options">
+                    <div class="option" (click)="this.router.navigateByUrl('/register')">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Create an account</span>
+                    </div>
+                    <div class="option" (click)="this.router.navigateByUrl('/recover')">
+                        <i class="fas fa-key"></i>
+                        <span>Forgot password?</span>
+                    </div>
+                </div>
+            </form>
+        </div> 
+    </div>
 </div>

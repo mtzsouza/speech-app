@@ -1,115 +1,371 @@
 @import '../../../styles.sass'
 
+// Light theme variables
+$light-bg: #F8FAFC
+$light-surface: #FFFFFF
+$light-text-primary: #1F2937
+$light-text-secondary: #6B7280
+$light-border: #E5E7EB
+
+// Dark theme variables
+$dark-bg: #111827
+$dark-surface: #1F2937
+$dark-text-primary: #F9FAFB
+$dark-text-secondary: #D1D5DB
+$dark-border: #374151
+
+// Existing color variables
+$primary: #2463EB
+$primary-light: rgba($primary, 0.1)
+$success: #10B981
+$warning: #F59E0B
+$danger: #EF4444
+$hearing-color: #4F46E5
+$speaking-color: #DB2777
+$phonetics-color: #EA580C
+$interactive-color: #059669
+
 .container
-    .main
-        width: 100%
-        height: 92%
-        display: flex
-        justify-content: center
-        align-items: start
+    min-height: 100vh
+    background: $light-bg
+    transition: background-color 0.3s ease
 
-        .panel
-            height: 90%
-            background-color: white
+.main
+    padding: 40px 24px
 
-            .title
-                text-align: center
-                font-size: 50px
-                font-weight: 800
-                margin: 20px 0px
-                transform: translateY(50%)
+.games-container
+    max-width: 1200px
+    margin: 0 auto
 
-            .button-space
-                width: 85%
-                height: 75%
+    .header-section
+        margin-bottom: 48px
+        text-align: center
+        
+        h1
+            font-size: 36px
+            font-weight: 800
+            color: $light-text-primary
+            margin: 24px 0 8px
+            transition: color 0.3s ease
+        
+        .subtitle
+            color: $light-text-secondary
+            font-size: 18px
+            transition: color 0.3s ease
+        
+        .back-link
+            position: absolute
+            top: 100px
+            left: 24px
+            display: flex
+            align-items: center
+            gap: 8px
+            color: $light-text-secondary
+            text-decoration: none
+            padding: 8px 12px
+            border-radius: 8px
+            transition: all 0.2s ease
+            cursor: pointer
+            
+            &:hover
+                color: $primary
+                transform: translateX(-4px)
+                background: $primary-light
+
+    .sort-controls
+        margin-bottom: 32px
+        padding: 0 24px
+        
+        .sort-group
+            margin-bottom: 16px
+            
+            label
+                display: block
+                color: $light-text-primary
+                font-weight: 500
+                margin-bottom: 8px
+                transition: color 0.3s ease
+            
+            .button-group
+                display: flex
+                gap: 8px
+                flex-wrap: wrap
+                
+                .sort-button
+                    padding: 8px 16px
+                    border: 1px solid $light-border
+                    background: $light-surface
+                    border-radius: 20px
+                    color: $light-text-secondary
+                    font-size: 14px
+                    font-weight: 500
+                    cursor: pointer
+                    transition: all 0.2s ease
+                    
+                    &:hover
+                        border-color: $primary
+                        color: $primary
+                    
+                    &.active
+                        background: $primary
+                        border-color: $primary
+                        color: white
+                    
+                    &.easy.active
+                        background: $success
+                        border-color: $success
+                    
+                    &.medium.active
+                        background: $warning
+                        border-color: $warning
+                    
+                    &.hard.active
+                        background: $danger
+                        border-color: $danger
+                    
+                    &.hearing.active
+                        background: $hearing-color
+                        border-color: $hearing-color
+                    
+                    &.speaking.active
+                        background: $speaking-color
+                        border-color: $speaking-color
+                    
+                    &.phonetics.active
+                        background: $phonetics-color
+                        border-color: $phonetics-color
+                    
+                    &.interactive.active
+                        background: $interactive-color
+                        border-color: $interactive-color
+
+    .games-grid
+        display: grid
+        grid-template-columns: repeat(auto-fit, minmax(280px, 320px))  // Set fixed column width
+        gap: 24px
+        padding: 0 24px
+        justify-content: center  // Center the grid items
+
+        .game-card
+            width: 100%  // Force full width
+            max-width: 320px  // Maximum width
+            margin: 0 auto  // Center if smaller than container
+            background: $light-surface
+            border-radius: 16px
+            overflow: hidden
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1)
+            transition: all 0.3s ease
+            
+            &:hover
+                transform: translateY(-4px)
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1)
+            
+            .game-content
+                padding: 20px
                 display: flex
                 flex-direction: column
-                justify-content: center
-                gap: 30px
-
-                .row
+                min-height: 400px  // Set minimum height for consistency
+                
+                .game-icon
                     width: 100%
-                    height: 35%
-                    display: flex
-                    justify-content: center
-                    align-items: center
-                    gap: 3%
-
-                    .game-button
-                        position: relative
-                        aspect-ratio: 1
-                        height: 110%
-                        border: solid black thin
-                        border-radius: 15px
-                        background-color: lightgray
-                        background-size: cover
-                        color: black
-                        text-decoration: none
-                        overflow: hidden
-                        display: flex
-
-                        .game-info
-                            position: absolute
-                            bottom: 0
-                            left: 0
-                            margin: 0
-                            width: 100%
-                            height: 30%
-                            background-color: $glass-white
-                            text-align: center
-
-                        .game-title
-                            margin: 0
-                            padding-top: 10px
-
-                    .game_1
-                        background-image: $game_1_icon
-                        background-position: center
-                    .game_2
-                        background-image: $game_2_icon
-                    .game_3
-                        background-image: $game_3_icon
-                    .game_4
-                        background-image: $game_4_icon
-                    .game_5
-                        background-image: $game_5_icon
-                    .game_6
-                        background-image: $game_6_icon
-                    .game_7
-                        background-image: $game_7_icon
-                    .game_8
-                        background-image: $game_8_icon
+                    height: 160px
+                    border-radius: 12px
+                    background-size: cover
+                    background-position: center
+                    margin-bottom: 20px
                     
+                    &.game_1
+                        background-image: $game_1_icon
+                    &.game_2
+                        background-image: $game_2_icon
+                    &.game_3
+                        background-image: $game_3_icon
+                    &.game_4
+                        background-image: $game_4_icon
+                    &.game_5
+                        background-image: $game_5_icon
+                    &.game_6
+                        background-image: $game_6_icon
+                    &.game_7
+                        background-image: $game_7_icon
+                    &.game_8
+                        background-image: $game_8_icon
+                
+                .game-details
+                    flex: 1  // Take up remaining space
+                    display: flex
+                    flex-direction: column
+                    margin-bottom: 0  // Remove bottom margin
+                    
+                    h2
+                        font-size: 20px
+                        font-weight: 600
+                        color: $light-text-primary
+                        margin-bottom: 12px
+                        transition: color 0.3s ease
+                    
+                    p
+                        color: $light-text-secondary
+                        font-size: 14px
+                        line-height: 1.5
+                        margin-bottom: 16px
+                        transition: color 0.3s ease
+                    
+                    .category-badge
+                        display: inline-block
+                        padding: 6px 12px
+                        border-radius: 20px
+                        font-size: 13px
+                        font-weight: 500
+                        margin-bottom: 24px
+                        
+                        &.hearing
+                            background: rgba($hearing-color, 0.1)
+                            color: $hearing-color
+                        
+                        &.speaking
+                            background: rgba($speaking-color, 0.1)
+                            color: $speaking-color
+                        
+                        &.phonetics
+                            background: rgba($phonetics-color, 0.1)
+                            color: $phonetics-color
+                        
+                        &.interactive
+                            background: rgba($interactive-color, 0.1)
+                            color: $interactive-color
+                
+                .play-button
+                    position: relative  // Change to relative positioning
+                    width: 70%  // Make button slightly narrower
+                    margin: 16px auto 0  // Add top margin, center horizontally
+                    padding: 8px 16px  // Adjust padding
+                    display: flex
+                    align-items: center
+                    justify-content: center
+                    gap: 8px
+                    background: linear-gradient(135deg, $primary 0%, darken($primary, 15%) 100%)
+                    color: white
+                    border-radius: 8px
+                    text-decoration: none
+                    font-weight: 600
+                    font-size: 14px
+                    letter-spacing: 0.3px
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+                    box-shadow: 0 4px 6px -1px rgba($primary, 0.2)
+                    border: 1px solid rgba(255, 255, 255, 0.1)
+                    
+                    svg
+                        width: 18px  // Slightly smaller icon
+                        height: 18px
+                        transition: transform 0.3s ease
+                        stroke: currentColor
+                        stroke-width: 2.5
+                    
+                    &:hover
+                        transform: translateY(-2px)
+                        box-shadow: 0 8px 12px -3px rgba($primary, 0.3), 0 4px 6px -4px rgba($primary, 0.1)
+                        background: linear-gradient(135deg, lighten($primary, 5%) 0%, $primary 100%)
+                        
+                        svg
+                            transform: translateX(4px)
+                    
+                    &:active
+                        transform: translateY(0)
+                        box-shadow: 0 2px 4px -1px rgba($primary, 0.2)
+                        background: linear-gradient(135deg, darken($primary, 5%) 0%, darken($primary, 20%) 100%)
 
-@media only screen and (max-width: 768px)
+// Dark theme styles
+:host-context(.dark-theme)
     .container
-        .main
-            height: fit-content
+        background: $dark-bg
 
-            .panel
-                height: 98%
+        .games-container
+            .header-section
+                h1
+                    color: $dark-text-primary
+                
+                .subtitle
+                    color: $dark-text-secondary
+                
+                .back-link
+                    color: $dark-text-secondary
+                    
+                    &:hover
+                        background: rgba($primary, 0.2)
+            
+            .sort-controls
+                .sort-group
+                    label
+                        color: $dark-text-primary
+                    
+                    .button-group
+                        .sort-button
+                            background: $dark-surface
+                            color: $dark-text-secondary
+                            border-color: $dark-border
+                            
+                            &:hover:not(.active)
+                                border-color: $primary
+                                color: $primary
 
-                .button-space
-                    margin-top: 25px
-                    gap: 5px
-                    justify-content: flex-start
+            .games-grid
+                .game-card
+                    background: $dark-surface
+                    
+                    .game-content
+                        .game-details
+                            h2
+                                color: $dark-text-primary
+                            
+                            p
+                                color: $dark-text-secondary
+                            
+                            .category-badge
+                                opacity: 0.9
 
-                    .row
-                        flex-direction: column
-                        height: 30%
+                        .play-button
+                            background: linear-gradient(135deg, $primary 0%, darken($primary, 10%) 100%)
+                            border-color: transparent
+                            
+                            &:hover
+                                background: linear-gradient(135deg, lighten($primary, 5%) 0%, $primary 100%)
 
-                        .game-button
-                            width: 100%
-                            min-height: 75px
-
-                            img
-                                width: 40px
-
-                            h1
-                                padding: 0px
-                                margin-top: 2%
-                                font-size: 15px
-
-                .title
-                    font-size: 20px
-                    padding: 10px
+@media (max-width: 768px)
+    .main
+        padding: 24px 16px
+    
+    .games-container
+        .header-section
+            margin-bottom: 32px
+            
+            h1
+                font-size: 28px
+            
+            .subtitle
+                font-size: 16px
+            
+            .back-link
+                top: 80px
+                left: 16px
+        
+        .sort-controls
+            padding: 0 16px
+            
+            .button-group
+                .sort-button
+                    padding: 6px 12px
+                    font-size: 13px
+        
+        .games-grid
+            grid-template-columns: 1fr
+            max-width: 320px  // Constrain width on mobile
+            margin: 0 auto
+            padding: 0 16px
+            gap: 16px
+            
+            .game-card
+                .game-content
+                    .play-button
+                        padding: 12px
+                        font-size: 14px

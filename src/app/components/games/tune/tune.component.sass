@@ -1,0 +1,208 @@
+@import '../../../../styles.sass'
+    
+.container
+    .main
+        display: flex
+        justify-content: center
+        align-content: center
+
+        .panel
+            position: relative
+            min-height: 80vh
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("./assets/background.jpg") no-repeat center center/cover
+            background-position: center
+            background-size: cover
+
+            .nav-button
+                position: absolute
+                top: 20px
+                text-decoration: none
+                font-size: 40px
+                color: GhostWhite
+                background-color: rgba(0, 0, 0, 0.7)
+                border-radius: 30px
+                padding: 2px 8px
+
+            .back-button
+                left: 20px
+
+            .restart-button
+                right: 20px
+
+            .menu
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+                width: 40%
+                height: 60%
+                background-color: rgba(0, 0, 0, 0.7)
+                border-radius: 10px
+                padding: 40px
+                display: flex
+                flex-direction: column
+                align-items: center
+                color: GhostWhite
+                font-family: Inter
+
+                h1
+                    letter-spacing: 5px
+                    user-select: none
+
+                p
+                    user-select: none
+                    text-align: center
+
+                .selection-box
+                    width: 80%
+                    height: 30%
+                    padding: 10px
+                    display: grid
+                    grid-template-columns: repeat(4, 1fr)
+                    place-items: center
+                    gap: 20px
+
+                    .pair-button
+                        width: 90px
+                        height: 50px
+                        background-color: GhostWhite
+                        border-radius: 5px
+                        padding: 5px
+                        color: black
+                        display: flex
+                        align-items: center
+                        justify-content: center
+                        text-align: center
+                        user-select: none
+                        cursor: pointer
+                        transition-duration: 0.2s
+                        font-size: 20px
+
+                        &:hover
+                            background-color: rgb(248, 248, 255, 0.7)
+                            transition-duration: 0.2s
+
+            .screen
+                position: absolute
+                top: 50%
+                left: 50%
+                transform: translate(-50%, -50%)
+                width: 50%
+                height: 80%
+
+            .game-area
+                display: flex
+                flex-direction: column
+                justify-content: start
+                align-items: center
+                
+                .choice-area
+                    display: flex
+                    gap: 50px
+
+                    .choice-button
+                        min-width: 75px
+                        padding: 10px 35px
+                        background-color: rgb(248, 248, 255, 0.8)
+                        border-radius: 10px
+                        font-size: 50px
+                        text-align: center
+                        user-select: none
+                        cursor: pointer
+
+                    .correct
+                        background-color: rgb(0, 158, 32, 0.8)
+
+            .summary-area
+                width: 40%
+                height: 80%
+                padding: 10px
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
+                text-align: center
+                color: GhostWhite
+                background-color: rgba(0, 55, 11, 0.8)
+                border-radius: 10px
+
+                h1
+                    font-size: 45px
+
+                h2
+                    font-size: 25px
+
+                .finish
+                    margin-top: 30px
+                    background-color: rgba(0, 0, 0, 0.7)
+                    border-radius: 10px
+                    padding: 0px 25px
+
+                    h3
+                        font-size: 20px
+
+
+            
+            .audio-gen
+                position: absolute
+                bottom: 20px
+                right: 20px
+                font-size: 30px
+                background-color: black
+                color: GhostWhite
+                padding: 2px
+                border-radius: 10px
+                cursor: pointer
+                user-select: none
+
+@media only screen and (max-width: 768px)
+    .container
+        padding-bottom: 0px
+        overflow: hidden
+
+        .main
+            height: fit-content
+
+            .panel
+                .nav-button
+                    top: 5px
+                    font-size: 25px
+
+                .back-button
+                    left: 10px
+
+                .restart-button
+                    right: 10px
+
+                .menu
+                    width: 85%
+                    height: 80%
+                    padding: 5px
+
+                    h1
+                        font-size: 25px
+
+                    p
+                        font-size: 15px
+
+                    .selection-box
+                        .pair-button
+                            width: 35px
+
+                .game-area
+                    width: 85%
+                    height: 80%
+
+                    .choice-area
+                        .choice-button
+                            min-width: 20px
+                            font-size: 30px
+
+                .summary-area
+                    width: 85%
+                    height: 80%
+
+                .audio-gen
+                    bottom: 10px
+                    right: 10px
+                    font-size: 20px

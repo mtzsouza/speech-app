@@ -1,25 +1,197 @@
 @import '../../../styles.sass'
 
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+$error-color: #d32f2f
+$error-background: #ffebee
+
 .container
-    justify-content: center
-    align-items: center
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    background-color: $background-light
+    position: relative
+    
+    .back-button
+        display: flex
+        align-items: center
+        text-decoration: none
+        color: $text-medium
+        font-weight: 500
+        transition: all 0.2s ease
+        margin: 20px 0 0 20px
+        
+        svg
+            margin-right: 8px
+            
+            path
+                stroke: currentColor
+        
+        span
+            font-size: 15px
+        
+        &:hover
+            color: $main-blue
+            transform: translateX(-3px)
 
-    .panel
-        width: 25%
-        height: 50%
-        transform: translateY(-20%)
-        background-color: white
-        overflow: hidden
+    .register-section
+        display: flex
+        justify-content: center
+        align-items: center
+        flex: 1
+        padding: 20px
 
-        form
-            h5
-                cursor: pointer
+        .panel
+            width: 400px
+            max-width: 100%
+            background-color: white
+            border-radius: 12px
+            padding: 35px
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08)
+            transition: all 0.3s ease
 
-                &:hover
-                    text-decoration: underline
+            form
+                .title
+                    color: $text-dark
+                    margin-bottom: 25px
+                    font-weight: 700
+                    text-align: center
+                    font-size: 28px
+                    
+                .alert
+                    background-color: $error-background
+                    color: $error-color
+                    padding: 14px
+                    border-radius: 8px
+                    margin-bottom: 25px
+                    display: flex
+                    align-items: center
+                    border-left: 3px solid $error-color
+                    
+                    i
+                        margin-right: 12px
+                        font-size: 16px
+                        min-width: 16px
+                        
+                .input-group
+                    margin-bottom: 20px
+                    
+                    label
+                        display: block
+                        margin-bottom: 10px
+                        font-weight: 500
+                        color: $text-medium
+                        font-size: 15px
+                        
+                    .input-wrapper
+                        position: relative
+                        
+                        .icon
+                            position: absolute
+                            left: 14px
+                            top: 50%
+                            transform: translateY(-50%)
+                            color: $main-blue
+                            font-size: 16px
+                            
+                        .text-input
+                            width: 100%
+                            padding: 14px 14px 14px 42px
+                            border: 1px solid $border-color
+                            border-radius: 8px
+                            font-size: 15px
+                            transition: border-color 0.3s, box-shadow 0.3s
+                            
+                            &:focus
+                                border-color: $main-blue
+                                outline: none
+                                box-shadow: 0 0 0 3px rgba($main-blue, 0.1)
+                            
+                            &::placeholder
+                                color: $text-light
+                
+                .button
+                    width: 100%
+                    background-color: $main-blue
+                    color: white
+                    border: none
+                    border-radius: 8px
+                    padding: 16px
+                    font-size: 16px
+                    font-weight: 600
+                    cursor: pointer
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    transition: all 0.2s ease
+                    margin-top: 20px
+                    margin-bottom: 25px
+                    
+                    span
+                        margin-right: 10px
+                        
+                    i
+                        font-size: 15px
+                        
+                    &:hover
+                        background-color: $darker-blue
+                        transform: translateY(-2px)
+                        box-shadow: 0 5px 15px rgba($main-blue, 0.2)
+                        
+                    &:active
+                        transform: translateY(0)
+                        
+                .login-link
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    gap: 8px
+                    margin-top: 15px
+                    
+                    span
+                        color: $text-medium
+                        
+                    h5
+                        color: $main-blue
+                        margin: 0
+                        font-weight: 500
+                        cursor: pointer
+                        transition: color 0.2s
+                        
+                        &:hover
+                            color: $darker-blue
+                            text-decoration: underline
+
+@media only screen and (max-width: 992px)
+    .container
+        .back-button
+            margin: 15px 0 0 15px
+        
+        .register-section
+            padding: 10px 15px
 
 @media only screen and (max-width: 768px)
     .container
-        .panel
-            width: 80%
-            height: 55%
+        background-color: $background-light
+        
+        .back-button
+            margin: 10px 0 0 10px
+            
+        .register-section
+            padding: 40px 15px 15px 15px
+            
+            .panel
+                width: 100%
+                padding: 30px 25px
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06)
+                
+                form .title
+                    font-size: 24px
+                    margin-bottom: 20px

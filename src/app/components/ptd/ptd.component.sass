@@ -1,127 +1,248 @@
+@import '../../../styles.sass'
+
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+$navy-blue: #003366
+
+.container
+  min-height: 100vh
+  background-color: white
+  display: flex
+  flex-direction: column
+  width: 100%
+
 .progress-tracking
-  text-align: center
-  overflow: scroll
-
-  .progress-card
-    background-color: white
-    border-radius: 10px
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1)
-    padding: 40px
+  flex: 1
+  display: flex
+  flex-direction: column
+  width: 100%
+  
+  .content-wrapper
+    flex: 1
+    padding: 40px 20px
     max-width: 1200px
-    min-height: 67vh
-    margin: 20px auto
-    width: 80% // Adjusted width for better responsiveness
-
-    @media (max-width: 1024px)
-      width: 90% // Adjusts width for smaller screens
-
-    @media (max-width: 768px)
-      width: 95% // Further adjustment for mobile screens
-      padding: 30px
-
-    h1
-      font-weight: bold
+    width: 100%
+    margin: 0 auto
+    position: relative
+    
+    .back-link
+      display: flex
+      align-items: center
+      text-decoration: none
+      color: $text-medium
+      font-weight: 500
+      transition: all 0.2s ease
       margin-bottom: 30px
-      font-size: 50px // Slightly bigger title for better balance
-
+      cursor: pointer  // Add cursor pointer
+      
+      svg
+        margin-right: 8px
+        
+        path
+          stroke: currentColor
+      
+      span
+        font-size: 15px
+      
+      &:hover
+        color: $main-blue
+        transform: translateX(-3px)
+      
+      &:focus  // Add focus styles for accessibility
+        outline: none
+        color: $main-blue
+        box-shadow: 0 0 0 2px rgba($main-blue, 0.1)
+    
+    h1
+      text-align: center
+      font-weight: 700
+      font-size: 32px
+      color: $text-dark
+      margin: 0 0 40px 0
+    
     .recent-sounds
       display: flex
       justify-content: center
-      gap: 2vw
-      flex-wrap: wrap // Allows wrapping on smaller screens
-
-      .col-4
+      gap: 30px
+      flex-wrap: wrap
+      
+      .sound-card
         flex: 1
-        min-width: 250px // Ensures a minimum width for better layout
-        max-width: 300px // Keeps a balanced layout
-        text-align: center
-
-        @media (max-width: 768px)
-          min-width: 100% // Ensures full-width stacking on smaller screens
-          max-width: 100%
-
-      .sound-title
-        background-color: #003366
-        color: white
-        padding: 15px 25px
-        font-size: 22px // Bigger text for better readability
-        border-radius: 8px
-        margin-bottom: 25px
-        font-weight: bold
-
-      .progress-circle
-        position: relative
-        display: inline-block
-
-        svg
-          overflow: visible
-          transform: rotate(-90deg)
-          width: 250px // Increase size of SVG for bigger circles
-          height: 250px
-
-          @media (max-width: 768px)
-            width: 200px
-            height: 200px
-
-          circle
-            fill: none
-            stroke-width: 25 // Thicker stroke for better visibility
-
-            &.bg-circle
-              stroke: #d3d3d3
-
-            &.progress-circle-fill
-              transition: stroke-dashoffset 0.5s ease-out
-              stroke-linecap: round
-
-        .percentage
-          position: absolute
-          top: 50%
-          left: 50%
-          transform: translate(-46%, -99%)
-          font-size: 30px
-          font-weight: bold
-          display: flex
-          align-items: center
-          justify-content: center
+        min-width: 260px
+        max-width: 300px
+        display: flex
+        flex-direction: column
+        align-items: center
+        
+        .sound-title
+          background-color: $navy-blue
+          color: white
+          padding: 15px 25px
+          font-size: 20px
+          border-radius: 8px
+          margin-bottom: 25px
+          font-weight: 600
           width: 100%
           text-align: center
+        
+        .progress-circle
+          position: relative
+          display: inline-block
+          margin-bottom: 25px
+          
+          svg
+            overflow: visible
+            transform: rotate(-90deg)
+            width: 200px
+            height: 200px
+            
+            circle
+              fill: none
+              stroke-width: 20
+              
+              &.bg-circle
+                stroke: #e5e5e5
+              
+              &.progress-circle-fill
+                transition: stroke-dashoffset 0.5s ease-out
+                stroke-linecap: round
+          
+          .percentage
+            position: absolute
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+            font-size: 28px
+            font-weight: 700
+            color: $text-dark
+          
+          .completion
+            position: absolute
+            top: 58%
+            left: 50%
+            transform: translateX(-50%)
+            font-size: 16px
+            font-weight: 500
+            color: $text-medium
+            width: 100%
+            text-align: center
+        
+        .activity-card
+          background-color: $main-blue
+          border-radius: 8px  // Reduced from 10px
+          padding: 14px 16px  // Reduced padding
+          width: 85%  // Reduced width
+          max-width: 240px  // Added max-width
+          margin: 0 auto  // Center the card
+          text-align: center
+          display: flex
+          flex-direction: column
+          align-items: center
+          transition: all 0.3s ease
+          cursor: pointer
+          
+          &:hover
+            transform: translateY(-3px)  // Reduced lift
+            background-color: $darker-blue
+            box-shadow: 0 6px 12px rgba($main-blue, 0.2)  // Reduced shadow
+          
+          .activity-wrapper
+            display: flex
+            flex-direction: column
+            align-items: center
+            gap: 6px  // Reduced gap
+          
+          .activity-icon
+            font-size: 24px  // Reduced from 30px
+            color: white
+          
+          .activity-title
+            font-size: 15px  // Reduced from 18px
+            font-weight: 600
+            color: white
+            white-space: nowrap
 
-        .completion
-          font-size: 28px
-          font-weight: bold
-          color: black
+@media only screen and (max-width: 992px)
+  .progress-tracking
+    .content-wrapper
+      padding: 30px 20px
+      
+      .back-link
+        margin-bottom: 25px
+      
+      h1
+        font-size: 28px
+        margin-bottom: 30px
+      
+      .recent-sounds
+        gap: 25px
+        
+        .sound-card
+          .sound-title
+            font-size: 18px
+            padding: 12px 20px
+          
+          .progress-circle
+            svg
+              width: 180px
+              height: 180px
+            
+            .percentage
+              font-size: 26px
 
-          @media (max-width: 768px)
-            font-size: 24px // Reduce size for smaller screens
-
-    .activity-card
-      background-color: #003366
-      border-radius: 12px
-      padding: 25px
-      margin-top: 30px
-      width: 260px // Wider activity cards
-      text-align: center
-      display: flex
-      flex-direction: column
-      align-items: center
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
-      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out
-      cursor: pointer
-
-      &:hover
-        transform: translateY(-5px)
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15)
-
-      .activity-icon
-        font-size: 42px // Bigger icon
-        margin-bottom: 15px
-        color: white
-
-      .activity-title
-        font-size: 22px // Bigger text
-        font-weight: bold
-        color: white
-
-      @media (max-width: 768px)
-        width: 90% // Make full width on smaller screens
+@media only screen and (max-width: 768px)
+  .progress-tracking
+    .content-wrapper
+      padding: 20px 15px
+      
+      .back-link
+        margin-bottom: 20px
+        
+        span
+          font-size: 14px
+      
+      h1
+        font-size: 24px
+        margin-bottom: 25px
+        text-align: left
+      
+      .recent-sounds
+        gap: 20px
+        
+        .sound-card
+          min-width: 100%
+          
+          .sound-title
+            font-size: 16px
+            padding: 10px 15px
+          
+          .progress-circle
+            svg
+              width: 160px
+              height: 160px
+              
+              circle
+                stroke-width: 18
+            
+            .percentage
+              font-size: 24px
+            
+            .completion
+              font-size: 14px
+          
+          .activity-card
+            padding: 12px 14px
+            width: 80%
+            
+            .activity-icon
+              font-size: 22px
+            
+            .activity-title
+              font-size: 14px

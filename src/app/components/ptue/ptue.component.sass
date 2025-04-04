@@ -1,81 +1,248 @@
+@import '../../../styles.sass'
+
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+
+.container
+  min-height: 100vh
+  background-color: white
+  display: flex
+  flex-direction: column
+  width: 100%
+
 .achievement-container
-  width: 90%
+  position: relative
+  width: 95%
   max-width: 1200px
-  background-color: #f2f2f2  // Light background for contrast
-  color: #000
-  border-radius: 8px
-  padding: 20px
-  border: 2px solid #24457B
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2)
-  margin: auto
-  margin-top: 20px
-  overflow: hidden
+  margin: 0 auto
+  padding: 40px 20px
+  
+  .back-link
+    display: flex
+    align-items: center
+    text-decoration: none
+    color: $text-medium
+    font-size: 15px
+    font-weight: 500
+    transition: all 0.2s ease
+    margin-bottom: 30px
+    cursor: pointer  // Add cursor pointer to indicate clickable
+    width: fit-content  // Ensure link only takes up needed space
+    
+    svg
+      margin-right: 8px
+      
+      path
+        stroke: currentColor
+    
+    &:hover
+      color: $main-blue
+      transform: translateX(-3px)
+    
+    &:focus
+      outline: none
+      color: $main-blue
+      box-shadow: 0 0 0 2px rgba($main-blue, 0.1)
 
   .header
-    display: flex
-    justify-content: space-between
-    align-items: center
-    margin-bottom: 20px
-    justify-content: center
-
-    .home-btn, .profile-btn
-      background: none
-      border: none
-      font-size: 2.5em
-      cursor: pointer
-
+    text-align: center
+    margin-bottom: 30px
+    
     .title
-      font-size: 2.5em
-      color: #000
+      font-size: 32px
+      font-weight: 700
+      color: $text-dark
       margin: 0
+      
+  .badge-section
+    background-color: $background-light
+    border-radius: 12px
+    padding: 25px
+    margin-bottom: 30px
+    
+    .section-title
+      font-size: 22px
+      font-weight: 600
+      color: $text-dark
+      margin-top: 0
+      margin-bottom: 20px
+      display: flex
+      align-items: center
+      gap: 10px
 
   .badge-grid
     display: grid
     grid-template-columns: repeat(3, 1fr)
     gap: 20px
-    max-height: 600px
-    overflow-y: scroll  // Scroll when content overflows
-    padding-right: 10px  // Space for the scrollbar
+    max-height: calc(100vh - 220px)
+    overflow-y: auto
+    scrollbar-width: thin
+    scrollbar-color: $border-color $background-light
+    
+    &::-webkit-scrollbar
+      width: 6px
+    
+    &::-webkit-scrollbar-track
+      background: $background-light
+      border-radius: 10px
+    
+    &::-webkit-scrollbar-thumb
+      background: $border-color
+      border-radius: 10px
+      
+      &:hover
+        background: darken($border-color, 10%)
 
     .badge-card
       background-color: white
-      border: 1px solid #ccc
+      border: 1px solid $border-color
       border-radius: 8px
-      padding: 10px
+      padding: 15px
       display: flex
       align-items: center
-      justify-content: flex-start
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1)
-
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05)
+      transition: all 0.2s ease
+      
+      &:hover
+        transform: translateY(-5px)
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08)
+      
       .badge-icon
-        width: 100px
-        height: 100px
-        background-color: gray  // Placeholder color for the icon
+        width: 80px
+        height: 80px
+        background-color: $text-light
         opacity: 0.5
         clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%)
         margin-right: 15px
-        font-size: 32px
+        font-size: 28px
         text-align: center
-        line-height: 103px
-
-
+        line-height: 83px
+      
       .badge-info
         flex: 1
+        
         h3
-          margin: 0
-          font-size: 1.5em
-
+          margin: 0 0 5px 0
+          font-size: 16px
+          font-weight: 600
+          color: $text-dark
+        
         p
           margin: 5px 0
-
+          color: $text-medium
+          font-size: 14px
+          line-height: 1.4
+        
         .date-earned
           font-style: italic
-          font-size: 0.9em
+          font-size: 13px
+          color: $text-light
 
-  @media (max-width: 768px)
+  .return-button
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    background-color: $main-blue
+    color: white
+    padding: 12px 25px
+    font-size: 15px
+    font-weight: 600
+    border-radius: 6px
+    cursor: pointer
+    transition: all 0.2s ease
+    border: none
+    margin-top: 10px
+    text-decoration: none
+    
+    &:hover
+      background-color: $darker-blue
+      transform: translateY(-2px)
+      box-shadow: 0 5px 15px rgba($main-blue, 0.2)
+    
+    svg
+      margin-right: 8px
+      width: 16px
+      height: 16px
+
+@media (max-width: 992px)
+  .achievement-container
+    padding: 30px 20px
+    
+    .back-link
+      margin-bottom: 25px
+    
+    .header
+      margin-bottom: 25px
+      
+      .title
+        font-size: 28px
+    
+    .badge-section
+      padding: 20px
+      
+      .section-title
+        font-size: 20px
+    
     .badge-grid
       grid-template-columns: repeat(2, 1fr)
+      gap: 15px
 
-  @media (max-width: 480px)
+@media (max-width: 768px)
+  .achievement-container
+    padding: 20px 15px
+    
+    .back-link
+      margin-bottom: 20px
+      
+      span
+        font-size: 14px
+    
+    .header
+      margin-bottom: 20px
+      
+      .title
+        font-size: 24px
+        text-align: left
+    
+    .badge-section
+      padding: 15px
+      
+      .section-title
+        font-size: 18px
+    
+    .badge-grid
+      gap: 12px
+      
+      .badge-card
+        padding: 12px
+        
+        .badge-icon
+          width: 60px
+          height: 60px
+          font-size: 22px
+          line-height: 62px
+          margin-right: 10px
+        
+        .badge-info
+          h3
+            font-size: 14px
+          
+          p
+            font-size: 13px
+    
+    .return-button
+      width: 100%
+      padding: 10px
+      font-size: 14px
+
+@media (max-width: 480px)
+  .achievement-container
     .badge-grid
       grid-template-columns: 1fr

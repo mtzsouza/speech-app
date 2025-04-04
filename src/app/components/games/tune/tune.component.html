@@ -1,0 +1,59 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="main">
+        <div class="panel">
+            <a href="/games" class="nav-button back-button">↩</a>
+
+            @if (menuActive) {
+                <div class="menu">
+                    <h1>Tune Your Ears</h1>
+                    <p>
+                        Choose a pair to practice and answer quickly to earn more points.
+                    </p>
+                    <div class="selection-box">
+                        @for (pair of pairs; track pair) {
+                            <div class="pair-button" (click)="startGame(pair)">
+                                <p>{{ pair.sounds[0] }}, {{ pair.sounds[1] }}</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            @if (gameActive) {
+                <div class="game-area screen">
+                    <h1 class="displayed-time">{{ displayedTime }}</h1>
+                    <div class="choice-area">
+                        @if (firstChoiceCorrect) {
+                            <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">{{currentQuestion.correctSound}}</div>
+                            <div class="choice-button" (click)="processResponse('wrong')">{{currentQuestion.wrongSound}}</div>
+                        } @else {
+                            <div class="choice-button" (click)="processResponse('wrong')">{{currentQuestion.wrongSound}}</div>
+                            <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">{{currentQuestion.correctSound}}</div>
+                        }
+                    </div>
+                </div>
+            }
+
+            @if (summaryActive) {
+                 <div class="summary-area screen">
+                    <h2>Total points earned:</h2>
+                    <h1>{{ pointsEarned }}</h1>
+                    <div class="finish">
+                        <a href="/tune-your-ears" class="nav-button restart-button">↻</a>
+                    </div>
+                 </div>
+            }
+
+            @if (isAdmin) {
+                <div class="audio-gen" (click)="generateAudios()">
+                    @if (generationStatus) {
+                        {{ generationStatus }}
+                    } @else {
+                        🔊
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

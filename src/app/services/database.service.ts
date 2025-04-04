@@ -1,4 +1,5 @@
 import { Injectable, inject } from '@angular/core';
+import { getStorage, ref, uploadBytes, getDownloadURL, Storage } from '@angular/fire/storage';
 import { 
   Firestore, 
   collection, 
@@ -15,7 +16,10 @@ import {
   providedIn: 'root'
 })
 export class DatabaseService {
-  constructor(private firestore: Firestore) {} // Changing this to inject() will crash
+  private storage: Storage;
+  constructor(private firestore: Firestore) {  // Changing this to inject() will crash
+    this.storage = getStorage();
+  }
 
  //   USAGE: 
  //   const data = this.database.fetchDocumentById('users', 'id').then(data => {console.log(data);})
@@ -60,7 +64,6 @@ export class DatabaseService {
         throw new Error(`Collection '${collectionName}' does not exist or is empty`);
       }
       const data = snapshot.docs.map(doc => doc.data());
-      console.log('Collection fetched successfully');
       return data;
     } catch (error) {
       throw error;
@@ -72,7 +75,6 @@ export class DatabaseService {
     try {
       const docSnapshot = await getDoc(docRef);
       if (docSnapshot.exists()) {
-        console.log('Document fetched successfully');
         return docSnapshot.data();
       } else {
         console.log('No such document!');
@@ -99,11 +101,61 @@ export class DatabaseService {
     }
   }
 
+  async getDocumentIdByField(collectionName: string, field: string, value: any): Promise<string | null> {
+    const ref = collection(this.firestore, collectionName);
+    try {
+      const snapshot = await getDocs(ref);
+      for (const docSnap of snapshot.docs) {
+        if (docSnap.exists() && docSnap.data()[field] === value) {
+          return docSnap.id;
+        }
+      }
+      return null; // Not found
+    } catch (error) {
+      console.error('Error retrieving document ID:', error);
+      return null;
+    }
+  }  
+
   async fetchUserPreferences(userId: string): Promise<{ theme: string; language: string } | null> {
     return await this.fetchDocumentById('users', userId);
   }
   
   async updateUserPreference(userId: string, field: 'theme' | 'language', value: string): Promise<void> {
     await this.updateField('users', userId, field, value);
+  }
+
+  async storeFile(path: string, file: Blob | File): Promise<string> {
+    const fileRef = ref(this.storage, path);
+    try {
+      await uploadBytes(fileRef, file);
+      const downloadUrl = await getDownloadURL(fileRef);
+      console.log('File uploaded successfully:', downloadUrl);
+      return downloadUrl;
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      throw error;
+    }
+  }
+
+  async fetchFile(path: string): Promise<string> {
+    const fileRef = ref(this.storage, path);
+    try {
+      const downloadUrl = await getDownloadURL(fileRef);
+      return downloadUrl;
+    } catch (error) {
+      console.error('Error fetching file:', error);
+      throw error;
+    }
+  }
+
+  async fileExists(path: string): Promise<boolean> {
+    const fileRef = ref(this.storage, path);
+    try {
+      const response = await getDownloadURL(fileRef);
+      return true;
+    } catch(error) {
+      return false;
+    }
   }
 }

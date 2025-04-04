@@ -3,13 +3,22 @@
     <div class="main">
         <div class="panel">
             @if (isAdmin) {
-                <a href="/stories/add" id="add-button">+</a>
+                <a routerLink="/stories/add" class="add-button">+</a>
             }
+            
+            <a routerLink="/" class="back-button">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Back</span>
+            </a>
+            
             <h1 class="title">
                 {{ userLanguage.storyCenter.title }}
             </h1>
+            
             @for (story of stories; track story) {
-                <a href="stories/{{ this.encodeTitle(story.title_english) }}" class="story-selector">
+                <a [routerLink]="['/stories', this.encodeTitle(story.title_english)]" class="story-selector">
                     @if (isEnglish()) {
                         <h2 class="story-title">{{ story.title_english }}</h2>
                         <h3 class="story-sound">{{ story.sound }}</h3>
@@ -19,7 +28,6 @@
                         <h3 class="story-sound">{{ story.sound }}</h3>
                         <h3 class="story-summary">{{ story.summary_spanish }}</h3>
                     }
-
                 </a>
             }
         </div>

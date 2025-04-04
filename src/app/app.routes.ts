@@ -25,6 +25,8 @@ import { EducationalArticlesComponent } from './components/educational-articles/
 import { RequestAdminComponent } from './components/update-info/request-admin/request-admin.component';
 import { AddStoryComponent } from './components/stories/add-story/add-story.component';
 import { ReadStoryComponent } from './components/stories/read-story/read-story.component';
+import { TuneComponent } from './components/games/tune/tune.component';
+import { TestComponent } from './components/test/test.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -33,6 +35,11 @@ export const routes: Routes = [
     { 
         path: '', 
         component: DashboardComponent
+    },
+    
+    { 
+        path: 'test', 
+        component: TestComponent
     },
 
     { 
@@ -104,6 +111,12 @@ export const routes: Routes = [
     {
         path: 'earth-defender', 
         component: EarthDefenderComponent, 
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'tune-your-ears', 
+        component: TuneComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
 

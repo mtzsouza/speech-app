@@ -1,78 +1,165 @@
 @import '../../../styles.sass'
 
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+
 .container
-    height: fit-content
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+    background-color: white
 
     .main
         width: 100%
-        height: fit-content
+        flex: 1
         display: flex
         justify-content: center
-        align-items: start
-        overflow-y: scroll
-        padding-bottom: 20px
+        align-items: flex-start
+        padding: 40px 20px
 
         .panel
+            width: 800px
+            max-width: 100%
             position: relative
-            height: fit-content
-            background-color: white
-            padding-bottom: 20px
 
-            #add-button
-                position: absolute
-                right: 2%
-                top: 2%
-                color: black
-                font-size: xx-large
-                font-weight: bold
-                background-color: lightgray
-                padding: 0px 8px
-                border: solid lightgray
-                border-radius: 20px
+            // Back button positioned at the top left
+            .back-button
+                display: flex
+                align-items: center
                 text-decoration: none
-
-            .title
-                text-align: center
-                font-size: 50px
-                font-weight: 800
-                margin: 20px 0px 40px 0px
-                transform: translateY(50%)
-
-            .story-selector
-                width: 80%
-                height: fit-content
-                background-color: $blue
-                margin: 15px 0px
-                padding: 0px 20px
-                border-radius: 14px
-                overflow: hidden
-                color: white
-                font-family: inter
-                font-weight: bold
-                transition-duration: 0.5s
-                text-decoration: none
-
+                color: $text-medium
+                font-weight: 500
+                transition: all 0.2s ease
+                margin-bottom: 30px
+                
+                svg
+                    margin-right: 8px
+                    
+                    path
+                        stroke: currentColor
+                
+                span
+                    font-size: 15px
+                
                 &:hover
-                    transform: scale(105%)
-                    transition-duration: 0.5s
+                    color: $main-blue
+                    transform: translateX(-3px)
+            
+            // Title as a separate element below back button
+            .title
+                font-size: 32px
+                font-weight: 700
+                color: $text-dark
+                margin: 0 0 40px 0
+                text-align: center
+            
+            .add-button
+                position: absolute
+                top: 0
+                right: 0
+                width: 36px
+                height: 36px
+                display: flex
+                align-items: center
+                justify-content: center
+                text-decoration: none
+                color: white
+                font-size: 22px
+                font-weight: 500
+                background-color: $main-blue
+                border-radius: 50%
+                transition: all 0.2s ease
+                
+                &:hover
+                    background-color: $darker-blue
+                    transform: scale(1.1)
+                    box-shadow: 0 5px 15px rgba($main-blue, 0.2)
+            
+            .story-selector
+                display: block
+                width: 100%
+                background-color: $main-blue
+                margin: 16px 0
+                padding: 20px 25px
+                border-radius: 12px
+                color: white
+                text-decoration: none
+                transition: all 0.3s ease
+                border: none
+                
+                &:hover
+                    transform: translateY(-5px)
+                    box-shadow: 0 8px 20px rgba($main-blue, 0.3)
+                
+                .story-title
+                    font-size: 20px
+                    font-weight: 700
+                    margin: 0 0 10px 0
+                
+                .story-sound
+                    font-size: 14px
+                    font-weight: 600
+                    margin: 0 0 8px 0
+                    opacity: 0.9
+                
+                .story-summary
+                    font-size: 15px
+                    font-weight: 400
+                    margin: 0
+                    line-height: 1.5
+                    opacity: 0.9
+
+@media only screen and (max-width: 992px)
+    .container .main
+        padding: 30px 20px
+        
+        .panel
+            .back-button
+                margin-bottom: 25px
+            
+            .title
+                font-size: 26px
+                margin-bottom: 30px
 
 @media only screen and (max-width: 768px)
-    .container
-        .main
-            .panel
-                height: 98%
-
-                .title
-                    font-size: 25px
-                    padding: 0px 20px
-
-                .story-selector
-                    height: fit-content
-                    
-                    h2
-                        font-size: medium
-
-                    h3
-                        margin: 2px
-                        font-size: small
-                        font-weight: normal
+    .container .main
+        padding: 20px 15px
+        
+        .panel
+            .back-button
+                margin-bottom: 20px
+                
+                span
+                    font-size: 14px
+            
+            .title
+                font-size: 24px
+                margin-bottom: 25px
+                text-align: left
+            
+            .add-button
+                width: 32px
+                height: 32px
+                font-size: 20px
+            
+            .story-selector
+                padding: 16px 20px
+                margin: 12px 0
+                
+                .story-title
+                    font-size: 17px
+                    margin-bottom: 8px
+                
+                .story-sound
+                    font-size: 13px
+                    margin-bottom: 6px
+                
+                .story-summary
+                    font-size: 14px

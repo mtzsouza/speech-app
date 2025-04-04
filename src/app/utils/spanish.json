@@ -1,13 +1,13 @@
 {
     "navbar": {
-        "soundboard": "Caja de Resonancia",
+        "soundboard": "Fonética",
         "games": "Juegos",
         "stories": "Historias",
         "progress": "Progreso"
     },
     "dashboard": {
         "title": "Panel",
-        "soundboard": "Caja de Resonancia",
+        "soundboard": "Fonética",
         "games": "Juegos",
         "stories": "Historias",
         "progress": "Progreso",
@@ -140,7 +140,9 @@
         }
     },
     "games": {
-        "title": "Bienvenido al Centro de Juegos"
+        "title": "Bienvenido al Centro de Juegos",
+        "listening": "Juegos de Escuchar",
+        "speaking": "Juegos de Hablar"
     },
     "storyCenter": {
         "title": "Bienvenido al Centro de Historias"

@@ -1,21 +1,51 @@
-<div class="navbar">
-    <!-- Home Icon -->
-    <a class="icon" href="/">
-        <img src="/assets/home-icon.png" alt="Home Page">
+<nav class="navbar">
+    <!-- Logo Section -->
+    <a class="logo-section" href="/">
+        <div class="logo-wrapper">
+            <img src="/assets/home-icon.png" alt="SpeechApp Logo">
+        </div>
+        <span class="brand-name">SpeechApp</span>
     </a>
 
-    <!-- Quick Links -->
-     @if (this.currentPage != "/") {
-        <div class="links">
-            <a href="/soundboard">{{ this.userLanguage.navbar.soundboard }}</a>
-            <a href="/games">{{ this.userLanguage.navbar.games }}</a>
-            <a href="/stories">{{ this.userLanguage.navbar.stories }}</a>
-            <a href="/progress">{{ this.userLanguage.navbar.progress }}</a>
-         </div>
-     }
+    <!-- Navigation Links -->
+    @if (this.currentPage != "/") {
+        <div class="nav-links">
+            <a href="/soundboard" [class.active]="currentPage === '/soundboard'">
+                {{ this.userLanguage.navbar.soundboard }}
+            </a>
+            <a href="/games" [class.active]="currentPage === '/games'">
+                {{ this.userLanguage.navbar.games }}
+            </a>
+            <a href="/stories" [class.active]="currentPage === '/stories'">
+                {{ this.userLanguage.navbar.stories }}
+            </a>
+            <a href="/progress" [class.active]="currentPage === '/progress'">
+                {{ this.userLanguage.navbar.progress }}
+            </a>
+        </div>
+    }
 
-    <!-- Preferences Icon -->
-     <div class="icon">
-        <app-preferences></app-preferences>
-     </div>
-</div>
+    <!-- Actions Section -->
+    <div class="actions-section">
+        <button class="action-button theme-toggle" (click)="toggleTheme()" aria-label="Toggle theme">
+            @if (isDarkMode) {
+                <div class="button-content">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5M17.6859 17.69L18.5 18.5M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z" 
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Dark Mode</span>
+                </div>
+            } @else {
+                <div class="button-content">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" 
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>Light Mode</span>
+                </div>
+            }
+        </button>
+        <app-preferences class="action-button profile"></app-preferences>
+    </div>
+</nav>

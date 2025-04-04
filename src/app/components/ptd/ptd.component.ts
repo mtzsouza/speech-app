@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 
@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './ptd.component.html',
   styleUrls: ['./ptd.component.sass'],
   standalone: true,
-  imports: [NavbarComponent, CommonModule]
+  imports: [NavbarComponent, CommonModule, RouterModule] // Add RouterModule
 })
 
 export class PTDComponent implements OnInit {
@@ -72,5 +72,9 @@ export class PTDComponent implements OnInit {
     if (routes[title]) {
       this.router.navigate([routes[title]]);
     }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/progress']);
   }
 }
