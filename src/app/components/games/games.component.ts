@@ -11,7 +11,7 @@ interface Game {
   description: string;
   emoji: string;
   iconClass: string;
-  category: 'hearing' | 'speaking' | 'memory' | 'interactive';
+  category: 'hearing' | 'speaking' | 'phonetics' | 'interactive';
   link: string;
 }
 
@@ -44,15 +44,15 @@ export class GamesComponent implements OnInit {
     },
     {
       title: 'Earth Defender',
-      description: 'Save Earth by matching correct sounds',
+      description: 'Save Earth by matching correct phonetic characters',
       emoji: '🌍',
       iconClass: 'game_2',
-      category: 'hearing',
+      category: 'phonetics',
       link: '/earth-defender'
     },
     {
       title: 'Tune Your Ears',
-      description: 'Train your ears to recognize sounds',
+      description: 'Train your ears to recognize minimal pairs',
       emoji: '🎵',
       iconClass: 'game_3',
       category: 'hearing',
@@ -111,8 +111,8 @@ export class GamesComponent implements OnInit {
       case 'speaking':
         this.filteredGames = this.games.filter(game => game.category === 'speaking');
         break;
-      case 'memory':
-        this.filteredGames = this.games.filter(game => game.category === 'memory');
+      case 'phonetics':
+        this.filteredGames = this.games.filter(game => game.category === 'phonetics');
         break;
       case 'interactive':
         this.filteredGames = this.games.filter(game => game.category === 'interactive');

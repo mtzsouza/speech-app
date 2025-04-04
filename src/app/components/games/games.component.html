@@ -10,7 +10,7 @@
                     <span>Back</span>
                 </a>
                 <h1>{{ userLanguage.games.title }}</h1>
-                <p class="subtitle">Choose a game to enhance your speech skills</p>
+                <p class="subtitle">Choose a game to enhance your communication skills</p>
             </div>
 
             <div class="sort-controls">
@@ -34,6 +34,12 @@
                             (click)="sortGames('speaking')" 
                             class="sort-button speaking">
                             Speaking Games
+                        </button>
+                        <button 
+                            [class.active]="sortBy === 'phonetics'"
+                            (click)="sortGames('phonetics')" 
+                            class="sort-button phonetics">
+                            Phonetics Games
                         </button>
                     </div>
                 </div>
