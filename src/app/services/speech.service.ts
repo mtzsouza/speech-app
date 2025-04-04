@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.prod';
 import { DatabaseService } from './database.service';
 
+export interface SpeechRecognitionResult {
+  text: string;
+  language_code: string;
+  words: string[];
+}
+
 const VOICE_MAP: Record<string, string> = {
   'english': 'Qggl4b0xRMiqOwhPtVWT',
   'spanish': 'TxGEqnHWrfWFTfGW9XjX',
@@ -141,7 +147,7 @@ export class SpeechService {
     this.onEndedCallback = callback;
   }
 
-  async detectSpeech(seconds: number): Promise<string> {
+  async detectSpeech(seconds: number): Promise<SpeechRecognitionResult> {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mediaRecorder = new MediaRecorder(stream);
@@ -153,7 +159,7 @@ export class SpeechService {
         }
       };
   
-      return new Promise<string>((resolve, reject) => {
+      return new Promise<SpeechRecognitionResult>((resolve, reject) => {
         mediaRecorder.onstop = async () => {
           try {
             const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
@@ -176,7 +182,18 @@ export class SpeechService {
             }
   
             const data = await response.json();
-            resolve(data.text || '');
+  
+            const result: SpeechRecognitionResult = {
+              text: data.text || '',
+              language_code: data.language_code || 'und',
+              words: Array.isArray(data.words)
+                ? data.words
+                    .filter((w: any) => w.type === 'word' && typeof w.text === 'string')
+                    .map((w: any) => w.text)
+                : []
+            };
+  
+            resolve(result);
           } catch (error) {
             console.error('Transcription error:', error);
             reject(error);

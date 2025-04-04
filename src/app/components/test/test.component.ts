@@ -1,19 +1,24 @@
 import { Component, inject } from '@angular/core';
-import { SpeechService } from '../../services/speech.service';
+import { SpeechService, SpeechRecognitionResult } from '../../services/speech.service';
 
 @Component({
   selector: 'app-test',
   standalone: true,
   imports: [],
   templateUrl: './test.component.html',
-  styleUrl: './test.component.sass'
+  styleUrls: ['./test.component.sass']
 })
 export class TestComponent {
   speechService = inject(SpeechService);
 
-  result = "No recording.";
+  result: SpeechRecognitionResult | null = null;
 
-  async startRecording() {
-    this.result = await this.speechService.detectSpeech(2);
+  async startRecording(): Promise<void> {
+    try {
+      this.result = await this.speechService.detectSpeech(2);
+      console.log('Recording result:', this.result);
+    } catch (error) {
+      console.error('Failed to record speech:', error);
+    }
   }
 }
