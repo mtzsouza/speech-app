@@ -9,6 +9,8 @@ $glass-white: rgba(255, 255, 255, 0.688)
 @import url('https://fonts.googleapis.com/css?family=Inter')
 
 /* Images */
+$listening_icon: url('assets/games/listening.png')
+$speaking_icon: url('assets/games/speaking.png')
 $game_1_icon: url('assets/games/game_1.png')
 $game_2_icon: url('assets/games/game_2.png')
 $game_3_icon: url('assets/games/game_3.png')
@@ -82,3 +84,43 @@ $game_8_icon: url('assets/games/game_8.png')
 
 .title
     font-family: Inter
+
+// Dark mode theme variables
+body.dark-theme
+  --bg-color: #121212
+  --card-bg: #1e1e2d
+  --text-color: #e1e1e1
+  --text-color-medium: #b0b0b0
+  --text-color-light: #8a8a8a
+  --border-color: #2d2d3d
+  
+  // Apply dark theme to global elements
+  background-color: var(--bg-color)
+  color: var(--text-color)
+  
+  // Dark mode common elements
+  .panel, .card, .container > div
+    background-color: var(--card-bg)
+    color: var(--text-color)
+  
+  h1, h2, h3, h4, h5, h6
+    color: var(--text-color)
+  
+  p, span, div
+    color: var(--text-color-medium)
+  
+  input, select, textarea
+    background-color: rgba(255, 255, 255, 0.05)
+    border-color: var(--border-color)
+    color: var(--text-color)
+    
+    &::placeholder
+      color: var(--text-color-light)
+  
+  button
+    &:not(.primary-button)
+      background-color: rgba(255, 255, 255, 0.05)
+      color: var(--text-color)
+  
+  a:not(.special-link)
+    color: #3d84ff

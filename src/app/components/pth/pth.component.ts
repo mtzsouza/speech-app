@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-pth',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NavbarComponent
+  ],
   templateUrl: './pth.component.html',
   styleUrls: ['./pth.component.sass']
 })
@@ -94,5 +99,9 @@ export class PTHComponent implements OnInit {
 
   navigateToProgress() {
     this.router.navigate(['/progress/data']);
+  }
+
+  goBack() {
+    this.router.navigate(['/']);
   }
 }

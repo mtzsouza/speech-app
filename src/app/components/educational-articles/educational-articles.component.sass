@@ -1,100 +1,260 @@
 @import '../../../styles.sass'
 
+// Using a single consistent blue color palette
+$main-blue: #2463EB 
+$darker-blue: #24457B
+$blue-light: rgba($main-blue, 0.12)
+$text-dark: #333333
+$text-medium: #555555
+$text-light: #888888
+$border-color: #E0E0E0
+$background-light: #F8FAFD
+$highlight-color: #E7F0FF
+
 .container
+  min-height: 100vh
+  background-color: white
+  
   .main
     width: 100%
-    height: 92%
+    min-height: calc(100vh - 64px) // Assuming navbar is 64px tall
     display: flex
     justify-content: center
-    align-items: start
-
+    padding: 40px 20px
+    
     .panel
+      width: 800px
+      max-width: 100%
       position: relative
-      width: 50%
-      background-color: white
-      border-radius: 10px
-      padding: 20px
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1)
-
-      .back-button
-        position: absolute
-        top: 20px
-        left: 50px
+      
+      // Back button positioned at the top
+      .back-link
+        display: flex
+        align-items: center
         text-decoration: none
-        font-size: 40px
-        color: black
-        background-color: lightgray
-        border-radius: 30px
-        padding: 2px 8px
-
-      .title
+        color: $text-medium
+        font-size: 15px
+        font-weight: 500
+        transition: all 0.2s ease
+        margin-bottom: 30px
+        cursor: pointer  // Add cursor pointer
+        width: fit-content  // Ensure link only takes up needed space
+        
+        svg
+          margin-right: 8px
+          
+          path
+            stroke: currentColor
+        
+        &:hover
+          color: $main-blue
+          transform: translateX(-3px)
+        
+        &:focus  // Add focus styles for accessibility
+          outline: none
+          color: $main-blue
+          box-shadow: 0 0 0 2px rgba($main-blue, 0.1)
+      
+      .header
         text-align: center
-        font-size: 28px
-        font-weight: bold
-        margin: 20px 0px
-
-      .input
-        margin-bottom: 20px
-
-        .text-input
-          width: 100%
-          padding: 10px
-          border: 1px solid #ccc
-          border-radius: 20px
-          font-family: inter
-
+        margin-bottom: 30px
+        
+        .title
+          font-size: 32px
+          font-weight: 700
+          color: $text-dark
+          margin: 0
+      
+      .search-container
+        margin-bottom: 30px
+        
+        .input-wrapper
+          position: relative
+          
+          .search-icon
+            position: absolute
+            left: 16px
+            top: 50%
+            transform: translateY(-50%)
+            color: $main-blue
+            font-size: 16px
+          
+          .search-input
+            width: 100%
+            padding: 14px 14px 14px 45px
+            border: 1px solid $border-color
+            border-radius: 12px
+            font-size: 15px
+            transition: all 0.3s ease
+            
+            &:focus
+              outline: none
+              border-color: $main-blue
+              box-shadow: 0 0 0 3px rgba($main-blue, 0.1)
+            
+            &::placeholder
+              color: $text-light
+          
+          .clear-icon
+            position: absolute
+            right: 16px
+            top: 50%
+            transform: translateY(-50%)
+            color: $text-light
+            font-size: 14px
+            cursor: pointer
+            padding: 5px
+            border-radius: 50%
+            
+            &:hover
+              color: $text-dark
+              background-color: $blue-light
+      
       .articles-list
+        display: grid
+        gap: 20px
+        
         .article
           display: flex
           flex-direction: column
-          margin-bottom: 15px
-          padding: 15px
-          background-color: #003366
-          color: white
-          border-radius: 5px
-          transition: transform 0.2s, box-shadow 0.2s
-
+          padding: 20px
+          border-radius: 12px
+          transition: all 0.3s ease
+          background-color: $main-blue
+          
           &:hover
             transform: translateY(-5px)
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1)
-
-          .article-title
-            font-weight: bold
-            margin-bottom: 5px
-
-          .article-title a, .article-content a
-            color: white
-            text-decoration: none
-
-          .article-content a.read-more
-            text-decoration: underline
-
-          .article-title a:hover, .article-content a:hover
-            text-decoration: underline
-
+            box-shadow: 0 8px 25px rgba($main-blue, 0.25)
+          
+          .article-header
+            margin-bottom: 12px
+            
+            .article-title
+              font-size: 18px
+              font-weight: 600
+              line-height: 1.4
+              margin: 0
+              
+              a
+                color: white
+                text-decoration: none
+                transition: color 0.2s
+                
+                &:hover
+                  text-decoration: underline
+          
+          .article-content
+            color: rgba(255, 255, 255, 0.9)
+            font-size: 14px
+            line-height: 1.6
+            margin-bottom: 15px
+            
+            p
+              margin: 0 0 15px 0
+            
+            .read-more
+              display: inline-flex
+              align-items: center
+              gap: 8px
+              color: white
+              text-decoration: none
+              font-weight: 500
+              font-size: 14px
+              padding: 6px 12px
+              border-radius: 6px
+              background-color: rgba(255, 255, 255, 0.15)
+              transition: all 0.2s
+              align-self: flex-start
+              
+              i
+                font-size: 12px
+              
+              &:hover
+                background-color: rgba(255, 255, 255, 0.25)
+                transform: translateX(3px)
+      
       .no-articles
+        display: flex
+        flex-direction: column
+        align-items: center
+        justify-content: center
+        padding: 40px 0
+        color: $text-medium
         text-align: center
-        font-size: 18px
-        color: #333
-
+        
+        .no-results-icon
+          font-size: 40px
+          color: $text-light
+          margin-bottom: 20px
+        
+        p
+          font-size: 16px
+          margin-bottom: 20px
+        
+        .reset-button
+          padding: 10px 20px
+          background-color: $main-blue
+          color: white
+          border: none
+          border-radius: 8px
+          font-weight: 500
+          cursor: pointer
+          transition: all 0.2s
+          
+          &:hover
+            background-color: $darker-blue
+            transform: translateY(-2px)
+            box-shadow: 0 5px 15px rgba($main-blue, 0.2)
+      
       .highlight
-        background-color: yellow
-        color: black
+        background-color: $highlight-color
+        padding: 0 2px
+        border-radius: 2px
+        color: $darker-blue
+        font-weight: 500
+
+@media only screen and (max-width: 992px)
+  .container .main
+    padding: 30px 20px
+    
+    .panel
+      .back-link
+        margin-bottom: 25px
+      
+      .header
+        .title
+          font-size: 28px
 
 @media only screen and (max-width: 768px)
-  .container
-    .main
-      .panel
-        width: 90%
-
-        .back-button
-          top: 5px
-          left: 10px
-          font-size: 25px
-
+  .container .main
+    padding: 20px 15px
+    
+    .panel
+      .back-link
+        margin-bottom: 20px
+        font-size: 14px
+      
+      .header
+        margin-bottom: 25px
+        
         .title
-          font-size: 22px
-
-  .article
-    padding: 10px
-    margin-bottom: 10px
+          font-size: 24px
+          text-align: left
+      
+      .search-container
+        margin-bottom: 25px
+        
+        .input-wrapper .search-input
+          padding: 12px 12px 12px 40px
+      
+      .articles-list
+        gap: 15px
+        
+        .article
+          padding: 16px
+          
+          .article-title
+            font-size: 16px
+          
+          .article-content
+            font-size: 14px

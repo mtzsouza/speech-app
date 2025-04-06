@@ -1,5 +1,11 @@
 <div class="update-name-container">
-    <h2>{{ userLanguage.updateUsername.updateUsername }}</h2>
+    <a routerLink="/" class="back-button">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    
+    <h2>Request Admin Access</h2>
     <form (submit)="onSubmit()">
       <!-- Request Code -->
       <div class="form-group">
@@ -9,18 +15,20 @@
           id="code"
           [(ngModel)]="code"
           name="code"
+          placeholder="Enter admin access code"
+          autocomplete="off"
         />
       </div>
 
       <div *ngIf="emptyFieldError" class="error-message">
-        <p>Request Failed</p>
+        <i class="fas fa-exclamation-circle"></i>
+        <p>Request Failed. Please enter a valid admin code.</p>
       </div>
   
       <!-- Action Buttons -->
       <div class="form-actions">
         <button type="button" class="cancel-btn" (click)="onCancel()">{{ userLanguage.updateUsername.cancel }}</button>
-        <button type="submit" class="update-btn">OK</button>
+        <button type="submit" class="update-btn">Submit Request</button>
       </div>
     </form>
   </div>
-  

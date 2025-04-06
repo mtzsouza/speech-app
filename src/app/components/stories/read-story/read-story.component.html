@@ -1,13 +1,28 @@
 <div class="container">
     <div class="panel">
-        <a href="/stories" class="button">←</a>
+        <a routerLink="/stories" class="button">←</a>
         <div class="control button">
             @if (!isReading) {
-                <img src="../../../../assets/start-icon.png" alt="Start Reading" (click)="this.speak()">
+                @if (!generatedAudio) {
+                    <img src="../../../../assets/start-icon.png" alt="Start Reading" (click)="this.speak()">
+                } @else {
+                    <img src="../../../../assets/start-icon.png" alt="Continue Reading" (click)="this.pauseOrResume()">
+                    <img src="../../../../assets/restart-icon.png" alt="Restart Story" (click)="this.restart()">
+                }
             } @else {
-                <img src="../../../../assets/stop-icon.png" alt="Stop Reading" (click)="this.stop()">
+                <img src="../../../../assets/stop-icon.png" alt="Stop Reading" (click)="this.pauseOrResume()">
+                <img src="../../../../assets/restart-icon.png" alt="Restart Story" (click)="this.restart()">
             }
         </div>
+        @if (isAdmin) {
+            <div class="audio-gen button" (click)="fixAudio()">
+                @if (!isGenerating) {
+                    🔊
+                } @else {
+                    Wait. Do not reload.
+                }
+            </div>
+        }
         @if (isEnglish()) {
             <h1 class="title">{{ this.title_english }}</h1>
             <p>{{ this.text_english }}</p>

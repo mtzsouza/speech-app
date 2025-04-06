@@ -1,0 +1,9 @@
+<button (click)="startRecording()">Record</button>
+<p>Full Text: {{ result?.text }}</p>
+<p>Language code: {{ result?.language_code }}</p>
+<p>
+    Words:
+    @for (word of result?.words; track word) {
+        <span> {{ word }} |</span>
+    }
+</p>
