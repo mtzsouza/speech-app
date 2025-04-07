@@ -1,0 +1,135 @@
+.speech-panel
+  text-align: center
+  max-width: 800px
+  margin: 30px auto
+  padding: 30px
+  background: #fefefe
+  border-radius: 16px
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1)
+
+  h2
+    font-size: 2.5em
+    font-weight: 700
+    margin-bottom: 10px
+    color: #24457B
+
+  .menu-bar
+    font-size: 1.1em
+    background: #eee
+    padding: 10px
+    border-radius: 8px
+    display: inline-block
+    margin: 20px 0
+
+  .game-visuals
+    margin: 25px auto
+    max-width: 500px
+
+    .progress-wrapper
+      height: 10px
+      background: #ccc
+      border-radius: 5px
+      overflow: hidden
+      margin-bottom: 20px
+
+      .progress-bar
+        height: 100%
+        background: #4caf50
+        transition: width 0.4s ease
+
+    .scene
+      position: relative
+      background: #d6eef7
+      border-radius: 10px
+      height: 220px
+      overflow: hidden
+
+      .character
+        position: absolute
+        bottom: 0
+        left: 20px
+        width: 100px
+        transition: left 0.6s ease-in-out
+
+        &.running
+          left: 320px
+
+        img
+          width: 100%
+          height: auto
+
+      .obstacle
+        position: absolute
+        bottom: 0
+        right: 20px
+        font-size: 3em
+        animation: bounce 1s infinite
+
+  p
+    font-size: 1.4em
+    line-height: 1.75
+    color: #333
+    margin: 20px 0
+
+  .highlight, strong u
+    background: #ffea00
+    padding: 3px 6px
+    border-radius: 5px
+    font-weight: 700
+    color: #000
+    text-decoration: underline
+
+  button
+    padding: 10px 20px
+    font-size: 1em
+    background: #24457B
+    color: white
+    border: none
+    border-radius: 6px
+    cursor: pointer
+
+    &:hover
+      background: #3a5ba0
+
+    &:disabled
+      opacity: 0.6
+      cursor: not-allowed
+
+  .game-over
+    margin-top: 30px
+    font-size: 1.3em
+    color: #b71c1c
+    font-weight: bold
+
+// ✅ Animation Effects
+@keyframes bounce
+  0%, 100%
+    transform: translateY(0)
+  50%
+    transform: translateY(-8px)
+
+.speech-panel.correct-flash
+  box-shadow: 0 0 10px 4px #b2f5b2 !important
+  transition: box-shadow 0.3s ease-in-out
+
+.speech-panel.shake-error
+  animation: shake 0.6s ease-in-out
+
+@keyframes shake
+  0%, 100%
+    transform: translateX(0)
+  20%, 60%
+    transform: translateX(-8px)
+  40%, 80%
+    transform: translateX(8px)
+
+@keyframes jump
+  0%
+    transform: translateY(0)
+  50%
+    transform: translateY(-40px)
+  100%
+    transform: translateY(0)
+
+.character.jump
+  animation: jump 0.6s ease

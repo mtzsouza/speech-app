@@ -27,6 +27,7 @@ import { AddStoryComponent } from './components/stories/add-story/add-story.comp
 import { ReadStoryComponent } from './components/stories/read-story/read-story.component';
 import { TuneComponent } from './components/games/tune/tune.component';
 import { TestComponent } from './components/test/test.component';
+import { SpeechWalkComponent } from './components/games/speech-walk/speech-walk.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -99,6 +100,12 @@ export const routes: Routes = [
     {
         path:'bingo',
         component: BingoComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'speech-walk',
+        component: SpeechWalkComponent,
         ...canActivate(redirectUnauthorizedToLogin)
     },
 

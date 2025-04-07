@@ -1,0 +1,49 @@
+<div class="container">
+    <app-navbar></app-navbar>
+  
+    <div class="speech-panel" [ngClass]="feedbackClass">
+      <div class="menu-bar">❤️ Lives: <strong>{{ lives }}</strong></div>
+  
+      <div class="game-visuals">
+        <div class="progress-wrapper">
+          <div class="progress-bar" [style.width.%]="currentProgress"></div>
+        </div>
+  
+        <h2>Speech-Walk</h2>
+
+        <div class="scene">
+          <div 
+            class="character"
+            [ngClass]="{ running: characterState === 'running' }">
+            <img 
+              [src]="characterState === 'running' 
+                        ? '/assets/characters/runner.gif' 
+                        : '/assets/characters/idle.gif'" 
+              alt="Character" />
+          </div>
+  
+          <div class="obstacle" *ngIf="isCheckpoint">
+            {{ isListening ? '🎤' : '🚧' }}
+          </div>
+        </div>
+      </div>
+  
+      <p [innerHTML]="currentText"></p>
+  
+      <div *ngIf="isCheckpoint">
+        <p><strong>Say the highlighted word to continue</strong></p>
+        <button [disabled]="isListening" (click)="handleNext()">
+          🎤 {{ isListening ? 'Listening...' : 'Say It' }}
+        </button>
+      </div>
+  
+      <div *ngIf="!isCheckpoint">
+        <button (click)="handleNext()">Next</button>
+      </div>
+  
+      <p class="game-over" *ngIf="lives <= 0">
+        💀 Game Over. Refresh to restart.
+      </p>
+    </div>
+  </div>
+  
