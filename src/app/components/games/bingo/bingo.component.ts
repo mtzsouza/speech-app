@@ -23,14 +23,27 @@ export class BingoComponent implements OnInit {
   currentSound: string | null = null;
   displayedSound: string | null = null;
   gameWon = false;
+  gameStarted = false;
 
-  phoneticMap: Record<string, string> = {
+  public phoneticMap: Record<string, string> = {
     '/eɪ/': 'a (long)', '/æ/': 'a (short)',
     '/i/': 'e (long)', '/ɛ/': 'e (short)',
     '/aɪ/': 'i (long)', '/ɪ/': 'i (short)',
     '/oʊ/': 'o (long)', '/ɑ/': 'o (short)',
     '/ju/': 'u (long)', '/ʌ/': 'u (short)', '/ʊ/': 'u (short)'
   };
+
+  showInstructions = true;
+  instructionStep = 1;
+
+  nextInstruction(): void {
+    this.instructionStep++;
+  }
+
+  closeInstructions(): void {
+    this.showInstructions = false;
+  }
+
 
   constructor(private languageService: LanguageService) {}
 
@@ -61,6 +74,8 @@ export class BingoComponent implements OnInit {
   currentLanguage: string = '';
 
   playSound(): void {
+    
+    if (!this.gameStarted) this.gameStarted = true;
     if (this.sounds.length === 0) return;
 
     if (this.currentSound) {
@@ -226,6 +241,7 @@ checkWin(): void {
     this.currentSound = null;
     this.displayedSound = null;
     this.gameWon = false;
+    this.gameStarted = false;
     this.generateBoard();
   }
 }
