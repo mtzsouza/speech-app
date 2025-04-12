@@ -1,0 +1,50 @@
+<div class="container">
+    <app-navbar></app-navbar>
+    <div class="main">
+      <div class="panel" #lakePanel>
+        <div class="game-container">
+            <svg class="lake-click-mask" viewBox="0 0 3309 2690">
+              <path
+              d="M38 731L6 822L80.5 1179.5V1398L6 1686L80.5 1846L464.5 2155.5L961 2524L1233 2577L1494.5 2684L1990.5 2524H2428L2844 2203.5L2999 1947.5L3063 1467.5L3180.5 1286L3271 1003L3303 640.5L3180.5 507L2599 149.5L2326.5 75L2038.5 5.5H1852L1142 219L822 176.5L38 731Z"
+              fill="rgba(0, 0, 0, 0.001)"
+              stroke="black" stroke-width="10"
+              (click)="onLakeClick($event)"
+              pointer-events="visibleFill"
+              />
+            </svg>
+        
+            <img *ngIf="bobberPos" class="bobber" [ngStyle]="{ top: bobberPos.y + 'px', left: bobberPos.x + 'px' }" src="/assets/games/fishing/bobber.svg" />
+            <img *ngIf="fishVisible && fishPos" class="fish-shadow" [ngStyle]="{ top: fishPos.y + 'px', left: fishPos.x + 'px', transform: 'scale(' + fishScale + ')'}" src="/assets/games/fishing/fish_shadow.svg"/>
+            <img *ngIf="showSplash" class="splash" [ngStyle]="{ top: bobberPos?.y + 'px', left: bobberPos?.x + 'px' }" src="/assets/games/fishing/splash.svg" />
+            <img *ngIf="caughtFishId" class="fish-caught" [src]="'/assets/games/fishing/fish' + caughtFishId + '.png'" />
+    
+            <div class="menu" *ngIf="showPhoneticPrompt">
+                <ng-container *ngIf="!awaitingSpeech; else awaiting">
+                  <p>Select the sound for: 
+                    <span class="word">
+                      {{wordParts.before}}<span class="highlight">{{wordParts.highlight}}</span>{{wordParts.after}}
+                    </span>
+                  </p>
+                  <button *ngFor="let opt of phoneticOptions" (click)="selectOption(opt)">
+                    {{ getDisplayOption(opt) }}
+                  </button>
+                </ng-container>
+              
+                <ng-template #awaiting>
+                    <p>{{ preSpeechMessage }}</p>
+                    <button (click)="startSpeechRecognition()">🎤 Speak</button>
+                </ng-template>
+              </div>
+              
+    
+            <div class="fishing-menu" *ngIf="showFishingMenu" (mousedown)="onHoldStart()" (mouseup)="onHoldEnd()" (mouseleave)="onHoldEnd()">
+            <div class="bar-container">
+                <div class="target" [ngStyle]="{ top: fishIconPosition + '%' }"></div>
+                <div class="bar" [ngStyle]="{ top: barPosition + '%' }"></div>
+            <p>Catch: {{ catchPercent }}%</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

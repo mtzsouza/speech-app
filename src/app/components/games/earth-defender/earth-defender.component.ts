@@ -98,7 +98,7 @@ export class EarthDefenderComponent implements OnInit {
     "w": { "Won": "W", "Swim": "w", "Away": "w" },
     "y": { "Year": "Y", "Yet": "Y", "Yellow": "Y" },
     "z": { "Zoo": "Z", "Busy": "s", "His": "s" },
-    "zh": { "Measure": "su", "Vision": "si", "Massage": "s" },
+    "zh": { "Measure": "su", "Vision": "si", "Massage": "ge" },
 
     "/a/": { "Papa": "a", "Agua": "a", "Amigo": "a" },
     "/e/": { "Ella": "e", "Escuchar": "e", "Elefante": "e" },
