@@ -9,6 +9,7 @@
         .panel
             position: relative
             min-height: 80vh
+            margin: 20px
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("./game-assets/background.jpg") no-repeat center center/cover
             background-position: center
             background-size: cover
@@ -95,6 +96,12 @@
                 flex-direction: column
                 justify-content: start
                 align-items: center
+
+                .displayed-time
+                    font-family: Inter
+                    font-size: 100px
+                    color: gold
+                    text-shadow: 1px
                 
                 .choice-area
                     display: flex
@@ -122,7 +129,8 @@
                 justify-content: center
                 align-items: center
                 text-align: center
-                color: GhostWhite
+                color: gold
+                font-family: Inter
                 background-color: rgba(0, 55, 11, 0.8)
                 border-radius: 10px
 
@@ -192,6 +200,9 @@
                 .game-area
                     width: 85%
                     height: 80%
+
+                    .displayed-time
+                        font-size: 50px
 
                     .choice-area
                         .choice-button

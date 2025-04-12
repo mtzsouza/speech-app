@@ -54,7 +54,7 @@ export class TuneComponent {
     correctSound: "",
     wrongSound: ""
   };
-  questionTime = 6;
+  questionTime = 5;
   displayedTime = 5;
   responded = false;
   randomizer = Math.random();
