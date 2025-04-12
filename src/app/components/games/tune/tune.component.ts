@@ -5,7 +5,7 @@ import { SpeechService } from '../../../services/speech.service';
 import { DatabaseService } from '../../../services/database.service';
 import { AuthService } from '../../../services/auth.service';
 import * as english from '../../../utils/english.json'
-import pairs from './assets/pairs.json';
+import pairs from './game-assets/pairs.json';
 
 interface Question {
   word: string;
