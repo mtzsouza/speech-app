@@ -68,6 +68,14 @@ export class EarthDefenderComponent implements OnInit {
     this.startGameLoop();
   }
 
+  private updateEarthDefenderProgress(): void {
+    const current = Number(localStorage.getItem('earthDefenderProgress')) || 0;
+    const updated = Math.min(current + 10, 100);
+    localStorage.setItem('earthDefenderProgress', String(updated));
+    console.log(`Earth Defender Progress: ${updated}%`);
+  }
+  
+
   startGameLoop(): void {
     this.gameOver = false;
     this.isDisabled = false;
@@ -81,8 +89,12 @@ export class EarthDefenderComponent implements OnInit {
     this.timerInterval = setInterval(() => {
       if (!this.gameOver) {
         this.timer++;
+    
+        if (this.timer % 10 === 0) {
+          this.updateEarthDefenderProgress(); // ✅ Every 10s
+        }
       }
-    }, 1000);
+    }, 1000);    
 
     this.gameInterval = setInterval(() => {
       if (this.gameOver) {

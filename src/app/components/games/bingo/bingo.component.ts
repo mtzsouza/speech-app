@@ -59,6 +59,13 @@ export class BingoComponent implements OnInit {
     this.generateBoard();
   }
 
+  private updateProgress(): void {
+    const current = Number(localStorage.getItem('bingoProgress')) || 0;
+    const newProgress = Math.min(current + 10, 100); // +10% per win, max 100%
+    localStorage.setItem('bingoProgress', String(newProgress));
+    console.log(`🎯 Bingo Progress Updated: ${newProgress}%`);
+  }
+
   generateBoard(): void {
     if(this.language.dashboard.title === 'Dashboard')
       this.currentLanguage = 'english';
@@ -198,6 +205,7 @@ triggerConfetti(): void {
     });
   }
 
+
   function animateConfetti() {
     drawConfetti();
     updateConfetti();
@@ -223,11 +231,8 @@ checkWin(): void {
 
   if (isRowWin || isColWin || isDiagonalWin) {
     this.gameWon = true;
-
-    // Start confetti animation first
     this.triggerConfetti();
-
-    // Show the victory message with a small delay to sync effect
+    this.updateProgress();
     setTimeout(() => {
       document.getElementById("victoryMessage")!.style.display = "block";
     }, 1000);

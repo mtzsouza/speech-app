@@ -1,49 +1,106 @@
 <div class="container">
-    <app-navbar></app-navbar>
-  
-    <div class="speech-panel" [ngClass]="feedbackClass">
-      <div class="menu-bar">❤️ Lives: <strong>{{ lives }}</strong></div>
-  
+  <app-navbar></app-navbar>
+
+  <div class="speech-panel" [ngClass]="feedbackClass">
+    <div class="menu-bar">❤️ Lives: <strong>{{ lives }}</strong></div>
+
+    <div class="story-selection" *ngIf="!selectedStory">
+      <h2>Choose a Story</h2>
+      <div class="story-grid">
+        <div 
+          class="story-card" 
+          *ngFor="let story of storyList"
+          (click)="selectStory(story)">
+          
+          <h3>{{ story.title }}</h3>
+          <p class="phoneme">{{ story.phoneme }}</p>
+          <p class="summary">{{ story.summary }}</p>
+    
+          <div *ngIf="isStoryCompleted(story)" class="completion-tag">
+            ✅ Completed
+          </div>
+        </div>
+      </div>
+    </div>    
+
+    <!-- Instructions -->
+    <div class="instructions-overlay" *ngIf="showInstructions && selectedStory">
+      <div class="instructions-box">
+        <button class="close-btn" (click)="closeInstructions()">✖</button>
+
+        <h2>🗣️ How to Play Speech-Walk</h2>
+
+        <div class="instruction-step">
+          <p><strong>🎮 1. Start the Game</strong></p>
+          <p>Click the <strong>“Start”</strong> button to begin your journey.</p>
+        </div>
+
+        <div class="instruction-step">
+          <p><strong>🚧 2. Face the Obstacle</strong></p>
+          <p>When the <strong>caution sign 🚧</strong> appears, your character is blocked.</p>
+        </div>
+
+        <div class="instruction-step">
+          <p><strong>🎤 3. Say the Word</strong></p>
+          <p>Click <strong>“Say It”</strong> to activate your mic and speak the <u>highlighted</u> word aloud.</p>
+          <p>If correct, your character continues. If not, you lose a ❤️.</p>
+        </div>
+
+        <p class="final-note">Survive the journey by saying the right words. Good luck!</p>
+
+        <button (click)="closeInstructions()">✅ Got it!</button>
+      </div>
+    </div>
+
+    <!-- Main Game Panel -->
+    <ng-container *ngIf="selectedStory">
       <div class="game-visuals">
         <div class="progress-wrapper">
           <div class="progress-bar" [style.width.%]="currentProgress"></div>
         </div>
-  
+
         <h2>Speech-Walk</h2>
 
         <div class="scene">
-          <div 
-            class="character"
-            [ngClass]="{ running: characterState === 'running' }">
+          <div class="character" [ngClass]="{ running: characterState === 'running' }">
             <img 
               [src]="characterState === 'running' 
                         ? '/assets/characters/runner.gif' 
                         : '/assets/characters/idle.gif'" 
               alt="Character" />
           </div>
-  
+
           <div class="obstacle" *ngIf="isCheckpoint">
             {{ isListening ? '🎤' : '🚧' }}
           </div>
         </div>
       </div>
-  
+
       <p [innerHTML]="currentText"></p>
-  
+
       <div *ngIf="isCheckpoint">
         <p><strong>Say the highlighted word to continue</strong></p>
         <button [disabled]="isListening" (click)="handleNext()">
           🎤 {{ isListening ? 'Listening...' : 'Say It' }}
         </button>
       </div>
-  
+
       <div *ngIf="!isCheckpoint">
         <button (click)="handleNext()">Next</button>
       </div>
-  
+      
       <p class="game-over" *ngIf="lives <= 0">
         💀 Game Over. Refresh to restart.
       </p>
-    </div>
+
+      <div class="victory-screen" *ngIf="isVictory">
+        <h2>🎉 Congrats!</h2>
+        <p>You finished the story! 🏁</p>
+        <div class="victory-buttons">
+          <button (click)="restartStory()">🔁 Play Again</button>
+          <button (click)="returnToSelection()">📚 Back to Stories</button>
+        </div>
+      </div>
+    </ng-container>
   </div>
-  
+</div>

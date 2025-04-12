@@ -3,18 +3,22 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SpeechService, SpeechRecognitionResult } from '../../../services/speech.service';
+
+const STORAGE_KEY = 'speechWalkCompleted';
 
 @Component({
   selector: 'app-speech-walk',
   standalone: true,
-  imports: [NavbarComponent, RouterModule, CommonModule],
+  imports: [NavbarComponent, RouterModule, CommonModule, HttpClientModule],
   templateUrl: './speech-walk.component.html',
   styleUrl: './speech-walk.component.sass',
 })
 export class SpeechWalkComponent implements OnInit {
   private speechService = inject(SpeechService);
   private sanitizer = inject(DomSanitizer);
+  private http = inject(HttpClient);
 
   currentText: SafeHtml = '';
   isListening = false;
@@ -24,36 +28,41 @@ export class SpeechWalkComponent implements OnInit {
   currentProgress = 0;
   characterState: 'standing' | 'running' = 'standing';
   feedbackClass = '';
+  showInstructions = true;
+  isVictory = false;
 
-  story: string[] = [
-    "Tom hops into the car.",
-    "'**Mom**, can I pick the **food** today?' he asks.",
-    "**Mom** nods. '**Of course!**'",
-    "They go to the **grocery** store.",
-    "Tom holds a big shopping cart.",
-    "'Let’s go to the fruit section!' he says.",
-    "**Mom** picks **oranges**. '**Oranges** are so good!'",
-    "Tom picks a **box** of plums. '**Plums** are sweet!'",
-    "He looks for **potatoes**. 'I want to cook today!' Tom says.",
-    "**Mom** smiles. '**Okay**, let’s get **onions** too.'",
-    "Tom looks for **tomatoes**. '**Tomatoes** go in salad!'",
-    "He spots a **box** of **cookies**. '**Mom**, can we?'",
-    "**Mom** nods. '**One box!**'",
-    "Tom grins. He pushes the cart to the cold **food** section.",
-    "'Milk, yogurt, and some frozen **corn**!' he lists.",
-    "**Mom** helps him pick. '**That’s all!**' she says.",
-    "They go to the cashier.",
-    "Tom puts **food** on the counter. '**Good job**, Tom!' says **Mom**.",
-    "Tom helps pack the bags.",
-    "On the way **home**, he smiles. '**Food shopping is fun!**'"
-  ];
+  completedStories: string[] = [];
+  storyList: any[] = [];
+  selectedStory: any = null;
+  story: string[] = [];
 
   ngOnInit(): void {
+    this.http.get<any[]>('assets/stories.json').subscribe(data => {
+      this.storyList = data;
+      this.loadProgress();
+    });
+  }
+
+  loadProgress(): void {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    this.completedStories = stored ? JSON.parse(stored) : [];
+  }
+
+  isStoryCompleted(story: any): boolean {
+    return this.completedStories.includes(story.title);
+  }
+
+  selectStory(story: any): void {
+    this.selectedStory = story;
+    this.story = story.lines;
+    this.currentIndex = 0;
+    this.lives = 3;
+    this.currentProgress = 0;
     this.updateText();
   }
 
   async handleNext(): Promise<void> {
-    if (this.currentIndex >= this.story.length - 1 || this.lives <= 0) return;
+    if (this.lives <= 0 || this.isVictory) return;
 
     const text = this.story[this.currentIndex];
     const checkpointWord = this.extractCheckpointWord(text);
@@ -86,9 +95,41 @@ export class SpeechWalkComponent implements OnInit {
   }
 
   nextText(): void {
+    const reachedEnd = this.currentIndex >= this.story.length - 1;
+
+    if (reachedEnd) {
+      this.isVictory = true;
+      this.currentIndex = this.story.length - 1;
+      this.currentProgress = 100;
+      this.updateText();
+
+      const title = this.selectedStory.title;
+      if (!this.completedStories.includes(title)) {
+        this.completedStories.push(title);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.completedStories));
+      }
+      return;
+    }
+
     this.currentIndex++;
     this.currentProgress = (this.currentIndex / this.story.length) * 100;
     this.updateText();
+  }
+
+  restartStory(): void {
+    this.currentIndex = 0;
+    this.lives = 3;
+    this.isVictory = false;
+    this.currentProgress = 0;
+    this.updateText();
+  }
+
+  returnToSelection(): void {
+    this.selectedStory = null;
+    this.isVictory = false;
+    this.currentIndex = 0;
+    this.currentProgress = 0;
+    this.lives = 3;
   }
 
   updateText(): void {
@@ -114,7 +155,7 @@ export class SpeechWalkComponent implements OnInit {
     return match ? match[1] : null;
   }
 
-  hasCheckpointWord(text: string): boolean {
-    return /\*\*(.*?)\*\*/.test(text);
+  closeInstructions(): void {
+    this.showInstructions = false;
   }
 }

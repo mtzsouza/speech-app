@@ -1,3 +1,35 @@
+@keyframes bounce
+  0%
+    transform: translateY(0)
+  100%
+    transform: translateY(0)
+  50%
+    transform: translateY(-8px)
+
+@keyframes shake
+  0%
+    transform: translateX(0)
+  100%
+    transform: translateX(0)
+  20%
+    transform: translateX(-8px)
+  60%
+    transform: translateX(-8px)
+  40%
+    transform: translateX(8px)
+  80%
+    transform: translateX(8px)
+
+@keyframes jump
+  0%
+    transform: translateY(0)
+  50%
+    transform: translateY(-40px)
+  100%
+    transform: translateY(0)
+
+
+
 .speech-panel
   text-align: center
   max-width: 800px
@@ -10,14 +42,14 @@
   h2
     font-size: 2.5em
     font-weight: 700
-    margin-bottom: 10px
     color: #24457B
+    margin-bottom: 10px
 
   .menu-bar
-    font-size: 1.1em
     background: #eee
     padding: 10px
     border-radius: 8px
+    font-size: 1.1em
     display: inline-block
     margin: 20px 0
 
@@ -101,35 +133,145 @@
     color: #b71c1c
     font-weight: bold
 
-// ✅ Animation Effects
-@keyframes bounce
-  0%, 100%
-    transform: translateY(0)
-  50%
-    transform: translateY(-8px)
+  &.correct-flash
+    box-shadow: 0 0 10px 4px #b2f5b2 !important
+    transition: box-shadow 0.3s ease-in-out
 
-.speech-panel.correct-flash
-  box-shadow: 0 0 10px 4px #b2f5b2 !important
-  transition: box-shadow 0.3s ease-in-out
+  &.shake-error
+    animation: shake 0.6s ease-in-out
 
-.speech-panel.shake-error
-  animation: shake 0.6s ease-in-out
 
-@keyframes shake
-  0%, 100%
-    transform: translateX(0)
-  20%, 60%
-    transform: translateX(-8px)
-  40%, 80%
-    transform: translateX(8px)
+.story-selection
+  text-align: center
+  margin-top: 30px
 
-@keyframes jump
-  0%
-    transform: translateY(0)
-  50%
-    transform: translateY(-40px)
-  100%
-    transform: translateY(0)
+  h2
+    font-size: 2em
+    margin-bottom: 20px
 
-.character.jump
-  animation: jump 0.6s ease
+.story-grid
+  display: flex
+  flex-wrap: wrap
+  gap: 20px
+  justify-content: center
+
+.story-card
+  background: #f9f9f9
+  border-radius: 10px
+  padding: 20px
+  width: 260px
+  cursor: pointer
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+  transition: transform 0.3s ease
+
+  &:hover
+    transform: translateY(-5px)
+
+  h3
+    margin: 0 0 10px
+    color: #24457B
+
+  .phoneme
+    font-weight: bold
+    color: #555
+
+  .summary
+    font-size: 0.95em
+    color: #444
+
+.completion-tag
+  margin-top: 10px
+  font-size: 0.95em
+  font-weight: bold
+  color: #2e7d32
+
+.instructions-overlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background: rgba(0, 0, 0, 0.75)
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 9999
+
+  .instructions-box
+    background: #fff
+    padding: 30px
+    border-radius: 12px
+    max-width: 600px
+    width: 90%
+    position: relative
+    text-align: center
+    font-size: 1.2em
+    color: #333
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3)
+
+    h2
+      font-size: 1.8em
+      font-weight: bold
+      margin-bottom: 15px
+
+    .instruction-step
+      margin-bottom: 20px
+
+    .final-note
+      font-style: italic
+      color: #666
+
+    .close-btn
+      position: absolute
+      top: 10px
+      right: 10px
+      background: none
+      border: none
+      font-size: 1.5em
+      cursor: pointer
+
+    button
+      margin-top: 15px
+      padding: 10px 20px
+      font-size: 1em
+      background: #24457B
+      color: white
+      border: none
+      border-radius: 6px
+      cursor: pointer
+
+.victory-screen
+  background: #f0fff4
+  border: 2px solid #4caf50
+  padding: 30px
+  margin-top: 20px
+  border-radius: 12px
+  text-align: center
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+
+  h2
+    color: #2e7d32
+    font-size: 2em
+    margin-bottom: 10px
+
+  p
+    font-size: 1.2em
+    color: #333
+
+  .victory-buttons
+    margin-top: 20px
+    display: flex
+    justify-content: center
+    gap: 20px
+
+    button
+      background: #24457B
+      color: white
+      padding: 10px 20px
+      border: none
+      border-radius: 8px
+      font-size: 1em
+      cursor: pointer
+
+      &:hover
+        background: #3a5ba0
