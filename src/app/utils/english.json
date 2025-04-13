@@ -211,5 +211,32 @@
             "dontShowAgain": "Don't show again",
             "startGame": "Start Game"
         }
+    },
+    "fishing": {
+        "instructions": {
+            "title": "How to Play",
+            "line1": "Click on the water to cast your bobber.",
+            "line2": "When asked, select the sounds made by the highlighted part of the word.",
+            "line3": "If you get it right, click the \"speak\" button and say the word.",
+            "line4": "If you get it right, hold the mouse button to raise the blue bar, and release to drop it.",
+            "line5": "Try to keep the blue bar over the fish until the green bar fills up.",
+            "line6": "How many fish can you catch before time runs out?",
+            "dontShowAgain": "Don't Show Again",
+            "start": "Start Game"
+        },
+        "gameOver": {
+            "title": "Time's Up!",
+            "caught": "You caught {{ fishCaught }} fish",
+            "restart": "Restart"
+        },
+        "scoreboard": {
+            "fish": "Fish: {{ fishCaught }}",
+            "timeLeft": "Time Left: {{ timeLeft }}",
+            "mostFish": "Most Fish: {{ bestFishCaught }}"
+        },
+        "phoneticPrompt": {
+            "select": "Select the sound for:",
+            "speak": "🎤 Speak"
+        }
     }
 }

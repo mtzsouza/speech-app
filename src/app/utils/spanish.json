@@ -191,5 +191,32 @@
             "dontShowAgain": "No mostrar de nuevo",
             "startGame": "Comenzar el Juego"
         }
+    },
+    "fishing": {
+        "instructions": {
+            "title": "Cómo Jugar",
+            "line1": "Haz clic en el agua para lanzar tu bobber.",
+            "line2": "Cuando se le pregunte, seleccione los sonidos producidos por la parte resaltada de la palabra.",
+            "line3": "Si aciertas, pulsa el botón «hablar» y di la palabra.",
+            "line4": "Si lo consigues, mantén pulsado el botón del ratón para subir la barra azul y suéltalo para bajarla.",
+            "line5": "Intenta mantener la barra azul sobre el pez hasta que se llene la barra verde.",
+            "line6": "¿Cuántos peces puedes pescar antes de que se acabe el tiempo?",
+            "dontShowAgain": "No vuelvas a aparecer",
+            "start": "Empezar Juego"
+        },
+        "gameOver": {
+            "title": "¡Se acabó el tiempo!",
+            "caught": "Atrapaste a {{ fishCaught }} peces",
+            "restart": "Reinicie"
+        },
+        "scoreboard": {
+            "fish": "Pescado: {{ fishCaught }}",
+            "timeLeft": "Tiempo restante: {{ timeLeft }}",
+            "mostFish": "La mayoría de los peces: {{ bestFishCaught }}"
+        },
+        "phoneticPrompt": {
+            "select": "Selecciona el sonido para:",
+            "speak": "🎤 Habla"
+        }
     }
 }

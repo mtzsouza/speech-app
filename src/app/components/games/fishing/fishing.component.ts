@@ -16,11 +16,15 @@ export class FishingComponent implements OnInit {
   languageService = inject(LanguageService);
   speechService = inject(SpeechService);
   language: any;
+  showInstructions: boolean | null = null;
 
   @ViewChild('lakePanel') lakePanelRef!: ElementRef;
   @ViewChild('bobber') bobberRef!: ElementRef;
   @ViewChild('fishShadow') fishRef!: ElementRef;
 
+  timeLeft: number = 100;
+  gameTimer: any;
+  isFishApproaching = false;
   bobberPos: { x: number; y: number } | null = null;
   bobberSize: number = 30;
   bobberCollided = false;
@@ -37,10 +41,14 @@ export class FishingComponent implements OnInit {
   result: SpeechRecognitionResult | null = null;
 
   showFishingMenu = false;
+  gameOver = false;
   catchPercent = 0;
   barPosition = 50;
   fishIconPosition = 60;
   barInterval: any;
+  fishMoveInterval: any;
+  fishMovePattern: number = Math.floor(Math.random() * 4); // 0 to 3
+
 
   caughtFishId: number | null = null;
   caughtFishSize: number = 100;
@@ -48,6 +56,7 @@ export class FishingComponent implements OnInit {
   showSplash = false;
   splashPos: { x: number; y: number } | null = null;
   fishCaught = 0;
+  bestFishCaught = 0;
   isCatching = false;
   isHolding = false;
   holdInterval: any;
@@ -156,10 +165,35 @@ export class FishingComponent implements OnInit {
     this.languageService.getLanguage().then((lang) => {
       this.language = lang;
     });
+    const hide = localStorage.getItem('hideInstructions');
+    this.showInstructions = !(hide === 'true');  // default tru
+    if(!this.showInstructions)
+      this.startGameTimer();
+    this.bestFishCaught = parseInt(localStorage.getItem('bestFishCaught') || '0');
   }
 
+  hideInstructions(dontShow: boolean): void {
+    if (dontShow) {
+      localStorage.setItem('hideInstructions', 'true');
+    }
+    this.showInstructions = false;
+    this.startGameTimer();
+  }
+  
+
+  startGameTimer(): void {
+    this.gameTimer = setInterval(() => {
+      this.timeLeft--;
+  
+      if (this.timeLeft <= 0) {
+        this.gameOver = true;
+      }
+    }, 1000);
+  }
+  
+
   onLakeClick(event: MouseEvent): void {
-    if (this.showPhoneticPrompt || this.showFishingMenu) return;
+    if (this.showPhoneticPrompt || this.showFishingMenu || this.isFishApproaching) return;
   
     const lakeRect = this.lakePanelRef.nativeElement.getBoundingClientRect();
     this.bobberSize = lakeRect.width * 0.04; // 3% of lake width
@@ -176,6 +210,7 @@ export class FishingComponent implements OnInit {
   spawnFishShadow(x: number, y: number): void {
     if (!this.bobberPos) return;
 
+    this.isFishApproaching = true;
 
     const lakeMaskEl = this.lakePanelRef.nativeElement;
     const lakeRect = lakeMaskEl.getBoundingClientRect();
@@ -249,6 +284,7 @@ export class FishingComponent implements OnInit {
       if (collided) {
         clearInterval(this.fishApproachInterval);
         this.bobberCollided = true;
+        this.isFishApproaching = false;
         this.promptPhonetic();
         return;
       }
@@ -361,7 +397,7 @@ getFishRotation(): string {
   startFishingMenu(): void {
     this.showPhoneticPrompt = false;
     this.showFishingMenu = true;
-    this.catchPercent = 0;
+    this.catchPercent = 20;
     this.barPosition = 50;
     this.fishIconPosition = 60;
     this.caughtFishId = null;
@@ -370,45 +406,104 @@ getFishRotation(): string {
 
   startCatchLoop(): void {
     this.isCatching = true;
+  
+    this.fishMovePattern = Math.floor(Math.random() * 4); // choose pattern
+    console.log(this.fishMovePattern);
+  
     this.barInterval = setInterval(() => {
       if (!this.isHolding) this.barPosition += 1;
       else this.barPosition -= 1;
-
-      this.barPosition = Math.max(0, Math.min(100, this.barPosition));
-
-      if (
-        this.barPosition > this.fishIconPosition - 10 &&
-        this.barPosition < this.fishIconPosition + 10
-      ) {
-        this.catchPercent += 1;
-        if (this.catchPercent >= 100) this.catchFish();
-      } else {
-        this.catchPercent = Math.max(0, this.catchPercent - 1);
+    
+      // Prevent falling through bottom visually
+      const barHeightPercent = 20; 
+      this.barPosition = Math.max(0, Math.min(100 - barHeightPercent, this.barPosition));
+    
+      const barEl = document.querySelector('.bar') as HTMLElement;
+      const targetEl = document.querySelector('.target-fish') as HTMLElement;
+    
+      if(this.catchPercent <= 0)
+        this.fishGotAway();
+    
+      if (barEl && targetEl) {
+        const barRect = barEl.getBoundingClientRect();
+        const targetRect = targetEl.getBoundingClientRect();
+    
+        const overlap =
+          barRect.top < targetRect.bottom &&
+          barRect.bottom > targetRect.top;
+    
+        if (overlap) {
+          this.catchPercent += 1;
+          if (this.catchPercent >= 100) this.catchFish();
+        } else {
+          this.catchPercent = Math.max(0, this.catchPercent - 2);
+        }
       }
     }, 50);
+    
+  
+    this.fishMoveInterval = setInterval(() => {
+      let move = 0;
+      const pattern = this.fishMovePattern;
+      const rand = Math.random();
+      
+      const fastAmount = Math.random() * 3 + 2;
+      const slowAmount = Math.random() * 1 + 0.5;
+    
+      switch (pattern) {
+        case 0: // Slow & stationary
+          if (rand < 0.55) {
+            move = (Math.random() < 0.5 ? -1 : 1) * slowAmount;
+          }
+          break;
+    
+        case 1: // Slow & always moving
+          move = (Math.random() < 0.5 ? -1 : 1) * slowAmount;
+          break;
+    
+        case 2: // Fast & stationary
+          if (rand < 0.65) {
+            move = (Math.random() < 0.5 ? -1 : 1) * fastAmount;
+          }
+          break;
+    
+        case 3: // Fast & always moving
+          move = (Math.random() < 0.5 ? -1 : 1) * fastAmount;
+          break;
+      }
+    
+      this.fishIconPosition = Math.max(0, Math.min(100, this.fishIconPosition + move));
+    }, 50);
   }
+  
+  
 
   catchFish(): void {
     clearInterval(this.barInterval);
+    clearInterval(this.fishMoveInterval); // <--
     this.showFishingMenu = false;
-  
     this.fishVisible = false;
     this.showSplash = true;
   
-    // Store bobber position for fish animation before clearing it
-    const bobber = this.bobberPos;
     if (this.bobberPos) {
       this.splashPos = { ...this.bobberPos };
       this.caughtFishPos = { ...this.bobberPos };
     }
     this.bobberPos = null;
-  
+    
+    this.isFishApproaching = true;
+
     setTimeout(() => {
       this.showSplash = false;
       this.caughtFishId = Math.floor(Math.random() * 5) + 1;
       this.fishCaught++;
+      if (this.fishCaught > this.bestFishCaught) {
+        this.bestFishCaught = this.fishCaught;
+        localStorage.setItem('bestFishCaught', String(this.fishCaught));
+      }      
       setTimeout(() => {
         this.caughtFishId = null;
+        this.isFishApproaching = false;
       }, 2000);
       this.resetState(true);
     }, 1000);
@@ -423,9 +518,10 @@ getFishRotation(): string {
     this.isHolding = false;
   }
 
-  resetState(preserveFishCount = false): void {
+  resetState(preserveFishCount = true): void {
     clearInterval(this.fishApproachInterval);
     clearInterval(this.barInterval);
+    clearInterval(this.fishMoveInterval); // <--
     this.bobberPos = null;
     this.bobberCollided = false;
     this.fishVisible = false;
@@ -436,5 +532,13 @@ getFishRotation(): string {
     this.fishIconPosition = 60;
     this.result = null;
     if (!preserveFishCount) this.fishCaught = 0;
+    if (!preserveFishCount) this.timeLeft = 100;
+  }
+
+  restartGame(): void {
+    clearInterval(this.gameTimer);
+    this.gameOver = false;
+    this.resetState(false);
+    this.startGameTimer();
   }
 }
