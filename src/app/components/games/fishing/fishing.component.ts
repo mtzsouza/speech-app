@@ -18,6 +18,8 @@ export class FishingComponent implements OnInit {
   language: any;
 
   @ViewChild('lakePanel') lakePanelRef!: ElementRef;
+  @ViewChild('bobber') bobberRef!: ElementRef;
+  @ViewChild('fishShadow') fishRef!: ElementRef;
 
   bobberPos: { x: number; y: number } | null = null;
   fishVisible = false;
@@ -165,74 +167,94 @@ export class FishingComponent implements OnInit {
   
     this.fishScale = 0.01;
     this.fishVisible = true;
+
+    const lakeMaskEl = this.lakePanelRef.nativeElement;
+    const lakeRect = lakeMaskEl.getBoundingClientRect();
   
-    const lakeRect = this.lakePanelRef.nativeElement.getBoundingClientRect();
-    const bobberX = this.bobberPos.x;
-    const bobberY = this.bobberPos.y;
+    const bobberX = x;
+    const bobberY = y;
   
-    const distTop = bobberY;
-    const distBottom = lakeRect.height - bobberY;
-    const distLeft = bobberX;
-    const distRight = lakeRect.width - bobberX;
+    const lakeCenterX = lakeRect.left + lakeRect.width / 2;
+    const lakeCenterY = lakeRect.top + lakeRect.height / 2;
   
-    const minDist = Math.min(distTop, distBottom, distLeft, distRight);
-    const offsetRatio = 0.15; // 15% of container size
+    const offset = 0.1;
     let dir: 'up' | 'down' | 'left' | 'right';
   
-    if (minDist === distTop) dir = 'down';
-    else if (minDist === distBottom) dir = 'up';
-    else if (minDist === distLeft) dir = 'right';
-    else dir = 'left';
+    const dx = bobberX - lakeCenterX;
+    const dy = bobberY - lakeCenterY;
   
-    const offsetX = lakeRect.width * offsetRatio;
-    const offsetY = lakeRect.height * offsetRatio;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      dir = dx < 0 ? 'right' : 'left';
+    } else {
+      dir = dy < 0 ? 'down' : 'up';
+    }
+    console.log("Bobber Position:", x, y);
+    console.log(dir);
+
+    let fishStartX = x;
+    let fishStartY = y;
   
     switch (dir) {
       case 'up':
-        this.fishPos = { x, y: y - offsetY };
+        fishStartY = fishStartY - lakeRect.height * offset;
         break;
       case 'down':
-        this.fishPos = { x, y: y + offsetY };
+        fishStartY = fishStartY + lakeRect.height * offset;
         break;
       case 'left':
-        this.fishPos = { x: x - offsetX, y };
+        fishStartX = fishStartX - lakeRect.width * offset;
         break;
       case 'right':
-        this.fishPos = { x: x + offsetX, y };
+        fishStartX = fishStartX + lakeRect.width * offset;
         break;
     }
+
+    const fishEl = this.fishRef?.nativeElement;
+    const fishWidth = fishEl?.offsetWidth || 0;
+    const fishHeight = fishEl?.offsetHeight || 0;
+    
+    this.fishPos = {
+      x: fishStartX - fishWidth / 2,
+      y: fishStartY - fishHeight / 2,
+    };
+    
+
+    console.log("Fish Position:", this.fishPos);
   
     this.fishApproachInterval = setInterval(() => {
-      if (!this.fishPos || !this.bobberPos) return;
-    
-      const speed = 2;
-    
-      if (this.fishPos.x !== this.bobberPos.x) {
-        const dx = this.bobberPos.x - this.fishPos.x;
-        if (Math.abs(dx) <= speed) {
-          this.fishPos.x = this.bobberPos.x;
-        } else {
-          this.fishPos.x += Math.sign(dx) * speed;
-        }
-      } else if (this.fishPos.y !== this.bobberPos.y) {
-        const dy = this.bobberPos.y - this.fishPos.y;
-        if (Math.abs(dy) <= speed) {
-          this.fishPos.y = this.bobberPos.y;
-        } else {
-          this.fishPos.y += Math.sign(dy) * speed;
-        }
-      }
-    
-      this.fishScale += 0.005;
-      console.log(this.fishPos.x, this.fishPos.y);
-    
-      if (
-        this.fishPos.x === this.bobberPos.x &&
-        this.fishPos.y === this.bobberPos.y
-      ) {
+      const fishEl = this.fishRef?.nativeElement;
+      const bobberEl = this.bobberRef?.nativeElement;
+  
+      if (!fishEl || !bobberEl) return;
+  
+      const fishRect = fishEl.getBoundingClientRect();
+      const bobberRect = bobberEl.getBoundingClientRect();
+  
+      const collided =
+        fishRect.left < bobberRect.right &&
+        fishRect.right > bobberRect.left &&
+        fishRect.top < bobberRect.bottom &&
+        fishRect.bottom > bobberRect.top;
+  
+      if (collided) {
         clearInterval(this.fishApproachInterval);
         this.promptPhonetic();
+        return;
       }
+  
+      if (!this.fishPos || !this.bobberPos) return;
+  
+      const dx = this.bobberPos.x - this.fishPos.x;
+      const dy = this.bobberPos.y - this.fishPos.y;
+  
+      const step = 2;
+      if (dir === 'up' || dir === 'down') {
+        this.fishPos.y += Math.sign(dy) * step;
+      } else {
+        this.fishPos.x += Math.sign(dx) * step;
+      }
+  
+      this.fishScale += 0.005;
     }, 30);
   }
   
@@ -352,7 +374,7 @@ export class FishingComponent implements OnInit {
       this.fishCaught++;
       setTimeout(() => {
         this.caughtFishId = null;
-      }, 2000); // 🕒 hide caught fish after 2s
+      }, 2000);
       this.resetState(true);
     }, 1000);
   }
