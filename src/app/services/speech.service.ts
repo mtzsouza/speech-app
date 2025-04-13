@@ -152,22 +152,22 @@ export class SpeechService {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const mediaRecorder = new MediaRecorder(stream);
       const audioChunks: Blob[] = [];
-  
+
       mediaRecorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           audioChunks.push(event.data);
         }
       };
-  
+
       return new Promise<SpeechRecognitionResult>((resolve, reject) => {
         mediaRecorder.onstop = async () => {
           try {
             const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-  
+
             const formData = new FormData();
             formData.append('file', audioBlob, 'recording.webm');
             formData.append('model_id', 'scribe_v1');
-  
+
             const response = await fetch('https://api.elevenlabs.io/v1/speech-to-text', {
               method: 'POST',
               headers: {
@@ -175,24 +175,25 @@ export class SpeechService {
               },
               body: formData
             });
-  
+
             if (!response.ok) {
               const errorText = await response.text();
               throw new Error(`STT request failed: ${errorText}`);
             }
-  
+
             const data = await response.json();
-  
+
             const result: SpeechRecognitionResult = {
               text: data.text || '',
               language_code: data.language_code || 'und',
               words: Array.isArray(data.words)
                 ? data.words
                     .filter((w: any) => w.type === 'word' && typeof w.text === 'string')
-                    .map((w: any) => w.text)
+                    .map((w: any) => w.text.toLowerCase().match(/\w+/g) || [])
+                    .flat()
                 : []
             };
-  
+
             resolve(result);
           } catch (error) {
             console.error('Transcription error:', error);
@@ -201,7 +202,7 @@ export class SpeechService {
             stream.getTracks().forEach((track) => track.stop());
           }
         };
-  
+
         mediaRecorder.start();
         console.log('Started recording...');
         setTimeout(() => {
@@ -213,5 +214,5 @@ export class SpeechService {
       console.error('Microphone access or recording error:', error);
       throw error;
     }
-  }  
+  }
 }
