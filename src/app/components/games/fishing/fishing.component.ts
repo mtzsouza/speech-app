@@ -22,8 +22,11 @@ export class FishingComponent implements OnInit {
   @ViewChild('fishShadow') fishRef!: ElementRef;
 
   bobberPos: { x: number; y: number } | null = null;
+  bobberSize: number = 30;
+  bobberCollided = false;
   fishVisible = false;
-  fishScale = 0.1;
+  fishScale = 1;
+  fishDirection: 'up' | 'down' | 'left' | 'right' = 'right';
   fishApproachInterval: any;
   fishPos: { x: number; y: number } | null = null;
 
@@ -40,7 +43,10 @@ export class FishingComponent implements OnInit {
   barInterval: any;
 
   caughtFishId: number | null = null;
+  caughtFishSize: number = 100;
+  caughtFishPos: { x: number; y: number } | null = null;
   showSplash = false;
+  splashPos: { x: number; y: number } | null = null;
   fishCaught = 0;
   isCatching = false;
   isHolding = false;
@@ -154,19 +160,22 @@ export class FishingComponent implements OnInit {
 
   onLakeClick(event: MouseEvent): void {
     if (this.showPhoneticPrompt || this.showFishingMenu) return;
+  
+    const lakeRect = this.lakePanelRef.nativeElement.getBoundingClientRect();
+    this.bobberSize = lakeRect.width * 0.04; // 3% of lake width
+    this.caughtFishSize = lakeRect.width * 0.08;
 
     this.bobberPos = {
-      x: event.clientX-20,
-      y: event.clientY-20,
+      x: event.clientX,
+      y: event.clientY,
     };
+  
     this.spawnFishShadow(event.clientX, event.clientY);
   }
 
   spawnFishShadow(x: number, y: number): void {
     if (!this.bobberPos) return;
-  
-    this.fishScale = 0.01;
-    this.fishVisible = true;
+
 
     const lakeMaskEl = this.lakePanelRef.nativeElement;
     const lakeRect = lakeMaskEl.getBoundingClientRect();
@@ -177,7 +186,7 @@ export class FishingComponent implements OnInit {
     const lakeCenterX = lakeRect.left + lakeRect.width / 2;
     const lakeCenterY = lakeRect.top + lakeRect.height / 2;
   
-    const offset = 0.1;
+    const offset = 0.3;
     let dir: 'up' | 'down' | 'left' | 'right';
   
     const dx = bobberX - lakeCenterX;
@@ -188,6 +197,8 @@ export class FishingComponent implements OnInit {
     } else {
       dir = dy < 0 ? 'down' : 'up';
     }
+
+    this.fishDirection = dir;
     console.log("Bobber Position:", x, y);
     console.log(dir);
 
@@ -209,55 +220,71 @@ export class FishingComponent implements OnInit {
         break;
     }
 
-    const fishEl = this.fishRef?.nativeElement;
-    const fishWidth = fishEl?.offsetWidth || 0;
-    const fishHeight = fishEl?.offsetHeight || 0;
     
     this.fishPos = {
-      x: fishStartX - fishWidth / 2,
-      y: fishStartY - fishHeight / 2,
+      x: fishStartX-15,
+      y: fishStartY-15,
     };
-    
+      
+    this.fishScale = 0.01;
+    this.fishVisible = true;
 
     console.log("Fish Position:", this.fishPos);
   
     this.fishApproachInterval = setInterval(() => {
       const fishEl = this.fishRef?.nativeElement;
       const bobberEl = this.bobberRef?.nativeElement;
-  
+    
       if (!fishEl || !bobberEl) return;
-  
+    
       const fishRect = fishEl.getBoundingClientRect();
       const bobberRect = bobberEl.getBoundingClientRect();
-  
+    
       const collided =
         fishRect.left < bobberRect.right &&
         fishRect.right > bobberRect.left &&
         fishRect.top < bobberRect.bottom &&
         fishRect.bottom > bobberRect.top;
-  
+    
       if (collided) {
         clearInterval(this.fishApproachInterval);
+        this.bobberCollided = true;
         this.promptPhonetic();
         return;
       }
-  
+    
       if (!this.fishPos || !this.bobberPos) return;
-  
+    
       const dx = this.bobberPos.x - this.fishPos.x;
       const dy = this.bobberPos.y - this.fishPos.y;
-  
-      const step = 2;
-      if (dir === 'up' || dir === 'down') {
+    
+      const lakeRect = this.lakePanelRef.nativeElement.getBoundingClientRect();
+      const stepRatio = 0.004;
+    
+      const step = (this.fishDirection === 'up' || this.fishDirection === 'down')
+        ? lakeRect.height * stepRatio
+        : lakeRect.width * stepRatio;
+    
+      if (this.fishDirection === 'up' || this.fishDirection === 'down') {
         this.fishPos.y += Math.sign(dy) * step;
       } else {
         this.fishPos.x += Math.sign(dx) * step;
       }
-  
-      this.fishScale += 0.005;
+    
+      this.fishScale += 0.015;
     }, 30);
+    
   }
-  
+
+getFishRotation(): string {
+  switch (this.fishDirection) {
+    case 'down': return 'rotate(-90deg)';
+    case 'up': return 'rotate(90deg)';
+    case 'right': return 'rotate(180deg)';
+    case 'left': return 'rotate(0deg)';
+  }
+}
+
 
   promptPhonetic(): void {
     const sounds = this.language.soundboard.examples;
@@ -309,9 +336,7 @@ export class FishingComponent implements OnInit {
   async startSpeechRecognition(): Promise<void> {
     try {
       this.result = await this.speechService.detectSpeech(2);
-      const spokenWords = this.result?.words?.map(w =>
-        w.toLowerCase().replace(/[.,!?;:]/g, '')
-      ) || [];
+      const spokenWords = this.result?.words?.map(w => w.toLowerCase()) || [];
       console.log(spokenWords);
   
       //Make a map of homophones and make it correct of the spoken word matches the correct answer's homophone map
@@ -366,7 +391,17 @@ export class FishingComponent implements OnInit {
   catchFish(): void {
     clearInterval(this.barInterval);
     this.showFishingMenu = false;
+  
+    this.fishVisible = false;
     this.showSplash = true;
+  
+    // Store bobber position for fish animation before clearing it
+    const bobber = this.bobberPos;
+    if (this.bobberPos) {
+      this.splashPos = { ...this.bobberPos };
+      this.caughtFishPos = { ...this.bobberPos };
+    }
+    this.bobberPos = null;
   
     setTimeout(() => {
       this.showSplash = false;
@@ -378,6 +413,7 @@ export class FishingComponent implements OnInit {
       this.resetState(true);
     }, 1000);
   }
+  
 
   onHoldStart(): void {
     this.isHolding = true;
@@ -391,6 +427,7 @@ export class FishingComponent implements OnInit {
     clearInterval(this.fishApproachInterval);
     clearInterval(this.barInterval);
     this.bobberPos = null;
+    this.bobberCollided = false;
     this.fishVisible = false;
     this.showPhoneticPrompt = false;
     this.showFishingMenu = false;

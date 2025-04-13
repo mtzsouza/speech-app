@@ -13,10 +13,10 @@
               />
             </svg>
         
-            <img #bobber *ngIf="bobberPos" class="bobber" [ngStyle]="{ top: bobberPos.y + 'px', left: bobberPos.x + 'px' }" src="/assets/games/fishing/bobber.svg" />
-            <img #fishShadow *ngIf="fishVisible && fishPos" class="fish-shadow" [ngStyle]="{ top: fishPos.y + 'px', left: fishPos.x + 'px', transform: 'scale(' + fishScale + ')'}" src="/assets/games/fishing/fish_shadow.svg"/>
-            <img *ngIf="showSplash" class="splash" [ngStyle]="{ top: bobberPos?.y + 'px', left: bobberPos?.x + 'px' }" src="/assets/games/fishing/splash.svg" />
-            <img *ngIf="caughtFishId" class="fish-caught" [src]="'/assets/games/fishing/fish' + caughtFishId + '.png'" />
+            <img #bobber *ngIf="bobberPos" class="bobber" [style.width.px]="bobberSize" [style.height.px]="bobberSize" [ngStyle]="{ top: bobberPos.y + 'px', left: bobberPos.x + 'px' }" [src]="bobberCollided ? '/assets/games/fishing/bobber_shadow.svg' : '/assets/games/fishing/bobber.svg'"/>
+            <img #fishShadow *ngIf="fishVisible && fishPos" class="fish-shadow" [ngStyle]="{ top: fishPos.y + 'px', left: fishPos.x + 'px', transform: 'scale(' + fishScale + ')' + getFishRotation()}" src="/assets/games/fishing/fish_shadow.svg"/>
+            <img *ngIf="showSplash && splashPos" class="splash" [ngStyle]="{ top: splashPos.y + 'px', left: splashPos.x + 'px' }" src="/assets/games/fishing/splash.svg" />
+            <img *ngIf="caughtFishId && caughtFishPos" class="fish-caught" [src]="'/assets/games/fishing/fish' + caughtFishId + '.png'" [ngStyle]="{ top: caughtFishPos.y + 'px', left: caughtFishPos.x + 'px', width: caughtFishSize + 'px', height: caughtFishSize + 'px'}"/>
     
             <div class="menu" *ngIf="showPhoneticPrompt">
                 <ng-container *ngIf="!awaitingSpeech; else awaiting">
@@ -38,12 +38,12 @@
               
     
             <div class="fishing-menu" *ngIf="showFishingMenu" (mousedown)="onHoldStart()" (mouseup)="onHoldEnd()" (mouseleave)="onHoldEnd()">
-            <div class="bar-container">
-                <div class="target" [ngStyle]="{ top: fishIconPosition + '%' }"></div>
-                <div class="bar" [ngStyle]="{ top: barPosition + '%' }"></div>
-            <p>Catch: {{ catchPercent }}%</p>
+              <p>Catch: {{ catchPercent }}%</p>
+              <div class="bar-container">
+                <img class="target-fish" [ngStyle]="{ top: fishIconPosition + '%' }" src="/assets/games/fishing/fishIcon.png" />
+                  <div class="bar" [ngStyle]="{ top: barPosition + '%' }"></div>
+              </div>
             </div>
-        </div>
       </div>
     </div>
   </div>
