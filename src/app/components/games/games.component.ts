@@ -75,12 +75,12 @@ export class GamesComponent implements OnInit {
       link: '/games'
     },
     {
-      title: 'Game 6',
-      description: 'Description of the game',
-      emoji: '🎲',
+      title: 'Phonetic Fishing',
+      description: 'Catch fish by practicing pronunciation',
+      emoji: '🎣',
       iconClass: 'game_6',
       category: 'speaking',
-      link: '/games'
+      link: '/phonetic-fishing'
     },
     {
       title: 'Game 7',
