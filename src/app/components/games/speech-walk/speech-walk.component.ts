@@ -81,7 +81,7 @@ export class SpeechWalkComponent implements OnInit {
         setTimeout(() => {
           this.feedbackClass = '';
           this.characterState = 'standing';
-        }, 600);
+        }, 4000);
         this.nextText();
       } else {
         this.feedbackClass = 'shake-error';

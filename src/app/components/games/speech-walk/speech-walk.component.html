@@ -61,7 +61,7 @@
 
         <h2>Speech-Walk</h2>
 
-        <div class="scene">
+        <div class="scene" [ngClass]="{ running: characterState === 'running' }">
           <div class="character" [ngClass]="{ running: characterState === 'running' }">
             <img 
               [src]="characterState === 'running' 
@@ -80,7 +80,10 @@
 
       <div *ngIf="isCheckpoint">
         <p><strong>Say the highlighted word to continue</strong></p>
-        <button [disabled]="isListening" (click)="handleNext()">
+        <button 
+          [disabled]="isListening"
+          [ngClass]="{ 'listening-mic': isListening }"
+          (click)="handleNext()">
           🎤 {{ isListening ? 'Listening...' : 'Say It' }}
         </button>
       </div>

@@ -28,11 +28,27 @@
   100%
     transform: translateY(0)
 
+@keyframes scrollBg
+  0%
+    background-position-x: 0
+  100%
+    background-position-x: -3000px
 
+@keyframes glowRed
+  0%, 100%
+    box-shadow: 0 0 6px 2px rgba(255, 0, 0, 0.6)
+  50%
+    box-shadow: 0 0 10px 4px rgba(255, 0, 0, 1)
+
+.listening-mic
+  animation: glowRed 1.2s ease-in-out infinite
+  border: 2px solid red
+  background-color: #880000 !important
 
 .speech-panel
   text-align: center
-  max-width: 800px
+  max-width: 1200px
+  font-size: 1.25em
   margin: 30px auto
   padding: 30px
   background: #fefefe
@@ -55,7 +71,10 @@
 
   .game-visuals
     margin: 25px auto
-    max-width: 500px
+    max-width: 1100px
+    width: 100%
+    font-size: 1.2em
+    padding: 12px 28px
 
     .progress-wrapper
       height: 10px
@@ -71,20 +90,38 @@
 
     .scene
       position: relative
-      background: #d6eef7
+      background-image: url('/assets/stop.jpg')
+      background-size: cover
+      background-repeat: no-repeat
+      background-position: center
       border-radius: 10px
-      height: 220px
+      height: 400px
+      max-width: 100%
+      margin: 0 auto
       overflow: hidden
+      transition: background-image 0.5s ease-in-out, background-position 0.5s linear
+
+      .scene:not(.running)
+        animation: none !important
+
+      &.running
+        background-image: url('/assets/bg-scroll.jpg')
+        background-size: contain
+        background-repeat: repeat-x
+        background-position: 0 center
+        animation: scrollBg 20s linear infinite
 
       .character
         position: absolute
         bottom: 0
         left: 20px
         width: 100px
-        transition: left 0.6s ease-in-out
+        transition: left 4.0s ease-in-out
 
         &.running
-          left: 320px
+          left: 900px
+          animation: scrollBg 3.5s linear infinite
+          
 
         img
           width: 100%

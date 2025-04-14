@@ -97,8 +97,10 @@
       
     
     <div class="bingo-container">
-        <h1>Bingo / Lotería 🎶</h1>
-    
+      <div class="bingo-label">
+        <span>B</span><span>I</span><span>N</span><span>G</span><span>O</span>
+      </div>
+      <div class="button-row">
         <button 
             class="play-btn" 
             (click)="playSound()" 
@@ -113,7 +115,7 @@
             title="Replay Sound">
             🔊 Play Sound
         </button>
-            
+      </div>
         <div class="bingo-board">
         <div *ngFor="let row of board; let rowIdx = index" class="bingo-row">
             <div *ngFor="let cell of row; let colIdx = index"
