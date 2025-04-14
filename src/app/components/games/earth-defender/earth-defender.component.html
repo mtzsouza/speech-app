@@ -3,10 +3,29 @@
     <div class="main">
         <div class="panel">
             <div class="game-container">
+                <!--scoreboard-->
+                <div class="scoreboard">
+                    <div>
+                        <p>{{ language.earthDefender.score }} {{ score }}</p>
+                        <p>{{ language.earthDefender.streak }} {{ streak }}</p>
+                        <p>{{ language.earthDefender.longestStreak }} {{ longestStreak }}</p>
+                        <p>{{ language.earthDefender.time }} {{ timer }}</p>
+                    </div>
+
+                    <div>
+                        <p>{{ language.earthDefender.bestTime }} {{ bestTime }}</p>
+                        <p>{{ language.earthDefender.bestScore }} {{ bestScore }}</p>
+                        <p>{{ language.earthDefender.bestStreak }} {{ bestStreak }}</p>
+                    </div>
+                    <button class="exit-btn" routerLink="/games">{{ language.earthDefender.backToGames }}</button>
+                </div>
+
                 <!--meteor-->
                 <div *ngIf="showMeteor" class="meteor" [ngStyle]="{'top': meteorPosition + '%'}">
                     <img src="/assets/games/earth-defender/meteor.png" alt="Meteor">
-                    <span class="word">{{ word }}</span>
+                    <span class="word">
+                        {{wordParts.before}}<span class="highlight">{{wordParts.highlight}}</span>{{wordParts.after}}
+                    </span>
                 </div>
 
                 <!--earth-->
@@ -24,14 +43,14 @@
                 </div>
 
                 <!--explosion-->
-                <div *ngIf="explosion" class="explosion" [ngStyle]="{'top': explosion.y + '%', 'left': explosion.x + '%', 'width': explosion.size + 'px', 'height': explosion.size + 'px'}">
+                <div *ngIf="explosion" class="explosion" [ngStyle]="{'top': explosion.y + 'px', 'left': explosion.x + '%', 'width': explosion.size + 'px', 'height': explosion.size + 'px'}">
                     <img src="/assets/games/earth-defender/explosion.png" alt="Explosion">
                 </div>
            
 
                 <!--missile-->
                 <div class="missile-container">
-                    <div *ngFor="let missile of missiles" class="missile" [ngStyle]="{'bottom': missile.position + '%'}">
+                    <div *ngFor="let missile of missiles" class="missile" [ngStyle]="{'bottom': missile.position + 'px'}">
                         <img src="/assets/games/earth-defender/missile.png" alt="Missile">
                     </div>
                 </div>
@@ -39,23 +58,26 @@
                 <!--game over-->
                 <div class="menu" *ngIf="gameOver">
                     <div class="menu-content">
-                        <h2>Game Over!</h2>
-                        <p>You survived {{ timer }} seconds.</p>
-                        <button class="restart-btn" (click)="restartGame()">Restart</button>
+                        <h2>{{ language.earthDefender.gameOver }}</h2>
+                        <p>{{ getSurvivedTime() }}</p>
+                        <button class="restart-btn" (click)="restartGame()">{{ language.earthDefender.restart }}</button>
                     </div>
                 </div>
 
                 <!--instructions-->
                 <div class="menu" *ngIf="showInstructions">
                     <div class="menu-content">
-                        <h2>How to Play</h2>
-                        <p>Destroy meteors by choosing the correct phonetic sound before they reach Earth.</p>
-
+                        <h2>{{ language.earthDefender.instructions.title }}</h2>
+                        <p>{{ language.earthDefender.instructions.goal }}</p>
+                        <p>{{ language.earthDefender.instructions.shoot }}</p>
+                        <p>{{ language.earthDefender.instructions.effect }}</p>
+                        <p>{{ language.earthDefender.instructions.caution }}</p>
+                        <p>{{ language.earthDefender.instructions.question }}</p>
                         <label>
                             <input type="checkbox" #dontShow (change)="hideInstructions(dontShow.checked)">
-                            Don't show again
+                            {{ language.earthDefender.instructions.dontShowAgain }}
                         </label>
-                        <button class="restart-btn" (click)="hideInstructions(dontShow.checked)">Start Game</button>
+                        <button class="restart-btn" (click)="hideInstructions(dontShow.checked)">{{ language.earthDefender.instructions.startGame }}</button>
                     </div>
                 </div>
             </div>
