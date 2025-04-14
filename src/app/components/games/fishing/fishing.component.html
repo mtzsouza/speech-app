@@ -1,0 +1,86 @@
+<div class="container"  (mousedown)="onHoldStart()" (mouseup)="onHoldEnd()" (mouseleave)="onHoldEnd()">
+  <app-navbar></app-navbar>
+  <div class="main">
+    <div class="panel" #lakePanel>
+      <div class="game-container">
+          <svg class="lake-click-mask" viewBox="0 0 3309 2690">
+            <path
+            d="M38 731L6 822L80.5 1179.5V1398L6 1686L80.5 1846L464.5 2155.5L961 2524L1233 2577L1494.5 2684L1990.5 2524H2428L2844 2203.5L2999 1947.5L3063 1467.5L3180.5 1286L3271 1003L3303 640.5L3180.5 507L2599 149.5L2326.5 75L2038.5 5.5H1852L1142 219L822 176.5L38 731Z"
+            fill="rgba(0, 0, 0, 0.001)"
+            stroke="black" stroke-width="10"
+            (click)="onLakeClick($event)"
+            pointer-events="visibleFill"
+            />
+          </svg>
+
+          <div *ngIf="!gameOver" class="scoreboard">
+            <p>{{ language.fishing.scoreboard.fish.replace('{{ fishCaught }}', fishCaught) }}</p>
+            <p>{{ language.fishing.scoreboard.timeLeft.replace('{{ timeLeft }}', timeLeft) }}</p>
+            <p>{{ language.fishing.scoreboard.mostFish.replace('{{ bestFishCaught }}', bestFishCaught) }}</p>
+          </div>
+      
+          <img #bobber *ngIf="bobberPos" class="bobber" [style.width.px]="bobberSize" [style.height.px]="bobberSize" [ngStyle]="{ top: bobberPos.y + 'px', left: bobberPos.x + 'px' }" [src]="bobberCollided ? '/assets/games/fishing/bobber_shadow.svg' : '/assets/games/fishing/bobber.svg'"/>
+          <img #fishShadow *ngIf="fishVisible && fishPos" class="fish-shadow" [ngStyle]="{ top: fishPos.y + 'px', left: fishPos.x + 'px', transform: 'scale(' + fishScale + ')' + getFishRotation()}" src="/assets/games/fishing/fish_shadow.svg"/>
+          <img *ngIf="showSplash && splashPos" class="splash" [ngStyle]="{ top: splashPos.y + 'px', left: splashPos.x + 'px' }" src="/assets/games/fishing/splash.svg" />
+          <img *ngIf="caughtFishId && caughtFishPos" class="fish-caught" [src]="'/assets/games/fishing/fish' + caughtFishId + '.png'" [ngStyle]="{ top: caughtFishPos.y + 'px', left: caughtFishPos.x + 'px', width: caughtFishSize + 'px', height: caughtFishSize + 'px'}"/>
+  
+          <div class="menu" *ngIf="showPhoneticPrompt">
+            <ng-container *ngIf="!awaitingSpeech; else awaiting">
+              <p>{{ language.fishing.phoneticPrompt.select }}
+                <span class="word">
+                  {{wordParts.before}}<span class="highlight">{{wordParts.highlight}}</span>{{wordParts.after}}
+                </span>
+              </p>
+              <button *ngFor="let opt of phoneticOptions" (click)="selectOption(opt)">
+                {{ getDisplayOption(opt) }}
+              </button>
+            </ng-container>
+          
+            <ng-template #awaiting>
+                <p>{{ preSpeechMessage }}</p>
+                <button (click)="startSpeechRecognition()">{{ language.fishing.phoneticPrompt.speak }}</button>
+            </ng-template>
+          </div>
+            
+          <div class="fishing-menu" *ngIf="showFishingMenu">
+            <div class="bar-wrapper">
+              <div class="bar-container">
+                <img class="target-fish" src="/assets/games/fishing/fishIcon.png" [ngStyle]="{ top: fishIconPosition + '%' }" />
+                <div class="bar" [ngStyle]="{ top: barPosition + '%' }"></div>
+              </div>
+              <div class="catch-bar">
+                <div class="catch-fill" [ngStyle]="{ height: catchPercent + '%' }"></div>
+              </div>
+            </div>
+          </div>  
+
+          <!--game over-->
+          <div class="menu" *ngIf="gameOver">
+            <div class="menu-content">
+                <h2>{{ language.fishing.gameOver.title }}</h2>
+                <p>{{ language.fishing.gameOver.caught.replace('{{ fishCaught }}', fishCaught) }}</p>
+                <button class="restart-btn" (click)="restartGame()">{{ language.fishing.gameOver.restart }}</button>
+            </div>
+          </div>
+
+          <!--instructions-->
+          <div class="menu" *ngIf="showInstructions">
+            <div class="menu-content">
+                <h2>{{ language.fishing.instructions.title }}</h2>
+                <p>{{ language.fishing.instructions.line1 }}</p>
+                <p>{{ language.fishing.instructions.line2 }}</p>
+                <p>{{ language.fishing.instructions.line3 }}</p>
+                <p>{{ language.fishing.instructions.line4 }}</p>
+                <p>{{ language.fishing.instructions.line5 }}</p>
+                <p>{{ language.fishing.instructions.line6 }}</p>
+                <label>
+                    <input type="checkbox" #dontShow (change)="hideInstructions(dontShow.checked)">
+                    {{ language.fishing.instructions.dontShowAgain }}
+                </label>
+                <button class="restart-btn" (click)="hideInstructions(dontShow.checked)">{{ language.fishing.instructions.start }}</button>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+  

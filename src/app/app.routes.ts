@@ -28,6 +28,8 @@ import { ReadStoryComponent } from './components/stories/read-story/read-story.c
 import { TuneComponent } from './components/games/tune/tune.component';
 import { TestComponent } from './components/test/test.component';
 import { SpeechWalkComponent } from './components/games/speech-walk/speech-walk.component';
+import { FishingComponent } from './components/games/fishing/fishing.component';
+
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['']);
@@ -118,6 +120,12 @@ export const routes: Routes = [
     {
         path: 'earth-defender', 
         component: EarthDefenderComponent, 
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'phonetic-fishing', 
+        component: FishingComponent, 
         ...canActivate(redirectUnauthorizedToLogin)
     },
 

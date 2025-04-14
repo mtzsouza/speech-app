@@ -16,6 +16,7 @@
 .panel
   width: 95%
   min-height: 90%
+  margin-top: 2%
   background-image: url('/assets/games/earth-defender/space.jpg')
   background-size: contain
   display: flex
@@ -41,15 +42,42 @@
 .hidden
     visibility: hidden
 
+.scoreboard
+  position: absolute
+  top: 30%
+  left: 20px
+  background: rgba(0, 0, 0, 0.6)
+  color: white
+  padding: 10px 15px
+  border-radius: 8px
+  font-size: 1rem
+  display: flex
+  flex-direction: column
+  align-items: flex-start
+  gap: 2px
+
+.exit-btn
+  align-self: center
+  margin-top: 8px
+  padding: 6px 12px
+  font-size: 0.9rem
+  border: none
+  border-radius: 5px
+  background: #ff5c5c
+  color: white
+  cursor: pointer
+
+
 .earth
   position: absolute
-  bottom: 80px 
+  bottom: 4vh 
   left: 50%
   transform: translateX(-50%)
 
   img
-    width: 100px
-    height: auto
+    height: 14vh
+    max-width: 140px
+    width: auto
 
 .meteor
   position: absolute
@@ -61,17 +89,24 @@
   align-items: center
 
   img
-    width: 140px
-    height: auto
+    height: 18vh
+    max-width: 140px
+    width: auto
 
-  .word
-    font-size: 1.5rem
-    font-weight: bold
-    color: white
-    background: rgba(0, 0, 0, 0.7)
-    padding: 5px 10px
-    border-radius: 5px
-    margin-top: 5px
+.word
+  font-size: 1.5rem
+  font-weight: bold
+  color: white
+  background: rgba(0, 0, 0, 0.7)
+  padding: 5px 10px
+  border-radius: 5px
+  margin-top: 5px
+
+.highlight
+  color: yellow
+  font-weight: bold
+  text-shadow: 0 0 4px black
+
 
 .explosion
   position: absolute
