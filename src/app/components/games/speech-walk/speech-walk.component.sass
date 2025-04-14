@@ -1,0 +1,314 @@
+@keyframes bounce
+  0%
+    transform: translateY(0)
+  100%
+    transform: translateY(0)
+  50%
+    transform: translateY(-8px)
+
+@keyframes shake
+  0%
+    transform: translateX(0)
+  100%
+    transform: translateX(0)
+  20%
+    transform: translateX(-8px)
+  60%
+    transform: translateX(-8px)
+  40%
+    transform: translateX(8px)
+  80%
+    transform: translateX(8px)
+
+@keyframes jump
+  0%
+    transform: translateY(0)
+  50%
+    transform: translateY(-40px)
+  100%
+    transform: translateY(0)
+
+@keyframes scrollBg
+  0%
+    background-position-x: 0
+  100%
+    background-position-x: -3000px
+
+@keyframes glowRed
+  0%, 100%
+    box-shadow: 0 0 6px 2px rgba(255, 0, 0, 0.6)
+  50%
+    box-shadow: 0 0 10px 4px rgba(255, 0, 0, 1)
+
+.listening-mic
+  animation: glowRed 1.2s ease-in-out infinite
+  border: 2px solid red
+  background-color: #880000 !important
+
+.speech-panel
+  text-align: center
+  max-width: 1200px
+  font-size: 1.25em
+  margin: 30px auto
+  padding: 30px
+  background: #fefefe
+  border-radius: 16px
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1)
+
+  h2
+    font-size: 2.5em
+    font-weight: 700
+    color: #24457B
+    margin-bottom: 10px
+
+  .menu-bar
+    background: #eee
+    padding: 10px
+    border-radius: 8px
+    font-size: 1.1em
+    display: inline-block
+    margin: 20px 0
+
+  .game-visuals
+    margin: 25px auto
+    max-width: 1100px
+    width: 100%
+    font-size: 1.2em
+    padding: 12px 28px
+
+    .progress-wrapper
+      height: 10px
+      background: #ccc
+      border-radius: 5px
+      overflow: hidden
+      margin-bottom: 20px
+
+      .progress-bar
+        height: 100%
+        background: #4caf50
+        transition: width 0.4s ease
+
+    .scene
+      position: relative
+      background-image: url('/assets/stop.jpg')
+      background-size: cover
+      background-repeat: no-repeat
+      background-position: center
+      border-radius: 10px
+      height: 400px
+      max-width: 100%
+      margin: 0 auto
+      overflow: hidden
+      transition: background-image 0.5s ease-in-out, background-position 0.5s linear
+
+      .scene:not(.running)
+        animation: none !important
+
+      &.running
+        background-image: url('/assets/bg-scroll.jpg')
+        background-size: contain
+        background-repeat: repeat-x
+        background-position: 0 center
+        animation: scrollBg 20s linear infinite
+
+      .character
+        position: absolute
+        bottom: 0
+        left: 20px
+        width: 100px
+        transition: left 4.0s ease-in-out
+
+        &.running
+          left: 900px
+          animation: scrollBg 3.5s linear infinite
+          
+
+        img
+          width: 100%
+          height: auto
+
+      .obstacle
+        position: absolute
+        bottom: 0
+        right: 20px
+        font-size: 3em
+        animation: bounce 1s infinite
+
+  p
+    font-size: 1.4em
+    line-height: 1.75
+    color: #333
+    margin: 20px 0
+
+  .highlight, strong u
+    background: #ffea00
+    padding: 3px 6px
+    border-radius: 5px
+    font-weight: 700
+    color: #000
+    text-decoration: underline
+
+  button
+    padding: 10px 20px
+    font-size: 1em
+    background: #24457B
+    color: white
+    border: none
+    border-radius: 6px
+    cursor: pointer
+
+    &:hover
+      background: #3a5ba0
+
+    &:disabled
+      opacity: 0.6
+      cursor: not-allowed
+
+  .game-over
+    margin-top: 30px
+    font-size: 1.3em
+    color: #b71c1c
+    font-weight: bold
+
+  &.correct-flash
+    box-shadow: 0 0 10px 4px #b2f5b2 !important
+    transition: box-shadow 0.3s ease-in-out
+
+  &.shake-error
+    animation: shake 0.6s ease-in-out
+
+
+.story-selection
+  text-align: center
+  margin-top: 30px
+
+  h2
+    font-size: 2em
+    margin-bottom: 20px
+
+.story-grid
+  display: flex
+  flex-wrap: wrap
+  gap: 20px
+  justify-content: center
+
+.story-card
+  background: #f9f9f9
+  border-radius: 10px
+  padding: 20px
+  width: 260px
+  cursor: pointer
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+  transition: transform 0.3s ease
+
+  &:hover
+    transform: translateY(-5px)
+
+  h3
+    margin: 0 0 10px
+    color: #24457B
+
+  .phoneme
+    font-weight: bold
+    color: #555
+
+  .summary
+    font-size: 0.95em
+    color: #444
+
+.completion-tag
+  margin-top: 10px
+  font-size: 0.95em
+  font-weight: bold
+  color: #2e7d32
+
+.instructions-overlay
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  background: rgba(0, 0, 0, 0.75)
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 9999
+
+  .instructions-box
+    background: #fff
+    padding: 30px
+    border-radius: 12px
+    max-width: 600px
+    width: 90%
+    position: relative
+    text-align: center
+    font-size: 1.2em
+    color: #333
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3)
+
+    h2
+      font-size: 1.8em
+      font-weight: bold
+      margin-bottom: 15px
+
+    .instruction-step
+      margin-bottom: 20px
+
+    .final-note
+      font-style: italic
+      color: #666
+
+    .close-btn
+      position: absolute
+      top: 10px
+      right: 10px
+      background: none
+      border: none
+      font-size: 1.5em
+      cursor: pointer
+
+    button
+      margin-top: 15px
+      padding: 10px 20px
+      font-size: 1em
+      background: #24457B
+      color: white
+      border: none
+      border-radius: 6px
+      cursor: pointer
+
+.victory-screen
+  background: #f0fff4
+  border: 2px solid #4caf50
+  padding: 30px
+  margin-top: 20px
+  border-radius: 12px
+  text-align: center
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1)
+
+  h2
+    color: #2e7d32
+    font-size: 2em
+    margin-bottom: 10px
+
+  p
+    font-size: 1.2em
+    color: #333
+
+  .victory-buttons
+    margin-top: 20px
+    display: flex
+    justify-content: center
+    gap: 20px
+
+    button
+      background: #24457B
+      color: white
+      padding: 10px 20px
+      border: none
+      border-radius: 8px
+      font-size: 1em
+      cursor: pointer
+
+      &:hover
+        background: #3a5ba0

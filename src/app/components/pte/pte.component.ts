@@ -1,56 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../navbar/navbar.component';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-pte',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule, RouterModule],
   templateUrl: './pte.component.html',
-  styleUrl: './pte.component.sass'
+  styleUrls: ['./pte.component.sass']
 })
 export class PTEComponent implements OnInit {
   earnedBadges: any[] = [];
 
   allBadges = [
-    // Video Watching Achievements
-    { name: 'First Steps', description: 'Watch your first video!', icon: '📺', requiredProgress: 5 },
-    { name: 'Binge Watcher', description: 'Watch 3 videos.', icon: '🎥', requiredProgress: 10 },
-    { name: 'Committed Learner', description: 'Watch 10 videos.', icon: '🎬', requiredProgress: 15 },
-    { name: 'Video Master', description: 'Watch 25 videos.', icon: '🏆', requiredProgress: 20 },
-    { name: 'Marathon Session', description: 'Watch videos for 1 hour.', icon: '⏳', requiredProgress: 25 },
-
-    // Soundboard Study Achievements
-    { name: 'Sound Explorer', description: 'Play a sound from the soundboard.', icon: '🔊', requiredProgress: 30 },
-    { name: 'Melody Maker', description: 'Play 5 different sounds.', icon: '🎶', requiredProgress: 35 },
-    { name: 'Dedicated Student', description: 'Study for 30 minutes.', icon: '📚', requiredProgress: 40 },
-    { name: 'Master of Sounds', description: 'Study for 1 hour.', icon: '💡', requiredProgress: 50 },
-
-    // Streak & Daily Achievements
-    { name: 'Daily Learner', description: 'Visit the website 3 days in a row.', icon: '📆', requiredProgress: 55 },
-    { name: 'Consistency is Key', description: 'Study for 7 consecutive days.', icon: '🔥', requiredProgress: 60 },
-    { name: 'Learning Streak', description: 'Watch a video or use the soundboard 10 days in a row.', icon: '🏅', requiredProgress: 65 },
-
-    // Miscellaneous Achievements
-    { name: 'Curious Explorer', description: 'Visit both Videos and Soundboard sections.', icon: '🧭', requiredProgress: 70 },
-    { name: 'Active Participant', description: 'Visit the website 10 times.', icon: '⭐', requiredProgress: 75 },
-    { name: 'Knowledge Seeker', description: 'Complete all previous achievements.', icon: '🎓', requiredProgress: 80 }
+    { name: 'First Steps', icon: '📺', description: 'Watch your first video!', requiredProgress: 5 },
+    { name: 'Binge Watcher', icon: '🎥', description: 'Watch 3 videos.', requiredProgress: 10 },
+    { name: 'Committed Learner', icon: '🎬', description: 'Watch 10 videos.', requiredProgress: 15 },
+    { name: 'Video Master', icon: '🏆', description: 'Watch 25 videos.', requiredProgress: 20 },
+    { name: 'Marathon Session', icon: '⏳', description: 'Watch videos for 1 hour.', requiredProgress: 25 },
+    { name: 'Sound Explorer', icon: '🔊', description: 'Play a sound from the soundboard.', requiredProgress: 30 },
+    { name: 'Melody Maker', icon: '🎶', description: 'Play 5 different sounds.', requiredProgress: 35 },
+    { name: 'Dedicated Student', icon: '📚', description: 'Study for 30 minutes.', requiredProgress: 40 },
+    { name: 'Master of Sounds', icon: '💡', description: 'Study for 1 hour.', requiredProgress: 50 },
+    { name: 'Daily Learner', icon: '📆', description: 'Visit the website 3 days in a row.', requiredProgress: 55 },
+    { name: 'Consistency is Key', icon: '🔥', description: 'Study for 7 consecutive days.', requiredProgress: 60 },
+    { name: 'Learning Streak', icon: '🏅', description: 'Watch a video or use the soundboard 10 days in a row.', requiredProgress: 65 },
+    { name: 'Curious Explorer', icon: '🧭', description: 'Visit both Videos and Soundboard sections.', requiredProgress: 70 },
+    { name: 'Active Participant', icon: '⭐', description: 'Visit the website 10 times.', requiredProgress: 75 },
+    { name: 'Knowledge Seeker', icon: '🎓', description: 'Complete all previous achievements.', requiredProgress: 80 }
   ];
 
   ngOnInit(): void {
-    this.loadEarnedBadges();
-  }
-
-  loadEarnedBadges(): void {
     const videoProgress = Number(sessionStorage.getItem('videoProgress')) || 0;
     const soundboardProgress = Number(sessionStorage.getItem('soundboardProgress')) || 0;
     const totalProgress = Math.max(videoProgress, soundboardProgress);
 
-
-    for (let badge of this.allBadges) {
-      if (totalProgress >= badge.requiredProgress) {
-        this.earnedBadges.push(badge);
-      }
-    }
+    this.earnedBadges = this.allBadges.filter(badge => totalProgress >= badge.requiredProgress);
   }
 }
