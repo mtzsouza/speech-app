@@ -2,39 +2,29 @@
   <app-navbar></app-navbar>
   <div class="achievement-container">
     <a routerLink="/progress" class="back-link">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2"/></svg>
       <span>Back to Progress</span>
     </a>
-    
+
     <div class="header">
       <h1 class="title">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 15L8.5 18L9.5 14L6.5 11.5L10.5 11L12 7L13.5 11L17.5 11.5L14.5 14L15.5 18L12 15Z" fill="#FFD700" stroke="#FFD700"/>
-          <circle cx="12" cy="12" r="9" stroke="#FFD700" stroke-width="2" fill="none"/>
-        </svg>
+        <svg width="28" height="28" viewBox="0 0 24 24"><path d="M12 15L8.5 18L9.5 14L6.5 11.5L10.5 11L12 7L13.5 11L17.5 11.5L14.5 14L15.5 18L12 15Z" fill="#FFD700" stroke="#FFD700"/><circle cx="12" cy="12" r="9" stroke="#FFD700" stroke-width="2" fill="none"/></svg>
         Earned Badges!
       </h1>
     </div>
 
     <div class="badge-grid">
-      <!-- Dynamically Display Only Earned Badges -->
       <div class="badge-card glowing-badge" *ngFor="let badge of earnedBadges">
         <div class="badge-icon">{{ badge.icon }}</div>
         <div class="badge-info">
           <h3>{{ badge.name }}</h3>
           <p>{{ badge.description }}</p>
-          <p class="date-earned">Earned: {{ badge.dateEarned }}</p>
         </div>
       </div>
     </div>
-    
-    <!-- Return button -->
+
     <a routerLink="/progress" class="return-button">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <svg width="16" height="16" viewBox="0 0 24 24"><path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2"/></svg>
       Return to Progress
     </a>
   </div>

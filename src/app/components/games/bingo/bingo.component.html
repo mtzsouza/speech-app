@@ -8,13 +8,114 @@
 
 <div class="container">
     <app-navbar></app-navbar>
+
+    <div class="instructions-overlay" *ngIf="showInstructions">
+        <div class="instructions-box">
+          <button class="close-btn" (click)="closeInstructions()">✖</button>
+      
+          <div *ngIf="instructionStep === 1">
+            <h2>🎮 Welcome to Bingo/Lotería!</h2>
+          
+            <div class="instruction-step">
+              <p><strong>1. Start the Game</strong></p>
+              <p>Click the <strong>“Start Game”</strong> button to begin. A sound will play automatically.</p>
+            </div>
+          
+            <div class="instruction-step">
+              <p><strong>2. Match the Sound</strong></p>
+              <p>Your goal is to find the correct letter or symbol on the board that matches the sound.</p>
+              <p>If correct, it's marked in green. If wrong, the tile shakes and turns red briefly.</p>
+            </div>
+          
+            <div class="instruction-step">
+              <p><strong>3. Replay & Skipping</strong></p>
+              <p>You can click the 🔊 button to <strong>replay</strong> the current sound.</p>
+              <p>If you click <strong>“Next Sound”</strong> without answering, that square becomes locked and won’t count toward a win!</p>
+            </div>
+          
+            <button (click)="nextInstruction()">➡ Next</button>
+          </div>          
+      
+          <div *ngIf="instructionStep === 2">
+            <h2>How to Win</h2>
+            <div class="win-example">
+                <h3>Diagonal</h3>
+                <div class="pattern-grid full-diagonal">
+                    <div class="tile dark"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                  
+                    <div class="tile empty"></div>
+                    <div class="tile dark"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                  
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile dark"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                  
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile dark"></div>
+                    <div class="tile empty"></div>
+                  
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile empty"></div>
+                    <div class="tile dark"></div>
+                  </div>                  
+              </div>
+              
+                           
+            <div class="win-example">
+              <h3>Across</h3>
+              <div class="pattern-row">
+                <div class="tile dark"></div><div class="tile dark"></div><div class="tile dark"></div><div class="tile dark"></div><div class="tile dark"></div>
+              </div>
+            </div>
+            <div class="win-example">
+              <h3>Vertical</h3>
+              <div class="pattern-column">
+                <div class="tile dark"></div>
+                <div class="tile dark"></div>
+                <div class="tile dark"></div>
+                <div class="tile dark"></div>
+                <div class="tile dark"></div>
+              </div>
+            </div>
+            <button (click)="closeInstructions()">Start Game</button>
+          </div>
+        </div>
+      </div>
+      
+    
     <div class="bingo-container">
-        <h1>Bingo / Lotería 🎶</h1>
-    
-        <button class="play-btn" (click)="playSound()" [disabled]="gameWon">🎵 Play Sound</button>
-        <button class="replay-btn" (click)="replaySound()" [disabled]="!currentSound || gameWon">🔁 Replay Sound</button>
-        <p *ngIf="displayedSound" class="current-sound">Now Playing: <strong>{{ displayedSound }}</strong></p>
-    
+      <div class="bingo-label">
+        <span>B</span><span>I</span><span>N</span><span>G</span><span>O</span>
+      </div>
+      <div class="button-row">
+        <button 
+            class="play-btn" 
+            (click)="playSound()" 
+            [disabled]="gameWon">
+            {{ gameStarted ? '➡ Next Sound' : '▶ Start Game' }}
+        </button>
+        <button 
+            class="replay-btn icon-only" 
+            *ngIf="displayedSound" 
+            (click)="replaySound()" 
+            [disabled]="!currentSound || gameWon" 
+            title="Replay Sound">
+            🔊 Play Sound
+        </button>
+      </div>
         <div class="bingo-board">
         <div *ngFor="let row of board; let rowIdx = index" class="bingo-row">
             <div *ngFor="let cell of row; let colIdx = index"
@@ -24,7 +125,7 @@
                 [class.correct]="cell.animation === 'correct'"
                 [class.incorrect]="cell.animation === 'incorrect'"
                 (click)="markSquare(rowIdx, colIdx)">
-                {{ cell.value }}
+                {{ phoneticMap[cell.value] || cell.value }}
             </div>
         </div>
     

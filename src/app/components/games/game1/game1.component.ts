@@ -179,13 +179,21 @@ export class Game1Component implements OnInit {
       this.endGame();
     }
   }
-  
+
+  //Hector added
+  private updateMemoryMatchProgress(): void {
+    const current = Number(localStorage.getItem('memoryMatchProgress')) || 0;
+    const updated = Math.min(current + 10, 100);
+    localStorage.setItem('memoryMatchProgress', String(updated));
+    console.log(`Memory Match Progress: ${updated}%`);
+  }
 
   completeLevel(): void {
     this.isGameActive = false;
     
     if (this.level < this.maxLevel) {
       this.levelComplete = true;
+      this.updateMemoryMatchProgress();
       setTimeout(() => {
         this.level++;
         this.initializeGame();
