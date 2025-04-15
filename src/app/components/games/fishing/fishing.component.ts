@@ -1,3 +1,4 @@
+//homophone map
 import { Component, inject, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../navbar/navbar.component';
@@ -17,6 +18,8 @@ export class FishingComponent implements OnInit {
   speechService = inject(SpeechService);
   language: any;
   showInstructions: boolean | null = null;
+  showDurationMenu = true;
+  selectedDuration = 100;
 
   @ViewChild('lakePanel') lakePanelRef!: ElementRef;
   @ViewChild('bobber') bobberRef!: ElementRef;
@@ -39,6 +42,7 @@ export class FishingComponent implements OnInit {
   correctPhonetic: string = '';
   correctWord: string = '';
   result: SpeechRecognitionResult | null = null;
+  isListening = false;
 
   showFishingMenu = false;
   gameOver = false;
@@ -47,7 +51,7 @@ export class FishingComponent implements OnInit {
   fishIconPosition = 60;
   barInterval: any;
   fishMoveInterval: any;
-  fishMovePattern: number = Math.floor(Math.random() * 4); // 0 to 3
+  fishMovePattern: number = Math.floor(Math.random() * 4);
 
 
   caughtFishId: number | null = null;
@@ -86,7 +90,7 @@ export class FishingComponent implements OnInit {
     "/i/": { "East": "E", "Seem": "ee", "Agree": "ee", "Ir": "i", "Idioma": "i", "Chica": "i" },
     "/ɛ/": { "End": "E", "Enter": "E", "Friend": "ie" },
     "/aɪ/": { "Eye": "Ey", "Kind": "i", "Sky": "y" },
-    "/ɪ/": { "Into": "I", "Issue": "I", "Gift": "i" },
+    "/ɪ/": { "Into": "I", "Gift": "i" },
     "/oʊ/": { "Old": "O", "Both": "o", "Snow": "ow" },
     "/ɑ/": { "Odd": "O", "Box": "o", "Not": "o" },
     "/ju/": { "You": "You", "Cute": "u", "View": "ew" },
@@ -115,7 +119,7 @@ export class FishingComponent implements OnInit {
     "p": { "Page": "P", "Copy": "p", "Drop": "p" },
     "r": { "Raise": "R", "Bring": "r", "Ear": "r" },
     "s": { "Small": "S", "Best": "s", "Nice": "c" },
-    "sh": { "Shape": "Sh", "Issue": "ss", "Fish": "sh" },
+    "sh": { "Shape": "Sh", "Fish": "sh" },
     "t": { "Take": "T", "Stop": "t", "Lost": "t" },
     "th": { "Thank": "Th", "Healthy": "th", "Bath": "th" },
     "v": { "View": "V", "Even": "v", "Save": "v" },
@@ -159,6 +163,32 @@ export class FishingComponent implements OnInit {
     "/y/": { "Yo": "y", "Rayos": "y", "Rey": "y" }
   };
 
+  homophones: Record<string, string[]> = {
+    "seem": ["seam"],
+    "eye": ["i", "aye"],
+    "sky": ["skye"],
+    "i": ["eye", "aye"],
+    "not": ["knot"],
+    "you": ["u"],
+    "our": ["hour"],
+    "are": ["r"],
+    "berry": ["barry"],
+    "hand": ["hande"],
+    "how": ["hau", "hau", "howe"],
+    "cat": ["kat", "catt", "katt", "catte"],
+    "luck": ["luk", "lucke"],
+    "feel": ["feil", "fiel", "foell"],
+    "rain": ["rein", "raign", "reine", "reign"],
+    "single": ["cingle", "singel"],
+    "page": ["paige"],
+    "raise": ["rays", "raze", "rayes"],
+    "copy": ["kopy", "coppi", "copie", "coppie"],
+    "nice": ["nyce", "neice", "gneiss", "niess"],
+    "fish": ["fisch", "phish"],
+    "won": ["one", "wonne"],
+    "vision": ["visione"],
+  };
+
   constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -166,10 +196,7 @@ export class FishingComponent implements OnInit {
       this.language = lang;
     });
     const hide = localStorage.getItem('hideInstructions');
-    this.showInstructions = !(hide === 'true');  // default tru
-    if(!this.showInstructions)
-      this.startGameTimer();
-    this.bestFishCaught = parseInt(localStorage.getItem('bestFishCaught') || '0');
+    this.showInstructions = !(hide === 'true');
   }
 
   hideInstructions(dontShow: boolean): void {
@@ -177,9 +204,20 @@ export class FishingComponent implements OnInit {
       localStorage.setItem('hideInstructions', 'true');
     }
     this.showInstructions = false;
-    this.startGameTimer();
   }
   
+  startGameWithDuration(seconds: number): void {
+    this.selectedDuration = seconds;
+    this.timeLeft = seconds;
+    this.showDurationMenu = false;
+  
+    const saved = localStorage.getItem(`bestFishCaught_${this.selectedDuration}`);
+    this.bestFishCaught = parseInt(saved || '0');
+
+    if (!this.showInstructions) {
+      this.startGameTimer();
+    }
+  }
 
   startGameTimer(): void {
     this.gameTimer = setInterval(() => {
@@ -196,7 +234,7 @@ export class FishingComponent implements OnInit {
     if (this.showPhoneticPrompt || this.showFishingMenu || this.isFishApproaching) return;
   
     const lakeRect = this.lakePanelRef.nativeElement.getBoundingClientRect();
-    this.bobberSize = lakeRect.width * 0.04; // 3% of lake width
+    this.bobberSize = lakeRect.width * 0.04;
     this.caughtFishSize = lakeRect.width * 0.08;
 
     this.bobberPos = {
@@ -370,14 +408,16 @@ getFishRotation(): string {
   }
   
   async startSpeechRecognition(): Promise<void> {
+    if (this.isListening) return;
+
+    this.isListening = true;
     try {
       this.result = await this.speechService.detectSpeech(2);
       const spokenWords = this.result?.words?.map(w => w.toLowerCase()) || [];
-      console.log(spokenWords);
   
-      //Make a map of homophones and make it correct of the spoken word matches the correct answer's homophone map
+      const allCorrectWords = [this.correctWord.toLowerCase(), ...this.getHomophones(this.correctWord)];
 
-      if (spokenWords.includes(this.correctWord.toLowerCase())) {
+      if (spokenWords.some(word => allCorrectWords.includes(word))) {
         this.startFishingMenu();
       } else {
         this.fishGotAway();
@@ -387,11 +427,20 @@ getFishRotation(): string {
     } finally {
       this.awaitingSpeech = false;
       this.preSpeechMessage = '';
+      this.isListening = false;
     }
   }
 
   fishGotAway(): void {
     this.resetState();
+  }
+
+  getHomophones(word: string): string[] {
+    const matches = Object.entries(this.homophones)
+      .filter(([key, list]) => key === word || list.includes(word))
+      .flatMap(([key, list]) => [key, ...list]);
+  
+    return Array.from(new Set(matches.map(w => w.toLowerCase())));
   }
 
   startFishingMenu(): void {
@@ -407,14 +456,13 @@ getFishRotation(): string {
   startCatchLoop(): void {
     this.isCatching = true;
   
-    this.fishMovePattern = Math.floor(Math.random() * 4); // choose pattern
+    this.fishMovePattern = Math.floor(Math.random() * 4);
     console.log(this.fishMovePattern);
   
     this.barInterval = setInterval(() => {
       if (!this.isHolding) this.barPosition += 1;
       else this.barPosition -= 1;
     
-      // Prevent falling through bottom visually
       const barHeightPercent = 20; 
       this.barPosition = Math.max(0, Math.min(100 - barHeightPercent, this.barPosition));
     
@@ -451,23 +499,23 @@ getFishRotation(): string {
       const slowAmount = Math.random() * 1 + 0.5;
     
       switch (pattern) {
-        case 0: // Slow & stationary
+        case 0:
           if (rand < 0.55) {
             move = (Math.random() < 0.5 ? -1 : 1) * slowAmount;
           }
           break;
     
-        case 1: // Slow & always moving
+        case 1:
           move = (Math.random() < 0.5 ? -1 : 1) * slowAmount;
           break;
     
-        case 2: // Fast & stationary
+        case 2:
           if (rand < 0.65) {
             move = (Math.random() < 0.5 ? -1 : 1) * fastAmount;
           }
           break;
     
-        case 3: // Fast & always moving
+        case 3:
           move = (Math.random() < 0.5 ? -1 : 1) * fastAmount;
           break;
       }
@@ -480,7 +528,7 @@ getFishRotation(): string {
 
   catchFish(): void {
     clearInterval(this.barInterval);
-    clearInterval(this.fishMoveInterval); // <--
+    clearInterval(this.fishMoveInterval);
     this.showFishingMenu = false;
     this.fishVisible = false;
     this.showSplash = true;
@@ -497,10 +545,13 @@ getFishRotation(): string {
       this.showSplash = false;
       this.caughtFishId = Math.floor(Math.random() * 5) + 1;
       this.fishCaught++;
+
+      const bestKey = `bestFishCaught_${this.selectedDuration}`;
       if (this.fishCaught > this.bestFishCaught) {
         this.bestFishCaught = this.fishCaught;
-        localStorage.setItem('bestFishCaught', String(this.fishCaught));
-      }      
+        localStorage.setItem(bestKey, String(this.fishCaught));
+      }
+      
       setTimeout(() => {
         this.caughtFishId = null;
         this.isFishApproaching = false;
@@ -521,7 +572,7 @@ getFishRotation(): string {
   resetState(preserveFishCount = true): void {
     clearInterval(this.fishApproachInterval);
     clearInterval(this.barInterval);
-    clearInterval(this.fishMoveInterval); // <--
+    clearInterval(this.fishMoveInterval);
     this.bobberPos = null;
     this.bobberCollided = false;
     this.fishVisible = false;
@@ -538,6 +589,7 @@ getFishRotation(): string {
   restartGame(): void {
     clearInterval(this.gameTimer);
     this.gameOver = false;
+    this.timeLeft = this.selectedDuration;
     this.resetState(false);
     this.startGameTimer();
   }

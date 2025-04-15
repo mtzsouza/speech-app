@@ -204,6 +204,12 @@
             "dontShowAgain": "No vuelvas a aparecer",
             "start": "Empezar Juego"
         },
+        "durationMenu": {
+          "title": "Seleccione la duración de la ronda",
+          "short": "100 segundos",
+          "medium": "3 minutos",
+          "long": "5 minutos"
+        },
         "gameOver": {
             "title": "¡Se acabó el tiempo!",
             "caught": "Atrapaste a {{ fishCaught }} peces",

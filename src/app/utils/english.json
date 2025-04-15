@@ -224,6 +224,12 @@
             "dontShowAgain": "Don't Show Again",
             "start": "Start Game"
         },
+        "durationMenu": {
+          "title": "Select Round Duration",
+          "short": "100 Seconds",
+          "medium": "3 Minutes",
+          "long": "5 Minutes"
+        },
         "gameOver": {
             "title": "Time's Up!",
             "caught": "You caught {{ fishCaught }} fish",
