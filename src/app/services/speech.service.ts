@@ -189,7 +189,7 @@ export class SpeechService {
               words: Array.isArray(data.words)
                 ? data.words
                     .filter((w: any) => w.type === 'word' && typeof w.text === 'string')
-                    .map((w: any) => w.text.toLowerCase().match(/\w+/g) || [])
+                    .map((w: any) => w.text.toLowerCase().replace(/[^\p{L}\p{N}]/gu, '') || [])
                     .flat()
                 : []
             };

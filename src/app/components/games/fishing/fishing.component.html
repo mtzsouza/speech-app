@@ -18,6 +18,15 @@
             <p>{{ language.fishing.scoreboard.timeLeft.replace('{{ timeLeft }}', timeLeft) }}</p>
             <p>{{ language.fishing.scoreboard.mostFish.replace('{{ bestFishCaught }}', bestFishCaught) }}</p>
           </div>
+
+          <div class="menu" *ngIf="showDurationMenu && !showInstructions">
+            <div class="menu-content">
+              <h2>{{ language.fishing.durationMenu.title }}</h2>
+              <button class="restart-btn" (click)="startGameWithDuration(100)">{{ language.fishing.durationMenu.short }}</button>
+              <button class="restart-btn" (click)="startGameWithDuration(180)">{{ language.fishing.durationMenu.medium }}</button>
+              <button class="restart-btn" (click)="startGameWithDuration(300)">{{ language.fishing.durationMenu.long }}</button>
+            </div>
+          </div>          
       
           <img #bobber *ngIf="bobberPos" class="bobber" [style.width.px]="bobberSize" [style.height.px]="bobberSize" [ngStyle]="{ top: bobberPos.y + 'px', left: bobberPos.x + 'px' }" [src]="bobberCollided ? '/assets/games/fishing/bobber_shadow.svg' : '/assets/games/fishing/bobber.svg'"/>
           <img #fishShadow *ngIf="fishVisible && fishPos" class="fish-shadow" [ngStyle]="{ top: fishPos.y + 'px', left: fishPos.x + 'px', transform: 'scale(' + fishScale + ')' + getFishRotation()}" src="/assets/games/fishing/fish_shadow.svg"/>
@@ -38,7 +47,7 @@
           
             <ng-template #awaiting>
                 <p>{{ preSpeechMessage }}</p>
-                <button (click)="startSpeechRecognition()">{{ language.fishing.phoneticPrompt.speak }}</button>
+                <button [ngClass]="{ listening: isListening }" (click)="startSpeechRecognition()">{{ language.fishing.phoneticPrompt.speak }}</button>
             </ng-template>
           </div>
             
