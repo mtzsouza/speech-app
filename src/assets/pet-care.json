@@ -1,0 +1,70 @@
+{
+    "en": {
+      "stars": "Stars: {{stars}}/5",
+      "listening": "Listening... Speak a command!",
+      "notUnderstood": "I didn't understand \"{{text}}\". Try: {{prompt}}",
+      "commands": {
+        "drinkWater": "Say \"drink water\"",
+        "eatFood": "Say \"eat food\"",
+        "playFetch": "Say \"play fetch\"",
+        "goSleep": "Say \"go sleep\"",
+        "jumpHigh": "Say \"jump high\"",
+        "spinAround": "Say \"spin around\"",
+        "lieDown": "Say \"lie down\"",
+        "shakeHand": "Say \"shake hand\"",
+        "rollOver": "Say \"roll over\"",
+        "barkLoud": "Say \"bark loud\""
+      },
+      "dogMessages": {
+        "drinkWater": "The dog is drinking water",
+        "eatFood": "The dog is eating its meal",
+        "playFetch": "The dog is playing fetch!",
+        "goSleep": "Shhh... the dog is sleeping",
+        "jumpHigh": "Wow! The dog jumped so high!",
+        "spinAround": "The dog is spinning in circles!",
+        "lieDown": "The dog is lying down to rest",
+        "shakeHand": "Good dog! It shook your hand!",
+        "rollOver": "The dog rolled over happily!",
+        "barkLoud": "WOOF! WOOF!"
+      },
+      "congratulations": {
+        "title": "Congratulations! 🎉",
+        "message": "You've earned all 5 stars!",
+        "button": "Play Again"
+      }
+    },
+    "es": {
+      "stars": "Estrellas: {{stars}}/5",
+      "listening": "Escuchando... ¡Di un comando!",
+      "notUnderstood": "No entendí \"{{text}}\". Intenta: {{prompt}}",
+      "commands": {
+        "drinkWater": "Di \"beber agua\"",
+        "eatFood": "Di \"comer comida\"",
+        "playFetch": "Di \"jugar a buscar\"",
+        "goSleep": "Di \"ir a dormir\"",
+        "jumpHigh": "Di \"saltar alto\"",
+        "spinAround": "Di \"girar en círculos\"",
+        "lieDown": "Di \"echarse\"",
+        "shakeHand": "Di \"dar la pata\"",
+        "rollOver": "Di \"darse la vuelta\"",
+        "barkLoud": "Di \"ladrar fuerte\""
+      },
+      "dogMessages": {
+        "drinkWater": "El perro está bebiendo agua",
+        "eatFood": "El perro está comiendo",
+        "playFetch": "¡El perro está jugando a buscar!",
+        "goSleep": "Shhh... el perro está durmiendo",
+        "jumpHigh": "¡Wow! ¡El perro saltó muy alto!",
+        "spinAround": "¡El perro está girando en círculos!",
+        "lieDown": "El perro se está echando a descansar",
+        "shakeHand": "¡Buen perro! ¡Te dio la pata!",
+        "rollOver": "¡El perro se dio la vuelta contento!",
+        "barkLoud": "¡GUAU! ¡GUAU!"
+      },
+      "congratulations": {
+        "title": "¡Felicidades! 🎉",
+        "message": "¡Has ganado todas las 5 estrellas!",
+        "button": "Jugar de nuevo"
+      }
+    }
+  }

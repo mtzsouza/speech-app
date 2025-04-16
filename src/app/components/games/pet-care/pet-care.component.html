@@ -1,0 +1,76 @@
+<div class="container">
+  <app-navbar></app-navbar>
+  <div class="main">
+    <div class="room">
+      <a href="/games" class="back-button">↩</a>
+
+      <!-- Stars display -->
+      <div class="stars-display">
+        {{ getTranslation('stars', {stars: stars.toString()}) }}
+        <div class="stars-container">
+          <span *ngFor="let star of [1,2,3,4,5]" 
+                [class.filled]="star <= stars">★</span>
+        </div>
+      </div>
+
+      <!-- Dog and objects -->
+      <div class="dog" 
+           [style.left.px]="dogPosition.x * roomWidth / 100"
+           [style.top.px]="dogPosition.y * roomHeight / 100"
+           [class.jump]="dogAction === 'jump'"
+           [class.spin]="dogAction === 'spin'"
+           [class.drink]="dogAction === 'drink'"
+           [class.eat]="dogAction === 'eat'"
+           [class.play]="dogAction === 'play'"
+           [class.sleep]="dogAction === 'sleep'"
+           [class.lie]="dogAction === 'lie'"
+           [class.shake]="dogAction === 'shake'"
+           [class.roll]="dogAction === 'roll'"
+           [class.bark]="dogAction === 'bark'">
+        🐕
+      </div>
+      
+      <div class="object food" 
+           [style.left.px]="objectPositions.food.x * roomWidth / 100" 
+           [style.top.px]="objectPositions.food.y * roomHeight / 100">
+        🍲
+      </div>
+      <div class="object water" 
+           [style.left.px]="objectPositions.water.x * roomWidth / 100" 
+           [style.top.px]="objectPositions.water.y * roomHeight / 100">
+        ⛲
+      </div>
+      <div class="object toy" 
+           [style.left.px]="objectPositions.toy.x * roomWidth / 100" 
+           [style.top.px]="objectPositions.toy.y * roomHeight / 100">
+        🥎
+      </div>
+      <div class="object bed" 
+           [style.left.px]="objectPositions.bed.x * roomWidth / 100" 
+           [style.top.px]="objectPositions.bed.y * roomHeight / 100">
+        🛏️
+      </div>
+
+      <!-- Controls -->
+      <div class="controls">
+        <button (click)="startRecording()" [disabled]="isRecording || isMoving">
+          {{ isRecording ? '🎙️ ' + getTranslation('listening') : '🎙️'}}
+        </button>
+        <div class="feedback" *ngIf="feedbackMessage">
+          {{ isRecording ? '' : feedbackMessage}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Congratulations overlay -->
+  <div class="congratulations-overlay" *ngIf="showCongratulations">
+    <div class="congratulations-content">
+      <h2>{{ getTranslation('congratulations.title') }}</h2>
+      <p>{{ getTranslation('congratulations.message') }}</p>
+      <button (click)="restartGame()">
+        {{ getTranslation('congratulations.button') }}
+      </button>
+    </div>
+  </div>
+</div>
