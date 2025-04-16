@@ -1,0 +1,275 @@
+@import '../../../../styles.sass'
+
+.container
+    display: flex
+    flex-direction: column
+    min-height: 100vh
+
+    .main
+        display: flex
+        flex-direction: column
+        align-items: center
+        padding: 20px
+        flex-grow: 1
+
+        .room
+            position: relative
+            width: 900px
+            height: 600px
+            background-image: url("./game-assets/background.png")
+            background-color: #33260d
+            background-size: cover
+            background-position: center
+            border: 3px solid #d4c9a8
+            border-radius: 15px
+            overflow: hidden
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2)
+            margin-bottom: 20px
+            
+            .back-button
+                left: 20px
+                position: absolute
+                top: 20px
+                text-decoration: none
+                font-size: 40px
+                color: GhostWhite
+                background-color: #00586e
+                border-radius: 30px
+                padding: 2px 8px
+                z-index: 30
+
+            .stars-display
+                position: absolute
+                top: 20px
+                right: 20px
+                background: rgba(0, 88, 110, 0.7)
+                color: white
+                padding: 10px 15px
+                border-radius: 10px
+                font-size: 1.2rem
+                font-family: Inter
+                display: flex
+                flex-direction: column
+                align-items: center
+                z-index: 20
+                user-select: none
+
+                .stars-container
+                    margin-top: 5px
+                    font-size: 1.5rem
+
+                    span
+                        color: #ccc
+                        margin: 0 2px
+
+                        &.filled
+                            color: gold
+
+            .dog
+                position: absolute
+                font-size: 100px
+                transform: translate(-50%, -50%)
+                transform-origin: center
+                transition: left 0.5s ease-out, top 0.5s ease-out
+                z-index: 20
+                text-shadow: 0px 0px 20px rgba(0, 0, 0, 1)
+                user-select: none
+
+                &.jump
+                    animation: jump 0.8s ease-in-out forwards
+
+                &.spin
+                    animation: spin 1s linear forwards
+
+                &.drink
+                    animation: drink 1s ease-in-out forwards
+
+                &.eat
+                    animation: eat 1s ease-in-out forwards
+
+                &.play
+                    animation: play 1s ease-in-out forwards
+
+                &.sleep
+                    animation: sleep 2s ease-in-out forwards
+
+                &.lie
+                    animation: lie 1.5s ease-in-out forwards
+
+                &.shake
+                    animation: shake 1s ease-in-out forwards
+
+                &.roll
+                    animation: roll 1.5s ease-in-out forwards
+
+                &.bark
+                    animation: bark 0.6s ease-in-out forwards
+
+            @keyframes jump
+                0%, 100%
+                    transform: translate(-50%, -50%) translateY(0)
+                50%
+                    transform: translate(-50%, -50%) translateY(-60px)
+
+            @keyframes spin
+                0%
+                    transform: translate(-50%, -50%) rotate(0deg)
+                100%
+                    transform: translate(-50%, -50%) rotate(360deg)
+
+            @keyframes drink
+                0%, 100%
+                    transform: translate(-50%, -50%) scale(1) rotate(0deg)
+                50%
+                    transform: translate(-50%, -50%) scale(0.9) rotate(5deg)
+
+            @keyframes eat
+                0%, 100%
+                    transform: translate(-50%, -50%) scale(1)
+                50%
+                    transform: translate(-50%, -50%) scale(1.1)
+
+            @keyframes play
+                0%, 100%
+                    transform: translate(-50%, -50%) rotate(0deg)
+                25%, 75%
+                    transform: translate(-50%, -50%) rotate(15deg)
+
+            @keyframes sleep
+                0%, 100%
+                    transform: translate(-50%, -50%) scale(1)
+                    opacity: 1
+                50%
+                    transform: translate(-50%, -50%) scale(0.9)
+                    opacity: 0.7
+
+            @keyframes lie
+                0%
+                    transform: translate(-50%, -50%) rotate(0deg)
+                100%
+                    transform: translate(-50%, -50%) rotate(90deg)
+
+            @keyframes shake
+                0%, 100%
+                    transform: translate(-50%, -50%) rotate(0deg)
+                25%
+                    transform: translate(-50%, -50%) rotate(15deg)
+                75%
+                    transform: translate(-50%, -50%) rotate(-15deg)
+
+            @keyframes roll
+                0%
+                    transform: translate(-50%, -50%) rotate(0deg) translateY(0)
+                50%
+                    transform: translate(-50%, -50%) rotate(180deg) translateY(-30px)
+                100%
+                    transform: translate(-50%, -50%) rotate(360deg) translateY(0)
+
+            @keyframes bark
+                0%, 100%
+                    transform: translate(-50%, -50%) scale(1)
+                50%
+                    transform: translate(-50%, -50%) scale(1.2)
+
+            .object
+                position: absolute
+                font-size: 50px
+                transform: translate(-50%, -50%)
+                z-index: 10
+                transition: all 0.3s ease
+                filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))
+                cursor: pointer
+                user-select: none
+                text-shadow: 0px 0px 20px rgba(0, 0, 0, 1)
+
+                &:hover
+                    animation: pulse 0.8s ease infinite alternate
+
+            .bed
+                font-size: 150px
+
+            .food
+                font-size: 75px
+
+            .water
+                font-size: 75px
+
+            .toy
+                font-size: 25px
+
+        .controls
+            position: absolute
+            bottom: 20px
+            left: 0
+            right: 0
+            display: flex
+            flex-direction: column
+            align-items: center
+            z-index: 20
+
+            button
+                font-size: 1.3rem
+                padding: 12px 30px
+                background: linear-gradient(135deg, #00586e, #0086a7)
+                color: white
+                border: none
+                border-radius: 50px
+                cursor: pointer
+                transition: all 0.3s ease
+                box-shadow: 0 4px 8px rgba(33, 158, 188, 0.3)
+                margin-bottom: 15px
+                font-weight: bold
+                font-family: Inter
+                text-transform: uppercase
+                letter-spacing: 1px
+
+                &:hover:not(:disabled)
+                    transform: translateY(-3px)
+                    box-shadow: 0 6px 12px rgba(33, 158, 188, 0.4)
+
+                &:disabled
+                    background: #cccccc
+                    cursor: not-allowed
+                    box-shadow: none
+                    transform: none
+
+            .feedback
+                font-family: Inter
+                font-size: 25px
+
+.congratulations-overlay
+    position: fixed
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    background: rgba(0, 0, 0, 0.8)
+    display: flex
+    justify-content: center
+    align-items: center
+    z-index: 1000
+
+    .congratulations-content
+        background: white
+        padding: 30px
+        border-radius: 15px
+        text-align: center
+        max-width: 80%
+        
+        h2
+            color: #219ebc
+            margin-bottom: 15px
+
+        button
+            background: linear-gradient(135deg, #00586e, #0086a7)
+            color: white
+            border: none
+            padding: 10px 20px
+            font-size: 1.2rem
+            border-radius: 5px
+            cursor: pointer
+            margin-top: 20px
+            transition: background 0.3s ease
+
+            &:hover
+                background: darken(#219ebc, 10%)
