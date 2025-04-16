@@ -127,6 +127,7 @@ export class SpeechWalkComponent implements OnInit {
       if (!this.completedStories.includes(title)) {
         this.completedStories.push(title);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.completedStories));
+        localStorage.setItem('speechWalkProgress', String(this.completedStories.length)); // ✅ Set progress
       }
       return;
     }

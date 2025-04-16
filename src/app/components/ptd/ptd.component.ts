@@ -90,7 +90,7 @@ export class PTDComponent implements OnInit {
       },
       {
         name: 'Speech Walk',
-        percentage: speechWalkProgress,
+        percentage: Math.min(speechWalkProgress * 10, 100),
         icon: '🚶‍♂️',
         title: 'Speech Walk',
         color: '#3f51b5'
@@ -121,7 +121,7 @@ export class PTDComponent implements OnInit {
       'Tune Your Ears': '/tune-your-ears',
       'Bingo': '/bingo',
       'Speech Walk': '/speech-walk',
-      'Game X': '/game-x',
+      'Fishing': '/fishing',
       'Game Y': '/game-y'
     };
   

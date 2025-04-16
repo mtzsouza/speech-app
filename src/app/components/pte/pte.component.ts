@@ -57,8 +57,8 @@ export class PTEComponent implements OnInit {
       { name: b.bingoBeginner.name, icon: '🎲', description: b.bingoBeginner.description, requiredKey: 'bingoProgress', requiredValue: 10, category: c.bingo },
       { name: b.bingoBoss.name, icon: '🏁', description: b.bingoBoss.description, requiredKey: 'bingoProgress', requiredValue: 50, category: c.bingo },
 
-      { name: b.speechWalker.name, icon: '🗣️', description: b.speechWalker.description, requiredKey: 'speechWalkProgress', requiredValue: 10, category: c.speechWalk },
-      { name: b.speechPro.name, icon: '🎤', description: b.speechPro.description, requiredKey: 'speechWalkProgress', requiredValue: 50, category: c.speechWalk },
+      { name: b.speechWalker.name, icon: '🗣️', description: b.speechWalker.description, requiredKey: 'speechWalkProgress', requiredValue: 1, category: c.speechWalk },
+      { name: b.speechPro.name, icon: '🎤', description: b.speechPro.description, requiredKey: 'speechWalkProgress', requiredValue: 5, category: c.speechWalk },
 
       { name: b.memoryStart.name, icon: '🧠', description: b.memoryStart.description, requiredKey: 'memoryMatchProgress', requiredValue: 10, category: c.memoryMatch },
       { name: b.memoryLegend.name, icon: '👑', description: b.memoryLegend.description, requiredKey: 'memoryMatchProgress', requiredValue: 100, category: c.memoryMatch },

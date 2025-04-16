@@ -48,8 +48,8 @@ export class PTHComponent implements OnInit {
     this.allBadges = [
       { name: b.bingoBeginner.name, description: b.bingoBeginner.description, icon: '🎲', requiredKey: 'bingoProgress', customCheck: val => val >= 10 },
       { name: b.bingoBoss.name, description: b.bingoBoss.description, icon: '🏁', requiredKey: 'bingoProgress', customCheck: val => val >= 50 },
-      { name: b.speechWalker.name, description: b.speechWalker.description, icon: '🗣️', requiredKey: 'speechWalkProgress', customCheck: val => val >= 10 },
-      { name: b.speechPro.name, description: b.speechPro.description, icon: '🎤', requiredKey: 'speechWalkProgress', customCheck: val => val >= 50 },
+      { name: b.speechWalker.name, description: b.speechWalker.description, icon: '🗣️', requiredKey: 'speechWalkProgress', customCheck: val => val >= 1 },
+      { name: b.speechPro.name, description: b.speechPro.description, icon: '🎤', requiredKey: 'speechWalkProgress', customCheck: val => val >= 5},
       { name: b.soundExplorer.name, description: b.soundExplorer.description, icon: '🔊', requiredKey: 'soundboardProgress', requiredValue: 10 },
       { name: b.melodyMaker.name, description: b.melodyMaker.description, icon: '🎶', requiredKey: 'soundboardProgress', requiredValue: 20 },
       { name: b.memoryStart.name, description: b.memoryStart.description, icon: '🧠', requiredKey: 'memoryMatchProgress', customCheck: val => val >= 10 },
