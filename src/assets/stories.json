@@ -1,5 +1,6 @@
 [
   {
+    "lang": "english",
     "title": "Tom Goes to the Grocery Store",
     "phoneme": "/oʊ/",
     "summary": "Tom goes to the grocery store with his mom to buy food for lunch.",
@@ -27,6 +28,7 @@
     ]
   },
   {
+    "lang": "english",
     "title": "Tim and His Little Sister",
     "phoneme": "/ɪ/",
     "summary": "Tim helps Lily build with blocks and play games.",
@@ -38,6 +40,7 @@
   },
 
   {
+    "lang": "english",
     "title": "Best Day Ever",
     "phoneme": "/e/",
     "summary": "Emma and Ella go on a pretend adventure and find a surprise in the garden.",
@@ -60,6 +63,7 @@
     ]
   },
   {
+    "lang": "english",
     "title": "Lucas and His Lunch at School",
     "phoneme": "/u/",
     "summary": "Lucas eats lunch at school with Bruno and Julia. They share food and have fun.",
@@ -83,6 +87,7 @@
     ]
   },
   {
+    "lang": "english",
     "title": "Ava and the Park Adventure",
     "phoneme": "/a/",
     "summary": "Ava and her dad go to the park to play, eat snacks, and enjoy the sunset.",
@@ -108,6 +113,7 @@
     ]
   },
   {
+    "lang": "english",
     "title": "Mimi's Big Trick",
     "phoneme": "/i/",
     "summary": "Mimi the kitten learns a fun new trick to surprise her family.",
@@ -125,7 +131,138 @@
       "Mimi purrs, feeling proud and **sweet**.",
       "'You're the best **kitty**, Mimi!'"
     ]
+  },
+  {
+    "lang": "spanish",
+    "title": "Tomás Va al Supermercado",
+    "phoneme": "/o/",
+    "summary": "Tomás va al supermercado con su mamá a comprar comida para el almuerzo.",
+    "lines": [
+      "Tomás sube al **carro**.",
+      "'**Mamá**, ¿puedo elegir la **comida** hoy?' pregunta.",
+      "**Mamá** asiente. '¡**Por supuesto**!'",
+      "Van al **supermercado**.",
+      "Tomás toma un **carro** grande.",
+      "'¡Vamos a la sección de frutas!' dice.",
+      "**Mamá** elige **naranjas**. '¡Las **naranjas** son ricas!'",
+      "Tomás elige una **caja** de **ciruelas**. '¡Las **ciruelas** son dulces!'",
+      "Busca **papas**. '¡Quiero cocinar hoy!' dice Tomás.",
+      "**Mamá** sonríe. '**Está bien**, tomemos **cebollas** también.'",
+      "Tomás busca **tomates**. '¡Los **tomates** van en la ensalada!'",
+      "Ve una **caja** de **galletas**. '**Mamá**, ¿podemos?'",
+      "**Mamá** asiente. '¡Una **caja**!'",
+      "Tomás sonríe. Empuja el **carrito** a la sección de fríos.",
+      "'¡**Leche**, yogur y un poco de **maíz** congelado!' dice.",
+      "**Mamá** lo ayuda a elegir. '**¡Eso es todo!**' dice ella.",
+      "Van a la **caja**.",
+      "Tomás pone la **comida** en la banda. '¡**Buen trabajo**, Tomás!' dice **mamá**.",
+      "Tomás ayuda a empacar las **bolsas**.",
+      "De camino a **casa**, sonríe. '¡Comprar **comida** es divertido!'"
+    ]
+  },
+  {
+    "lang": "spanish",
+    "title": "Tim y su Hermana Pequeña",
+    "phoneme": "/i/",
+    "summary": "Tim ayuda a su hermana Lily a construir con bloques y jugar.",
+    "lines": [
+      "Tim se sienta en la **sala**.",
+      "Su hermana **pequeña**, **Lily**, trae una **caja** grande.",
+      "'**Tim**, ¿me ayudas?' pregunta.",
+      "'¡Sí!' **Tim** sonríe.",
+      "**Lily** tira los bloques. '¡**Construyamos** una ciudad!' dice.",
+      "**Tim** toma un **bloque** rojo. '¡Esto será un **edificio**!'",
+      "**Lily** toma uno rosa. '¡El mío será **chiquito**!'",
+      "Se ríen.",
+      "**Tim** apila bloques **altos**.",
+      "**Lily** hace **casas** pequeñas.",
+      "'¡Esta ciudad es linda!' dice **Lily**.",
+      "**Tim** asiente. '¡Sí!'",
+      "Luego, un **gatito** entra corriendo. '¡**Mimi**!' grita **Lily**.",
+      "El **gatito** tropieza. ¡Los **bloques** caen!",
+      "'¡Oh no!' **Tim** ríe. '¡No pasa nada, **Lily**! Podemos arreglarlo.'",
+      "Recogen **bloques** y reconstruyen.",
+      "Después de un rato, mamá trae **leche**.",
+      "'¡Un descanso!' **Lily** bebe su vaso.",
+      "**Tim** termina su **edificio**.",
+      "'¡Lo logramos!' **Lily** aplaude.",
+      "'¡Esta es mi ciudad favorita!' dice.",
+      "**Tim** sonríe. '¡Es la mejor!'"
+    ]
+  },
+  {
+    "lang": "spanish",
+    "title": "El Mejor Día de Emma",
+    "phoneme": "/e/",
+    "summary": "Emma y Ella exploran el jardín y encuentran un tesoro sorpresa.",
+    "lines": [
+      "**Emma** se despierta **emocionada**.",
+      "'¡**Ella** viene hoy!' le dice a su **mascota**.",
+      "Se **viste**, come **huevos** y se prepara.",
+      "A las once, **Ella** toca el timbre. '¡**Emma**!' grita.",
+      "**Emma** abre la puerta. '¡**Ella**! ¡Juguemos!'",
+      "**Emma** prepara el juego. '¡Fingiremos explorar un **lugar secreto**!'",
+      "**Emma** y **Ella** entran al **jardín**. '¡Veamos detrás de la **banca**!' dice **Ella**.",
+      "Ven un **sobre** rojo. '¡Una carta!' **Emma** la lee.",
+      "'¡Bienvenidas, **exploradoras**! ¡Encuentren el **tesoro**!'",
+      "**Emma** y **Ella** se emocionan. Buscan **en todas partes**.",
+      "'¿Bajo el **árbol**?' '¿Entre la **cerca**?'",
+      "Luego, **Ella** ve algo. '¡**Emma**, mira!'",
+      "¡Es un **cofre** rojo pequeño! Lo abren.",
+      "Dentro hay dos pedazos de **pastel**. '¡**Pastel**!' **Emma** grita.",
+      "Comen felices. '¡El **mejor día**!' dice **Emma**.",
+      "**Ella** asiente. '¡Sí! ¡Vamos a contarle a todos sobre el **tesoro**!'"
+    ]
+  },
+  {
+    "lang": "spanish",
+    "title": "Lucas y su Almuerzo en la Escuela",
+    "phoneme": "/u/",
+    "summary": "Lucas come su almuerzo en la escuela con Bruno y Julia. Comparten comida y se divierten.",
+    "lines": [
+      "**Lucas** corre al **comedor**.",
+      "Su amigo **Bruno** está en una **mesa**. '¡**Lucas**, ven!' llama **Bruno**.",
+      "**Lucas** pone su **lonchera** en la **mesa**.",
+      "Saca un **sándwich** de **atún**. '¡El **atún** es bueno!' dice.",
+      "**Bruno** tiene **sopa**. '¿Quieres una cucharada?' pregunta **Bruno**.",
+      "**Lucas** asiente. '¡Mmm! ¡Me gusta la **sopa**!' **Bruno** sonríe.",
+      "**Lucas** abre una caja de **jugo**. '¡El **jugo** de fruta es fresco!' Bebe un sorbo.",
+      "Su amiga **Julia** también se sienta. '¡Miren, tengo **pudín**!' dice.",
+      "**Lucas** ríe. '¡Me encanta el **pudín**!'",
+      "Todos comen felices.",
+      "**Lucas** muerde una **manzana**. '¡Está **crujiente**!' dice.",
+      "**Bruno** bebe **leche**. '¡La **leche** también es buena!'",
+      "El **comedor** está lleno de risas.",
+      "Suena la **campana**. '¡Hora de clase!' dice **Julia**.",
+      "**Lucas** guarda su **lonchera**. '¡El **almuerzo** fue divertido!' dice.",
+      "Corren afuera, llenos y felices."
+    ]
+  },
+  {
+    "lang": "spanish",
+    "title": "Ana y la Aventura en el Parque",
+    "phoneme": "/a/",
+    "summary": "Ana y su papá van al parque a jugar, comer y ver el atardecer.",
+    "lines": [
+      "**Ana** se despierta y agarra su **mochila**.",
+      "'**Papá**, ¿podemos ir al **parque**?' pregunta.",
+      "**Papá** sonríe. '¡Sí! Guarda una **manzana** y un **plátano** para la merienda.'",
+      "**Ana** aplaude.",
+      "En el **parque**, **Ana** corre rápido por el **pasto**.",
+      "Ve un **gato** negro durmiendo. '¡Un **gato**!' dice, acariciándolo.",
+      "**Papá** le da una **pelota** a **Ana**. '¡Atrápala!' dice.",
+      "**Ana** agarra la **pelota** y la lanza de vuelta.",
+      "'¡Ese fue un gran lanzamiento!' dice **papá**, riendo.",
+      "Después de jugar, se sientan en una **banca**.",
+      "**Ana** saca una **manzana** y le da un **plátano** a **papá**.",
+      "'¡Las **manzanas** son mis favoritas!' dice, dando un gran mordisco.",
+      "El **sol** empieza a bajar.",
+      "'¡Mira el **cielo**! ¡Es **naranja** y **rosa**!' dice **Ana**, asombrada.",
+      "**Papá** toma una **foto**. '¡Un **día perfecto** en el parque!' dice.",
+      "**Ana** sonríe. '¿Podemos volver **mañana**?'",
+      "**Papá** asiente. '¡Claro!'",
+      "**Ana** aplaude de nuevo. '¡**Asombroso**!'"
+    ]
   }
-  
-  
+
 ]

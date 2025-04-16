@@ -251,5 +251,32 @@
             "startGame": "Empezar Juego",
             "dontShowAgain": "No mostrar de nuevo"
         }
+    },
+    "speechWalk": {
+        "title": "Habla-Camina",
+        "chooseStory": "Elija una historia",
+        "completed": "✅ Completado",
+        "instructions": {
+            "title": "🗣️ Cómo jugar a Speech-Walk",
+            "step1Title": "🎮 1. Iniciar el juego",
+            "step1Body": "Haga clic en el botón 'Empezar' para iniciar su viaje.",
+            "step2Title": "🚧 2. Enfrentarse al obstáculo",
+            "step2Body": "Cuando aparece la señal de precaución 🚧, tu personaje está bloqueado.",
+            "step3Title": "🎤 3. Decir la palabra",
+            "step3Body1": "Haz clic en 'Dilo' para activar el micrófono y pronunciar en voz alta la palabra resaltada.",
+            "step3Body2": "Si es correcto, tu personaje continúa. Si no, pierdes un ❤️.",
+            "note": "Sobrevive al viaje diciendo las palabras adecuadas. ¡Suerte!",
+            "close": "✅ ¡La tengo!"
+        },
+        "livesLabel": "❤️ Vidas:",
+        "sayPrompt": "Diga la palabra resaltada para continuar",
+        "sayButton": "🎤 Dilo",
+        "listeningButton": "🎤 Escuchando...",
+        "nextButton": "Siguiente",
+        "gameOver": "💀 Se acabó el juego. Actualizar para reiniciar.",
+        "victoryTitle": "🎉  ¡Felicidades!",
+        "victoryBody": "¡Has terminado la historia! 🏁",
+        "playAgain": "🔁 Volver a jugar",
+        "backToStories": "📚 Volver a Historias"
     }
 }

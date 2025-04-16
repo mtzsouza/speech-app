@@ -271,6 +271,33 @@
             "startGame": "Start Game",
             "dontShowAgain": "Don't show again"
         }
-    }
+    },
+    "speechWalk": {
+        "title": "Speech-Walk",
+        "chooseStory": "Choose a Story",
+        "completed": "✅ Completed",
+        "instructions": {
+            "title": "🗣️ How to Play Speech-Walk",
+            "step1Title": "🎮 1. Start the Game",
+            "step1Body": "Click the “Start” button to begin your journey.",
+            "step2Title": "🚧 2. Face the Obstacle",
+            "step2Body": "When the caution sign 🚧 appears, your character is blocked.",
+            "step3Title": "🎤 3. Say the Word",
+            "step3Body1": "Click “Say It” to activate your mic and speak the highlighted word aloud.",
+            "step3Body2": "If correct, your character continues. If not, you lose a ❤️.",
+            "note": "Survive the journey by saying the right words. Good luck!",
+            "close": "✅ Got it!"
+        },
+        "livesLabel": "❤️ Lives:",
+        "sayPrompt": "Say the highlighted word to continue",
+        "sayButton": "🎤 Say It",
+        "listeningButton": "🎤 Listening...",
+        "nextButton": "Next",
+        "gameOver": "💀 Game Over. Refresh to restart.",
+        "victoryTitle": "🎉 Congrats!",
+        "victoryBody": "You finished the story! 🏁",
+        "playAgain": "🔁 Play Again",
+        "backToStories": "📚 Back to Stories"
+        }
 
 }
