@@ -352,6 +352,18 @@
         "marathonSession": {
             "name": "Sesión Maratón",
             "description": "Ver vídeos durante 1 hora."
+        },
+        "fishingFirstCatch": {
+        "name": "Primera captura",
+        "description": "¡Atrapa tu primer pez en el juego de pesca!"
+        },
+        "fishingNovice": {
+        "name": "Pesca Novato",
+        "description": "¡Atrapa 5 peces en el juego de pesca!"
+        },
+        "fishingApprentice": {
+        "name": "Aprendiz de pescador",
+        "description": "¡Atrapa 10 peces en el juego de pesca!"
         }
     },
     "badgeCategories": {
@@ -361,6 +373,15 @@
         "speechWalk": "Paseo de la palabra",
         "memoryMatch": "Partida de memoria",
         "earthDefender": "Defensor de la Tierra"
+    },
+    "videos": {
+        "title": "Videoteca",
+        "back": "Volver",
+        "searchPlaceholder": "Buscar vídeos por título o descripción",
+        "englishSection": "Vídeos en inglés",
+        "spanishSection": "Vídeos en español",
+        "watched": "Visto",
+        "watchButton": "Ver el vídeo"
     }
 
 }

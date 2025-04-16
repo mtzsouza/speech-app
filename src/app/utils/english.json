@@ -372,6 +372,18 @@
         "marathonSession": {
             "name": "Marathon Session",
             "description": "Watch videos for 1 hour."
+        },
+        "fishingFirstCatch": {
+        "name": "First Catch",
+        "description": "Catch your first fish in the fishing game!"
+        },
+        "fishingNovice": {
+        "name": "Fishing Novice",
+        "description": "Catch 5 fish in the fishing game!"
+        },
+        "fishingApprentice": {
+        "name": "Fishing Apprentice",
+        "description": "Catch 10 fish in the fishing game!"
         }
     },
     "badgeCategories": {
@@ -380,7 +392,17 @@
         "bingo": "Bingo",
         "speechWalk": "Speech Walk",
         "memoryMatch": "Memory Match",
-        "earthDefender": "Earth Defender"
+        "earthDefender": "Earth Defender",
+        "fishing": "Fishing"
+    },
+    "videos": {
+        "title": "Video Library",
+        "back": "Back",
+        "searchPlaceholder": "Search videos by title or description",
+        "englishSection": "English Videos",
+        "spanishSection": "Spanish Videos",
+        "watched": "Watched",
+        "watchButton": "Watch Video"
     }
 
 

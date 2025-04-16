@@ -12,7 +12,8 @@ type ProgressKey =
   | 'bingoProgress'
   | 'speechWalkProgress'
   | 'memoryMatchProgress'
-  | 'earthDefenderProgress';
+  | 'earthDefenderProgress'
+  | 'fishingGameProgress';
 
 interface Badge {
   name: string;
@@ -59,7 +60,10 @@ export class PTHComponent implements OnInit {
       { name: b.bingeWatcher.name, description: b.bingeWatcher.description, icon: '🎥', requiredKey: 'videoProgress', requiredValue: 10 },
       { name: b.committedLearner.name, description: b.committedLearner.description, icon: '🎬', requiredKey: 'videoProgress', requiredValue: 15 },
       { name: b.videoMaster.name, description: b.videoMaster.description, icon: '🏆', requiredKey: 'videoProgress', requiredValue: 20 },
-      { name: b.marathonSession.name, description: b.marathonSession.description, icon: '⏳', requiredKey: 'videoProgress', requiredValue: 25 }
+      { name: b.marathonSession.name, description: b.marathonSession.description, icon: '⏳', requiredKey: 'videoProgress', requiredValue: 25 },
+      { name: b.fishingFirstCatch.name, description: b.fishingFirstCatch.description, icon: '🐟', requiredKey: 'fishingGameProgress', requiredValue: 1 },
+      { name: b.fishingNovice.name, description: b.fishingNovice.description, icon: '🎣', requiredKey: 'fishingGameProgress', requiredValue: 5 },
+      { name: b.fishingApprentice.name, description: b.fishingApprentice.description, icon: '🏅', requiredKey: 'fishingGameProgress', requiredValue: 10 },      
     ];
   }
 
@@ -80,7 +84,8 @@ export class PTHComponent implements OnInit {
       bingoProgress: Number(localStorage.getItem('bingoProgress') || 0),
       speechWalkProgress: Number(localStorage.getItem('speechWalkProgress') || 0),
       memoryMatchProgress: Number(localStorage.getItem('memoryMatchProgress') || 0),
-      earthDefenderProgress: Number(localStorage.getItem('earthDefenderProgress') || 0)
+      earthDefenderProgress: Number(localStorage.getItem('earthDefenderProgress') || 0),
+      fishingGameProgress: Number(localStorage.getItem('fishingGameProgress') || 0) // 👈 add this
     };
 
     const prevEarned: Badge[] = JSON.parse(sessionStorage.getItem('earnedBadges') || '[]');

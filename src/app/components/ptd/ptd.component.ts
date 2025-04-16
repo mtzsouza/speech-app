@@ -41,7 +41,7 @@ export class PTDComponent implements OnInit {
     const memoryProgress = Number(localStorage.getItem('memoryMatchProgress')) || 0;
     const edProgress = Number(localStorage.getItem('earthDefenderProgress')) || 0;
     const speechWalkProgress = Number(localStorage.getItem('speechWalkProgress')) || 0;
-
+    const fishingGameProgress = Number(localStorage.getItem('fishingGameProgress')) || 0;
 
 
 
@@ -96,11 +96,11 @@ export class PTDComponent implements OnInit {
         color: '#3f51b5'
       },
       {
-        name: 'Game X',
-        percentage: 0,
-        icon: '🎯',
-        title: 'Game X',
-        color: '#ff5722'
+        name: 'Fishing Game',
+        percentage: Math.min(fishingGameProgress * 10, 100),
+        icon: '🎣',
+        title: 'Fishing',
+        color: '#795548'
       },
       {
         name: 'Game Y',

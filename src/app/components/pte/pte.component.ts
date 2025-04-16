@@ -12,7 +12,8 @@ type ProgressKey =
   | 'bingoProgress'
   | 'speechWalkProgress'
   | 'memoryMatchProgress'
-  | 'earthDefenderProgress';
+  | 'earthDefenderProgress'
+  | 'fishingGameProgress';
 
   interface Badge {
     name: string;
@@ -63,8 +64,11 @@ export class PTEComponent implements OnInit {
       { name: b.memoryLegend.name, icon: '👑', description: b.memoryLegend.description, requiredKey: 'memoryMatchProgress', requiredValue: 100, category: c.memoryMatch },
 
       { name: b.earthRookie.name, icon: '🛡️', description: b.earthRookie.description, requiredKey: 'earthDefenderProgress', requiredValue: 10, category: c.earthDefender },
-      { name: b.defenderElite.name, icon: '🌍', description: b.defenderElite.description, requiredKey: 'earthDefenderProgress', requiredValue: 100, category: c.earthDefender }
-    ];
+      { name: b.defenderElite.name, icon: '🌍', description: b.defenderElite.description, requiredKey: 'earthDefenderProgress', requiredValue: 100, category: c.earthDefender },
+      { name: b.fishingFirstCatch.name, icon: '🐟', description: b.fishingFirstCatch.description, requiredKey: 'fishingGameProgress', requiredValue: 1, category: c.fishing },
+      { name: b.fishingNovice.name, icon: '🎣', description: b.fishingNovice.description, requiredKey: 'fishingGameProgress', requiredValue: 5, category: c.fishing },
+      { name: b.fishingApprentice.name, icon: '🏅', description: b.fishingApprentice.description, requiredKey: 'fishingGameProgress', requiredValue: 10, category: c.fishing }
+    ];      
   }
 
   constructor(private router: Router) {}
@@ -80,7 +84,8 @@ export class PTEComponent implements OnInit {
         bingoProgress: Number(localStorage.getItem('bingoProgress') || 0),
         speechWalkProgress: Number(localStorage.getItem('speechWalkProgress') || 0),
         memoryMatchProgress: Number(localStorage.getItem('memoryMatchProgress') || 0),
-        earthDefenderProgress: Number(localStorage.getItem('earthDefenderProgress') || 0)
+        earthDefenderProgress: Number(localStorage.getItem('earthDefenderProgress') || 0),
+        fishingGameProgress: Number(localStorage.getItem('fishingGameProgress') || 0)
       };
   
       this.earnedBadges = this.allBadges.filter(badge => {

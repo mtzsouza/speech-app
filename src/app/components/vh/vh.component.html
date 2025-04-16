@@ -10,7 +10,7 @@
       </button>
 
       <div class="header">
-        <h1>Video Library</h1>
+        <h1>{{ language.videos.title }}</h1>
       </div>
 
       <div class="search-bar">
@@ -18,7 +18,7 @@
           <i class="fas fa-search search-icon"></i>
           <input 
             type="text" 
-            placeholder="Search videos by title or description" 
+            [placeholder]="language.videos.searchPlaceholder"
             #searchInput 
             (input)="onSearch(searchInput.value)" 
           />
@@ -28,7 +28,7 @@
 
       <!-- English Videos Section -->
       <div class="video-section">
-        <h2 class="section-title">English Videos</h2>
+        <h2 class="section-title">{{ language.videos.englishSection }}</h2>
         <div class="video-list">
           <div class="video-item" 
                *ngFor="let video of englishVideos" 
@@ -40,7 +40,7 @@
                   <i class="fas fa-play"></i>
                 </div>
                 <div *ngIf="isWatched(video.link)" class="watched-badge">
-                  <i class="fas fa-check"></i> Watched
+                  <i class="fas fa-check"></i> {{ language.videos.watched }}
                 </div>
               </div>
               <div class="video-info">
@@ -69,7 +69,7 @@
 
       <!-- Spanish Videos Section -->
       <div class="video-section">
-        <h2 class="section-title">Spanish Videos</h2>
+        <h2 class="section-title">{{ language.videos.spanishSection }}</h2>
         <div class="video-list">
           <div class="video-item" 
                *ngFor="let video of spanishVideos" 
@@ -81,7 +81,7 @@
                   <i class="fas fa-play"></i>
                 </div>
                 <div *ngIf="isWatched(video.link)" class="watched-badge">
-                  <i class="fas fa-check"></i> Watched
+                  <i class="fas fa-check"></i> {{ language.videos.watched }}
                 </div>
               </div>
               <div class="video-info">
@@ -102,7 +102,7 @@
                target="_blank"
                class="watch-button"
                (click)="trackVideoClick(video.link)">
-              Watch Video <i class="fas fa-external-link-alt"></i>
+               {{ language.videos.watchButton }} <i class="fas fa-external-link-alt"></i>
             </a>
           </div>
         </div>

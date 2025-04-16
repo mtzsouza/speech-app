@@ -497,6 +497,8 @@ getFishRotation(): string {
       this.showSplash = false;
       this.caughtFishId = Math.floor(Math.random() * 5) + 1;
       this.fishCaught++;
+      const currentProgress = Number(localStorage.getItem('fishingGameProgress')) || 0;
+      localStorage.setItem('fishingGameProgress', String(currentProgress + 1));
       if (this.fishCaught > this.bestFishCaught) {
         this.bestFishCaught = this.fishCaught;
         localStorage.setItem('bestFishCaught', String(this.fishCaught));
