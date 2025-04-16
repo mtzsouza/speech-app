@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { LanguageService } from '../../services/language.service';
+import * as english from '../../utils/english.json';
 
 type ProgressKey =
   | 'videoProgress'
@@ -28,135 +30,47 @@ interface Badge {
   templateUrl: './pth.component.html',
   styleUrls: ['./pth.component.sass']
 })
+
 export class PTHComponent implements OnInit {
   earnedBadges: Badge[] = [];
   unearnedBadges: Badge[] = [];
   showConfetti = false;
   confettiPieces: any[] = [];
+  languageService = inject(LanguageService);
+  language = english;
 
-  readonly allBadges: Badge[] = [
-    // 🎲 Bingo
-    {
-      name: 'Bingo Beginner',
-      icon: '🎲',
-      description: 'Completed 1 round of Bingo.',
-      requiredKey: 'bingoProgress',
-      customCheck: (val) => val >= 10
-    },
-    {
-      name: 'Bingo Boss',
-      icon: '🏁',
-      description: 'Completed 5 rounds of Bingo.',
-      requiredKey: 'bingoProgress',
-      customCheck: (val) => val >= 50
-    },
+  allBadges: Badge[] = [];
 
-    // 🗣️ Speech-Walk
-    {
-      name: 'Speech Walker',
-      icon: '🗣️',
-      description: 'Completed 1 Speech-Walk story.',
-      requiredKey: 'speechWalkProgress',
-      customCheck: (val) => val >= 10
-    },
-    {
-      name: 'Speech Pro',
-      icon: '🎤',
-      description: 'Completed 5 Speech-Walk stories.',
-      requiredKey: 'speechWalkProgress',
-      customCheck: (val) => val >= 50
-    },
-
-    // 🔊 Soundboard
-    {
-      name: 'Sound Explorer',
-      icon: '🔊',
-      description: 'Play a sound from the soundboard.',
-      requiredKey: 'soundboardProgress',
-      requiredValue: 10
-    },
-    {
-      name: 'Melody Maker',
-      icon: '🎶',
-      description: 'Play 5 different sounds.',
-      requiredKey: 'soundboardProgress',
-      requiredValue: 20
-    },
-
-    // 🧠 Memory Match
-    {
-      name: 'Memory Start',
-      icon: '🧠',
-      description: 'Completed 1 Memory Match.',
-      requiredKey: 'memoryMatchProgress',
-      customCheck: (val) => val >= 10
-    },
-    {
-      name: 'Memory Legend',
-      icon: '👑',
-      description: 'Completed 10 Memory Matches.',
-      requiredKey: 'memoryMatchProgress',
-      customCheck: (val) => val >= 100
-    },
-
-    // 🛡️ Earth Defender
-    {
-      name: 'Earth Rookie',
-      icon: '🛡️',
-      description: 'Played Earth Defender once.',
-      requiredKey: 'earthDefenderProgress',
-      customCheck: (val) => val >= 10
-    },
-    {
-      name: 'Defender Elite',
-      icon: '🌍',
-      description: 'Played Earth Defender 10 times.',
-      requiredKey: 'earthDefenderProgress',
-      customCheck: (val) => val >= 100
-    },
-
-    // 📺 Video Progress
-    {
-      name: 'First Steps',
-      icon: '📺',
-      description: 'Watch your first video!',
-      requiredKey: 'videoProgress',
-      requiredValue: 5
-    },
-    {
-      name: 'Binge Watcher',
-      icon: '🎥',
-      description: 'Watch 3 videos.',
-      requiredKey: 'videoProgress',
-      requiredValue: 10
-    },
-    {
-      name: 'Committed Learner',
-      icon: '🎬',
-      description: 'Watch 10 videos.',
-      requiredKey: 'videoProgress',
-      requiredValue: 15
-    },
-    {
-      name: 'Video Master',
-      icon: '🏆',
-      description: 'Watch 25 videos.',
-      requiredKey: 'videoProgress',
-      requiredValue: 20
-    },
-    {
-      name: 'Marathon Session',
-      icon: '⏳',
-      description: 'Watch videos for 1 hour.',
-      requiredKey: 'videoProgress',
-      requiredValue: 25
-    }
-  ];
+  initializeBadges(): void {
+    const b = this.language.badges;
+  
+    this.allBadges = [
+      { name: b.bingoBeginner.name, description: b.bingoBeginner.description, icon: '🎲', requiredKey: 'bingoProgress', customCheck: val => val >= 10 },
+      { name: b.bingoBoss.name, description: b.bingoBoss.description, icon: '🏁', requiredKey: 'bingoProgress', customCheck: val => val >= 50 },
+      { name: b.speechWalker.name, description: b.speechWalker.description, icon: '🗣️', requiredKey: 'speechWalkProgress', customCheck: val => val >= 10 },
+      { name: b.speechPro.name, description: b.speechPro.description, icon: '🎤', requiredKey: 'speechWalkProgress', customCheck: val => val >= 50 },
+      { name: b.soundExplorer.name, description: b.soundExplorer.description, icon: '🔊', requiredKey: 'soundboardProgress', requiredValue: 10 },
+      { name: b.melodyMaker.name, description: b.melodyMaker.description, icon: '🎶', requiredKey: 'soundboardProgress', requiredValue: 20 },
+      { name: b.memoryStart.name, description: b.memoryStart.description, icon: '🧠', requiredKey: 'memoryMatchProgress', customCheck: val => val >= 10 },
+      { name: b.memoryLegend.name, description: b.memoryLegend.description, icon: '👑', requiredKey: 'memoryMatchProgress', customCheck: val => val >= 100 },
+      { name: b.earthRookie.name, description: b.earthRookie.description, icon: '🛡️', requiredKey: 'earthDefenderProgress', customCheck: val => val >= 10 },
+      { name: b.defenderElite.name, description: b.defenderElite.description, icon: '🌍', requiredKey: 'earthDefenderProgress', customCheck: val => val >= 100 },
+      { name: b.firstSteps.name, description: b.firstSteps.description, icon: '📺', requiredKey: 'videoProgress', requiredValue: 5 },
+      { name: b.bingeWatcher.name, description: b.bingeWatcher.description, icon: '🎥', requiredKey: 'videoProgress', requiredValue: 10 },
+      { name: b.committedLearner.name, description: b.committedLearner.description, icon: '🎬', requiredKey: 'videoProgress', requiredValue: 15 },
+      { name: b.videoMaster.name, description: b.videoMaster.description, icon: '🏆', requiredKey: 'videoProgress', requiredValue: 20 },
+      { name: b.marathonSession.name, description: b.marathonSession.description, icon: '⏳', requiredKey: 'videoProgress', requiredValue: 25 }
+    ];
+  }
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.checkProgressAndAwardBadges();
+    this.languageService.getLanguage().then(lang => {
+      this.language = lang;
+      this.initializeBadges();
+      this.checkProgressAndAwardBadges();
+    });
   }
 
   checkProgressAndAwardBadges(): void {

@@ -278,5 +278,89 @@
         "victoryBody": "¡Has terminado la historia! 🏁",
         "playAgain": "🔁 Volver a jugar",
         "backToStories": "📚 Volver a Historias"
+    },
+    "progressTrackingHome": {
+        "title": "¡Bienvenido a Progress Sharing!",
+        "back": "Volver",
+        "earned": {
+            "title": "Insignias conseguidas",
+            "button": "Ver insignias obtenidas"
+        },
+        "unearned": {
+            "title": "Aún no se ha ganado",
+            "button": "Ver Insignias no ganadas"
+        },
+        "progressButton": "Ver datos de progreso"
+    },
+    "badges": {
+        "bingoBeginner": {
+            "name": "Bingo Principiante",
+            "description": "Completada 1 ronda de Bingo."
+        },
+        "bingoBoss": {
+            "name": "Jefe del Bingo",
+            "description": "Completadas 5 rondas de Bingo."
+        },
+        "speechWalker": {
+            "name": "Discurso Walker",
+            "description": "Completada 1 historia de Habla-Camina."
+        },
+        "speechPro": {
+            "name": "Habla Pro",
+            "description": "Completadas 5 historias de Speech-Walk."
+        },
+        "soundExplorer": {
+            "name": "Explorador de sonidos",
+            "description": "Reproduce un sonido de la caja de resonancia."
+        },
+        "melodyMaker": {
+            "name": "Melody Maker",
+            "description": "Reproduce 5 sonidos diferentes."
+        },
+        "memoryStart": {
+            "name": "Memoria Inicio",
+            "description": "Has completado 1 partida de memoria."
+        },
+        "memoryLegend": {
+            "name": "Leyenda de la memoria",
+            "description": "Has completado 10 Partidas de Memoria."
+        },
+        "earthRookie": {
+            "name": "Novato de la Tierra",
+            "description": "Jugué una vez al Earth Defender."
+        },
+        "defenderElite": {
+            "name": "Defensor Elite",
+            "description": "Has jugado a Earth Defender 10 veces."
+        },
+        "firstSteps": {
+            "name": "Primeros pasos",
+            "description": "Vea su primer vídeo"
+        },
+        "bingeWatcher": {
+            "name": "Binge Watcher (Observador compulsivo)",
+            "description": "Ver 3 vídeos."
+        },
+        "committedLearner": {
+            "name": "Estudiante comprometido",
+            "description": "Ver 10 vídeos."
+        },
+        "videoMaster": {
+            "name": "Vídeo Maestro",
+            "description": "Ver 25 vídeos."
+        },
+        "marathonSession": {
+            "name": "Sesión Maratón",
+            "description": "Ver vídeos durante 1 hora."
+        }
+    },
+    "badgeCategories": {
+        "video": "Logros del aprendizaje por vídeo",
+        "soundboard": "Logros de la caja de resonancia",
+        "bingo": "Bingo",
+        "speechWalk": "Paseo de la palabra",
+        "memoryMatch": "Partida de memoria",
+        "earthDefender": "Defensor de la Tierra"
     }
+
 }

@@ -298,6 +298,90 @@
         "victoryBody": "You finished the story! 🏁",
         "playAgain": "🔁 Play Again",
         "backToStories": "📚 Back to Stories"
+    },
+    "progressTrackingHome": {
+        "title": "Welcome to Progress Sharing!",
+        "back": "Back",
+        "earned": {
+            "title": "Earned Badges!",
+            "button": "See Earned Badges"
+        },
+        "unearned": {
+            "title": "Not Yet Earned!",
+            "button": "See Unearned Badges"
+        },
+        "progressButton": "View Progress Data"
+    },
+    "badges": {
+        "bingoBeginner": {
+            "name": "Bingo Beginner",
+            "description": "Completed 1 round of Bingo."
+        },
+        "bingoBoss": {
+            "name": "Bingo Boss",
+            "description": "Completed 5 rounds of Bingo."
+        },
+        "speechWalker": {
+            "name": "Speech Walker",
+            "description": "Completed 1 Speech-Walk story."
+        },
+        "speechPro": {
+            "name": "Speech Pro",
+            "description": "Completed 5 Speech-Walk stories."
+        },
+        "soundExplorer": {
+            "name": "Sound Explorer",
+            "description": "Play a sound from the soundboard."
+        },
+        "melodyMaker": {
+            "name": "Melody Maker",
+            "description": "Play 5 different sounds."
+        },
+        "memoryStart": {
+            "name": "Memory Start",
+            "description": "Completed 1 Memory Match."
+        },
+        "memoryLegend": {
+            "name": "Memory Legend",
+            "description": "Completed 10 Memory Matches."
+        },
+        "earthRookie": {
+            "name": "Earth Rookie",
+            "description": "Played Earth Defender once."
+        },
+        "defenderElite": {
+            "name": "Defender Elite",
+            "description": "Played Earth Defender 10 times."
+        },
+        "firstSteps": {
+            "name": "First Steps",
+            "description": "Watch your first video!"
+        },
+        "bingeWatcher": {
+            "name": "Binge Watcher",
+            "description": "Watch 3 videos."
+        },
+        "committedLearner": {
+            "name": "Committed Learner",
+            "description": "Watch 10 videos."
+        },
+        "videoMaster": {
+            "name": "Video Master",
+            "description": "Watch 25 videos."
+        },
+        "marathonSession": {
+            "name": "Marathon Session",
+            "description": "Watch videos for 1 hour."
         }
+    },
+    "badgeCategories": {
+        "video": "Video Learning Achievements",
+        "soundboard": "Soundboard Achievements",
+        "bingo": "Bingo",
+        "speechWalk": "Speech Walk",
+        "memoryMatch": "Memory Match",
+        "earthDefender": "Earth Defender"
+    }
+
 
 }
