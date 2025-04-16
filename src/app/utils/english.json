@@ -238,5 +238,39 @@
             "select": "Select the sound for:",
             "speak": "🎤 Speak"
         }
+    },
+    "bingo": {
+        "playSound": "🔊 Play Sound:",
+        "streak": "Streak:",
+        "longestStreak": "Longest Streak:",
+        "time": "Time:",
+        "bestTime": "Best Time:",
+        "bestScore": "Best Score:",
+        "bestStreak": "All-Time Best Streak:",
+        "backToGames": "Back to Games",
+        "gameOver": "Game Over!",
+        "restart": "Restart",
+        "victory": "🎉 BINGO! You won! 🎊",
+        "ok": "OK",
+        "start": "▶ Start Game",
+        "next": "➡ Next Sound",
+        "title": "BINGO / Lotería",
+        "replay": "Replay Sound",
+        "lockedSquare": "Locked square! You skipped.",
+        "instructions": {
+            "title": "How to Play",
+            "start": "Click the “Start Game” button to begin. A sound will play automatically.",
+            "match": "Your goal is to find the correct letter or symbol on the board that matches the sound.",
+            "feedback": "Correct answers are marked in green. Wrong ones shake and turn red.",
+            "replay": "Click the 🔊 button to replay the sound.",
+            "skip": "Clicking 'Next Sound' without answering locks that square. It won’t count toward a win!",
+            "winTitle": "How to Win",
+            "patternDiagonal": "Diagonal",
+            "patternRow": "Across",
+            "patternCol": "Vertical",
+            "startGame": "Start Game",
+            "dontShowAgain": "Don't show again"
+        }
     }
+
 }

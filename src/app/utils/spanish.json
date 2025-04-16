@@ -218,5 +218,38 @@
             "select": "Selecciona el sonido para:",
             "speak": "🎤 Habla"
         }
+    },
+    "bingo": {
+        "playSound": "🔊 Reproducir sonido:",
+        "streak": "Racha:",
+        "longestStreak": "La racha más larga:",
+        "time": "Hora:",
+        "bestTime": "El mejor momento:",
+        "bestScore": "Mejor puntuación:",
+        "bestStreak": "Mejor racha de todos los tiempos:",
+        "backToGames": "Volver a Juegos",
+        "gameOver": "¡Se acabó el juego!",
+        "restart": "Reinicie",
+        "victory": "🎉 ¡BINGO! ¡Has ganado! 🎊",
+        "ok": "OK",
+        "start": "▶ Comenzar el juego",
+        "next": "➡ Siguiente sonido",
+        "title": "BINGO / Lotería",
+        "replay": "Repetición de sonido",
+        "lockedSquare": "¡Cuadrado bloqueado! Te has saltado.",
+        "instructions": {
+            "title": "Cómo jugar",
+            "start": "Pulsa el botón “Empezar Juego” para comenzar. Se reproducirá un sonido automáticamente.",
+            "match": "Tu objetivo es encontrar en la pizarra la letra o el símbolo correcto que corresponda al sonido,",
+            "feedback": "Las respuestas correctas se marcan en verde. Las incorrectas se agitan y se vuelven rojas.",
+            "replay": "Haz clic en el botón 🔊 para reproducir el sonido.",
+            "skip": "Si haces clic en 'Siguiente sonido' sin responder, se bloqueará esa casilla. No contará para la victoria.",
+            "winTitle": "Cómo ganar",
+            "patternDiagonal": "Diagonal",
+            "patternRow": "A través de",
+            "patternCol": "Vertical",
+            "startGame": "Empezar Juego",
+            "dontShowAgain": "No mostrar de nuevo"
+        }
     }
 }

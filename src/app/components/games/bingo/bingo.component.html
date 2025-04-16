@@ -1,8 +1,8 @@
 <canvas id="confettiCanvas"></canvas>
 <div id="victoryMessage" class="victory-popup">
-  🎉 BINGO! You won! 🎊
+  {{ language.bingo.victory }}
   <button onclick="document.getElementById('victoryMessage').style.display='none'">
-      OK
+    {{ language.bingo.ok }}
   </button>
 </div>
 
@@ -14,32 +14,30 @@
           <button class="close-btn" (click)="closeInstructions()">✖</button>
       
           <div *ngIf="instructionStep === 1">
-            <h2>🎮 Welcome to Bingo/Lotería!</h2>
+            <h2>🎮 {{ language.bingo.title }}</h2>
           
             <div class="instruction-step">
-              <p><strong>1. Start the Game</strong></p>
-              <p>Click the <strong>“Start Game”</strong> button to begin. A sound will play automatically.</p>
+              <p><strong>1.</strong> {{ language.bingo.instructions.start }}</p>
+              <p>{{ language.bingo.instructions.start }}</p>
             </div>
           
             <div class="instruction-step">
-              <p><strong>2. Match the Sound</strong></p>
-              <p>Your goal is to find the correct letter or symbol on the board that matches the sound.</p>
-              <p>If correct, it's marked in green. If wrong, the tile shakes and turns red briefly.</p>
+              <p><strong>2.</strong> {{ language.bingo.instructions.match }}</p>
+              <p>{{ language.bingo.instructions.feedback }}</p>
             </div>
           
             <div class="instruction-step">
-              <p><strong>3. Replay & Skipping</strong></p>
-              <p>You can click the 🔊 button to <strong>replay</strong> the current sound.</p>
-              <p>If you click <strong>“Next Sound”</strong> without answering, that square becomes locked and won’t count toward a win!</p>
+              <p><strong>3.</strong> {{ language.bingo.instructions.replay }}</p>
+              <p>{{ language.bingo.instructions.skip }}</p>
             </div>
           
-            <button (click)="nextInstruction()">➡ Next</button>
+            <button (click)="nextInstruction()">{{ language.bingo.next }}</button>
           </div>          
       
           <div *ngIf="instructionStep === 2">
-            <h2>How to Win</h2>
+            <h2>{{ language.bingo.instructions.winTitle }}</h2>
             <div class="win-example">
-                <h3>Diagonal</h3>
+              <h3>{{ language.bingo.instructions.patternDiagonal }}</h3>
                 <div class="pattern-grid full-diagonal">
                     <div class="tile dark"></div>
                     <div class="tile empty"></div>
@@ -75,13 +73,13 @@
               
                            
             <div class="win-example">
-              <h3>Across</h3>
+              <h3>{{ language.bingo.instructions.patternRow }}</h3>
               <div class="pattern-row">
                 <div class="tile dark"></div><div class="tile dark"></div><div class="tile dark"></div><div class="tile dark"></div><div class="tile dark"></div>
               </div>
             </div>
             <div class="win-example">
-              <h3>Vertical</h3>
+              <h3>{{ language.bingo.instructions.patternCol }}</h3>
               <div class="pattern-column">
                 <div class="tile dark"></div>
                 <div class="tile dark"></div>
@@ -90,7 +88,7 @@
                 <div class="tile dark"></div>
               </div>
             </div>
-            <button (click)="closeInstructions()">Start Game</button>
+            <button (click)="closeInstructions()">{{ language.bingo.instructions.startGame }}</button>
           </div>
         </div>
       </div>
@@ -113,7 +111,7 @@
             (click)="replaySound()" 
             [disabled]="!currentSound || gameWon" 
             title="Replay Sound">
-            🔊 Play Sound
+            {{ language.bingo.playSound }}
         </button>
       </div>
         <div class="bingo-board">
@@ -125,11 +123,11 @@
                 [class.correct]="cell.animation === 'correct'"
                 [class.incorrect]="cell.animation === 'incorrect'"
                 (click)="markSquare(rowIdx, colIdx)">
-                {{ phoneticMap[cell.value] || cell.value }}
+                {{ getDisplayOption(cell.value) }}
             </div>
         </div>
     
-        <button class="reset-btn" (click)="resetGame()">🔄 Reset Game</button>
+        <button class="reset-btn" (click)="resetGame()">🔄 {{ language.bingo.restart }}</button>
     </div>  
 </div>
   
