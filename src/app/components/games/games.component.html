@@ -30,22 +30,16 @@
                             Hearing Games
                         </button>
                         <button 
-                            [class.active]="sortBy === 'visual'"
-                            (click)="sortGames('visual')" 
-                            class="sort-button visual">
-                            Visual Games
+                            [class.active]="sortBy === 'speaking'"
+                            (click)="sortGames('speaking')" 
+                            class="sort-button speaking">
+                            Speaking Games
                         </button>
                         <button 
-                            [class.active]="sortBy === 'memory'"
-                            (click)="sortGames('memory')" 
-                            class="sort-button memory">
-                            Memory Games
-                        </button>
-                        <button 
-                            [class.active]="sortBy === 'interactive'"
-                            (click)="sortGames('interactive')" 
-                            class="sort-button interactive">
-                            Interactive Games
+                            [class.active]="sortBy === 'phonetics'"
+                            (click)="sortGames('phonetics')" 
+                            class="sort-button phonetics">
+                            Phonetics Games
                         </button>
                     </div>
                 </div>
