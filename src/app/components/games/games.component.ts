@@ -69,7 +69,7 @@ export class GamesComponent implements OnInit {
     {
       title: 'Speech Walk',
       description: 'Walk through a story while trying sounds',
-      emoji: '🎲',
+      emoji: '👣',
       iconClass: 'game_5',
       category: 'speaking',
       link: '/speech-walk'
@@ -83,12 +83,12 @@ export class GamesComponent implements OnInit {
       link: '/phonetic-fishing'
     },
     {
-      title: 'Game 7',
-      description: 'Description of the game',
-      emoji: '🎲',
+      title: 'Pet Care',
+      description: 'Use two-word expressions to take care of a puppy',
+      emoji: '🐶',
       iconClass: 'game_7',
       category: 'speaking',
-      link: '/games'
+      link: '/pet-care'
     }
   ];
 
