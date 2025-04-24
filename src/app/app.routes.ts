@@ -29,6 +29,7 @@ import { TuneComponent } from './components/games/tune/tune.component';
 import { TestComponent } from './components/test/test.component';
 import { SpeechWalkComponent } from './components/games/speech-walk/speech-walk.component';
 import { FishingComponent } from './components/games/fishing/fishing.component';
+import { PetCareComponent } from './components/games/pet-care/pet-care.component';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -108,6 +109,12 @@ export const routes: Routes = [
     {
         path: 'speech-walk',
         component: SpeechWalkComponent,
+        ...canActivate(redirectUnauthorizedToLogin)
+    },
+
+    {
+        path: 'pet-care',
+        component: PetCareComponent,
         ...canActivate(redirectUnauthorizedToLogin)
     },
 

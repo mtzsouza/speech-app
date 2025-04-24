@@ -6,6 +6,7 @@ import { DatabaseService } from '../../../services/database.service';
 import { AuthService } from '../../../services/auth.service';
 import * as english from '../../../utils/english.json'
 import pairs from './game-assets/pairs.json';
+import { CommonModule } from '@angular/common';
 
 interface Question {
   word: string;
@@ -16,7 +17,7 @@ interface Question {
 @Component({
   selector: 'app-tune',
   standalone: true,
-  imports: [NavbarComponent],
+  imports: [NavbarComponent, CommonModule],
   templateUrl: './tune.component.html',
   styleUrl: './tune.component.sass'
 })
@@ -30,6 +31,7 @@ export class TuneComponent {
   userLanguage = english;
   isAdmin = false;
   generationStatus = "";
+  feedback = "";
 
   async ngOnInit(): Promise<void> {
     this.userLanguage = await this.languageService.getLanguage();
@@ -141,6 +143,9 @@ export class TuneComponent {
     if (!this.responded && choice == 'correct') {
       const timeMultiplier = Math.min(5.0, this.questionTime);
       this.pointsEarned += (timeMultiplier * 100);
+      this.feedback = 'Great job! 🌟';
+    } else {
+      this.feedback = 'Try again! 💪';
     }
     this.responded = true;
   }

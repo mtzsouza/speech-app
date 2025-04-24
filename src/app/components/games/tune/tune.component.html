@@ -2,45 +2,81 @@
     <app-navbar></app-navbar>
     <div class="main">
         <div class="panel">
-            <a href="/games" class="nav-button back-button">↩</a>
+            <a href="/games" class="nav-button back-button">
+                <span class="icon">🏠</span> Home
+            </a>
 
             @if (menuActive) {
                 <div class="menu">
-                    <h1>Tune Your Ears</h1>
-                    <p>
+                    <div class="title-container">
+                        <h1>Tune Your Ears</h1>
+                        <div class="music-notes">
+                            <span>🎵</span><span>🎶</span><span>🎵</span>
+                        </div>
+                    </div>
+                    <p class="instructions">
+                        Help the music fairies learn their sounds!<br>
                         Choose a pair to practice and answer quickly to earn more points.
                     </p>
                     <div class="selection-box">
                         @for (pair of pairs; track pair) {
                             <div class="pair-button" (click)="startGame(pair)">
-                                <p>{{ pair.sounds[0] }}, {{ pair.sounds[1] }}</p>
+                                <div class="button-icon">🎼</div>
+                                <p>{{ pair.sounds[0] }} & {{ pair.sounds[1] }}</p>
                             </div>
                         }
+                    </div>
+                    <div class="forest-animals">
+                        <div class="animal" *ngFor="let animal of ['🦉', '🐿️', '🦊']">{{ animal }}</div>
                     </div>
                 </div>
             }
 
             @if (gameActive) {
                 <div class="game-area screen">
-                    <h1 class="displayed-time">{{ displayedTime }}</h1>
+                    <div class="time-container">
+                        <div class="fairy">🧚</div>
+                        <h1 class="displayed-time">{{ displayedTime }}</h1>
+                    </div>
                     <div class="choice-area">
                         @if (firstChoiceCorrect) {
-                            <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">{{currentQuestion.correctSound}}</div>
-                            <div class="choice-button" (click)="processResponse('wrong')">{{currentQuestion.wrongSound}}</div>
+                            <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">
+                                <div class="sound-icon">🔊</div>
+                                {{currentQuestion.correctSound}}
+                            </div>
+                            <div class="choice-button" (click)="processResponse('wrong')">
+                                <div class="sound-icon">🔊</div>
+                                {{currentQuestion.wrongSound}}
+                            </div>
                         } @else {
-                            <div class="choice-button" (click)="processResponse('wrong')">{{currentQuestion.wrongSound}}</div>
-                            <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">{{currentQuestion.correctSound}}</div>
+                            <div class="choice-button" (click)="processResponse('wrong')">
+                                <div class="sound-icon">🔊</div>
+                                {{currentQuestion.wrongSound}}
+                            </div>
+                            <div class="choice-button" [class.correct]='responded' (click)="processResponse('correct')">
+                                <div class="sound-icon">🔊</div>
+                                {{currentQuestion.correctSound}}
+                            </div>
                         }
+                    </div>
+                    <div class="feedback" *ngIf="responded">
+                        {{ feedback }}
                     </div>
                 </div>
             }
 
             @if (summaryActive) {
                  <div class="summary-area screen">
-                    <h2>Total points earned:</h2>
-                    <h1>{{ pointsEarned }}</h1>
+                    <h2>You earned</h2>
+                    <h1 class="points">{{ pointsEarned }} <span class="star">⭐</span></h1>
+                    <p class="encouragement">You're a music superstar!</p>
                     <div class="finish">
-                        <a href="/tune-your-ears" class="nav-button restart-button">↻</a>
+                        <a href="/tune-your-ears" class="nav-button restart-button">
+                            <span class="icon">🔄</span> Play Again
+                        </a>
+                    </div>
+                    <div class="celebration">
+                        <span *ngFor="let item of ['🎉', '🎈', '✨']">{{ item }}</span>
                     </div>
                  </div>
             }
@@ -50,7 +86,7 @@
                     @if (generationStatus) {
                         {{ generationStatus }}
                     } @else {
-                        🔊
+                        <span class="icon">🔊</span> Generate Sounds
                     }
                 </div>
             }

@@ -10,7 +10,7 @@
                     <span>Back</span>
                 </a>
                 <h1>{{ userLanguage.games.title }}</h1>
-                <p class="subtitle">Choose a game to enhance your communication skills</p>
+                <p class="subtitle">Choose a game to enhance your speech skills</p>
             </div>
 
             <div class="sort-controls">
@@ -48,20 +48,24 @@
             <div class="games-grid">
                 <div class="game-card" *ngFor="let game of filteredGames">
                     <div class="game-content">
-                      <div class="game-icon" [class]="game.iconClass"></div>
-                  
-                      <div class="game-info">
-                        <h2 class="game-title">{{ game.title }}</h2>
-                      </div>
-                  
-                      <a [routerLink]="game.link" class="play-button">
-                        <span>Play Now</span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                          <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </a>
+                        <div class="game-icon" [class]="game.iconClass">
+                            <!-- Game background is set via CSS class -->
+                        </div>
+                        <div class="game-details">
+                            <h2>{{ game.title }} {{game.emoji}}</h2>
+                            <p>{{ game.description }}</p>
+                            <span class="category-badge" [class]="game.category">
+                                {{ game.category | titlecase }} Game
+                            </span>
+                        </div>
+                        <a [routerLink]="game.link" class="play-button">
+                            <span>Play Now</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
                     </div>
-                  </div>                  
+                </div>
             </div>
         </div>
     </div>
