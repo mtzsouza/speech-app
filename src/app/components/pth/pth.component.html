@@ -6,11 +6,13 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>Back</span>
+        <span>{{ language.progressTrackingHome.back }}</span>
       </a>
 
       <div class="header">
-        <h1 class="title">Welcome to Progress Sharing!</h1>
+        <h1 class="title">
+          {{ language.progressTrackingHome.title }}
+        </h1>
       </div>
 
       <!-- Earned Badges Section -->
@@ -20,7 +22,7 @@
             <path d="M12 15L8.5 18L9.5 14L6.5 11.5L10.5 11L12 7L13.5 11L17.5 11.5L14.5 14L15.5 18L12 15Z" fill="currentColor" stroke="currentColor"/>
             <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
           </svg>
-          Earned Badges!
+          {{ language.progressTrackingHome.earned.title }}
         </h2>
         <div class="badge-grid">
           <div class="badge-card shiny-badge"
@@ -36,7 +38,7 @@
         <!-- Show 'See Earned Badges' button ONLY IF at least one badge is earned -->
         <div class="earned-btn-container">
           <button class="progress-btn" (click)="viewEarnedBadges()">
-            See Earned Badges
+            {{ language.progressTrackingHome.earned.button }}
           </button>
         </div>
       </div>
@@ -57,7 +59,7 @@
             <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" fill="none"/>
             <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
-          Not Yet Earned!
+          {{ language.progressTrackingHome.unearned.title }}
         </h2>
         <div class="badge-grid">
           <div class="badge-card unearned"
@@ -73,14 +75,16 @@
         <!-- 'See Unearned Badges' button (always appears) -->
         <div class="unearned-btn-container">
           <button class="progress-btn" (click)="viewUnearnedBadges()">
-            See Unearned Badges
+            {{ language.progressTrackingHome.unearned.button }}
           </button>
         </div>
       </div>
 
       <!-- View Progress Data Button (Centered) -->
       <div class="progress-data-link">
-        <button class="progress-btn" (click)="navigateToProgress()">View Progress Data</button>
+        <button class="progress-btn" (click)="navigateToProgress()">
+          {{ language.progressTrackingHome.progressButton }}
+        </button>        
       </div>
     </div>
   </div>

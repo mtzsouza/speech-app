@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { LanguageService } from '../../services/language.service';
+import * as english from '../../utils/english.json';
+
+
 
 @Component({
   selector: 'app-vh',
   standalone: true,
-  imports: [
-    CommonModule, 
-    NavbarComponent,
-    RouterModule
-  ],
+  imports: [CommonModule, RouterModule, NavbarComponent],
   templateUrl: './vh.component.html',
   styleUrls: ['./vh.component.sass']
 })
 export class VHComponent implements OnInit {
+  language = english;
+  languageService = inject(LanguageService);
+  
   // Full video list
   allVideos = [
     { 
@@ -186,9 +190,12 @@ export class VHComponent implements OnInit {
   }
 
   constructor(private router: Router) {}
-
+  
   ngOnInit(): void {
-    this.trackVisit();
+    this.languageService.getLanguage().then(lang => {
+      this.language = lang;
+      this.trackVisit();
+    });
   }
 
   trackVisit(): void {

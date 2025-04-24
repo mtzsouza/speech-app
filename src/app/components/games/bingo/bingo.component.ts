@@ -16,7 +16,12 @@ import * as english from '../../../utils/english.json';
 })
 
 export class BingoComponent implements OnInit {
-  language: any;
+  languageService = inject(LanguageService);
+  language = english;
+
+  showInstructions = true;
+  instructionStep = 1;
+  
   sounds: string[] = [];
   board: { value: string; marked: boolean; missed?: boolean; animation?: string }[][] = [];
   calledSounds: string[] = [];
@@ -25,16 +30,26 @@ export class BingoComponent implements OnInit {
   gameWon = false;
   gameStarted = false;
 
-  public phoneticMap: Record<string, string> = {
+  englishPhoneticMap: Record<string, string> = {
     '/eɪ/': 'a (long)', '/æ/': 'a (short)',
     '/i/': 'e (long)', '/ɛ/': 'e (short)',
     '/aɪ/': 'i (long)', '/ɪ/': 'i (short)',
     '/oʊ/': 'o (long)', '/ɑ/': 'o (short)',
     '/ju/': 'u (long)', '/ʌ/': 'u (short)', '/ʊ/': 'u (short)'
   };
+  
+  spanishPhoneticMap: Record<string, string> = {
+    '/a/': 'a', '/e/': 'e', '/o/': 'o', '/u/': 'u',
+    '/b/': 'b', '/ca/': 'ca', '/ci/': 'ci', '/co/': 'co', '/cc/': 'cc',
+    '/cu/': 'cu', '/ch/': 'ch', '/d/': 'd', '/f/': 'f', '/g/': 'g',
+    '/gue/': 'gue', '/gui/': 'gui', '/güe/': 'güe', '/güi/': 'güi',
+    '/j/': 'j', '/k/': 'k', '/l/': 'l', '/ll/': 'll', '/m/': 'm',
+    '/n/': 'n', '/ñ/': 'ñ', '/p/': 'p', '/que/': 'que', '/qui/': 'qui',
+    '/r/': 'r', '/rr/': 'rr', '/s/': 's', '/t/': 't', '/y/': 'y'
+  };
+  
 
-  showInstructions = true;
-  instructionStep = 1;
+
 
   nextInstruction(): void {
     this.instructionStep++;
@@ -44,8 +59,6 @@ export class BingoComponent implements OnInit {
     this.showInstructions = false;
   }
 
-
-  constructor(private languageService: LanguageService) {}
 
   ngOnInit(): void {
     this.languageService.getLanguage().then(lang => {
@@ -103,7 +116,7 @@ export class BingoComponent implements OnInit {
 
     this.currentSound = remainingSounds[Math.floor(Math.random() * remainingSounds.length)];
     this.calledSounds.push(this.currentSound);
-    this.displayedSound = this.phoneticMap[this.currentSound] || this.currentSound;
+    this.displayedSound = this.getDisplayOption(this.currentSound);
 
     console.log("🔊 Playing sound:", this.currentSound);
 
@@ -115,7 +128,11 @@ export class BingoComponent implements OnInit {
 }
 
   
-
+getDisplayOption(opt: string): string {
+  if (!opt) return '';
+  const map = this.currentLanguage === 'spanish' ? this.spanishPhoneticMap : this.englishPhoneticMap;
+  return map[opt] || opt;
+}
 
 markSquare(row: number, col: number): void {
   if (!this.currentSound || this.gameWon) return;

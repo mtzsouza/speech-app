@@ -2,10 +2,12 @@
   <app-navbar></app-navbar>
 
   <div class="speech-panel" [ngClass]="feedbackClass">
-    <div class="menu-bar">❤️ Lives: <strong>{{ lives }}</strong></div>
+    <div class="menu-bar">
+      {{ language.speechWalk.livesLabel }} <strong>{{ lives }}</strong>
+    </div>
 
     <div class="story-selection" *ngIf="!selectedStory">
-      <h2>Choose a Story</h2>
+      <h2>{{ language.speechWalk.chooseStory }}</h2>
       <div class="story-grid">
         <div 
           class="story-card" 
@@ -17,7 +19,7 @@
           <p class="summary">{{ story.summary }}</p>
     
           <div *ngIf="isStoryCompleted(story)" class="completion-tag">
-            ✅ Completed
+            {{ language.speechWalk.completed }}
           </div>
         </div>
       </div>
@@ -28,27 +30,29 @@
       <div class="instructions-box">
         <button class="close-btn" (click)="closeInstructions()">✖</button>
 
-        <h2>🗣️ How to Play Speech-Walk</h2>
+        <h2>{{ language.speechWalk.instructions.title }}</h2>
 
         <div class="instruction-step">
-          <p><strong>🎮 1. Start the Game</strong></p>
-          <p>Click the <strong>“Start”</strong> button to begin your journey.</p>
+          <p><strong>{{ language.speechWalk.instructions.step1Title }}</strong></p>
+          <p>{{ language.speechWalk.instructions.step1Body }}</p>
         </div>
 
         <div class="instruction-step">
-          <p><strong>🚧 2. Face the Obstacle</strong></p>
-          <p>When the <strong>caution sign 🚧</strong> appears, your character is blocked.</p>
+          <p><strong>{{ language.speechWalk.instructions.step2Title }}</strong></p>
+          <p>{{ language.speechWalk.instructions.step2Body }}</p>
         </div>
 
         <div class="instruction-step">
-          <p><strong>🎤 3. Say the Word</strong></p>
-          <p>Click <strong>“Say It”</strong> to activate your mic and speak the <u>highlighted</u> word aloud.</p>
-          <p>If correct, your character continues. If not, you lose a ❤️.</p>
+          <p><strong>{{ language.speechWalk.instructions.step3Title }}</strong></p>
+          <p>{{ language.speechWalk.instructions.step3Body1 }}</p>
+          <p>{{ language.speechWalk.instructions.step3Body2 }}</p>
         </div>
 
-        <p class="final-note">Survive the journey by saying the right words. Good luck!</p>
+        <p class="final-note">{{ language.speechWalk.instructions.note }}</p>
 
-        <button (click)="closeInstructions()">✅ Got it!</button>
+        <button (click)="closeInstructions()">
+          {{ language.speechWalk.instructions.close }}
+        </button>
       </div>
     </div>
 
@@ -59,7 +63,7 @@
           <div class="progress-bar" [style.width.%]="currentProgress"></div>
         </div>
 
-        <h2>Speech-Walk</h2>
+        <h2>{{ language.speechWalk.title }}</h2>
 
         <div class="scene" [ngClass]="{ running: characterState === 'running' }">
           <div class="character" [ngClass]="{ running: characterState === 'running' }">
@@ -79,12 +83,13 @@
       <p [innerHTML]="currentText"></p>
 
       <div *ngIf="isCheckpoint">
-        <p><strong>Say the highlighted word to continue</strong></p>
-        <button 
+        <p><strong>{{ language.speechWalk.sayPrompt }}</strong></p>
+        <button
           [disabled]="isListening"
           [ngClass]="{ 'listening-mic': isListening }"
-          (click)="handleNext()">
-          🎤 {{ isListening ? 'Listening...' : 'Say It' }}
+          (click)="handleNext()"
+        >
+          {{ isListening ? language.speechWalk.listeningButton : language.speechWalk.sayButton }}
         </button>
       </div>
 
@@ -93,15 +98,19 @@
       </div>
       
       <p class="game-over" *ngIf="lives <= 0">
-        💀 Game Over. Refresh to restart.
+        {{ language.speechWalk.gameOver }}
       </p>
 
       <div class="victory-screen" *ngIf="isVictory">
-        <h2>🎉 Congrats!</h2>
-        <p>You finished the story! 🏁</p>
+        <h2>{{ language.speechWalk.victoryTitle }}</h2>
+        <p>{{ language.speechWalk.victoryBody }}</p>
         <div class="victory-buttons">
-          <button (click)="restartStory()">🔁 Play Again</button>
-          <button (click)="returnToSelection()">📚 Back to Stories</button>
+          <button (click)="restartStory()">
+            {{ language.speechWalk.playAgain }}
+          </button>
+          <button (click)="returnToSelection()">
+            {{ language.speechWalk.backToStories }}
+          </button>
         </div>
       </div>
     </ng-container>

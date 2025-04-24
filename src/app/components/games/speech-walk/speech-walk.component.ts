@@ -5,8 +5,11 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SpeechService, SpeechRecognitionResult } from '../../../services/speech.service';
+import { LanguageService } from '../../../services/language.service';
+import * as english from '../../../utils/english.json';
 
 const STORAGE_KEY = 'speechWalkCompleted';
+
 
 @Component({
   selector: 'app-speech-walk',
@@ -19,6 +22,10 @@ export class SpeechWalkComponent implements OnInit {
   private speechService = inject(SpeechService);
   private sanitizer = inject(DomSanitizer);
   private http = inject(HttpClient);
+  languageService = inject(LanguageService);
+  language = english;
+
+  currentLanguage: 'english' | 'spanish' = 'english';
 
   currentText: SafeHtml = '';
   isListening = false;
@@ -30,6 +37,7 @@ export class SpeechWalkComponent implements OnInit {
   feedbackClass = '';
   showInstructions = true;
   isVictory = false;
+  
 
   completedStories: string[] = [];
   storyList: any[] = [];
@@ -37,8 +45,20 @@ export class SpeechWalkComponent implements OnInit {
   story: string[] = [];
 
   ngOnInit(): void {
+    this.languageService.getLanguage().then(lang => {
+      this.language = lang;
+      this.currentLanguage = lang.dashboard.title === 'Dashboard' ? 'english' : 'spanish';
+  
+      this.http.get<any[]>('assets/stories.json').subscribe(data => {
+        this.storyList = data.filter(story => story.lang === this.currentLanguage);
+        this.loadProgress();
+      });
+    });
+    
+    
+    
     this.http.get<any[]>('assets/stories.json').subscribe(data => {
-      this.storyList = data;
+      this.storyList = data.filter(story => story.lang === this.currentLanguage);
       this.loadProgress();
     });
   }
@@ -107,6 +127,7 @@ export class SpeechWalkComponent implements OnInit {
       if (!this.completedStories.includes(title)) {
         this.completedStories.push(title);
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.completedStories));
+        localStorage.setItem('speechWalkProgress', String(this.completedStories.length)); // ✅ Set progress
       }
       return;
     }

@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { RouterModule } from '@angular/router';
+import { LanguageService } from '../../services/language.service';
+import * as english from '../../utils/english.json';
 
 type ProgressKey =
   | 'videoProgress'
@@ -10,7 +12,8 @@ type ProgressKey =
   | 'bingoProgress'
   | 'speechWalkProgress'
   | 'memoryMatchProgress'
-  | 'earthDefenderProgress';
+  | 'earthDefenderProgress'
+  | 'fishingGameProgress';
 
 interface Badge {
   name: string;
@@ -30,52 +33,70 @@ interface Badge {
 })
 export class PTUEComponent implements OnInit {
   unearnedBadgesByCategory: Record<string, Badge[]> = {};
+  language = english;
+  languageService = inject(LanguageService);
 
-  readonly allBadges: Badge[] = [
-    { name: 'First Steps', icon: '📺', description: 'Watch your first video!', requiredKey: 'videoProgress', requiredValue: 5, category: 'Video Learning Achievements' },
-    { name: 'Binge Watcher', icon: '🎥', description: 'Watch 3 videos.', requiredKey: 'videoProgress', requiredValue: 10, category: 'Video Learning Achievements' },
-    { name: 'Committed Learner', icon: '🎬', description: 'Watch 10 videos.', requiredKey: 'videoProgress', requiredValue: 15, category: 'Video Learning Achievements' },
-    { name: 'Video Master', icon: '🏆', description: 'Watch 25 videos.', requiredKey: 'videoProgress', requiredValue: 20, category: 'Video Learning Achievements' },
-    { name: 'Marathon Session', icon: '⏳', description: 'Watch videos for 1 hour.', requiredKey: 'videoProgress', requiredValue: 25, category: 'Video Learning Achievements' },
+  allBadges: Badge[] = [];
 
-    { name: 'Sound Explorer', icon: '🔊', description: 'Play a sound from the soundboard.', requiredKey: 'soundboardProgress', requiredValue: 10, category: 'Soundboard Achievements' },
-    { name: 'Melody Maker', icon: '🎶', description: 'Play 5 different sounds.', requiredKey: 'soundboardProgress', requiredValue: 20, category: 'Soundboard Achievements' },
+  initializeBadges(): void {
+    const b = this.language.badges;
+    const c = this.language.badgeCategories;
 
-    { name: 'Bingo Beginner', icon: '🎲', description: 'Completed 1 round of Bingo.', requiredKey: 'bingoProgress', requiredValue: 10, category: 'Bingo' },
-    { name: 'Bingo Boss', icon: '🏁', description: 'Completed 5 rounds of Bingo.', requiredKey: 'bingoProgress', requiredValue: 50, category: 'Bingo' },
+    this.allBadges = [
+      { name: b.firstSteps.name, icon: '📺', description: b.firstSteps.description, requiredKey: 'videoProgress', requiredValue: 5, category: c.video },
+      { name: b.bingeWatcher.name, icon: '🎥', description: b.bingeWatcher.description, requiredKey: 'videoProgress', requiredValue: 10, category: c.video },
+      { name: b.committedLearner.name, icon: '🎬', description: b.committedLearner.description, requiredKey: 'videoProgress', requiredValue: 15, category: c.video },
+      { name: b.videoMaster.name, icon: '🏆', description: b.videoMaster.description, requiredKey: 'videoProgress', requiredValue: 20, category: c.video },
+      { name: b.marathonSession.name, icon: '⏳', description: b.marathonSession.description, requiredKey: 'videoProgress', requiredValue: 25, category: c.video },
 
-    { name: 'Speech Walker', icon: '🗣️', description: 'Completed 1 Speech-Walk story.', requiredKey: 'speechWalkProgress', requiredValue: 10, category: 'Speech Walk' },
-    { name: 'Speech Pro', icon: '🎤', description: 'Completed 5 Speech-Walk stories.', requiredKey: 'speechWalkProgress', requiredValue: 50, category: 'Speech Walk' },
+      { name: b.soundExplorer.name, icon: '🔊', description: b.soundExplorer.description, requiredKey: 'soundboardProgress', requiredValue: 10, category: c.soundboard },
+      { name: b.melodyMaker.name, icon: '🎶', description: b.melodyMaker.description, requiredKey: 'soundboardProgress', requiredValue: 20, category: c.soundboard },
 
-    { name: 'Memory Start', icon: '🧠', description: 'Completed 1 Memory Match.', requiredKey: 'memoryMatchProgress', requiredValue: 10, category: 'Memory Match' },
-    { name: 'Memory Legend', icon: '👑', description: 'Completed 10 Memory Matches.', requiredKey: 'memoryMatchProgress', requiredValue: 100, category: 'Memory Match' },
+      { name: b.bingoBeginner.name, icon: '🎲', description: b.bingoBeginner.description, requiredKey: 'bingoProgress', requiredValue: 10, category: c.bingo },
+      { name: b.bingoBoss.name, icon: '🏁', description: b.bingoBoss.description, requiredKey: 'bingoProgress', requiredValue: 50, category: c.bingo },
 
-    { name: 'Earth Rookie', icon: '🛡️', description: 'Played Earth Defender once.', requiredKey: 'earthDefenderProgress', requiredValue: 10, category: 'Earth Defender' },
-    { name: 'Defender Elite', icon: '🌍', description: 'Played Earth Defender 10 times.', requiredKey: 'earthDefenderProgress', requiredValue: 100, category: 'Earth Defender' }
-  ];
+      { name: b.speechWalker.name, icon: '🗣️', description: b.speechWalker.description, requiredKey: 'speechWalkProgress', requiredValue: 1, category: c.speechWalk },
+      { name: b.speechPro.name, icon: '🎤', description: b.speechPro.description, requiredKey: 'speechWalkProgress', requiredValue: 5, category: c.speechWalk },
+
+      { name: b.memoryStart.name, icon: '🧠', description: b.memoryStart.description, requiredKey: 'memoryMatchProgress', requiredValue: 10, category: c.memoryMatch },
+      { name: b.memoryLegend.name, icon: '👑', description: b.memoryLegend.description, requiredKey: 'memoryMatchProgress', requiredValue: 100, category: c.memoryMatch },
+
+      { name: b.earthRookie.name, icon: '🛡️', description: b.earthRookie.description, requiredKey: 'earthDefenderProgress', requiredValue: 10, category: c.earthDefender },
+      { name: b.defenderElite.name, icon: '🌍', description: b.defenderElite.description, requiredKey: 'earthDefenderProgress', requiredValue: 100, category: c.earthDefender },
+    
+      { name: b.fishingFirstCatch.name, icon: '🐟', description: b.fishingFirstCatch.description, requiredKey: 'fishingGameProgress', requiredValue: 1, category: c.fishing },
+      { name: b.fishingNovice.name, icon: '🎣', description: b.fishingNovice.description, requiredKey: 'fishingGameProgress', requiredValue: 5, category: c.fishing },
+      { name: b.fishingApprentice.name, icon: '🏅', description: b.fishingApprentice.description, requiredKey: 'fishingGameProgress', requiredValue: 10, category: c.fishing },
+    ];
+  }
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
+    this.languageService.getLanguage().then(lang => {
+      this.language = lang;
+      this.initializeBadges();
+      this.computeUnearnedBadges();
+    });
+  }
+
+  computeUnearnedBadges(): void {
     const progressMap: Record<ProgressKey, number> = {
       videoProgress: Number(sessionStorage.getItem('videoProgress')) || 0,
       soundboardProgress: Number(sessionStorage.getItem('soundboardProgress')) || 0,
       bingoProgress: Number(localStorage.getItem('bingoProgress')) || 0,
       speechWalkProgress: Number(localStorage.getItem('speechWalkProgress')) || 0,
       memoryMatchProgress: Number(localStorage.getItem('memoryMatchProgress')) || 0,
-      earthDefenderProgress: Number(localStorage.getItem('earthDefenderProgress')) || 0
+      earthDefenderProgress: Number(localStorage.getItem('earthDefenderProgress')) || 0,
+      fishingGameProgress: Number(localStorage.getItem('fishingGameProgress')) || 0 // ✅ add this
     };
+    
 
-    const earnedBadges = this.allBadges.filter(
-      badge => progressMap[badge.requiredKey] >= badge.requiredValue
-    );
-
-    const unearnedBadges = this.allBadges.filter(
-      badge => !earnedBadges.some(earned => earned.name === badge.name)
-    );
+    const earned = this.allBadges.filter(b => progressMap[b.requiredKey] >= b.requiredValue);
+    const unearned = this.allBadges.filter(b => !earned.some(e => e.name === b.name));
 
     this.unearnedBadgesByCategory = {};
-    for (const badge of unearnedBadges) {
+    for (const badge of unearned) {
       if (!this.unearnedBadgesByCategory[badge.category]) {
         this.unearnedBadgesByCategory[badge.category] = [];
       }

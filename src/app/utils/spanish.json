@@ -224,5 +224,170 @@
             "select": "Selecciona el sonido para:",
             "speak": "🎤 Habla"
         }
+    },
+    "bingo": {
+        "playSound": "🔊 Reproducir sonido:",
+        "streak": "Racha:",
+        "longestStreak": "La racha más larga:",
+        "time": "Hora:",
+        "bestTime": "El mejor momento:",
+        "bestScore": "Mejor puntuación:",
+        "bestStreak": "Mejor racha de todos los tiempos:",
+        "backToGames": "Volver a Juegos",
+        "gameOver": "¡Se acabó el juego!",
+        "restart": "Reinicie",
+        "victory": "🎉 ¡BINGO! ¡Has ganado! 🎊",
+        "ok": "OK",
+        "start": "▶ Comenzar el juego",
+        "next": "➡ Siguiente sonido",
+        "title": "BINGO / Lotería",
+        "replay": "Repetición de sonido",
+        "lockedSquare": "¡Cuadrado bloqueado! Te has saltado.",
+        "instructions": {
+            "title": "Cómo jugar",
+            "start": "Pulsa el botón “Empezar Juego” para comenzar. Se reproducirá un sonido automáticamente.",
+            "match": "Tu objetivo es encontrar en la pizarra la letra o el símbolo correcto que corresponda al sonido,",
+            "feedback": "Las respuestas correctas se marcan en verde. Las incorrectas se agitan y se vuelven rojas.",
+            "replay": "Haz clic en el botón 🔊 para reproducir el sonido.",
+            "skip": "Si haces clic en 'Siguiente sonido' sin responder, se bloqueará esa casilla. No contará para la victoria.",
+            "winTitle": "Cómo ganar",
+            "patternDiagonal": "Diagonal",
+            "patternRow": "A través de",
+            "patternCol": "Vertical",
+            "startGame": "Empezar Juego",
+            "dontShowAgain": "No mostrar de nuevo"
+        }
+    },
+    "speechWalk": {
+        "title": "Habla-Camina",
+        "chooseStory": "Elija una historia",
+        "completed": "✅ Completado",
+        "instructions": {
+            "title": "🗣️ Cómo jugar a Speech-Walk",
+            "step1Title": "🎮 1. Iniciar el juego",
+            "step1Body": "Haga clic en el botón 'Empezar' para iniciar su viaje.",
+            "step2Title": "🚧 2. Enfrentarse al obstáculo",
+            "step2Body": "Cuando aparece la señal de precaución 🚧, tu personaje está bloqueado.",
+            "step3Title": "🎤 3. Decir la palabra",
+            "step3Body1": "Haz clic en 'Dilo' para activar el micrófono y pronunciar en voz alta la palabra resaltada.",
+            "step3Body2": "Si es correcto, tu personaje continúa. Si no, pierdes un ❤️.",
+            "note": "Sobrevive al viaje diciendo las palabras adecuadas. ¡Suerte!",
+            "close": "✅ ¡La tengo!"
+        },
+        "livesLabel": "❤️ Vidas:",
+        "sayPrompt": "Diga la palabra resaltada para continuar",
+        "sayButton": "🎤 Dilo",
+        "listeningButton": "🎤 Escuchando...",
+        "nextButton": "Siguiente",
+        "gameOver": "💀 Se acabó el juego. Actualizar para reiniciar.",
+        "victoryTitle": "🎉  ¡Felicidades!",
+        "victoryBody": "¡Has terminado la historia! 🏁",
+        "playAgain": "🔁 Volver a jugar",
+        "backToStories": "📚 Volver a Historias"
+    },
+    "progressTrackingHome": {
+        "title": "¡Bienvenido a Progress Sharing!",
+        "back": "Volver",
+        "earned": {
+            "title": "Insignias conseguidas",
+            "button": "Ver insignias obtenidas"
+        },
+        "unearned": {
+            "title": "Aún no se ha ganado",
+            "button": "Ver Insignias no ganadas"
+        },
+        "progressButton": "Ver datos de progreso"
+    },
+    "badges": {
+        "bingoBeginner": {
+            "name": "Bingo Principiante",
+            "description": "Completada 1 ronda de Bingo."
+        },
+        "bingoBoss": {
+            "name": "Jefe del Bingo",
+            "description": "Completadas 5 rondas de Bingo."
+        },
+        "speechWalker": {
+            "name": "Discurso Walker",
+            "description": "Completada 1 historia de Habla-Camina."
+        },
+        "speechPro": {
+            "name": "Habla Pro",
+            "description": "Completadas 5 historias de Speech-Walk."
+        },
+        "soundExplorer": {
+            "name": "Explorador de sonidos",
+            "description": "Reproduce un sonido de la caja de resonancia."
+        },
+        "melodyMaker": {
+            "name": "Melody Maker",
+            "description": "Reproduce 5 sonidos diferentes."
+        },
+        "memoryStart": {
+            "name": "Memoria Inicio",
+            "description": "Has completado 1 partida de memoria."
+        },
+        "memoryLegend": {
+            "name": "Leyenda de la memoria",
+            "description": "Has completado 10 Partidas de Memoria."
+        },
+        "earthRookie": {
+            "name": "Novato de la Tierra",
+            "description": "Jugué una vez al Earth Defender."
+        },
+        "defenderElite": {
+            "name": "Defensor Elite",
+            "description": "Has jugado a Earth Defender 10 veces."
+        },
+        "firstSteps": {
+            "name": "Primeros pasos",
+            "description": "Vea su primer vídeo"
+        },
+        "bingeWatcher": {
+            "name": "Binge Watcher (Observador compulsivo)",
+            "description": "Ver 3 vídeos."
+        },
+        "committedLearner": {
+            "name": "Estudiante comprometido",
+            "description": "Ver 10 vídeos."
+        },
+        "videoMaster": {
+            "name": "Vídeo Maestro",
+            "description": "Ver 25 vídeos."
+        },
+        "marathonSession": {
+            "name": "Sesión Maratón",
+            "description": "Ver vídeos durante 1 hora."
+        },
+        "fishingFirstCatch": {
+        "name": "Primera captura",
+        "description": "¡Atrapa tu primer pez en el juego de pesca!"
+        },
+        "fishingNovice": {
+        "name": "Pesca Novato",
+        "description": "¡Atrapa 5 peces en el juego de pesca!"
+        },
+        "fishingApprentice": {
+        "name": "Aprendiz de pescador",
+        "description": "¡Atrapa 10 peces en el juego de pesca!"
+        }
+    },
+    "badgeCategories": {
+        "video": "Logros del aprendizaje por vídeo",
+        "soundboard": "Logros de la caja de resonancia",
+        "bingo": "Bingo",
+        "speechWalk": "Paseo de la palabra",
+        "memoryMatch": "Partida de memoria",
+        "earthDefender": "Defensor de la Tierra"
+    },
+    "videos": {
+        "title": "Videoteca",
+        "back": "Volver",
+        "searchPlaceholder": "Buscar vídeos por título o descripción",
+        "englishSection": "Vídeos en inglés",
+        "spanishSection": "Vídeos en español",
+        "watched": "Visto",
+        "watchButton": "Ver el vídeo"
     }
+
 }
