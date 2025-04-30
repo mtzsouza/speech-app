@@ -1,72 +1,130 @@
-<div class="container">
+<div class="min-h-screen bg-white">
     <app-navbar></app-navbar>
-    <div class="main">
-        <div class="games-container">
-            <div class="header-section">
-                <a (click)="goBack()" class="back-link">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    
+    <main class="max-w-7xl mx-auto px-5 py-12">
+        <div class="relative">
+            <!-- Header Section -->
+            <div class="mb-16 text-center">
+                <a (click)="goBack()" class="absolute top-0 left-0 inline-flex items-center gap-2 text-slate-500 hover:text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-all duration-200 cursor-pointer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-current">
                         <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <span>Back</span>
+                    <span class="font-medium">Back</span>
                 </a>
-                <h1>{{ userLanguage.games.title }}</h1>
-                <p class="subtitle">Choose a game to enhance your speech skills</p>
+                
+                <h1 class="text-5xl font-bold text-slate-800 mb-4">{{ userLanguage.games.title }}</h1>
+                <p class="text-lg text-slate-500 max-w-xl mx-auto">Choose a game to enhance your speech skills</p>
             </div>
 
-            <div class="sort-controls">
-                <div class="sort-group">
-                    <label>Browse by Category:</label>
-                    <div class="button-group">
+            <!-- Category Filter -->
+            <div class="mb-10">
+                <div class="flex flex-col items-center">
+                    <h2 class="text-xl font-semibold text-slate-700 mb-4">Browse by Category</h2>
+                    <div class="flex flex-wrap justify-center gap-3">
                         <button 
-                            [class.active]="sortBy === 'default'"
+                            [class.bg-blue-600]="sortBy === 'default'"
+                            [class.text-white]="sortBy === 'default'"
+                            [class.bg-white]="sortBy !== 'default'"
                             (click)="sortGames('default')" 
-                            class="sort-button">
+                            class="px-5 py-2.5 rounded-full border border-slate-200 text-slate-700 font-medium text-sm shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5">
                             All Games
                         </button>
                         <button 
-                            [class.active]="sortBy === 'hearing'"
+                            [class.bg-indigo-600]="sortBy === 'hearing'"
+                            [class.text-white]="sortBy === 'hearing'"
+                            [class.bg-white]="sortBy !== 'hearing'"
                             (click)="sortGames('hearing')" 
-                            class="sort-button hearing">
+                            class="px-5 py-2.5 rounded-full border border-slate-200 text-slate-700 font-medium text-sm shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5">
                             Hearing Games
                         </button>
                         <button 
-                            [class.active]="sortBy === 'speaking'"
+                            [class.bg-pink-600]="sortBy === 'speaking'"
+                            [class.text-white]="sortBy === 'speaking'"
+                            [class.bg-white]="sortBy !== 'speaking'"
                             (click)="sortGames('speaking')" 
-                            class="sort-button speaking">
+                            class="px-5 py-2.5 rounded-full border border-slate-200 text-slate-700 font-medium text-sm shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5">
                             Speaking Games
                         </button>
                         <button 
-                            [class.active]="sortBy === 'phonetics'"
+                            [class.bg-orange-600]="sortBy === 'phonetics'"
+                            [class.text-white]="sortBy === 'phonetics'"
+                            [class.bg-white]="sortBy !== 'phonetics'"
                             (click)="sortGames('phonetics')" 
-                            class="sort-button phonetics">
+                            class="px-5 py-2.5 rounded-full border border-slate-200 text-slate-700 font-medium text-sm shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-0.5">
                             Phonetics Games
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div class="games-grid">
-                <div class="game-card" *ngFor="let game of filteredGames">
-                    <div class="game-content">
-                        <div class="game-icon" [class]="game.iconClass">
-                            <!-- Game background is set via CSS class -->
+            <!-- Games Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div *ngFor="let game of filteredGames" class="w-full bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-lg hover:translate-y-[-4px] transition-all duration-200 overflow-hidden">
+                    <div class="flex flex-col h-full">
+                        <!-- Game Image with inline style background for each card -->
+                        <div class="h-48 bg-cover bg-center relative" 
+                            [ngStyle]="{
+                                'background-image': game.iconClass === 'game_1' ? 'url(/assets/games/game_1.png)' :
+                                                    game.iconClass === 'game_2' ? 'url(/assets/games/game_2.png)' :
+                                                    game.iconClass === 'game_3' ? 'url(/assets/games/game_3.png)' :
+                                                    game.iconClass === 'game_4' ? 'url(/assets/games/game_4.png)' :
+                                                    game.iconClass === 'game_5' ? 'url(/assets/games/game_5.png)' :
+                                                    game.iconClass === 'game_6' ? 'url(/assets/games/game_6.png)' :
+                                                    game.iconClass === 'game_7' ? 'url(/assets/games/game_7.png)' :
+                                                    'url(/assets/games/game_8.png)'
+                            }">
+                            <!-- Category Badge -->
+                            <div class="absolute bottom-4 left-4">
+                                <span 
+                                    [class.bg-indigo-600]="game.category === 'hearing'"
+                                    [class.bg-pink-600]="game.category === 'speaking'"
+                                    [class.bg-orange-600]="game.category === 'phonetics'"
+                                    [class.bg-emerald-600]="game.category === 'interactive'"
+                                    class="inline-block px-3 py-1 rounded-full text-xs font-medium text-white shadow-sm">
+                                    {{ game.category | titlecase }} Game
+                                </span>
+                            </div>
+                            
+                            <!-- Dark gradient overlay for better text contrast -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                         </div>
-                        <div class="game-details">
-                            <h2>{{ game.title }} {{game.emoji}}</h2>
-                            <p>{{ game.description }}</p>
-                            <span class="category-badge" [class]="game.category">
-                                {{ game.category | titlecase }} Game
-                            </span>
+                        
+                        <!-- Game Content -->
+                        <div class="p-6 flex flex-col flex-grow">
+                            <h3 class="text-xl font-semibold text-slate-800 mb-2 flex items-center">
+                                <span class="mr-2">{{ game.emoji }}</span>
+                                {{ game.title }}
+                            </h3>
+                            <p class="text-slate-500 text-sm mb-6">{{ game.description }}</p>
+                            
+                            <div class="mt-auto">
+                                <a [routerLink]="game.link" 
+                                   [class.bg-indigo-600]="game.category === 'hearing'"
+                                   [class.hover:bg-indigo-700]="game.category === 'hearing'"
+                                   [class.bg-pink-600]="game.category === 'speaking'"
+                                   [class.hover:bg-pink-700]="game.category === 'speaking'"
+                                   [class.bg-orange-600]="game.category === 'phonetics'"
+                                   [class.hover:bg-orange-700]="game.category === 'phonetics'"
+                                   [class.bg-emerald-600]="game.category === 'interactive'"
+                                   [class.hover:bg-emerald-700]="game.category === 'interactive'"
+                                   class="group inline-flex items-center justify-center w-full py-3 px-4 rounded-lg text-white font-medium text-sm shadow-md hover:shadow-lg transition-all duration-200">
+                                    <span>Play Now</span>
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="ml-2 transform group-hover:translate-x-1 transition-transform">
+                                        <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
-                        <a [routerLink]="game.link" class="play-button">
-                            <span>Play Now</span>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
                     </div>
                 </div>
             </div>
+            
+            <!-- No games message -->
+            <div *ngIf="filteredGames.length === 0" class="text-center py-12">
+                <div class="text-5xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold text-slate-800 mb-2">No games found</h3>
+                <p class="text-slate-500">Try selecting a different category</p>
+            </div>
         </div>
-    </div>
+    </main>
 </div>

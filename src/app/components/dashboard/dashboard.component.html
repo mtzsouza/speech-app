@@ -1,51 +1,140 @@
-<div class="container">
+<div class="min-h-screen bg-white">
     <app-navbar class="dashboard-navbar"></app-navbar>
-    <div class="main">
-        <h1 class="main-title">{{ language.dashboard.title }}</h1>
-        <p class="activities-title">Select an activity to begin</p>
-        
-        <div class="activities-grid">
-            <a class="activity-link soundboard" routerLink="/soundboard">
-                <div class="icon-container soundboard-bg">
-                    <img src="/assets/soundboard-icon.png" alt="Soundboard">
+    
+    <main class="max-w-7xl mx-auto px-5 py-12">
+        <!-- Header -->
+        <header class="mb-16 text-center">
+            <h1 class="text-5xl font-bold text-slate-800 mb-4">{{ language.dashboard.title }}</h1>
+            <p class="text-lg text-slate-500 max-w-xl mx-auto">Select an activity to begin</p>
+        </header>
+
+        <!-- Activity Cards - Increased size with larger gaps -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Soundboard Card -->
+            <a routerLink="/soundboard" class="group flex flex-col bg-white rounded-xl border border-slate-100 p-8 shadow-sm hover:shadow-lg hover:border-blue-200 hover:translate-y-[-4px] transition-all duration-200">
+                <div class="mb-6 flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-blue-50 flex items-center justify-center mr-6">
+                        <img src="/assets/soundboard-icon.png" alt="Soundboard" class="w-11 h-11 object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                            {{ language.dashboard.soundboard }}
+                        </h3>
+                        <p class="text-base text-slate-500 mt-1">Interactive sounds</p>
+                    </div>
                 </div>
-                <span>{{ language.dashboard.soundboard }}</span>
+                <div class="mt-auto pt-5 border-t border-slate-100">
+                    <span class="text-blue-500 text-base font-medium flex items-center">
+                        Explore
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 transform group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </span>
+                </div>
             </a>
             
-            <a class="activity-link games" routerLink="/games">
-                <div class="icon-container games-bg">
-                    <img src="/assets/games-icon.png" alt="Games">
+            <!-- Games Card -->
+            <a routerLink="/games" class="group flex flex-col bg-white rounded-xl border border-slate-100 p-8 shadow-sm hover:shadow-lg hover:border-emerald-200 hover:translate-y-[-4px] transition-all duration-200">
+                <div class="mb-6 flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center mr-6">
+                        <img src="/assets/games-icon.png" alt="Games" class="w-11 h-11 object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 group-hover:text-emerald-600 transition-colors">
+                            {{ language.dashboard.games }}
+                        </h3>
+                        <p class="text-base text-slate-500 mt-1">Fun learning games</p>
+                    </div>
                 </div>
-                <span>{{ language.dashboard.games }}</span>
+                <div class="mt-auto pt-5 border-t border-slate-100">
+                    <span class="text-emerald-500 text-base font-medium flex items-center">
+                        Explore
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 transform group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </span>
+                </div>
             </a>
             
-            <a class="activity-link progress" routerLink="/progress">
-                <div class="icon-container progress-bg">
-                    <img src="/assets/share-icon.png" alt="Progress">
+            <!-- Progress Card -->
+            <a routerLink="/progress" class="group flex flex-col bg-white rounded-xl border border-slate-100 p-8 shadow-sm hover:shadow-lg hover:border-indigo-200 hover:translate-y-[-4px] transition-all duration-200">
+                <div class="mb-6 flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-indigo-50 flex items-center justify-center mr-6">
+                        <img src="/assets/share-icon.png" alt="Progress" class="w-11 h-11 object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 group-hover:text-indigo-600 transition-colors">
+                            {{ language.dashboard.progress }}
+                        </h3>
+                        <p class="text-base text-slate-500 mt-1">Track your journey</p>
+                    </div>
                 </div>
-                <span>{{ language.dashboard.progress }}</span>
+                <div class="mt-auto pt-5 border-t border-slate-100">
+                    <span class="text-indigo-500 text-base font-medium flex items-center">
+                        Explore
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 transform group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </span>
+                </div>
             </a>
             
-            <a class="activity-link videos" routerLink="/videos">
-                <div class="icon-container videos-bg">
-                    <img src="/assets/videos-icon.png" alt="Videos">
+            <!-- Videos Card -->
+            <a routerLink="/videos" class="group flex flex-col bg-white rounded-xl border border-slate-100 p-8 shadow-sm hover:shadow-lg hover:border-rose-200 hover:translate-y-[-4px] transition-all duration-200">
+                <div class="mb-6 flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-rose-50 flex items-center justify-center mr-6">
+                        <img src="/assets/videos-icon.png" alt="Videos" class="w-11 h-11 object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 group-hover:text-rose-600 transition-colors">
+                            {{ language.dashboard.videos }}
+                        </h3>
+                        <p class="text-base text-slate-500 mt-1">Watch & learn</p>
+                    </div>
                 </div>
-                <span>{{ language.dashboard.videos }}</span>
+                <div class="mt-auto pt-5 border-t border-slate-100">
+                    <span class="text-rose-500 text-base font-medium flex items-center">
+                        Explore
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 transform group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </span>
+                </div>
             </a>
             
-            <a class="activity-link stories" routerLink="/stories">
-                <div class="icon-container stories-bg">
-                    <img src="/assets/stories-icon.png" alt="Stories">
+            <!-- Stories Card -->
+            <a routerLink="/stories" class="group flex flex-col bg-white rounded-xl border border-slate-100 p-8 shadow-sm hover:shadow-lg hover:border-amber-200 hover:translate-y-[-4px] transition-all duration-200">
+                <div class="mb-6 flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-amber-50 flex items-center justify-center mr-6">
+                        <img src="/assets/stories-icon.png" alt="Stories" class="w-11 h-11 object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 group-hover:text-amber-600 transition-colors">
+                            {{ language.dashboard.stories }}
+                        </h3>
+                        <p class="text-base text-slate-500 mt-1">Interactive stories</p>
+                    </div>
                 </div>
-                <span>{{ language.dashboard.stories }}</span>
+                <div class="mt-auto pt-5 border-t border-slate-100">
+                    <span class="text-amber-500 text-base font-medium flex items-center">
+                        Explore
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 transform group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </span>
+                </div>
             </a>
             
-            <a class="activity-link resources" routerLink="/articles">
-                <div class="icon-container resources-bg">
-                    <img src="/assets/parent-icon.png" alt="Resources">
+            <!-- Resources Card -->
+            <a routerLink="/articles" class="group flex flex-col bg-white rounded-xl border border-slate-100 p-8 shadow-sm hover:shadow-lg hover:border-purple-200 hover:translate-y-[-4px] transition-all duration-200">
+                <div class="mb-6 flex items-center">
+                    <div class="w-20 h-20 rounded-full bg-purple-50 flex items-center justify-center mr-6">
+                        <img src="/assets/parent-icon.png" alt="Resources" class="w-11 h-11 object-contain">
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-slate-800 group-hover:text-purple-600 transition-colors">
+                            {{ language.dashboard.resources }}
+                        </h3>
+                        <p class="text-base text-slate-500 mt-1">Helpful materials</p>
+                    </div>
                 </div>
-                <span>{{ language.dashboard.resources }}</span>
+                <div class="mt-auto pt-5 border-t border-slate-100">
+                    <span class="text-purple-500 text-base font-medium flex items-center">
+                        Explore
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 transform group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                    </span>
+                </div>
             </a>
-        </div>
-    </div>
+        </section>
+    </main>
 </div>

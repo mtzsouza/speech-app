@@ -19,8 +19,7 @@ interface Game {
   selector: 'app-games',
   standalone: true,
   imports: [CommonModule, NavbarComponent, RouterModule, FormsModule],
-  templateUrl: './games.component.html',
-  styleUrl: './games.component.sass'
+  templateUrl: './games.component.html'
 })
 export class GamesComponent implements OnInit {
   sortBy: string = 'default';

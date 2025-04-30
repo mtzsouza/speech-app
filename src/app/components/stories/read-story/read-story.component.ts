@@ -1,20 +1,25 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { StoryService } from '../../../services/story.service';
 import { SpeechService } from '../../../services/speech.service';
 import { LanguageService } from '../../../services/language.service';
 import { DatabaseService } from '../../../services/database.service';
 import * as english from '../../../utils/english.json'
+import { CommonModule } from '@angular/common';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-read-story',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    NavbarComponent
+  ],
   templateUrl: './read-story.component.html',
   styleUrl: './read-story.component.sass'
 })
 
-export class ReadStoryComponent {
+export class ReadStoryComponent implements OnInit {
   router = inject(Router);
   storyService = inject(StoryService);
   speechService = inject(SpeechService);
@@ -131,5 +136,9 @@ export class ReadStoryComponent {
         this.isGenerating = false;
       }
     }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/stories']);
   }
 }

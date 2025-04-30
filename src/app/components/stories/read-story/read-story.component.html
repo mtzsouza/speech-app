@@ -1,34 +1,101 @@
-<div class="container">
-    <div class="panel">
-        <a routerLink="/stories" class="button">←</a>
-        <div class="control button">
-            @if (!isReading) {
-                @if (!generatedAudio) {
-                    <img src="../../../../assets/start-icon.png" alt="Start Reading" (click)="this.speak()">
-                } @else {
-                    <img src="../../../../assets/start-icon.png" alt="Continue Reading" (click)="this.pauseOrResume()">
-                    <img src="../../../../assets/restart-icon.png" alt="Restart Story" (click)="this.restart()">
-                }
+<div class="min-h-screen bg-slate-50">
+    <app-navbar></app-navbar>
+    
+    <main class="max-w-7xl mx-auto px-5 py-12 flex justify-center">
+      <div class="relative max-w-4xl w-full bg-white rounded-xl border border-slate-100 shadow-md px-8 py-12 md:px-12 md:py-16">
+        <!-- Back Button - Changed to use (click) instead of routerLink -->
+        <a (click)="goBack()" class="absolute top-4 left-4 md:top-6 md:left-6 inline-flex items-center gap-2 text-slate-500 hover:text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-all duration-200 cursor-pointer">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-current">
+            <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="font-medium">Back</span>
+        </a>
+        
+        <!-- Audio Controls -->
+        <div class="absolute top-4 right-4 md:top-6 md:right-6 flex items-center gap-2">
+          @if (!isReading) {
+            @if (!generatedAudio) {
+              <button 
+                (click)="this.speak()" 
+                class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 hover:bg-blue-100 hover:scale-105 transition-all duration-200 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </button>
             } @else {
-                <img src="../../../../assets/stop-icon.png" alt="Stop Reading" (click)="this.pauseOrResume()">
-                <img src="../../../../assets/restart-icon.png" alt="Restart Story" (click)="this.restart()">
+              <button 
+                (click)="this.pauseOrResume()" 
+                class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 hover:bg-blue-100 hover:scale-105 transition-all duration-200 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+              </button>
+              <button 
+                (click)="this.restart()" 
+                class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 hover:bg-blue-100 hover:scale-105 transition-all duration-200 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 4v6h6"></path>
+                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                </svg>
+              </button>
             }
+          } @else {
+            <button 
+              (click)="this.pauseOrResume()" 
+              class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 hover:bg-blue-100 hover:scale-105 transition-all duration-200 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+            </button>
+            <button 
+              (click)="this.restart()" 
+              class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 border border-blue-100 hover:bg-blue-100 hover:scale-105 transition-all duration-200 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 4v6h6"></path>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+            </button>
+          }
         </div>
+        
+        <!-- Admin Audio Generation Button -->
         @if (isAdmin) {
-            <div class="audio-gen button" (click)="fixAudio()">
-                @if (!isGenerating) {
-                    🔊
-                } @else {
-                    Wait. Do not reload.
-                }
+          <button 
+            (click)="fixAudio()" 
+            class="absolute bottom-4 right-4 md:bottom-6 md:right-6 py-3 px-5 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-200 flex items-center gap-2"
+            [class.animate-pulse]="isGenerating">
+            @if (!isGenerating) {
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+              </svg>
+              <span>Generate Audio</span>
+            } @else {
+              <svg class="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+              <span>Wait. Do not reload.</span>
+            }
+          </button>
+        }
+        
+        <!-- Story Content -->
+        <div class="mt-12 md:mt-8">
+          @if (isEnglish()) {
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-8 text-center">{{ this.title_english }}</h1>
+            <div class="prose prose-lg max-w-none text-slate-700 font-serif leading-relaxed">
+              <p class="first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:mt-1">{{ this.text_english }}</p>
             </div>
-        }
-        @if (isEnglish()) {
-            <h1 class="title">{{ this.title_english }}</h1>
-            <p>{{ this.text_english }}</p>
-        } @else {
-            <h1 class="title">{{ this.title_spanish }}</h1>
-            <p>{{ this.text_spanish }}</p>
-        }
-    </div>
-</div>
+          } @else {
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-8 text-center">{{ this.title_spanish }}</h1>
+            <div class="prose prose-lg max-w-none text-slate-700 font-serif leading-relaxed">
+              <p class="first-letter:text-5xl first-letter:font-bold first-letter:float-left first-letter:mr-3 first-letter:mt-1">{{ this.text_spanish }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </main>
+  </div>

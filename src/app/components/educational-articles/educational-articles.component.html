@@ -1,58 +1,97 @@
-<div class="container">
+<div class="min-h-screen bg-white">
   <app-navbar></app-navbar>
-
-  <div class="main">
-    <div class="panel">
-      <a (click)="goBack()" class="back-link">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  
+  <main class="max-w-7xl mx-auto px-5 py-12">
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Back Button -->
+      <a (click)="goBack()" class="inline-flex items-center gap-2 text-slate-500 hover:text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-all duration-200 cursor-pointer mb-8">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-current">
           <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        <span>Back</span>
+        <span class="font-medium">Back</span>
       </a>
       
-      <div class="header">
-        <h1 class="title">Educational Resources</h1>
-      </div>
-
-      <div class="search-container">
-        <div class="input-wrapper">
-          <i class="fas fa-search search-icon"></i>
-          <input
+      <!-- Header -->
+      <header class="mb-12 text-center">
+        <h1 class="text-5xl font-bold text-slate-800 mb-4">Educational Resources</h1>
+        <p class="text-lg text-slate-500 max-w-xl mx-auto">Helpful information for parents and educators</p>
+      </header>
+      
+      <!-- Search Bar -->
+      <div class="mb-10">
+        <div class="relative max-w-2xl mx-auto">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <input 
             type="text"
             id="search"
             name="search"
-            class="search-input"
             [(ngModel)]="searchQuery"
             (input)="filterArticles()"
-            placeholder="Search for articles..."
-            aria-label="Search for educational articles"
-          />
-          <i *ngIf="searchQuery" (click)="clearSearch()" class="fas fa-times clear-icon"></i>
+            placeholder="Search for articles..." 
+            class="w-full pl-12 pr-12 py-4 bg-white border border-slate-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors text-slate-800"
+          >
+          <button 
+            *ngIf="searchQuery" 
+            (click)="clearSearch()" 
+            class="absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400 hover:text-slate-600"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
       </div>
-
-      <div class="articles-list">
-        <div class="article" *ngFor="let article of filteredArticles; trackBy: trackByArticleId">
-          <div class="article-header">
-            <h3 class="article-title">
-              <a [href]="article.url" target="_blank" [innerHTML]="highlightSearchTerm(article.title)"></a>
+      
+      <!-- Articles List -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div 
+          *ngFor="let article of filteredArticles; trackBy: trackByArticleId" 
+          class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl overflow-hidden shadow-md hover:shadow-xl hover:translate-y-[-4px] transition-all duration-200"
+        >
+          <div class="p-6">
+            <h3 class="text-xl font-semibold text-white mb-3">
+              <a 
+                [href]="article.url" 
+                target="_blank" 
+                [innerHTML]="highlightSearchTerm(article.title)"
+                class="hover:underline focus:underline outline-none focus:ring-2 focus:ring-white/50 rounded-sm"
+              ></a>
             </h3>
-          </div>
-          <div class="article-content">
-            <p>{{ article.description }}</p>
-            <a [href]="article.url" target="_blank" class="read-more">
-              <span>Read Article</span>
-              <i class="fas fa-external-link-alt"></i>
+            
+            <p class="text-white/90 text-base mb-6">{{ article.description }}</p>
+            
+            <a 
+              [href]="article.url" 
+              target="_blank" 
+              class="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 text-white py-2 px-4 rounded-lg transition-all duration-200 text-sm font-medium"
+            >
+              Read Article
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
             </a>
           </div>
         </div>
-        
-        <div *ngIf="filteredArticles.length === 0" class="no-articles">
-          <i class="fas fa-search no-results-icon"></i>
-          <p>No articles found matching your search.</p>
-          <button class="reset-button" (click)="clearSearch()">Clear Search</button>
-        </div>
+      </div>
+      
+      <!-- No Articles Message -->
+      <div *ngIf="filteredArticles.length === 0" class="text-center py-16 bg-white rounded-xl border border-slate-100 shadow-sm">
+        <div class="text-6xl mb-4">🔍</div>
+        <h2 class="text-2xl font-semibold text-slate-800 mb-2">No articles found</h2>
+        <p class="text-slate-500 mb-8">Try searching with different keywords</p>
+        <button 
+          (click)="clearSearch()" 
+          class="py-3 px-6 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-200"
+        >
+          Clear Search
+        </button>
       </div>
     </div>
-  </div>
+  </main>
 </div>

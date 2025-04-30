@@ -33,6 +33,7 @@
               }
             ],
             "styles": [
+              "src/global.css",
               "src/styles.sass"
             ],
             "scripts": []
@@ -93,6 +94,7 @@
               }
             ],
             "styles": [
+              "src/global.css",
               "src/styles.sass"
             ],
             "scripts": []

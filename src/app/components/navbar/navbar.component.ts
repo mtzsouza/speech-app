@@ -10,8 +10,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, PreferencesComponent],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.sass'
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
   auth = inject(AuthService);
